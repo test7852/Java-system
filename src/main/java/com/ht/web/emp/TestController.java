@@ -1,14 +1,14 @@
-package com.ht.web;
+package com.ht.web.emp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/Test")
+@RequestMapping("/test")
 public class TestController {
-    @RequestMapping("/go")
+    @RequestMapping("/test")
     public String go(){
         System.out.println("进来了");
-        return "aaa";
+        return "emp/test";
     }
 }
