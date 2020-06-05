@@ -9,6 +9,7 @@ public class TestController {
     @RequestMapping("/test")
     public String go(){
         System.out.println("进来了");
+        System.out.println("罗俊进来过");
         return "emp/test";
     }
 }
