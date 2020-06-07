@@ -1,12 +1,13 @@
-package com.ht.service;
+package com.ht.service.impl;
 
+import com.ht.service.PostService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.bean.Post;
 import com.ht.dao.PostMapper;
-import com.ht.service.impl.PostService;
+
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
     @Resource
     private PostMapper postMapper;

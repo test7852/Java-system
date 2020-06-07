@@ -1,10 +1,10 @@
-package com.ht.service;
+package com.ht.service.impl;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.EmpinfoMapper;
 import com.ht.bean.Empinfo;
-import com.ht.service.impl.EmpinfoService;
+import com.ht.service.EmpinfoService;
 /**
  * @author lrq
  * @date 2020/6/7 20:19

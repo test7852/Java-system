@@ -1,4 +1,4 @@
-package com.ht.service.impl;
+package com.ht.service;
 
 import com.ht.bean.Empinfo;
     /**
