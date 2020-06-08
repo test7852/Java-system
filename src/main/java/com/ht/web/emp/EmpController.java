@@ -11,7 +11,12 @@ import javax.annotation.Resource;
 public class EmpController {
     @Resource
     private EmpinfoService empinfoService;
-    //登录
+
+    /**
+     * @param empinfo
+     * @return
+     * 登录
+     */
     @RequestMapping("login")
     public String login(Empinfo empinfo){
         empinfo.setPhone("1111111");
@@ -23,7 +28,12 @@ public class EmpController {
         System.out.println("成功");
         return "emp/home";
     }
-    //注册
+
+    /**
+     * @param empinfo
+     * @return
+     * 注册
+     */
     @RequestMapping("register")
     public String register(Empinfo empinfo){
         empinfo.setEmpName("王钟华");
