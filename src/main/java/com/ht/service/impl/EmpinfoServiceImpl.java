@@ -16,6 +16,11 @@ public class EmpinfoServiceImpl implements EmpinfoService{
     private EmpinfoMapper empinfoMapper;
 
     @Override
+    public Empinfo login(Empinfo empinfo) {
+        return empinfoMapper.login(empinfo);
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer empId) {
         return empinfoMapper.deleteByPrimaryKey(empId);
     }

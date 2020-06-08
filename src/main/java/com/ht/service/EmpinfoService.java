@@ -7,6 +7,7 @@ import com.ht.bean.Empinfo;
  */
 public interface EmpinfoService{
 
+    Empinfo login(Empinfo empinfo);//登录
 
     int deleteByPrimaryKey(Integer empId);
 

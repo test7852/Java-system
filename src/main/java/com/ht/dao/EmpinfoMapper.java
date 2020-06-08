@@ -7,6 +7,9 @@ import com.ht.bean.Empinfo;
  * @date 2020/6/7 20:19
  */
 public interface EmpinfoMapper {
+//    登录
+    Empinfo login(Empinfo empinfo);
+
     int deleteByPrimaryKey(Integer empId);
 
     int insert(Empinfo record);

@@ -33,6 +33,14 @@
     Email, married, University, Major, Education, Address, alipay, hireDay, fireDay, 
     `password`, `status`, post_Id
   </sql>
+<!--  登录-->
+  <select id="login" resultType="Empinfo">
+    <!--自动转义特殊字符，避免可能出现的标签格式问题-->
+    <![CDATA[
+          select * from empinfo where Phone=#{phone} and password=#{password}
+        ]]>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
