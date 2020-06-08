@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.student.StudenthuorMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.student.Studenthuor">
+    <!--@mbg.generated-->
+    <!--@Table studenthuor-->
+    <id column="Hourid" jdbcType="INTEGER" property="hourid" />
+    <result column="huorName" jdbcType="VARCHAR" property="huorname" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="floorId" jdbcType="INTEGER" property="floorid" />
+    <result column="numberBeds" jdbcType="INTEGER" property="numberbeds" />
+    <result column="huoeIddsc" jdbcType="VARCHAR" property="huoeiddsc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    Hourid, huorName, addr, `count`, floorId, numberBeds, huoeIddsc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from studenthuor
+    where Hourid = #{hourid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from studenthuor
+    where Hourid = #{hourid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Hourid" keyProperty="hourid" parameterType="com.ht.bean.student.Studenthuor" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into studenthuor (huorName, addr, `count`, 
+      floorId, numberBeds, huoeIddsc
+      )
+    values (#{huorname,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{floorid,jdbcType=INTEGER}, #{numberbeds,jdbcType=INTEGER}, #{huoeiddsc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="Hourid" keyProperty="hourid" parameterType="com.ht.bean.student.Studenthuor" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into studenthuor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="huorname != null">
+        huorName,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="count != null">
+        `count`,
+      </if>
+      <if test="floorid != null">
+        floorId,
+      </if>
+      <if test="numberbeds != null">
+        numberBeds,
+      </if>
+      <if test="huoeiddsc != null">
+        huoeIddsc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="huorname != null">
+        #{huorname,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="floorid != null">
+        #{floorid,jdbcType=INTEGER},
+      </if>
+      <if test="numberbeds != null">
+        #{numberbeds,jdbcType=INTEGER},
+      </if>
+      <if test="huoeiddsc != null">
+        #{huoeiddsc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.student.Studenthuor">
+    <!--@mbg.generated-->
+    update studenthuor
+    <set>
+      <if test="huorname != null">
+        huorName = #{huorname,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        `count` = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="floorid != null">
+        floorId = #{floorid,jdbcType=INTEGER},
+      </if>
+      <if test="numberbeds != null">
+        numberBeds = #{numberbeds,jdbcType=INTEGER},
+      </if>
+      <if test="huoeiddsc != null">
+        huoeIddsc = #{huoeiddsc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Hourid = #{hourid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.student.Studenthuor">
+    <!--@mbg.generated-->
+    update studenthuor
+    set huorName = #{huorname,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      `count` = #{count,jdbcType=INTEGER},
+      floorId = #{floorid,jdbcType=INTEGER},
+      numberBeds = #{numberbeds,jdbcType=INTEGER},
+      huoeIddsc = #{huoeiddsc,jdbcType=VARCHAR}
+    where Hourid = #{hourid,jdbcType=INTEGER}
+  </update>
+</mapper>

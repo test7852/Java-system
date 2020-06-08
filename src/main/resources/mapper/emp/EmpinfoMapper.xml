@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.emp.EmpinfoMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Empinfo">
+    <!--@mbg.generated-->
+    <!--@Table empinfo-->
+    <id column="emp_Id" jdbcType="INTEGER" property="empId" />
+    <result column="emp_Name" jdbcType="VARCHAR" property="empName" />
+    <result column="dep_Id" jdbcType="INTEGER" property="depId" />
+    <result column="emp_Sex" jdbcType="VARCHAR" property="empSex" />
+    <result column="Birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="Cardno" jdbcType="VARCHAR" property="cardno" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="QQcode" jdbcType="VARCHAR" property="qqcode" />
+    <result column="Weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="married" jdbcType="VARCHAR" property="married" />
+    <result column="University" jdbcType="VARCHAR" property="university" />
+    <result column="Major" jdbcType="VARCHAR" property="major" />
+    <result column="Education" jdbcType="VARCHAR" property="education" />
+    <result column="Address" jdbcType="VARCHAR" property="address" />
+    <result column="alipay" jdbcType="VARCHAR" property="alipay" />
+    <result column="hireDay" jdbcType="VARCHAR" property="hireday" />
+    <result column="fireDay" jdbcType="VARCHAR" property="fireday" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="post_Id" jdbcType="INTEGER" property="postId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    emp_Id, emp_Name, dep_Id, emp_Sex, Birthday, Cardno, nation, Phone, QQcode, Weixin, 
+    Email, married, University, Major, Education, Address, alipay, hireDay, fireDay, 
+    `password`, `status`, post_Id
+  </sql>
+<!--  登录-->
+  <select id="login" resultType="Empinfo">
+    <!--自动转义特殊字符，避免可能出现的标签格式问题-->
+    <![CDATA[
+          select * from empinfo where Phone=#{phone} and password=#{password}
+        ]]>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from empinfo
+    where emp_Id = #{empId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from empinfo
+    where emp_Id = #{empId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="emp_Id" keyProperty="empId" parameterType="com.ht.bean.emp.Empinfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into empinfo (emp_Name, dep_Id, emp_Sex, 
+      Birthday, Cardno, nation, 
+      Phone, QQcode, Weixin, 
+      Email, married, University, 
+      Major, Education, Address, 
+      alipay, hireDay, fireDay, 
+      `password`, `status`, post_Id
+      )
+    values (#{empName,jdbcType=VARCHAR}, #{depId,jdbcType=INTEGER}, #{empSex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{cardno,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{qqcode,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{married,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{alipay,jdbcType=VARCHAR}, #{hireday,jdbcType=VARCHAR}, #{fireday,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="emp_Id" keyProperty="empId" parameterType="com.ht.bean.emp.Empinfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into empinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empName != null">
+        emp_Name,
+      </if>
+      <if test="depId != null">
+        dep_Id,
+      </if>
+      <if test="empSex != null">
+        emp_Sex,
+      </if>
+      <if test="birthday != null">
+        Birthday,
+      </if>
+      <if test="cardno != null">
+        Cardno,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="qqcode != null">
+        QQcode,
+      </if>
+      <if test="weixin != null">
+        Weixin,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="married != null">
+        married,
+      </if>
+      <if test="university != null">
+        University,
+      </if>
+      <if test="major != null">
+        Major,
+      </if>
+      <if test="education != null">
+        Education,
+      </if>
+      <if test="address != null">
+        Address,
+      </if>
+      <if test="alipay != null">
+        alipay,
+      </if>
+      <if test="hireday != null">
+        hireDay,
+      </if>
+      <if test="fireday != null">
+        fireDay,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="postId != null">
+        post_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        #{depId,jdbcType=INTEGER},
+      </if>
+      <if test="empSex != null">
+        #{empSex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null">
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qqcode != null">
+        #{qqcode,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="married != null">
+        #{married,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null">
+        #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="hireday != null">
+        #{hireday,jdbcType=VARCHAR},
+      </if>
+      <if test="fireday != null">
+        #{fireday,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Empinfo">
+    <!--@mbg.generated-->
+    update empinfo
+    <set>
+      <if test="empName != null">
+        emp_Name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        dep_Id = #{depId,jdbcType=INTEGER},
+      </if>
+      <if test="empSex != null">
+        emp_Sex = #{empSex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        Birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null">
+        Cardno = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qqcode != null">
+        QQcode = #{qqcode,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        Weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="married != null">
+        married = #{married,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        University = #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        Major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        Education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null">
+        alipay = #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="hireday != null">
+        hireDay = #{hireday,jdbcType=VARCHAR},
+      </if>
+      <if test="fireday != null">
+        fireDay = #{fireday,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="postId != null">
+        post_Id = #{postId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where emp_Id = #{empId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Empinfo">
+    <!--@mbg.generated-->
+    update empinfo
+    set emp_Name = #{empName,jdbcType=VARCHAR},
+      dep_Id = #{depId,jdbcType=INTEGER},
+      emp_Sex = #{empSex,jdbcType=VARCHAR},
+      Birthday = #{birthday,jdbcType=VARCHAR},
+      Cardno = #{cardno,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      QQcode = #{qqcode,jdbcType=VARCHAR},
+      Weixin = #{weixin,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      married = #{married,jdbcType=VARCHAR},
+      University = #{university,jdbcType=VARCHAR},
+      Major = #{major,jdbcType=VARCHAR},
+      Education = #{education,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      alipay = #{alipay,jdbcType=VARCHAR},
+      hireDay = #{hireday,jdbcType=VARCHAR},
+      fireDay = #{fireday,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      post_Id = #{postId,jdbcType=INTEGER}
+    where emp_Id = #{empId,jdbcType=INTEGER}
+  </update>
+</mapper>

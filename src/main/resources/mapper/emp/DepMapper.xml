@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.emp.DepMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Dep">
+    <!--@mbg.generated-->
+    <!--@Table dep-->
+    <id column="depid" jdbcType="INTEGER" property="depid" />
+    <result column="depName" jdbcType="VARCHAR" property="depname" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="chairman" jdbcType="VARCHAR" property="chairman" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="personnel" jdbcType="INTEGER" property="personnel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    depid, depName, parentId, chairman, remark, personnel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dep
+    where depid = #{depid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from dep
+    where depid = #{depid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="depid" keyProperty="depid" parameterType="com.ht.bean.emp.Dep" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into dep (depName, parentId, chairman, 
+      remark, personnel)
+    values (#{depname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, #{chairman,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{personnel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="depid" keyProperty="depid" parameterType="com.ht.bean.emp.Dep" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into dep
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="depname != null">
+        depName,
+      </if>
+      <if test="parentid != null">
+        parentId,
+      </if>
+      <if test="chairman != null">
+        chairman,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="personnel != null">
+        personnel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="depname != null">
+        #{depname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="chairman != null">
+        #{chairman,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="personnel != null">
+        #{personnel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Dep">
+    <!--@mbg.generated-->
+    update dep
+    <set>
+      <if test="depname != null">
+        depName = #{depname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="chairman != null">
+        chairman = #{chairman,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="personnel != null">
+        personnel = #{personnel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where depid = #{depid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Dep">
+    <!--@mbg.generated-->
+    update dep
+    set depName = #{depname,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      chairman = #{chairman,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      personnel = #{personnel,jdbcType=INTEGER}
+    where depid = #{depid,jdbcType=INTEGER}
+  </update>
+</mapper>

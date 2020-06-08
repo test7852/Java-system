@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Course">
+    <!--@mbg.generated-->
+    <!--@Table course-->
+    <id column="courseid" jdbcType="INTEGER" property="courseid" />
+    <result column="courseName" jdbcType="VARCHAR" property="coursename" />
+    <result column="isobligatory" jdbcType="VARCHAR" property="isobligatory" />
+    <result column="courseTypeId" jdbcType="INTEGER" property="coursetypeid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    courseid, courseName, isobligatory, courseTypeId, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where courseid = #{courseid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from course
+    where courseid = #{courseid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="courseid" keyProperty="courseid" parameterType="com.ht.bean.education.Course" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into course (courseName, isobligatory, courseTypeId, 
+      remark)
+    values (#{coursename,jdbcType=VARCHAR}, #{isobligatory,jdbcType=VARCHAR}, #{coursetypeid,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="courseid" keyProperty="courseid" parameterType="com.ht.bean.education.Course" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="coursename != null">
+        courseName,
+      </if>
+      <if test="isobligatory != null">
+        isobligatory,
+      </if>
+      <if test="coursetypeid != null">
+        courseTypeId,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="coursename != null">
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="isobligatory != null">
+        #{isobligatory,jdbcType=VARCHAR},
+      </if>
+      <if test="coursetypeid != null">
+        #{coursetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Course">
+    <!--@mbg.generated-->
+    update course
+    <set>
+      <if test="coursename != null">
+        courseName = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="isobligatory != null">
+        isobligatory = #{isobligatory,jdbcType=VARCHAR},
+      </if>
+      <if test="coursetypeid != null">
+        courseTypeId = #{coursetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where courseid = #{courseid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Course">
+    <!--@mbg.generated-->
+    update course
+    set courseName = #{coursename,jdbcType=VARCHAR},
+      isobligatory = #{isobligatory,jdbcType=VARCHAR},
+      courseTypeId = #{coursetypeid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where courseid = #{courseid,jdbcType=INTEGER}
+  </update>
+</mapper>

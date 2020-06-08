@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.student.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.student.Student">
+    <!--@mbg.generated-->
+    <!--@Table student-->
+    <id column="Studid" jdbcType="INTEGER" property="studid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="stuname" jdbcType="VARCHAR" property="stuname" />
+    <result column="middleschool" jdbcType="VARCHAR" property="middleschool" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="clazz" jdbcType="INTEGER" property="clazz" />
+    <result column="huor" jdbcType="INTEGER" property="huor" />
+    <result column="entertime" jdbcType="VARCHAR" property="entertime" />
+    <result column="introduretech" jdbcType="VARCHAR" property="introduretech" />
+    <result column="stat" jdbcType="VARCHAR" property="stat" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="natives" jdbcType="VARCHAR" property="natives" />
+    <result column="residence" jdbcType="VARCHAR" property="residence" />
+    <result column="cardid" jdbcType="INTEGER" property="cardid" />
+    <result column="professional" jdbcType="VARCHAR" property="professional" />
+    <result column="prolevel" jdbcType="VARCHAR" property="prolevel" />
+    <result column="studytype" jdbcType="VARCHAR" property="studytype" />
+    <result column="parents" jdbcType="VARCHAR" property="parents" />
+    <result column="parentsphone" jdbcType="VARCHAR" property="parentsphone" />
+    <result column="audition" jdbcType="VARCHAR" property="audition" />
+    <result column="auditionoption" jdbcType="VARCHAR" property="auditionoption" />
+    <result column="isvocational" jdbcType="VARCHAR" property="isvocational" />
+    <result column="vocationalsch" jdbcType="VARCHAR" property="vocationalsch" />
+    <result column="vocationalflag" jdbcType="VARCHAR" property="vocationalflag" />
+    <result column="enrollno" jdbcType="INTEGER" property="enrollno" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="dibao" jdbcType="VARCHAR" property="dibao" />
+    <result column="sourceType" jdbcType="VARCHAR" property="sourcetype" />
+    <result column="guarantee" jdbcType="VARCHAR" property="guarantee" />
+    <result column="soldier" jdbcType="VARCHAR" property="soldier" />
+    <result column="registration" jdbcType="VARCHAR" property="registration" />
+    <result column="zhuxiao" jdbcType="VARCHAR" property="zhuxiao" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="tuixue" jdbcType="VARCHAR" property="tuixue" />
+    <result column="xiuxue" jdbcType="VARCHAR" property="xiuxue" />
+    <result column="stuno" jdbcType="INTEGER" property="stuno" />
+    <result column="computer" jdbcType="VARCHAR" property="computer" />
+    <result column="collar" jdbcType="VARCHAR" property="collar" />
+    <result column="grants" jdbcType="VARCHAR" property="grants" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    Studid, `password`, stuname, middleschool, sex, age, birthday, phone, addr, clazz, 
+    huor, entertime, introduretech, stat, nation, natives, residence, cardid, professional, 
+    prolevel, studytype, parents, parentsphone, audition, auditionoption, isvocational, 
+    vocationalsch, vocationalflag, enrollno, score, dibao, sourceType, guarantee, soldier, 
+    registration, zhuxiao, remark, tuixue, xiuxue, stuno, computer, collar, `grants`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where Studid = #{studid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from student
+    where Studid = #{studid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Studid" keyProperty="studid" parameterType="com.ht.bean.student.Student" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into student (`password`, stuname, middleschool, 
+      sex, age, birthday, 
+      phone, addr, clazz, 
+      huor, entertime, introduretech, 
+      stat, nation, natives, 
+      residence, cardid, professional, 
+      prolevel, studytype, parents, 
+      parentsphone, audition, auditionoption, 
+      isvocational, vocationalsch, vocationalflag, 
+      enrollno, score, dibao, 
+      sourceType, guarantee, soldier, 
+      registration, zhuxiao, remark, 
+      tuixue, xiuxue, stuno, 
+      computer, collar, `grants`
+      )
+    values (#{password,jdbcType=VARCHAR}, #{stuname,jdbcType=VARCHAR}, #{middleschool,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{clazz,jdbcType=INTEGER}, 
+      #{huor,jdbcType=INTEGER}, #{entertime,jdbcType=VARCHAR}, #{introduretech,jdbcType=VARCHAR}, 
+      #{stat,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{natives,jdbcType=VARCHAR}, 
+      #{residence,jdbcType=VARCHAR}, #{cardid,jdbcType=INTEGER}, #{professional,jdbcType=VARCHAR}, 
+      #{prolevel,jdbcType=VARCHAR}, #{studytype,jdbcType=VARCHAR}, #{parents,jdbcType=VARCHAR}, 
+      #{parentsphone,jdbcType=VARCHAR}, #{audition,jdbcType=VARCHAR}, #{auditionoption,jdbcType=VARCHAR}, 
+      #{isvocational,jdbcType=VARCHAR}, #{vocationalsch,jdbcType=VARCHAR}, #{vocationalflag,jdbcType=VARCHAR}, 
+      #{enrollno,jdbcType=INTEGER}, #{score,jdbcType=VARCHAR}, #{dibao,jdbcType=VARCHAR}, 
+      #{sourcetype,jdbcType=VARCHAR}, #{guarantee,jdbcType=VARCHAR}, #{soldier,jdbcType=VARCHAR}, 
+      #{registration,jdbcType=VARCHAR}, #{zhuxiao,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{tuixue,jdbcType=VARCHAR}, #{xiuxue,jdbcType=VARCHAR}, #{stuno,jdbcType=INTEGER}, 
+      #{computer,jdbcType=VARCHAR}, #{collar,jdbcType=VARCHAR}, #{grants,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="Studid" keyProperty="studid" parameterType="com.ht.bean.student.Student" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="stuname != null">
+        stuname,
+      </if>
+      <if test="middleschool != null">
+        middleschool,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="clazz != null">
+        clazz,
+      </if>
+      <if test="huor != null">
+        huor,
+      </if>
+      <if test="entertime != null">
+        entertime,
+      </if>
+      <if test="introduretech != null">
+        introduretech,
+      </if>
+      <if test="stat != null">
+        stat,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="natives != null">
+        natives,
+      </if>
+      <if test="residence != null">
+        residence,
+      </if>
+      <if test="cardid != null">
+        cardid,
+      </if>
+      <if test="professional != null">
+        professional,
+      </if>
+      <if test="prolevel != null">
+        prolevel,
+      </if>
+      <if test="studytype != null">
+        studytype,
+      </if>
+      <if test="parents != null">
+        parents,
+      </if>
+      <if test="parentsphone != null">
+        parentsphone,
+      </if>
+      <if test="audition != null">
+        audition,
+      </if>
+      <if test="auditionoption != null">
+        auditionoption,
+      </if>
+      <if test="isvocational != null">
+        isvocational,
+      </if>
+      <if test="vocationalsch != null">
+        vocationalsch,
+      </if>
+      <if test="vocationalflag != null">
+        vocationalflag,
+      </if>
+      <if test="enrollno != null">
+        enrollno,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="dibao != null">
+        dibao,
+      </if>
+      <if test="sourcetype != null">
+        sourceType,
+      </if>
+      <if test="guarantee != null">
+        guarantee,
+      </if>
+      <if test="soldier != null">
+        soldier,
+      </if>
+      <if test="registration != null">
+        registration,
+      </if>
+      <if test="zhuxiao != null">
+        zhuxiao,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="tuixue != null">
+        tuixue,
+      </if>
+      <if test="xiuxue != null">
+        xiuxue,
+      </if>
+      <if test="stuno != null">
+        stuno,
+      </if>
+      <if test="computer != null">
+        computer,
+      </if>
+      <if test="collar != null">
+        collar,
+      </if>
+      <if test="grants != null">
+        `grants`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="stuname != null">
+        #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="middleschool != null">
+        #{middleschool,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null">
+        #{clazz,jdbcType=INTEGER},
+      </if>
+      <if test="huor != null">
+        #{huor,jdbcType=INTEGER},
+      </if>
+      <if test="entertime != null">
+        #{entertime,jdbcType=VARCHAR},
+      </if>
+      <if test="introduretech != null">
+        #{introduretech,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null">
+        #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="natives != null">
+        #{natives,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null">
+        #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="professional != null">
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="prolevel != null">
+        #{prolevel,jdbcType=VARCHAR},
+      </if>
+      <if test="studytype != null">
+        #{studytype,jdbcType=VARCHAR},
+      </if>
+      <if test="parents != null">
+        #{parents,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsphone != null">
+        #{parentsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="audition != null">
+        #{audition,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionoption != null">
+        #{auditionoption,jdbcType=VARCHAR},
+      </if>
+      <if test="isvocational != null">
+        #{isvocational,jdbcType=VARCHAR},
+      </if>
+      <if test="vocationalsch != null">
+        #{vocationalsch,jdbcType=VARCHAR},
+      </if>
+      <if test="vocationalflag != null">
+        #{vocationalflag,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollno != null">
+        #{enrollno,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="dibao != null">
+        #{dibao,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcetype != null">
+        #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantee != null">
+        #{guarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="soldier != null">
+        #{soldier,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null">
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuxiao != null">
+        #{zhuxiao,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tuixue != null">
+        #{tuixue,jdbcType=VARCHAR},
+      </if>
+      <if test="xiuxue != null">
+        #{xiuxue,jdbcType=VARCHAR},
+      </if>
+      <if test="stuno != null">
+        #{stuno,jdbcType=INTEGER},
+      </if>
+      <if test="computer != null">
+        #{computer,jdbcType=VARCHAR},
+      </if>
+      <if test="collar != null">
+        #{collar,jdbcType=VARCHAR},
+      </if>
+      <if test="grants != null">
+        #{grants,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.student.Student">
+    <!--@mbg.generated-->
+    update student
+    <set>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="stuname != null">
+        stuname = #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="middleschool != null">
+        middleschool = #{middleschool,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null">
+        clazz = #{clazz,jdbcType=INTEGER},
+      </if>
+      <if test="huor != null">
+        huor = #{huor,jdbcType=INTEGER},
+      </if>
+      <if test="entertime != null">
+        entertime = #{entertime,jdbcType=VARCHAR},
+      </if>
+      <if test="introduretech != null">
+        introduretech = #{introduretech,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null">
+        stat = #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="natives != null">
+        natives = #{natives,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        residence = #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null">
+        cardid = #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="professional != null">
+        professional = #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="prolevel != null">
+        prolevel = #{prolevel,jdbcType=VARCHAR},
+      </if>
+      <if test="studytype != null">
+        studytype = #{studytype,jdbcType=VARCHAR},
+      </if>
+      <if test="parents != null">
+        parents = #{parents,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsphone != null">
+        parentsphone = #{parentsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="audition != null">
+        audition = #{audition,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionoption != null">
+        auditionoption = #{auditionoption,jdbcType=VARCHAR},
+      </if>
+      <if test="isvocational != null">
+        isvocational = #{isvocational,jdbcType=VARCHAR},
+      </if>
+      <if test="vocationalsch != null">
+        vocationalsch = #{vocationalsch,jdbcType=VARCHAR},
+      </if>
+      <if test="vocationalflag != null">
+        vocationalflag = #{vocationalflag,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollno != null">
+        enrollno = #{enrollno,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="dibao != null">
+        dibao = #{dibao,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcetype != null">
+        sourceType = #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantee != null">
+        guarantee = #{guarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="soldier != null">
+        soldier = #{soldier,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null">
+        registration = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuxiao != null">
+        zhuxiao = #{zhuxiao,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tuixue != null">
+        tuixue = #{tuixue,jdbcType=VARCHAR},
+      </if>
+      <if test="xiuxue != null">
+        xiuxue = #{xiuxue,jdbcType=VARCHAR},
+      </if>
+      <if test="stuno != null">
+        stuno = #{stuno,jdbcType=INTEGER},
+      </if>
+      <if test="computer != null">
+        computer = #{computer,jdbcType=VARCHAR},
+      </if>
+      <if test="collar != null">
+        collar = #{collar,jdbcType=VARCHAR},
+      </if>
+      <if test="grants != null">
+        `grants` = #{grants,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Studid = #{studid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.student.Student">
+    <!--@mbg.generated-->
+    update student
+    set `password` = #{password,jdbcType=VARCHAR},
+      stuname = #{stuname,jdbcType=VARCHAR},
+      middleschool = #{middleschool,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      clazz = #{clazz,jdbcType=INTEGER},
+      huor = #{huor,jdbcType=INTEGER},
+      entertime = #{entertime,jdbcType=VARCHAR},
+      introduretech = #{introduretech,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      natives = #{natives,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      cardid = #{cardid,jdbcType=INTEGER},
+      professional = #{professional,jdbcType=VARCHAR},
+      prolevel = #{prolevel,jdbcType=VARCHAR},
+      studytype = #{studytype,jdbcType=VARCHAR},
+      parents = #{parents,jdbcType=VARCHAR},
+      parentsphone = #{parentsphone,jdbcType=VARCHAR},
+      audition = #{audition,jdbcType=VARCHAR},
+      auditionoption = #{auditionoption,jdbcType=VARCHAR},
+      isvocational = #{isvocational,jdbcType=VARCHAR},
+      vocationalsch = #{vocationalsch,jdbcType=VARCHAR},
+      vocationalflag = #{vocationalflag,jdbcType=VARCHAR},
+      enrollno = #{enrollno,jdbcType=INTEGER},
+      score = #{score,jdbcType=VARCHAR},
+      dibao = #{dibao,jdbcType=VARCHAR},
+      sourceType = #{sourcetype,jdbcType=VARCHAR},
+      guarantee = #{guarantee,jdbcType=VARCHAR},
+      soldier = #{soldier,jdbcType=VARCHAR},
+      registration = #{registration,jdbcType=VARCHAR},
+      zhuxiao = #{zhuxiao,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      tuixue = #{tuixue,jdbcType=VARCHAR},
+      xiuxue = #{xiuxue,jdbcType=VARCHAR},
+      stuno = #{stuno,jdbcType=INTEGER},
+      computer = #{computer,jdbcType=VARCHAR},
+      collar = #{collar,jdbcType=VARCHAR},
+      `grants` = #{grants,jdbcType=VARCHAR}
+    where Studid = #{studid,jdbcType=INTEGER}
+  </update>
+</mapper>
