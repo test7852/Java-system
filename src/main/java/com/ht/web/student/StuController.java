@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 /**
  * @author lrq
  * @date 2020/6/9 8:51
- * 员工管理
+ * 学生管理
  */
 @Controller
 @RequestMapping("Student")
