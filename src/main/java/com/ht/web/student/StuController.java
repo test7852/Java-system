@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * 学生管理
  */
 @Controller
-@RequestMapping("Student")
+@RequestMapping("stu")
 public class StuController {
     @Resource
     private StudentService studentService;

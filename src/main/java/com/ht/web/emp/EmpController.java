@@ -1,6 +1,7 @@
 package com.ht.web.emp;
 import com.ht.bean.emp.Empinfo;
 import com.ht.service.emp.EmpinfoService;
+import com.ht.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,7 +11,7 @@ import javax.annotation.Resource;
  *
  * */
 @Controller
-@RequestMapping("Emp")
+@RequestMapping("emp")
 public class EmpController {
     @Resource
     private EmpinfoService empinfoService;
@@ -33,9 +34,14 @@ public class EmpController {
     }
 
     @RequestMapping("list")
-    public String list(){
-        
-        return "";
+    public String list(Pager pager){
+        pager.pageSize = 2;
+        //查询总行数
+        pager.page(empinfoService.selprocount());
+        pager.data = empinfoService.allPageEmp(pager);
+        System.out.println(empinfoService.selprocount());
+        System.out.println(pager.data.toString());
+        return "managerui/index";
     }
 
     @RequestMapping("/zhuc")

@@ -1,10 +1,14 @@
 package com.ht.service.emp.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.emp.EmpinfoMapper;
 import com.ht.bean.emp.Empinfo;
 import com.ht.service.emp.EmpinfoService;
+
+import java.util.List;
+
 /**
  * @author lrq
  * @date 2020/6/7 20:19
@@ -18,6 +22,16 @@ public class EmpinfoServiceImpl implements EmpinfoService{
     @Override
     public Empinfo login(Empinfo empinfo) {
         return empinfoMapper.login(empinfo);
+    }
+
+    @Override
+    public int selprocount() {
+        return empinfoMapper.selprocount();
+    }
+
+    @Override
+    public List<Empinfo> allPageEmp(Pager pager) {
+        return empinfoMapper.allPageEmp(pager);
     }
 
     @Override
