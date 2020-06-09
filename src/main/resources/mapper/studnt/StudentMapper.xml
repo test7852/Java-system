@@ -541,4 +541,17 @@
       `grants` = #{grants,jdbcType=VARCHAR}
     where Studid = #{studid,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="allPageStu" resultType="com.ht.bean.student.Student">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    select * from student  order by studid desc limit #{kais},#{pageSize}
+  </select>
+
+  <select id="getTotalRow" resultType="int">
+        select count(*) from student
+  </select>
+
+
 </mapper>
