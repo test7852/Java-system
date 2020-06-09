@@ -1,6 +1,9 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.Student;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -19,4 +22,8 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    List<Student> allPageStu(Pager pager);
+
+    int getTotalRow();
 }

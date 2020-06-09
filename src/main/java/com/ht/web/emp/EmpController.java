@@ -1,7 +1,9 @@
 package com.ht.web.emp;
 import com.ht.bean.emp.Empinfo;
 import com.ht.service.emp.EmpinfoService;
+import com.ht.util.Pager;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -10,7 +12,7 @@ import javax.annotation.Resource;
  *
  * */
 @Controller
-@RequestMapping("Emp")
+@RequestMapping("emp")
 public class EmpController {
     @Resource
     private EmpinfoService empinfoService;
@@ -29,27 +31,67 @@ public class EmpController {
             System.out.println("失败");
         }
         System.out.println("成功");
-        return "emp/home";
-    }
-
-    @RequestMapping("list")
-    public String list(){
-        
-        return "";
-    }
-
-    @RequestMapping("/zhuc")
-    public String zhuc(){
-        return "managerui/register";
-    }
-
-    @RequestMapping("/zhuye")
-    public String zhuye(){
         return "managerui/index";
     }
 
-    @RequestMapping("/logins")
-    public String logins(){
-        return "managerui/login";
+    /**
+     * @param pager
+     * @param model
+     * @return
+     * 分页
+     */
+    @RequestMapping("list")
+    public String list(Pager pager, Model model){
+        pager.pageSize = 2;
+        //查询总行数
+        pager.page(empinfoService.selprocount());
+        pager.data = empinfoService.allPageEmp(pager);
+
+        return "managerui/index";
+    }
+
+    /**
+     * @param empinfo
+     * @return
+     * 添加
+     */
+    @RequestMapping("add")
+    public String add(Empinfo empinfo){
+        empinfoService.insert(empinfo);
+        return "";
+    }
+
+    /**
+     * @param id
+     * @return
+     * 删除
+     */
+    @RequestMapping("del")
+    public String del(Integer id){
+        empinfoService.deleteByPrimaryKey(id);
+        return "";
+    }
+
+    /**
+     * @param id
+     * @param model
+     * @return
+     * 去修改
+     */
+    @RequestMapping("toupdata")
+    public String toupdata(Integer id,Model model){
+        Empinfo empinfo = empinfoService.selectByPrimaryKey(id);
+        return "";
+    }
+
+    /**
+     * @param empinfo
+     * @return
+     * 修改
+     */
+    @RequestMapping("updata")
+    public String updata(Empinfo empinfo){
+        empinfoService.updateByPrimaryKeySelective(empinfo);
+        return "";
     }
 }

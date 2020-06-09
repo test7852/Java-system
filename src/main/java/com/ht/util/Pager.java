@@ -8,7 +8,7 @@ package com.ht.util;
 public class Pager {
 
     public int currPage = 1;//当前页
-    public int pageSize = 8;//每页行数
+    public int pageSize = 10;//每页行数
     public int totalRow = 0;//总行数
     public int totalPage = 0;//总页数
     public Object data;//每页数据

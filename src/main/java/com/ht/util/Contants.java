@@ -1,10 +1,16 @@
 package com.ht.util;
 
-//静态常量
+/**
+ * Created by Administrator on 2020/4/27.
+ */
+
+/**
+ * 静态常量类
+ */
 public class Contants {
     /**
-     * 商品图片保存路径
+     * 文件上传路径
      */
-    //public static final String PRO_IMG_SAVE_PATH="D:\\chunfile\\pro\\";
+    public static final String PRO_FILE_SAVE_PATH="D:\\fFile\\";
 
 }

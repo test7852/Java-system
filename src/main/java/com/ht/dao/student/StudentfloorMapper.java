@@ -1,6 +1,9 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.Studentfloor;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +11,11 @@ import com.ht.bean.student.Studentfloor;
  *  
  */
 public interface StudentfloorMapper {
+
+    List<Studentfloor> selsfbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
+
+    int selsf();//查询总数
+
     int deleteByPrimaryKey(Integer floorid);
 
     int insert(Studentfloor record);
