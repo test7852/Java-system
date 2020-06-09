@@ -3,6 +3,7 @@ import com.ht.bean.emp.Empinfo;
 import com.ht.service.emp.EmpinfoService;
 import com.ht.util.Pager;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -30,32 +31,67 @@ public class EmpController {
             System.out.println("失败");
         }
         System.out.println("成功");
-        return "emp/home";
+        return "managerui/index";
     }
 
+    /**
+     * @param pager
+     * @param model
+     * @return
+     * 分页
+     */
     @RequestMapping("list")
-    public String list(Pager pager){
+    public String list(Pager pager, Model model){
         pager.pageSize = 2;
         //查询总行数
         pager.page(empinfoService.selprocount());
         pager.data = empinfoService.allPageEmp(pager);
-        System.out.println(empinfoService.selprocount());
-        System.out.println(pager.data.toString());
+
         return "managerui/index";
     }
 
-    @RequestMapping("/zhuc")
-    public String zhuc(){
-        return "managerui/register";
+    /**
+     * @param empinfo
+     * @return
+     * 添加
+     */
+    @RequestMapping("add")
+    public String add(Empinfo empinfo){
+        empinfoService.insert(empinfo);
+        return "";
     }
 
-    @RequestMapping("/zhuye")
-    public String zhuye(){
-        return "managerui/index";
+    /**
+     * @param id
+     * @return
+     * 删除
+     */
+    @RequestMapping("del")
+    public String del(Integer id){
+        empinfoService.deleteByPrimaryKey(id);
+        return "";
     }
 
-    @RequestMapping("/logins")
-    public String logins(){
-        return "managerui/login";
+    /**
+     * @param id
+     * @param model
+     * @return
+     * 去修改
+     */
+    @RequestMapping("toupdata")
+    public String toupdata(Integer id,Model model){
+        Empinfo empinfo = empinfoService.selectByPrimaryKey(id);
+        return "";
+    }
+
+    /**
+     * @param empinfo
+     * @return
+     * 修改
+     */
+    @RequestMapping("updata")
+    public String updata(Empinfo empinfo){
+        empinfoService.updateByPrimaryKeySelective(empinfo);
+        return "";
     }
 }
