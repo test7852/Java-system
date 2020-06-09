@@ -9,7 +9,6 @@ import javax.annotation.Resource;
  * 员工管理
  *
  * */
-
 @Controller
 @RequestMapping("Emp")
 public class EmpController {
@@ -33,18 +32,10 @@ public class EmpController {
         return "emp/home";
     }
 
-    /**
-     * @param empinfo
-     * @return
-     * 注册
-     */
-    @RequestMapping("register")
-    public String register(Empinfo empinfo){
-        empinfo.setEmpName("王钟华");
-        empinfo.setPhone("15717978951");
-        empinfo.setPassword("123");
-        empinfoService.insert(empinfo);
-        return "emp/home";
+    @RequestMapping("list")
+    public String list(){
+        
+        return "";
     }
 
     @RequestMapping("/zhuc")
@@ -61,5 +52,4 @@ public class EmpController {
     public String logins(){
         return "managerui/login";
     }
-
 }
