@@ -1,5 +1,6 @@
 package com.ht.bean.education;
 
+import lombok.Data;
 
 /**
  * @author lrq
@@ -8,6 +9,7 @@ package com.ht.bean.education;
 /**
     * 系管理
     */
+@Data
 public class Dept {
     /**
     * id
@@ -23,37 +25,4 @@ public class Dept {
     * 说明
     */
     private String remark;
-
-    public Integer getDeptid() {
-        return deptid;
-    }
-
-    public void setDeptid(Integer deptid) {
-        this.deptid = deptid;
-    }
-
-    public String getDeptname() {
-        return deptname;
-    }
-
-    public void setDeptname(String deptname) {
-        this.deptname = deptname;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "Dept{" +
-                "deptid=" + deptid +
-                ", deptname='" + deptname + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
 }
