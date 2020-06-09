@@ -14,16 +14,16 @@ public class Empinfo {
     /**
     * 员工编号
     */
-    private Integer empId;
+    private Integer emp_id;
 
     /**
     * 员工姓名
     */
-    private String empName;
+    private String emp_name;
 
-    private Integer depId;
+    private Integer dep_id;
 
-    private String empSex;
+    private String emp_sex;
 
     private String birthday;
 

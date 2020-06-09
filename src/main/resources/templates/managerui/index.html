@@ -57,7 +57,7 @@
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
                             <li class="active-page">
-                                <a href="index.html">
+                                <a th:href="@{/emp/login}">
                                     <i class="menu-icon icon-home4"></i><span> 首 页</span>
                                 </a>
                             </li>
@@ -71,8 +71,8 @@
                                     <i class="fa fa-user-circle-o"></i><span> 员工管理 </span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="name" th:href="@{/coursetype/edulist}"><i class="fa fa-bank"></i> 部门管理</a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-files-o"></i> 员工资料</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-bank"></i> 部门管理</a></li>
+                                    <li><a target="name" th:href="@{/emp/emplistUi}"><i class="fa fa-files-o"></i> 员工资料</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-leanpub"></i> 周报审阅</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> 谈心记录</a></li>

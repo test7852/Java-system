@@ -1,10 +1,13 @@
 package com.ht.web.emp;
 import com.ht.bean.emp.Empinfo;
+import com.ht.bean.json.JsonData;
 import com.ht.service.emp.EmpinfoService;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 /**
@@ -40,15 +43,15 @@ public class EmpController {
      * @return
      * 分页
      */
-    @RequestMapping("list")
-    public String list(Pager pager, Model model){
-        pager.pageSize = 2;
-        //查询总行数
-        pager.page(empinfoService.selprocount());
-        pager.data = empinfoService.allPageEmp(pager);
-
-        return "managerui/index";
-    }
+//    @RequestMapping("list")
+//    public String list(Pager pager, Model model){
+//        pager.pageSize = 2;
+//        //查询总行数
+//        pager.page(empinfoService.selprocount());
+//        pager.data = empinfoService.allPageEmp(pager);
+//
+//        return "managerui/index";
+//    }
 
     /**
      * @param empinfo
@@ -71,6 +74,27 @@ public class EmpController {
         empinfoService.deleteByPrimaryKey(id);
         return "";
     }
+
+    @RequestMapping("emplistUi")
+    public String emplistUi(){
+        return "emp/emplist";
+    }
+
+    @Resource
+    private JsonData jsonData;
+
+    @RequestMapping("empdata")
+    @ResponseBody
+    public JsonData empdata(@Param("limit")int limit , @Param("page")int page ){
+        Pager pager=new Pager();
+        pager.setCurrPage(page);
+        pager.setPageSize(limit);
+        jsonData.setCount(empinfoService.selprocount());
+        jsonData.setCode(0);
+        jsonData.setData(empinfoService.allPageEmp(pager));
+        return jsonData;
+    }
+
 
     /**
      * @param id

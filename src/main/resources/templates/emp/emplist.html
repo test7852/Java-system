@@ -12,23 +12,12 @@
 		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
         <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
         <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-        <!--<link th:href="@{/assets/plugins/icomoon/style.css}" rel="stylesheet">-->
-        <!--<link th:href="@{/assets/plugins/uniform/css/default.css}" rel="stylesheet"/>-->
-        <!--<link th:href="@{/assets/plugins/switchery/switchery.min.css}" rel="stylesheet"/>-->
-
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
-
-        <!--<script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>-->
-        <!--<script th:src="@{/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js}"></script>-->
-        <!--<script th:src="@{/assets/plugins/uniform/js/jquery.uniform.standalone.js}"></script>-->
-        <!--<script th:src="@{/assets/plugins/switchery/switchery.min.js}"></script>-->
-        <!--<script th:src="@{/assets/js/ecaps.min.js}"></script>-->
 	</head>
 	<style>
     .layui-table-page {
         text-align: center;
     }
-/*	.utable{margin-left: 300px;}*/
 
     .utable .layui-laypage .layui-laypage-curr .layui-laypage-em {
         background-color: #1E9FFF;
@@ -51,10 +40,10 @@
     </a>
 	</script>
 	<script type="text/html" id="sexTpl">
-	    {{#  if(d.sex === '女'){ }}
-	    <span style="color: #F581B1;">{{ d.sex }}</span>
+	    {{#  if(d.emp_sex === '女'){ }}
+	    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
 	    {{#  } else { }}
-	    {{ d.sex }}
+	    {{ d.emp_sex }}
 	    {{#  } }}
 	</script>
  <!--搜索栏-->
@@ -86,24 +75,26 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1200 ,height:700, url:'/coursetype/jsondata', page:true, id:'tab',toolbar: '#toolbarDemo' }"
+       lay-data="{width:1150,height:650, url:'/emp/empdata', page:true, id:'tab',toolbar: '#toolbarDemo' }"
        lay-filter="test">
     <thead>
     <tr>
         <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-        <th lay-data="{field:'coursetypeid', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'coursetypename', width:120}">用户名</th>
-        <th lay-data="{field:'sex', width:120,templet: '#sexTpl', sort: true}">性别</th>
-        <th lay-data="{field:'remark', width:260}">签名</th>
-        <th lay-data="{field:'city', width:260}">城市</th>
-        <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:385}"></th>
+        <th lay-data="{field:'emp_id', width:80, sort: true}">ID</th>
+        <th lay-data="{field:'emp_name', width:80}">用户名</th>
+        <th lay-data="{field:'emp_sex', width:80,templet: '#sexTpl', sort: true}">性别</th>
+        <th lay-data="{field:'birthday', width:100}">生日</th>
+        <th lay-data="{field:'cardno', width:100}">身份证</th>
+        <th lay-data="{field:'nation', width:100}">地区</th>
+        <th lay-data="{field:'phone', width:100}">手机号码</th>
+        <th lay-data="{field:'qqcode', width:100}">QQ</th>
+        <th lay-data="{field:'nation', width:100}">籍贯</th>
+        <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
     </thead>
 </table>
 </div>
 </body>
-<!--<script th:src="@{/js/jquery-2.0.0.min.js}"></script>
-<script th:src="@{/layui/layui.js}"></script>-->
 <script src="../js/jquery/jquery-3.1.0.min.js"></script>
 <script src="../layui/layui.js"></script>
 <script type="text/javascript" th:inline="none">
@@ -146,7 +137,7 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {
-                layer.msg(data.id);
+                layer.msg(data.emp_id);
             }
         })
 
