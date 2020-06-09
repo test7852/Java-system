@@ -117,4 +117,12 @@
       huoeIddsc = #{huoeiddsc,jdbcType=VARCHAR}
     where Hourid = #{hourid,jdbcType=INTEGER}
   </update>
+
+  <select id="selstbypage" resultType="Studenthuor">
+    select * from studenthuor limit #{startRow},#{pageSize}
+  </select>
+
+  <select id="selst" resultType="int">
+    select count(*) from studenthuor
+  </select>
 </mapper>

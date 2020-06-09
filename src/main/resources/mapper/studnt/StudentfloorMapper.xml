@@ -58,4 +58,12 @@
     set floorName = #{floorname,jdbcType=VARCHAR}
     where floorId = #{floorid,jdbcType=INTEGER}
   </update>
+
+  <select id="selsfbypage" resultType="Studentfloor">
+    select * from studentfloor limit #{startRow},#{pageSize}
+  </select>
+
+  <select id="selsf" resultType="int">
+    select count(*) from studentfloor
+  </select>
 </mapper>
