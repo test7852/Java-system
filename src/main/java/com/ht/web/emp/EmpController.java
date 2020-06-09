@@ -43,4 +43,19 @@ public class EmpController {
         return "emp/home";
     }
 
+    @RequestMapping("/zhuc")
+    public String zhuc(){
+        return "managerui/register";
+    }
+
+    @RequestMapping("/zhuye")
+    public String zhuye(){
+        return "managerui/index";
+    }
+
+    @RequestMapping("/logins")
+    public String logins(){
+        return "managerui/login";
+    }
+
 }
