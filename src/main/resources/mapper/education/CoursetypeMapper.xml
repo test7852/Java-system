@@ -77,4 +77,16 @@
       remark = #{remark,jdbcType=VARCHAR}
     where courseTypeId = #{coursetypeid,jdbcType=INTEGER}
   </update>
+
+  <!--查询总数据-->
+  <select id="selCountEdu" resultType="int">
+    select count(*) from coursetype;
+  </select>
+
+  <!--分页查询-->
+  <select id="selbypage" resultType="coursetype">
+    <![CDATA[
+          select * from coursetype limit #{startRow},#{pageSize};
+        ]]>
+  </select>
 </mapper>

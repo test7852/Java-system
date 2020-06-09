@@ -1,7 +1,12 @@
 package com.ht.service.education;
 
 import com.ht.bean.education.Course;
-    /**
+import com.ht.bean.education.Coursetype;
+import com.ht.util.Pager;
+
+import java.util.List;
+
+/**
  * @author 王金宝
  * @date 2020/6/8 20:35
  *  
@@ -20,5 +25,10 @@ public interface CourseService{
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    int selCountcEdu();//查询总数据
+
+    List<Course> selByPage(Pager pager);//分页查询
+
 
 }

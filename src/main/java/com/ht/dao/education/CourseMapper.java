@@ -1,12 +1,18 @@
 package com.ht.dao.education;
 
 import com.ht.bean.education.Course;
+import com.ht.bean.education.Coursetype;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author 王金宝
  * @date 2020/6/8 20:35
  *  
  */
+@Repository
 public interface CourseMapper {
     int deleteByPrimaryKey(Integer courseid);
 
@@ -19,4 +25,8 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    int selCountcEdu();//查询总数据
+
+    List<Course> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
 }
