@@ -1,10 +1,14 @@
 package com.ht.service.student.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.bean.student.Studentfloor;
 import com.ht.dao.student.StudentfloorMapper;
 import com.ht.service.student.StudentfloorService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/8 20:42
@@ -15,6 +19,16 @@ public class StudentfloorServiceImpl implements StudentfloorService{
 
     @Resource
     private StudentfloorMapper studentfloorMapper;
+
+    @Override
+    public List<Studentfloor> sflistpage(Pager pager) {
+        return studentfloorMapper.selsfbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
+    }
+
+    @Override
+    public int selsf() {
+        return studentfloorMapper.selsf();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer floorid) {
