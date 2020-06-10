@@ -31,15 +31,7 @@ public class studenthuorController {
 
         return "studenthuor";
     }
-    @RequestMapping("/stlist")
-    public String stafflist(Pager pager, Model model){
-        pager.pageSize=7;
-        //查询总行数
-        pager.page(studenthuorService.selCount());
-        pager.data=studenthuorService.sybase(pager);
-        model.addAttribute("pager",pager);
-        return "stlist";
-    }
+
     @RequestMapping("/toadd")
     public String toadd() {
         return "sfadd";
@@ -51,6 +43,7 @@ public class studenthuorController {
         return "redirect:stafflist";
     }
 
+
     @RequestMapping("/toupd")
     public String toupd(int id,Model model){
         Studenthuor studenthuor = studenthuorService.selectByPrimaryKey(id);
@@ -58,11 +51,17 @@ public class studenthuorController {
         return "staffupd";
     }
 
+
+    /**
+     * @param studenthuor
+     * @return
+     */
     @RequestMapping("/upd")
     public String upd(Studenthuor studenthuor){
         studenthuorService.updateByPrimaryKey(studenthuor);
         return "redirect:stafflist";
     }
+
 
     @RequestMapping("data")
     @ResponseBody
@@ -82,6 +81,10 @@ public class studenthuorController {
     }
 
 
+    /**
+     * @param id
+     * @return
+     */
     @RequestMapping("/del")
     public String del(Integer id) {
         System.out.println(id);

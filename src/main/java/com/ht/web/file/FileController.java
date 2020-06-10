@@ -1,6 +1,6 @@
-package com.ht.web;
+package com.ht.web.file;
 
-import com.ht.bean.Datadoc;
+import com.ht.bean.file.Datadoc;
 import com.ht.util.Contants;
 import com.ht.util.Utils;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.ht.bean;
+package com.ht.bean.file;
 
 /**
  * @author 王钟华

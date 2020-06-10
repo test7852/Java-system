@@ -1,7 +1,6 @@
 package com.ht.util;
 
-import com.ht.bean.Datadoc;
-import org.springframework.http.converter.json.GsonBuilderUtils;
+import com.ht.bean.file.Datadoc;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
