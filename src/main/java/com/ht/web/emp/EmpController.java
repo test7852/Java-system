@@ -109,23 +109,12 @@ public class EmpController {
 
 
     /**
-     * @param id
-     * @param model
-     * @return
-     * 去修改
-     */
-    @RequestMapping("toupdata")
-    public String toupdata(Integer id,Model model){
-        Empinfo empinfo = empinfoService.selectByPrimaryKey(id);
-        return "";
-    }
-
-    /**
      * @param empinfo
      * @return
      * 修改
      */
     @RequestMapping("updata")
+    @ResponseBody
     public Integer updata(Empinfo empinfo){
         System.out.println("empinfo.toString() = " + empinfo.toString());
         int updatacurr = empinfoService.updateByPrimaryKeySelective(empinfo);
