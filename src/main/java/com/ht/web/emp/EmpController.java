@@ -34,7 +34,7 @@ public class EmpController {
             System.out.println("失败");
         }
         System.out.println("成功");
-        return "managerui/index";
+        return "managerui/login";
     }
 
     /**
