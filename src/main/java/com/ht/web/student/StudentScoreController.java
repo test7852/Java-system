@@ -1,8 +1,8 @@
 package com.ht.web.student;
 
-import com.ht.bean.student.Student;
 import com.ht.bean.json.JsonData;
-import com.ht.service.student.StudentService;
+import com.ht.bean.student.StudentScore;
+import com.ht.service.student.StudentScoreService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -13,38 +13,33 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 /**
- * @author lrq
- * @date 2020/6/9 8:51
- * 学生管理
+ * @author xmf
+ * @date 2020/6/10 14:35
+ * 学生成绩
  */
 @Controller
-@RequestMapping("stu")
-public class StuController {
+@RequestMapping("score")
+public class StudentScoreController {
     @Resource
-    private StudentService studentService;
-
-    @RequestMapping("stulistUi")
-    public String stulistUi(){
-        return"student/stulist";
+    private StudentScoreService studentScoreService;
+//去到列表
+    @RequestMapping("scorelistUi")
+    public String scorelistUi(){
+        return "student/scorelist";
     }
-
-    @RequestMapping("select")
-    public String select(Integer studid){
-        System.out.println(studid);
-        return "student/stuselect";
-    }
+    //加载数据
     @Resource
     private JsonData jsonData;
 
-    @RequestMapping("studata")
+    @RequestMapping("scoredata")
     @ResponseBody
     public JsonData empdata(@Param("limit")int limit , @Param("page")int page ){
         Pager pager=new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
-        jsonData.setCount(studentService.getTotalRow());
+        jsonData.setCount(studentScoreService.getTotalRow());
         jsonData.setCode(0);
-        jsonData.setData(studentService.allPageStu(pager));
+        jsonData.setData(studentScoreService.allPageStuScore(pager));
         return jsonData;
     }
 
@@ -56,30 +51,30 @@ public class StuController {
      */
     @RequestMapping("list")
     public String list(Pager pager, Map map){
-        pager.page(studentService.getTotalRow());
-        map.put("",studentService.allPageStu(pager));
+        pager.page(studentScoreService.getTotalRow());
+        map.put("",studentScoreService.allPageStuScore(pager));
         return "";
     }
 
     /**
-     * @param student
+     * @param studentScore
      * @return
      * 去添加页面
      */
     @RequestMapping("toadd")
-    public String toadd(Student student){
-        studentService.insert(student);
+    public String toadd(StudentScore studentScore){
+        studentScoreService.insert(studentScore);
         return "";
     }
 
     /**
-     * @param student
+     * @param studentScore
      * @return
      * 添加学生信息
      */
     @RequestMapping("add")
-    public String add(Student student){
-        studentService.insert(student);
+    public String add(StudentScore studentScore){
+        studentScoreService.insert(studentScore);
         return "";
     }
 
@@ -91,30 +86,30 @@ public class StuController {
      */
     @RequestMapping("toupd")
     public String toupd(int stuid,Map map){
-        map.put("",studentService.selectByPrimaryKey(stuid));
+        map.put("",studentScoreService.selectByPrimaryKey(stuid));
         return "";
     }
 
     /**
-     * @param student
+     * @param studentScore
      * @return
      * 修改学生信息
      */
     @RequestMapping("upd")
-    public String upd(Student student){
-        studentService.updateByPrimaryKey(student);
+    public String upd(StudentScore studentScore){
+        studentScoreService.updateByPrimaryKey(studentScore);
         return "";
     }
 
     /**
-     * @param studid
+     * @param id
      * @return
      * 删除学生
      */
     @RequestMapping("del")
-    public String del(int studid){
-
-        studentService.deleteByPrimaryKey(studid);
-        return "redirect:stu/stulistUi";
+    public String del(int id){
+        System.out.println(id+"    scoreid");
+        studentScoreService.deleteByPrimaryKey(id);
+        return "redirect:score/scorelistUi";
     }
 }

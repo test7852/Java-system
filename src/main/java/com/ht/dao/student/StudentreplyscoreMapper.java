@@ -1,6 +1,9 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.Studentreplyscore;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +11,11 @@ import com.ht.bean.student.Studentreplyscore;
  * 
  */
 public interface StudentreplyscoreMapper {
+
+    List<Studentreplyscore> allPageStuRecord(Pager pager);//分页查询
+
+    int getTotalRow();//获取总行数
+
     int deleteByPrimaryKey(Integer replyid);
 
     int insert(Studentreplyscore record);

@@ -9,7 +9,7 @@
         <meta name="keywords" content="admin,dashboard">
         <meta name="author" content="skcats">
 		<title></title>
-		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+        <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
         <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
         <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
@@ -50,6 +50,15 @@
   <div class="layui-form-item">
     <div class="layui-inline">
       
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+     <label class="layui-form-label">验证</label>
+    </div>
+    <div class="layui-inline">
+     
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
       </div>
         <label class="layui-form-label">验证</label>
     </div>
@@ -66,20 +75,21 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/stu/studata', page:true, id:'tab',toolbar: '#toolbarDemo' }"
+       lay-data="{width:1150,height:650, url:'/score/scoredata', page:true, id:'tab',toolbar: '#toolbarDemo' }"
        lay-filter="test">
     <thead>
     <tr>
         <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-        <th lay-data="{field:'studid', width:80, sort: true}">学生id</th>
-        <th lay-data="{field:'stuname', width:80}">学生姓名</th>
-        <th lay-data="{field:'sex', width:80,templet: '#sexTpl', sort: true}">性别</th>
-        <th lay-data="{field:'age', width:100}">年龄</th>
-        <th lay-data="{field:'birthday', width:100}">出生年月</th>
-        <th lay-data="{field:'phone', width:100}">学生电话</th>
-        <th lay-data="{field:'addr', width:100}">家庭地址</th>
-        <th lay-data="{field:'stat', width:100}">学生状态</th>
-        <th lay-data="{field:'nation', width:100}">民族</th>
+        <th lay-data="{field:'scoreid', width:80, sort: true}">成绩id</th>
+        <th lay-data="{field:'stuid', width:80}">学生id</th>
+        <th lay-data="{field:'score', width:80}">学生成绩</th>
+        <th lay-data="{field:'rescore', width:100}">补考成绩</th>
+        <th lay-data="{field:'courseid', width:100}">关联课程id</th>
+        <th lay-data="{field:'testtype', width:100}">考试类型</th>
+        <th lay-data="{field:'termid', width:100}">关联学期id</th>
+        <th lay-data="{field:'scoretime', width:100}">考试时间</th>
+        <th lay-data="{field:'empid', width:100}">录入人员id</th>
+        <th lay-data="{field:'remark', width:100}">备注</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
     </thead>
@@ -91,8 +101,6 @@
 <script type="text/javascript" th:inline="none">
     layui.use('table', function () {
         var table = layui.table;
-
-
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
@@ -116,46 +124,26 @@
             }
             ;
         })
-        function ck(id) {
-            alert(id)
-            layer.open({
-                type: 2,//弹窗类型
-                title:'查看学生信息',
-                shadeClose: true,
-                shade: 0.3,//背景暗度
-                fixed:true,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['40%','35%'],//宽高
-                content: '/stu/select?studid='+id,//内容为页面
-                // btn: ['确认'],
-                end : function () {
-                    location.reload();
-                }
-            })
-        }
         //监听行工具事件
         table.on('tool(test)', function (obj) {
             var data = obj.data;
-            var id = data.studid;
-            //console.log(obj)
+            //console.log(obj);
             if (obj.event === 'del') {
                 layer.confirm('真的删除么?', function (index) {
+                    alert(data.scoreid);
                     obj.del();
                     layer.close(index);
-
                     $.ajax({
-                        url: '/stu/del',
+                        url: '/score/del',
                         type: 'post',
                         data: {
-                            studid:data.studid
+                            id:data.scoreid
                         },
                         dataType: 'text',
                     })
                 });
             } else if (obj.event === 'edit') {
                 layer.msg(data.studid);
-            }else if (obj.event === 'ck') {
-                ck(id);
             }
         })
 

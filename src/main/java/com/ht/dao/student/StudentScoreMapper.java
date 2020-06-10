@@ -1,6 +1,9 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.StudentScore;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +11,11 @@ import com.ht.bean.student.StudentScore;
  * 
  */
 public interface StudentScoreMapper {
+
+    List<StudentScore> allPageStuScore(Pager pager);//分页查询
+
+    int getTotalRow();//获取总行数
+
     int deleteByPrimaryKey(Integer scoreid);
 
     int insert(StudentScore record);
