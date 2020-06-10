@@ -99,7 +99,7 @@ body {
 	display: block;
 	border: none;
 	border-bottom: 1px solid rgb(215,215,215);
-	width: 200px;
+	width: 230px;
 	margin: 0px auto 20px auto;
 	font-size: 12px;
 	-webkit-appearance:none;
@@ -114,6 +114,10 @@ body {
 }
 .c-login .loginForm .userLogo{
 	background-image:url(/img/manager/register/login-user.png)!important;
+	background-size: 18px!important;
+}
+.c-login .loginForm .userEmail{
+	background-image:url(/img/manager/register/email.png)!important;
 	background-size: 18px!important;
 }
 .c-login .loginForm input[type="password"]{
@@ -192,7 +196,7 @@ body {
 .c-login .loginForm .codeText{
 	display: inline!important;
 	background-image:url(/img/manager/register/login-code.png)!important;
-	width: 120px !important;
+	width: 100px !important;
 }
 .c-login .loginForm .codeBtn{
 	padding: 4px 0px 4px 0px!important;
