@@ -96,9 +96,15 @@ public class EmpController {
      * 删除
      */
     @RequestMapping("del")
-    public void del(@Param("id") Integer id){
+    @ResponseBody
+    public Boolean del(@Param("id") Integer id){
         System.out.println("id = " + id);
-        empinfoService.deleteByPrimaryKey(id);
+        int b = empinfoService.deleteByPrimaryKey(id);
+        System.out.println(b);
+        if (b == 0){
+            return false;
+        }
+        return true;
     }
 
     @RequestMapping("emplistUi")
