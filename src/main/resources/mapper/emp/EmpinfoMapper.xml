@@ -210,14 +210,14 @@
     <!--@mbg.generated-->
     update empinfo
     <set>
-      <if test="empName != null">
-        emp_Name = #{empName,jdbcType=VARCHAR},
+      <if test="emp_name != null">
+        emp_Name = #{emp_name,jdbcType=VARCHAR},
       </if>
-      <if test="depId != null">
-        dep_Id = #{depId,jdbcType=INTEGER},
+      <if test="dep_id != null">
+        dep_Id = #{dep_id,jdbcType=INTEGER},
       </if>
-      <if test="empSex != null">
-        emp_Sex = #{empSex,jdbcType=VARCHAR},
+      <if test="emp_sex != null">
+        emp_Sex = #{emp_sex,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null">
         Birthday = #{birthday,jdbcType=VARCHAR},
@@ -274,7 +274,7 @@
         post_Id = #{postId,jdbcType=INTEGER},
       </if>
     </set>
-    where emp_Id = #{empId,jdbcType=INTEGER}
+    where emp_Id = #{emp_id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Empinfo">
     <!--@mbg.generated-->
