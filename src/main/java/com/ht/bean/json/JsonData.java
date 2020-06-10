@@ -16,4 +16,5 @@ public class JsonData<T> {
     private String msg="";
     private int count;
     private List<T> data;
+
 }

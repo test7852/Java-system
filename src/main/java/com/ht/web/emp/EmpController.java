@@ -19,6 +19,8 @@ import javax.annotation.Resource;
 public class EmpController {
     @Resource
     private EmpinfoService empinfoService;
+    @Resource
+    private JsonData jsonData;
 
     /**
      * @param empinfo
@@ -38,20 +40,42 @@ public class EmpController {
     }
 
     /**
-     * @param pager
-     * @param model
+     * @param
      * @return
-     * 分页
+     * 去主页
      */
-//    @RequestMapping("list")
-//    public String list(Pager pager, Model model){
-//        pager.pageSize = 2;
-//        //查询总行数
-//        pager.page(empinfoService.selprocount());
-//        pager.data = empinfoService.allPageEmp(pager);
-//
-//        return "managerui/index";
-//    }
+    @RequestMapping("index")
+    public String index(){
+        return "managerui/index";
+    }
+
+
+    /**
+     * @return
+     * 去员工资料表
+     */
+    @RequestMapping("list")
+    public String list(){
+        return "emp/emplist";
+    }
+
+    /**
+     * @param limit
+     * @param page
+     * @return
+     * 获取员工资料
+     */
+    @RequestMapping("empdata")
+    @ResponseBody
+    public JsonData empdata(@Param("limit")int limit , @Param("page")int page){
+        Pager pager = new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(empinfoService.selprocount());
+        jsonData.setData(empinfoService.allPageEmp(pager));
+        return jsonData;
+    }
+
 
     /**
      * @param empinfo
@@ -80,20 +104,6 @@ public class EmpController {
         return "emp/emplist";
     }
 
-    @Resource
-    private JsonData jsonData;
-
-    @RequestMapping("empdata")
-    @ResponseBody
-    public JsonData empdata(@Param("limit")int limit , @Param("page")int page ){
-        Pager pager=new Pager();
-        pager.setCurrPage(page);
-        pager.setPageSize(limit);
-        jsonData.setCount(empinfoService.selprocount());
-        jsonData.setCode(0);
-        jsonData.setData(empinfoService.allPageEmp(pager));
-        return jsonData;
-    }
 
 
     /**

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.student.StudentScoreMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.student.StudentScore">
+    <!--@mbg.generated-->
+    <!--@Table student_score-->
+    <id column="scoreId" jdbcType="INTEGER" property="scoreid" />
+    <result column="stuid" jdbcType="INTEGER" property="stuid" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="Rescore" jdbcType="INTEGER" property="rescore" />
+    <result column="courseId" jdbcType="INTEGER" property="courseid" />
+    <result column="testType" jdbcType="VARCHAR" property="testtype" />
+    <result column="termid" jdbcType="INTEGER" property="termid" />
+    <result column="scoreTime" jdbcType="VARCHAR" property="scoretime" />
+    <result column="Empid" jdbcType="INTEGER" property="empid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    scoreId, stuid, score, Rescore, courseId, testType, termid, scoreTime, Empid, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from student_score
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from student_score
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="scoreId" keyProperty="scoreid" parameterType="com.ht.bean.student.StudentScore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into student_score (stuid, score, Rescore, 
+      courseId, testType, termid, 
+      scoreTime, Empid, remark
+      )
+    values (#{stuid,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{rescore,jdbcType=INTEGER}, 
+      #{courseid,jdbcType=INTEGER}, #{testtype,jdbcType=VARCHAR}, #{termid,jdbcType=INTEGER}, 
+      #{scoretime,jdbcType=VARCHAR}, #{empid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="scoreId" keyProperty="scoreid" parameterType="com.ht.bean.student.StudentScore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into student_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="rescore != null">
+        Rescore,
+      </if>
+      <if test="courseid != null">
+        courseId,
+      </if>
+      <if test="testtype != null">
+        testType,
+      </if>
+      <if test="termid != null">
+        termid,
+      </if>
+      <if test="scoretime != null">
+        scoreTime,
+      </if>
+      <if test="empid != null">
+        Empid,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="rescore != null">
+        #{rescore,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null">
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="testtype != null">
+        #{testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="termid != null">
+        #{termid,jdbcType=INTEGER},
+      </if>
+      <if test="scoretime != null">
+        #{scoretime,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.student.StudentScore">
+    <!--@mbg.generated-->
+    update student_score
+    <set>
+      <if test="stuid != null">
+        stuid = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="rescore != null">
+        Rescore = #{rescore,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null">
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="testtype != null">
+        testType = #{testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="termid != null">
+        termid = #{termid,jdbcType=INTEGER},
+      </if>
+      <if test="scoretime != null">
+        scoreTime = #{scoretime,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        Empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.student.StudentScore">
+    <!--@mbg.generated-->
+    update student_score
+    set stuid = #{stuid,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      Rescore = #{rescore,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      testType = #{testtype,jdbcType=VARCHAR},
+      termid = #{termid,jdbcType=INTEGER},
+      scoreTime = #{scoretime,jdbcType=VARCHAR},
+      Empid = #{empid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where scoreId = #{scoreid,jdbcType=INTEGER}
+  </update>
+</mapper>
