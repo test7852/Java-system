@@ -1,10 +1,13 @@
 package com.ht.web.student;
 
 import com.ht.bean.student.Student;
+import com.ht.bean.json.JsonData;
 import com.ht.service.student.StudentService;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -19,6 +22,26 @@ import java.util.Map;
 public class StuController {
     @Resource
     private StudentService studentService;
+
+    @RequestMapping("stulistUi")
+    public String stulistUi(){
+        return "student/stulist";
+    }
+
+    @Resource
+    private JsonData jsonData;
+
+    @RequestMapping("studata")
+    @ResponseBody
+    public JsonData empdata(@Param("limit")int limit , @Param("page")int page ){
+        Pager pager=new Pager();
+        pager.setCurrPage(page);
+        pager.setPageSize(limit);
+        jsonData.setCount(studentService.getTotalRow());
+        jsonData.setCode(0);
+        jsonData.setData(studentService.allPageStu(pager));
+        return jsonData;
+    }
 
     /**
      * @param pager
@@ -84,8 +107,7 @@ public class StuController {
      * 删除学生
      */
     @RequestMapping("del")
-    public String del(int stuid){
+    public void del(int stuid){
         studentService.deleteByPrimaryKey(stuid);
-        return "";
     }
 }

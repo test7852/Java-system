@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Map;
+
 /**
  * 员工管理
  *
@@ -107,25 +109,15 @@ public class EmpController {
 
 
     /**
-     * @param id
-     * @param model
-     * @return
-     * 去修改
-     */
-    @RequestMapping("toupdata")
-    public String toupdata(Integer id,Model model){
-        Empinfo empinfo = empinfoService.selectByPrimaryKey(id);
-        return "";
-    }
-
-    /**
      * @param empinfo
      * @return
      * 修改
      */
     @RequestMapping("updata")
-    public String updata(Empinfo empinfo){
-        empinfoService.updateByPrimaryKeySelective(empinfo);
-        return "";
+    @ResponseBody
+    public Integer updata(Empinfo empinfo){
+        System.out.println("empinfo.toString() = " + empinfo.toString());
+        int updatacurr = empinfoService.updateByPrimaryKeySelective(empinfo);
+        return updatacurr;
     }
 }
