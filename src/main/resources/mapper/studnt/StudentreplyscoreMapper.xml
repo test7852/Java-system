@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.student.StudentreplyscoreMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.student.Studentreplyscore">
+    <!--@mbg.generated-->
+    <!--@Table studentreplyscore-->
+    <id column="replyId" jdbcType="INTEGER" property="replyid" />
+    <result column="StudentId" jdbcType="INTEGER" property="studentid" />
+    <result column="projectId" jdbcType="INTEGER" property="projectid" />
+    <result column="empId" jdbcType="INTEGER" property="empid" />
+    <result column="score1" jdbcType="VARCHAR" property="score1" />
+    <result column="Score2" jdbcType="VARCHAR" property="score2" />
+    <result column="Score3" jdbcType="VARCHAR" property="score3" />
+    <result column="Score4" jdbcType="VARCHAR" property="score4" />
+    <result column="Score5" jdbcType="VARCHAR" property="score5" />
+    <result column="Score6" jdbcType="VARCHAR" property="score6" />
+    <result column="Score7" jdbcType="VARCHAR" property="score7" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    replyId, StudentId, projectId, empId, score1, Score2, Score3, Score4, Score5, Score6, 
+    Score7, Remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from studentreplyscore
+    where replyId = #{replyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from studentreplyscore
+    where replyId = #{replyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="replyId" keyProperty="replyid" parameterType="com.ht.bean.student.Studentreplyscore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into studentreplyscore (StudentId, projectId, empId, 
+      score1, Score2, Score3, 
+      Score4, Score5, Score6, 
+      Score7, Remark)
+    values (#{studentid,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}, 
+      #{score1,jdbcType=VARCHAR}, #{score2,jdbcType=VARCHAR}, #{score3,jdbcType=VARCHAR}, 
+      #{score4,jdbcType=VARCHAR}, #{score5,jdbcType=VARCHAR}, #{score6,jdbcType=VARCHAR}, 
+      #{score7,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="replyId" keyProperty="replyid" parameterType="com.ht.bean.student.Studentreplyscore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into studentreplyscore
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentid != null">
+        StudentId,
+      </if>
+      <if test="projectid != null">
+        projectId,
+      </if>
+      <if test="empid != null">
+        empId,
+      </if>
+      <if test="score1 != null">
+        score1,
+      </if>
+      <if test="score2 != null">
+        Score2,
+      </if>
+      <if test="score3 != null">
+        Score3,
+      </if>
+      <if test="score4 != null">
+        Score4,
+      </if>
+      <if test="score5 != null">
+        Score5,
+      </if>
+      <if test="score6 != null">
+        Score6,
+      </if>
+      <if test="score7 != null">
+        Score7,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentid != null">
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="score1 != null">
+        #{score1,jdbcType=VARCHAR},
+      </if>
+      <if test="score2 != null">
+        #{score2,jdbcType=VARCHAR},
+      </if>
+      <if test="score3 != null">
+        #{score3,jdbcType=VARCHAR},
+      </if>
+      <if test="score4 != null">
+        #{score4,jdbcType=VARCHAR},
+      </if>
+      <if test="score5 != null">
+        #{score5,jdbcType=VARCHAR},
+      </if>
+      <if test="score6 != null">
+        #{score6,jdbcType=VARCHAR},
+      </if>
+      <if test="score7 != null">
+        #{score7,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.student.Studentreplyscore">
+    <!--@mbg.generated-->
+    update studentreplyscore
+    <set>
+      <if test="studentid != null">
+        StudentId = #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        projectId = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        empId = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="score1 != null">
+        score1 = #{score1,jdbcType=VARCHAR},
+      </if>
+      <if test="score2 != null">
+        Score2 = #{score2,jdbcType=VARCHAR},
+      </if>
+      <if test="score3 != null">
+        Score3 = #{score3,jdbcType=VARCHAR},
+      </if>
+      <if test="score4 != null">
+        Score4 = #{score4,jdbcType=VARCHAR},
+      </if>
+      <if test="score5 != null">
+        Score5 = #{score5,jdbcType=VARCHAR},
+      </if>
+      <if test="score6 != null">
+        Score6 = #{score6,jdbcType=VARCHAR},
+      </if>
+      <if test="score7 != null">
+        Score7 = #{score7,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where replyId = #{replyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.student.Studentreplyscore">
+    <!--@mbg.generated-->
+    update studentreplyscore
+    set StudentId = #{studentid,jdbcType=INTEGER},
+      projectId = #{projectid,jdbcType=INTEGER},
+      empId = #{empid,jdbcType=INTEGER},
+      score1 = #{score1,jdbcType=VARCHAR},
+      Score2 = #{score2,jdbcType=VARCHAR},
+      Score3 = #{score3,jdbcType=VARCHAR},
+      Score4 = #{score4,jdbcType=VARCHAR},
+      Score5 = #{score5,jdbcType=VARCHAR},
+      Score6 = #{score6,jdbcType=VARCHAR},
+      Score7 = #{score7,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where replyId = #{replyid,jdbcType=INTEGER}
+  </update>
+</mapper>

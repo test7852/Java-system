@@ -26,32 +26,25 @@ public class CourseTypeController {
     @Resource
     private JsonData jsonData;
 
-//    @RequestMapping("jsondata")
-//    @ResponseBody
-//    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
-//
-//        Pager pager=new Pager();
-//        pager.setCurrPage(page);
-//        pager.setPageSize(limit);
-//        jsonData.setCount(coursetypeService.selCountEdu());
-//        jsonData.setCode(0);
-//        jsonData.setData(coursetypeService.selByPage(pager));
-//        System.out.println("jsonData = " + jsonData.toString());
-//
-//        return jsonData;
-//    }
+    @RequestMapping("jsondata")
+    @ResponseBody
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
+
+        Pager pager=new Pager();
+        pager.setCurrPage(page);
+        pager.setPageSize(limit);
+        jsonData.setCount(coursetypeService.selCountEdu());
+        jsonData.setData(coursetypeService.selByPage(pager));
+
+        return jsonData;
+    }
+
 
     //课程类别   分页查
     @RequestMapping("/edulist")
     public String edulist(Pager pager, Map map){
-        //前台最大展示数
-        pager.pageSize=8;
-        //查询总数据
-        pager.page(coursetypeService.selCountEdu());
-        //查询总页数
-        pager.data=coursetypeService.selByPage(pager);
-        map.put("page",pager);
-        return "emplist";
+
+        return "emp/department";
     }
 
     //课程类别   根据id删除

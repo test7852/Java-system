@@ -72,7 +72,7 @@
                                     <i class="fa fa-user-circle-o"></i><span> 员工管理 </span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="goto" href="/emp/emplistUi"><i class="fa fa-bank"></i> 部门管理</a></li>
+                                    <li><a target="goto" href=""><i class="fa fa-bank"></i> 部门管理</a></li>
                                     <li><a target="goto" th:href="@{/emp/emplistUi}"><i class="fa fa-files-o"></i> 员工资料</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-leanpub"></i> 周报审阅</a></li>
@@ -90,7 +90,7 @@
                                     <li><a href="javascript:void(0);"><i class="fa fa-users"></i> 班级管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-ravelry"></i> 楼栋管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-certificate"></i> 宿舍管理</a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-newspaper-o"></i> 学生资料</a></li>
+                                    <li><a target="goto" th:href="@{/stu/stulistUi}"><i class="fa fa-newspaper-o"></i> 学生资料</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-mortar-board"></i> 考试成绩</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-mortar-board"></i> 答辩成绩</a></li>
                                 </ul>
@@ -260,9 +260,11 @@
                     <div class="page-title">
                         <h3 class="breadcrumb-header">首 页</h3>
                     </div>
+
                     <div id="main-wrapper">
                         <iframe width="100%" height="800px" src="http://baidu.com" scrolling="yes" frameborder="0" name="goto"></iframe>
                     </div><!-- Main Wrapper -->
+
                     <div class="page-footer">
                         <p>懵逼树 &copy; 2020. 由火箭组合开发 懵逼树后台管理系统</p>
                     </div>
