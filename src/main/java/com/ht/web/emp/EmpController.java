@@ -70,9 +70,9 @@ public class EmpController {
      * 删除
      */
     @RequestMapping("del")
-    public String del(Integer id){
+    public void del(@Param("id") Integer id){
+        System.out.println("id = " + id);
         empinfoService.deleteByPrimaryKey(id);
-        return "";
     }
 
     @RequestMapping("emplistUi")
