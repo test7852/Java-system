@@ -159,10 +159,7 @@
         table.on('tool(tab)', function (obj) {
             var data = obj.data;
             //console.log(obj)
-            if (obj.event === 'de' +
-                '' +
-                '' +
-                'l') {
+            if (obj.event === 'del') {
                 layer.confirm('真的删除么?', function (index) {
                     obj.del();
                     layer.close(index);
@@ -175,7 +172,7 @@
                         dataType: 'text',
                     })
                 });
-            } else if (obj.event === 'edit') {
+            } else if (obj.event == 'edit') {
                 if($(".falg").html()=="ON"){
                     // 打开可编辑状态：
                     $(".layui-table").find('td').data('edit', true)
