@@ -59,11 +59,13 @@
     where floorId = #{floorid,jdbcType=INTEGER}
   </update>
 
-  <select id="selsfbypage" resultType="Studentfloor">
-    select * from studentfloor limit #{startRow},#{pageSize}
+  <!--  分页-->
+  <select id="sybase" resultType="com.ht.bean.student.Studentfloor">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    select * from studentfloor limit #{kais},#{pageSize}
   </select>
-
-  <select id="selsf" resultType="int">
-    select count(*) from studentfloor
-  </select>
+  <!--  查询总数-->
+  <select id="selCount" resultType="int">
+        select count(*) from studentfloor
+    </select>
 </mapper>

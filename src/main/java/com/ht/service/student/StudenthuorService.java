@@ -1,5 +1,6 @@
 package com.ht.service.student;
 
+import com.ht.bean.student.Studentfloor;
 import com.ht.bean.student.Studenthuor;
 import com.ht.util.Pager;
 
@@ -12,9 +13,9 @@ import java.util.List;
  */
 public interface StudenthuorService{
 
-    List<Studenthuor> stlistpage(Pager pager);//分页查询
+    List<Studentfloor> sybase(Pager pager);//分页查询
 
-    int selst();//查询总数
+    int selCount();//查询总数
 
     int deleteByPrimaryKey(Integer hourid);
 

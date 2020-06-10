@@ -153,4 +153,15 @@
       majorId = #{majorid,jdbcType=INTEGER}
     where classid = #{classid,jdbcType=INTEGER}
   </update>
+
+
+  <!--  分页-->
+  <select id="sybase" resultType="com.ht.bean.student.Studentclass">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    select * from studentclass limit #{kais},#{pageSize}
+  </select>
+  <!--  查询总数-->
+  <select id="selCount" resultType="int">
+        select count(*) from studentclass
+    </select>
 </mapper>

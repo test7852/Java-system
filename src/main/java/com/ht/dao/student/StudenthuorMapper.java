@@ -1,6 +1,8 @@
 package com.ht.dao.student;
 
+import com.ht.bean.student.Studentfloor;
 import com.ht.bean.student.Studenthuor;
+import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,9 +14,9 @@ import java.util.List;
  */
 public interface StudenthuorMapper {
 
-    List<Studenthuor> selstbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
+    List<Studentfloor> sybase(Pager pager);//分页查询
 
-    int selst();//查询总数
+    int selCount();//查询总数
 
     int deleteByPrimaryKey(Integer hourid);
 

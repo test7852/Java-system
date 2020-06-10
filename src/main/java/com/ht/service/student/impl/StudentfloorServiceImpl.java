@@ -21,13 +21,13 @@ public class StudentfloorServiceImpl implements StudentfloorService{
     private StudentfloorMapper studentfloorMapper;
 
     @Override
-    public List<Studentfloor> sflistpage(Pager pager) {
-        return studentfloorMapper.selsfbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
+    public List<Studentfloor> sybase(Pager pager) {
+        return studentfloorMapper.sybase(pager);
     }
 
     @Override
-    public int selsf() {
-        return studentfloorMapper.selsf();
+    public int selCount() {
+        return studentfloorMapper.selCount();
     }
 
     @Override

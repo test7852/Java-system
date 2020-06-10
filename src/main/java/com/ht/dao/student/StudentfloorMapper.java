@@ -1,6 +1,8 @@
 package com.ht.dao.student;
 
+import com.ht.bean.student.Studentclass;
 import com.ht.bean.student.Studentfloor;
+import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,10 +13,9 @@ import java.util.List;
  *  
  */
 public interface StudentfloorMapper {
+    int selCount();//查询总数
 
-    List<Studentfloor> selsfbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
-
-    int selsf();//查询总数
+    List<Studentfloor> sybase(Pager pager);//分页
 
     int deleteByPrimaryKey(Integer floorid);
 

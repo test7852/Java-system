@@ -1,5 +1,6 @@
 package com.ht.service.student.impl;
 
+import com.ht.bean.student.Studentfloor;
 import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -20,14 +21,15 @@ public class StudenthuorServiceImpl implements StudenthuorService{
     @Resource
     private StudenthuorMapper studenthuorMapper;
 
+
     @Override
-    public List<Studenthuor> stlistpage(Pager pager) {
-        return studenthuorMapper.selstbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
+    public List<Studentfloor> sybase(Pager pager) {
+        return studenthuorMapper.sybase(pager);
     }
 
     @Override
-    public int selst() {
-        return studenthuorMapper.selst();
+    public int selCount() {
+        return studenthuorMapper.selCount();
     }
 
     @Override

@@ -118,11 +118,13 @@
     where Hourid = #{hourid,jdbcType=INTEGER}
   </update>
 
-  <select id="selstbypage" resultType="Studenthuor">
-    select * from studenthuor limit #{startRow},#{pageSize}
+  <!--  分页-->
+  <select id="sybase" resultType="com.ht.bean.student.Studenthuor">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    select * from studenthuor limit #{kais},#{pageSize}
   </select>
-
-  <select id="selst" resultType="int">
-    select count(*) from studenthuor
-  </select>
+  <!--  查询总数-->
+  <select id="selCount" resultType="int">
+        select count(*) from studenthuor
+    </select>
 </mapper>

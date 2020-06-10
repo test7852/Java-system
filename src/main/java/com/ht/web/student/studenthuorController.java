@@ -1,9 +1,11 @@
 package com.ht.web.student;
 
+import com.ht.bean.json.JsonData;
 import com.ht.bean.student.Studenthuor;
 import com.ht.service.emp.EmpinfoService;
 import com.ht.service.student.StudenthuorService;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,10 @@ import javax.annotation.Resource;
  * @date 2020/6/9 10:18
  */
 @Controller
-@RequestMapping("studenthuor")
+@RequestMapping("studentHuor")
 public class studenthuorController {
+    @Resource
+    private JsonData jsonData;
     @Resource
     private StudenthuorService studenthuorService;
 
@@ -31,8 +35,8 @@ public class studenthuorController {
     public String stafflist(Pager pager, Model model){
         pager.pageSize=7;
         //查询总行数
-        pager.page(studenthuorService.selst());
-        pager.data=studenthuorService.stlistpage(pager);
+        pager.page(studenthuorService.selCount());
+        pager.data=studenthuorService.sybase(pager);
         model.addAttribute("pager",pager);
         return "stlist";
     }
@@ -60,9 +64,29 @@ public class studenthuorController {
         return "redirect:stafflist";
     }
 
-    @RequestMapping("/del")
-    public String del(Integer hourid) {
-        studenthuorService.deleteByPrimaryKey(hourid);
-        return "redirect:stafflist";
+    @RequestMapping("data")
+    @ResponseBody
+    public JsonData data(@Param("limit")int limit , @Param("page")int page){
+        Pager pager = new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(studenthuorService.selCount());
+        jsonData.setData(studenthuorService.sybase(pager));
+        return jsonData;
     }
+
+
+    @RequestMapping("list")
+    public String list(){
+        return "student/studentHuor";
+    }
+
+
+    @RequestMapping("/del")
+    public String del(Integer id) {
+        System.out.println(id);
+//        studenthuorService.deleteByPrimaryKey(id);
+        return "redirect:studentHuor/list";
+    }
+
 }

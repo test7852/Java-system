@@ -1,8 +1,10 @@
 package com.ht.web.student;
 
+import com.ht.bean.json.JsonData;
 import com.ht.bean.student.Studentfloor;
 import com.ht.service.student.StudentfloorService;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +17,10 @@ import javax.annotation.Resource;
  * @date 2020/6/9 10:22
  */
 @Controller
-@RequestMapping("Studentfloor")
+@RequestMapping("studentFloor")
 public class StudentfloorController {
+    @Resource
+    private JsonData jsonData;
     @Resource
     private StudentfloorService studentfloorService;
 
@@ -27,15 +31,9 @@ public class StudentfloorController {
         return "Studentfloor";
     }
 
-    @RequestMapping("/stlist")
-    public String stafflist(Pager pager, Model model){
-        pager.pageSize=7;
-        //查询总行数
-        pager.page(studentfloorService.selsf());
-        pager.data=studentfloorService.sflistpage(pager);
-        model.addAttribute("pager",pager);
-        return "stlist";
-    }
+
+
+
     @RequestMapping("/toadd")
     public String toadd() {
         return "sfadd";
@@ -60,9 +58,30 @@ public class StudentfloorController {
         return "redirect:stafflist";
     }
 
+
+
+    @RequestMapping("data")
+    @ResponseBody
+    public JsonData data(@Param("limit")int limit , @Param("page")int page){
+        Pager pager = new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(studentfloorService.selCount());
+        jsonData.setData(studentfloorService.sybase(pager));
+        return jsonData;
+    }
+
+
+    @RequestMapping("list")
+    public String list(){
+        return "student/studentFloor";
+    }
+
+
     @RequestMapping("/del")
-    public String del(Integer floorid) {
-        studentfloorService.deleteByPrimaryKey(floorid);
-        return "redirect:stafflist";
+    public String del(Integer id) {
+        System.out.println(id);
+//        studentfloorService.deleteByPrimaryKey(id);
+        return "redirect:studentFloor/list";
     }
 }

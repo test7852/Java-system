@@ -1,6 +1,9 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.Studentclass;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +11,10 @@ import com.ht.bean.student.Studentclass;
  * 
  */
 public interface StudentclassMapper {
+    int selCount();//查询总数
+
+    List<Studentclass> sybase(Pager pager);//分页
+
     int deleteByPrimaryKey(Integer classid);
 
     int insert(Studentclass record);

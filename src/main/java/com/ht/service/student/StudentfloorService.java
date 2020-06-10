@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface StudentfloorService{
 
-    List<Studentfloor> sflistpage(Pager pager);//分页查询
+    List<Studentfloor> sybase(Pager pager);//分页查询
 
-    int selsf();//查询总数
+    int selCount();//查询总数
 
     int deleteByPrimaryKey(Integer floorid);
 
