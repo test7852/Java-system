@@ -25,12 +25,19 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 	</style>
 <body>
 <!--数据表格样式及附件-->	
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">
-        <i class="layui-icon">&#xe642;</i>编辑
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
     <a class="layui-btn layui-btn-xs" lay-event="ck">
         <i class="layui-icon">&#xe6b2;</i>查看
@@ -39,13 +46,7 @@
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 	</script>
-	<script type="text/html" id="sexTpl">
-	    {{#  if(d.emp_sex === '女'){ }}
-	    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-	    {{#  } else { }}
-	    {{ d.emp_sex }}
-	    {{#  } }}
-	</script>
+
  <!--搜索栏-->
   <div class="layui-form-item">
     <div class="layui-inline">
@@ -101,33 +102,10 @@
 <script type="text/javascript" th:inline="none">
     layui.use('table', function () {
         var table = layui.table;
-        //头工具栏事件
-        table.on('toolbar(test)', function (obj) {
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch (obj.event) {
-                case 'getCheckData':
-                    layer.msg("添加")
-                     var data = checkStatus.data;
-                     layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-                case 'LAYTABLE_TIPS':
-                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
-                    break;
-            }
-            ;
-        })
+
         //监听行工具事件
         table.on('tool(test)', function (obj) {
             var data = obj.data;
-            //console.log(obj);
             if (obj.event === 'del') {
                 layer.confirm('真的删除么?', function (index) {
                     alert(data.scoreid);
@@ -142,6 +120,17 @@
                         dataType: 'text',
                     })
                 });
+            }else if (obj.event == 'edit') {
+                if($(".falg").html()=="ON"){
+                    // 打开可编辑状态：
+                    $(".layui-table").find('td').data('edit', true);
+                    $(".falg").html("YES")
+
+                }else {
+                    $(".layui-table").find('td').data('edit', false);
+                    $(".falg").html("ON")
+                }
+
             } else if (obj.event === 'edit') {
                 layer.msg(data.studid);
             }

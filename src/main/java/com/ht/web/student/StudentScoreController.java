@@ -108,8 +108,7 @@ public class StudentScoreController {
      */
     @RequestMapping("del")
     public String del(int id){
-        System.out.println(id+"    scoreid");
-        studentScoreService.deleteByPrimaryKey(id);
+//(待删除)        studentScoreService.deleteByPrimaryKey(id);
         return "redirect:score/scorelistUi";
     }
 }

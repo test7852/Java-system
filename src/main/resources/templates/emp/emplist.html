@@ -25,6 +25,13 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 	</style>
 <body>
 <!--数据表格样式及附件-->	
@@ -103,14 +110,14 @@
     layui.use('table', function () {
         var table = layui.table;
 
-            //监听单元格编辑
+        //监听单元格编辑（修改）
         table.on('edit(tab)', function(obj){
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
             layer.msg(data.emp_name);
             $.ajax({
-                url: '/emp/updata',
+                url: '/emp/update',
                 type: 'post',
                 data: {
                     emp_id:data.emp_id,
@@ -161,9 +168,7 @@
                 if($(".falg").html()=="ON"){
                     // 打开可编辑状态：
                     $(".layui-table").find('td').data('edit', true);
-                    // layer.msg(data.emp_id);
                     $(".falg").html("YES")
-                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
 
                 }else {
                     $(".layui-table").find('td').data('edit', false);

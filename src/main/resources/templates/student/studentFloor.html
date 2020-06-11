@@ -36,8 +36,8 @@
 <body>
 <!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">
-        <i class="layui-icon">&#xe642;</i>编辑
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
@@ -66,7 +66,7 @@
         </div>
         <label class="layui-form-label">验证</label>
         <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
-        <button type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
+        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
 </div>
 
@@ -74,7 +74,7 @@
 <div class="utable">
     <table class="layui-table"
            lay-data="{width:1150,height:650, url:'/studentFloor/data', page:true, id:'tab',toolbar: '#toolbarDemo' }"
-           lay-filter="test">
+           lay-filter="tab">
         <thead>
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
@@ -93,31 +93,36 @@
     layui.use('table', function () {
         var table = layui.table;
 
-        //头工具栏事件
-        table.on('toolbar(test)', function (obj) {
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch (obj.event) {
-                case 'getCheckData':
-                    layer.msg("添加")
-                    // var data = checkStatus.data;
-                    // layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-                case 'LAYTABLE_TIPS':
-                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
-                    break;
-            }
-            ;
+        //监听单元格编辑(修改)
+        table.on('edit(tab)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+            $.ajax({
+                url: '/studentFloor/update',
+                type: 'post',
+                data: {
+                    floorid:data.floorid,
+                    floorname:data.floorname,
+                },
+                dataType: 'text'
+            })
+        });
+
+        //点击添加iframe窗方法(添加)
+        $("#add").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '新增楼栋',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['450px', '300px'],
+                content: ['/studentFloor/toadd']//这是链接你的页面地址 url
+            });
         })
-        //监听行工具事件
-        table.on('tool(test)', function (obj) {
+
+
+        //监听行工具事件(删除)
+        table.on('tool(tab)', function (obj) {
             var data = obj.data;
             //console.log(obj)
             if (obj.event === 'del') {
@@ -128,15 +133,21 @@
                         url: '/studentFloor/del',
                         type: 'post',
                         data: {
-
                             id:data.floorid
                         },
-
                         dataType: 'text',
                     })
                 });
-            } else if (obj.event === 'edit') {
-                layer.msg(data.classid);
+            } else if (obj.event == 'edit') {
+                if($(".falg").html()=="ON"){
+                    // 打开可编辑状态：
+                    $(".layui-table").find('td').data('edit', true);
+                    $(".falg").html("YES")
+
+                }else {
+                    $(".layui-table").find('td').data('edit', false);
+                    $(".falg").html("ON")
+                }
             }
         })
 

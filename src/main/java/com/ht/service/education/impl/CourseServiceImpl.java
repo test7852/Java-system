@@ -1,5 +1,6 @@
 package com.ht.service.education.impl;
 
+import com.ht.bean.education.Coursetype;
 import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -59,5 +60,11 @@ public class CourseServiceImpl implements CourseService{
     public List<Course> selByPage(Pager pager) {
         return courseMapper.selbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
     }
+
+    @Override
+    public List<Coursetype> selCtypes() {
+        return courseMapper.selCtype();
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.ht.web.education;
 
+import com.ht.bean.education.Course;
 import com.ht.bean.education.Coursetype;
 import com.ht.bean.json.JsonData;
 import com.ht.service.education.CoursetypeService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,59 +28,53 @@ public class CourseTypeController {
     @Resource
     private JsonData jsonData;
 
-    @RequestMapping("jsondata")
+    //去到课程类别界面
+    @RequestMapping("/coursetypelist")
+    public String coursetypelist(){
+        return "education/coursetypelist";
+    }
+
+    //课程管理  分页查的数据
+    @RequestMapping("/coursetypedata")
     @ResponseBody
     public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
-
         Pager pager=new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
         jsonData.setCount(coursetypeService.selCountEdu());
         jsonData.setData(coursetypeService.selByPage(pager));
-
         return jsonData;
     }
 
-
-    //课程类别   分页查
-    @RequestMapping("/edulist")
-    public String edulist(Pager pager, Map map){
-
-        return "emp/department";
+    //课程管理  根据id删除
+    @RequestMapping("/coursetypedel")
+    @ResponseBody
+    public Integer coursedel(Integer coursetypeid){
+        int i = coursetypeService.deleteByPrimaryKey(coursetypeid);
+        System.out.println("删除的id:"+coursetypeid);
+        return i;
     }
 
-    //课程类别   根据id删除
-    @RequestMapping("/edudel")
-    public String edudel(Integer coursetypeid){
-        coursetypeService.deleteByPrimaryKey(coursetypeid);
-        return "";
+    //课程管理  修改
+    @RequestMapping("/coursetypeupd")
+    @ResponseBody
+    public Integer coursetypeupd(Coursetype coursetype){
+        int i = coursetypeService.updateByPrimaryKey(coursetype);
+        return i;
     }
 
-    //课程类别   根据id查询  去修改界面
-    @RequestMapping("/edutoupd")
-    public String edutoupd(Integer coursetypeid,Map map){
-        Coursetype coursetype = coursetypeService.selectByPrimaryKey(coursetypeid);
-        map.put("list",coursetype);
-        return "";
+    //去新增
+    @RequestMapping("/coursetypetoadd")
+    public String coursetypetoadd(){
+        return "education/coursetypeadd";
     }
 
-    //课程类别   修改
-    @RequestMapping("/eduupd")
-    public String eduupd(Coursetype coursetype){
-        coursetypeService.updateByPrimaryKey(coursetype);
-        return "";
-    }
-
-    //课程类别   去新增界面
-    @RequestMapping("/edutoadd")
-    public String edutoadd(){
-        return "";
-    }
-
-    //课程类别   新增
-    @RequestMapping("/eduadd")
-    public String eduadd(Coursetype coursetype){
-        coursetypeService.insert(coursetype);
-        return "";
+    //新增
+    @RequestMapping("/coursetypeadd")
+    @ResponseBody
+    public Integer coursetypeadd(Coursetype coursetype){
+        System.out.println(coursetype);
+        int insert = coursetypeService.insert(coursetype);
+        return insert;
     }
 }

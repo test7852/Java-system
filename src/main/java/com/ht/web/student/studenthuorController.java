@@ -25,11 +25,15 @@ public class studenthuorController {
     @Resource
     private StudenthuorService studenthuorService;
 
-    @RequestMapping("/test")
+    @RequestMapping("data")
     @ResponseBody
-    public String test(){
-
-        return "studenthuor";
+    public JsonData data(@Param("limit")int limit , @Param("page")int page){
+        Pager pager = new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(studenthuorService.selCount());
+        jsonData.setData(studenthuorService.sybase(pager));
+        return jsonData;
     }
 
     @RequestMapping("/toadd")
@@ -43,37 +47,17 @@ public class studenthuorController {
         return "redirect:stafflist";
     }
 
-
-    @RequestMapping("/toupd")
-    public String toupd(int id,Model model){
-        Studenthuor studenthuor = studenthuorService.selectByPrimaryKey(id);
-        model.addAttribute("studenthuor",studenthuor);
-        return "staffupd";
-    }
-
-
     /**
      * @param studenthuor
-     * @return
+     * @return 修改数据
      */
-    @RequestMapping("/upd")
-    public String upd(Studenthuor studenthuor){
-        studenthuorService.updateByPrimaryKey(studenthuor);
-        return "redirect:stafflist";
-    }
-
-
-    @RequestMapping("data")
+    @RequestMapping("/update")
     @ResponseBody
-    public JsonData data(@Param("limit")int limit , @Param("page")int page){
-        Pager pager = new Pager();
-        pager.setPageSize(limit);
-        pager.setCurrPage(page);
-        jsonData.setCount(studenthuorService.selCount());
-        jsonData.setData(studenthuorService.sybase(pager));
-        return jsonData;
+    public Integer upd(Studenthuor studenthuor){
+        System.out.println(studenthuor.toString());
+        int i = studenthuorService.updateByPrimaryKeySelective(studenthuor);
+        return i;
     }
-
 
     @RequestMapping("list")
     public String list(){
@@ -88,7 +72,7 @@ public class studenthuorController {
     @RequestMapping("/del")
     public String del(Integer id) {
         System.out.println(id);
-//        studenthuorService.deleteByPrimaryKey(id);
+// (待删除)       studenthuorService.deleteByPrimaryKey(id);
         return "redirect:studentHuor/list";
     }
 

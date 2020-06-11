@@ -100,8 +100,7 @@ public class StuController {
      */
     @RequestMapping("del")
     public String del(int studid){
-
-        studentService.deleteByPrimaryKey(studid);
+//(待删除)    studentService.deleteByPrimaryKey(studid);
         return "redirect:stu/stulistUi";
     }
 }

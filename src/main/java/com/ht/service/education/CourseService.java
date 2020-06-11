@@ -30,5 +30,7 @@ public interface CourseService{
 
     List<Course> selByPage(Pager pager);//分页查询
 
+    List<Coursetype> selCtypes();//查询课程类别
+
 
 }

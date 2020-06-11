@@ -51,7 +51,7 @@ public class StudentClassController {
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
         System.out.println("id = " + id);
-// 待删除       studentclassService.deleteByPrimaryKey(id);
+//(待删除)       studentclassService.deleteByPrimaryKey(id);
         return "redirect:studentClass/list";
     }
 

@@ -118,9 +118,8 @@ public class EmpController {
      * @return
      * 修改
      */
-    @RequestMapping("updata")
+    @RequestMapping("update")
     @ResponseBody
-
     public Integer updata(Empinfo empinfo){
         System.out.println("empinfo.toString() = " + empinfo.toString());
         int updatacurr = empinfoService.updateByPrimaryKeySelective(empinfo);
