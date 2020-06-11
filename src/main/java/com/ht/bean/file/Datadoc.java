@@ -41,4 +41,16 @@ public class Datadoc {
     * 上传人员   关联员工表主键
     */
     private Integer empid;
+
+    public Datadoc() {
+    }
+
+    public Datadoc(Integer docid, String dataname, String url, String optime, String remark, Integer empid) {
+        this.docid = docid;
+        this.dataname = dataname;
+        this.url = url;
+        this.optime = optime;
+        this.remark = remark;
+        this.empid = empid;
+    }
 }
