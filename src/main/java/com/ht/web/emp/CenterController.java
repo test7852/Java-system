@@ -29,5 +29,4 @@ public class CenterController {
     public String emplist(){
         return "emp/emplist";
     }
-
 }

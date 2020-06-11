@@ -1,4 +1,4 @@
-package com.ht.service.education;
+package com.ht.dao.education;
 
 import com.ht.bean.education.Teacherbe;
     /**

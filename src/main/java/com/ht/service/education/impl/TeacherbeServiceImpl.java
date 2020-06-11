@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.education.TeacherbeMapper;
 import com.ht.bean.education.Teacherbe;
-import com.ht.service.education.TeacherbeService;
+import com.ht.dao.education.TeacherbeService;
 /**
  * @author lrq
  * @date 2020/6/11 15:44
