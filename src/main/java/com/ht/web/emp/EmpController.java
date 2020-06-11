@@ -5,12 +5,11 @@ import com.ht.service.emp.EmpinfoService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 /**
  * 员工管理
@@ -27,38 +26,17 @@ public class EmpController {
     /**
      * @param empinfo
      * @return
-     * 登录
+     * 登录操作
      */
     @RequestMapping("login")
-    public String login(Empinfo empinfo){
-        empinfo.setPhone("1111111");
-        empinfo.setPassword("123456");
+    @ResponseBody
+    public Boolean login(Empinfo empinfo, HttpSession session){
         Empinfo user = empinfoService.login(empinfo);
         if (user == null){
-            System.out.println("失败");
+            return false;
         }
-        System.out.println("成功");
-        return "managerui/login";
-    }
-
-    /**
-     * @param
-     * @return
-     * 去主页
-     */
-    @RequestMapping("index")
-    public String index(){
-        return "managerui/index";
-    }
-
-
-    /**
-     * @return
-     * 去员工资料表
-     */
-    @RequestMapping("list")
-    public String list(){
-        return "emp/emplist";
+        session.setAttribute("user",user);
+        return true;
     }
 
     /**
@@ -98,21 +76,12 @@ public class EmpController {
     @RequestMapping("del")
     @ResponseBody
     public Boolean del(@Param("id") Integer id){
-        System.out.println("id = " + id);
         int b = empinfoService.deleteByPrimaryKey(id);
-        System.out.println(b);
         if (b == 0){
             return false;
         }
         return true;
     }
-
-    @RequestMapping("emplistUi")
-    public String emplistUi(){
-        return "emp/emplist";
-    }
-
-
 
     /**
      * @param empinfo
@@ -121,7 +90,6 @@ public class EmpController {
      */
     @RequestMapping("updata")
     @ResponseBody
-
     public Integer updata(Empinfo empinfo){
         System.out.println("empinfo.toString() = " + empinfo.toString());
         int updatacurr = empinfoService.updateByPrimaryKeySelective(empinfo);

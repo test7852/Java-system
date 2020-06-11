@@ -20,8 +20,8 @@
 <div class="c-login">
 	<h1>用户登录</h1>
 	<form class="loginForm">
-		<input type="text"  placeholder="请输入手机号码" lay-verify="phone" />
-		<input type="password" placeholder="请输入密码" lay-verify="required" />
+		<input id="phone" type="text" name="phone" placeholder="请输入手机号码" lay-verify="phone"/>
+		<input id="pwd" type="password" name="password" placeholder="请输入密码" lay-verify="required"/>
 		<input type="text"  width="50" id="text" class="codeText" placeholder="请输入验证密码" lay-verify="required" />
 		<canvas id="canvas" width="120px" height="40px" style="margin-top: -15px;margin-bottom: -10px"></canvas>
 		<input type="button" value="登录" id="bt"/>
@@ -35,14 +35,6 @@
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/loginjs/base.js}"></script>
 <script type="text/javascript">
-
-	//提交判断
-	$('#bt').click(function(){
-		if(!checkInputFunction($('#bt'))){
-			return false;
-		}
-		//下面书写验证成功后执行的内容
-	});
 
 	//验证码js
 	var canvas = document.getElementById("canvas");//演员
@@ -101,17 +93,38 @@
 			context.strokeStyle=getColor();
 			context.stroke();
 		}
-
-		//点击按钮验证
-		button.onclick = function () {
-			var text = input.value //获取输入框的值
-			if (text === num) {
-				alert('验证通过')
-			} else {
-				alert('验证失败')
+		$('#bt').click(function(){
+			//判断验证码
+			if(!checkInputFunction($('#bt'))){
+				return false;
+			}else {
+				var text = $('#text').val(); //获取输入框的值
+				var phone = $('#phone').val();
+				var password = $('#pwd').val();
+				if (text != num) {
+					alert("验证码错误")
+					$('#text').val("");
+				}else {
+					//下面书写验证成功后执行的内容
+					$.ajax({
+						url: '/emp/login',
+						type: 'post',
+						data: {
+							phone:phone,
+							password:password
+						},
+						dataType: 'json',
+						success : function(data) {
+							if (data){
+								document.location.href="/skip/index";
+							}else {
+								alert("账号或密码错误");
+							}
+						}
+					})
+				}
 			}
-		}
-
+		});
 	}
 </script>
 </html>
