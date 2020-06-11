@@ -93,38 +93,40 @@
 			context.strokeStyle=getColor();
 			context.stroke();
 		}
-		$('#bt').click(function(){
-			//判断验证码
+
+		//点击按钮验证
+		button.onclick = function () {
+			var text = input.value //获取输入框的值
+			//判断是否为空
 			if(!checkInputFunction($('#bt'))){
 				return false;
-			}else {
-				var text = $('#text').val(); //获取输入框的值
+			}
+			if (text === num) {
+				//获取账号密码
 				var phone = $('#phone').val();
 				var password = $('#pwd').val();
-				if (text != num) {
-					alert("验证码错误");
-					$('#text').val("");
-				}else {
-					//下面书写验证成功后执行的内容
-					$.ajax({
-						url: '/emp/login',
-						type: 'post',
-						data: {
-							phone:phone,
-							password:password
-						},
-						dataType: 'json',
-						success : function(data) {
-							if (data){
-								document.location.href="/skip/index";
-							}else {
-								alert("账号或密码错误");
-							}
+				//下面书写验证成功后执行的内容
+				$.ajax({
+					url: '/emp/login',
+					type: 'post',
+					data: {
+						phone:phone,
+						password:password
+					},
+					dataType: 'json',
+					success : function(data) {
+						if (data){
+							//去主页
+							document.location.href="/skip/index";
+						}else {
+							alert("账号或密码错误");
 						}
-					})
-				}
+					}
+				})
+			} else {
+				alert('验证码错误');
 			}
-		});
+		}
 	}
 </script>
 </html>
