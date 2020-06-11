@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.file.DatadocMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.file.Datadoc">
+    <!--@mbg.generated-->
+    <!--@Table datadoc-->
+    <id column="docId" jdbcType="INTEGER" property="docid" />
+    <result column="dataName" jdbcType="VARCHAR" property="dataname" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="optime" jdbcType="VARCHAR" property="optime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="empid" jdbcType="INTEGER" property="empid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    docId, dataName, url, optime, remark, empid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from datadoc
+    where docId = #{docid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from datadoc
+    where docId = #{docid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="docId" keyProperty="docid" parameterType="com.ht.bean.file.Datadoc" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into datadoc (dataName, url, optime, 
+      remark, empid)
+    values (#{dataname,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{optime,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{empid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="docId" keyProperty="docid" parameterType="com.ht.bean.file.Datadoc" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into datadoc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dataname != null">
+        dataName,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="optime != null">
+        optime,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="empid != null">
+        empid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dataname != null">
+        #{dataname,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        #{optime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.file.Datadoc">
+    <!--@mbg.generated-->
+    update datadoc
+    <set>
+      <if test="dataname != null">
+        dataName = #{dataname,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        optime = #{optime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        empid = #{empid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where docId = #{docid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.file.Datadoc">
+    <!--@mbg.generated-->
+    update datadoc
+    set dataName = #{dataname,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      optime = #{optime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      empid = #{empid,jdbcType=INTEGER}
+    where docId = #{docid,jdbcType=INTEGER}
+  </update>
+</mapper>

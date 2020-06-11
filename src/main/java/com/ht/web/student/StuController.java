@@ -25,9 +25,14 @@ public class StuController {
 
     @RequestMapping("stulistUi")
     public String stulistUi(){
-        return "student/stulist";
+        return"student/stulist";
     }
 
+    @RequestMapping("select")
+    public String select(Integer studid){
+        System.out.println(studid);
+        return "student/stuselect";
+    }
     @Resource
     private JsonData jsonData;
 
@@ -89,12 +94,14 @@ public class StuController {
     }
 
     /**
-     * @param stuid
+     * @param studid
      * @return
      * 删除学生
      */
     @RequestMapping("del")
-    public void del(int stuid){
-        studentService.deleteByPrimaryKey(stuid);
+    public String del(int studid){
+
+        studentService.deleteByPrimaryKey(studid);
+        return "redirect:stu/stulistUi";
     }
 }
