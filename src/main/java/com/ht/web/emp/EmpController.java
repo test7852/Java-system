@@ -68,9 +68,8 @@ public class EmpController {
      * 添加
      */
     @RequestMapping("add")
-    public String add(Empinfo empinfo){
+    public void add(Empinfo empinfo){
         empinfoService.insert(empinfo);
-        return "";
     }
 
     /**
