@@ -104,4 +104,13 @@
       empid = #{empid,jdbcType=INTEGER}
     where docId = #{docid,jdbcType=INTEGER}
   </update>
+
+  <select id="sybase" resultType="com.ht.bean.file.Datadoc">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    select * from datadoc limit #{kais},#{pageSize}
+  </select>
+  <!--  查询总数-->
+  <select id="selCount" resultType="int">
+        select count(*) from datadoc
+    </select>
 </mapper>

@@ -23,6 +23,11 @@ public class StudentClassController {
     @Resource
     private StudentclassService studentclassService;
 
+    @RequestMapping("toAdd")
+    public String toAdd(){
+        return "student/stulist";
+    }
+
 
     @RequestMapping("data")
     @ResponseBody
@@ -38,7 +43,7 @@ public class StudentClassController {
 
     /**
      * @return
-     * 去员工资料表
+     * 去班级页面
      */
     @RequestMapping("list")
     public String list(){

@@ -24,6 +24,11 @@ public class EmpController {
     @Resource
     private JsonData jsonData;
 
+
+    @RequestMapping("toAdd")
+    public String toAdd(){
+        return "emp/empadd";
+    }
     /**
      * @param empinfo
      * @return
