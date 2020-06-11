@@ -25,6 +25,13 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 	</style>
 <body>
 <!--数据表格样式及附件-->	
@@ -40,10 +47,10 @@
     </a>
 	</script>
 	<script type="text/html" id="sexTpl">
-	    {{#  if(d.emp_sex === '女'){ }}
-	    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
+	    {{#  if(d.sex === '女'){ }}
+	    <span style="color: #F581B1;">{{ d.sex }}</span>
 	    {{#  } else { }}
-	    {{ d.emp_sex }}
+	    {{ d.sex }}
 	    {{#  } }}
 	</script>
  <!--搜索栏-->
@@ -69,6 +76,7 @@
       </div>
       <label class="layui-form-label">验证</label>
        <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+        <button type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
   </div>
 
@@ -80,15 +88,11 @@
     <thead>
     <tr>
         <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-        <th lay-data="{field:'studid', width:80, sort: true}">学生id</th>
-        <th lay-data="{field:'stuname', width:80}">学生姓名</th>
-        <th lay-data="{field:'sex', width:80,templet: '#sexTpl', sort: true}">性别</th>
-        <th lay-data="{field:'age', width:100}">年龄</th>
-        <th lay-data="{field:'birthday', width:100}">出生年月</th>
-        <th lay-data="{field:'phone', width:100}">学生电话</th>
-        <th lay-data="{field:'addr', width:100}">家庭地址</th>
-        <th lay-data="{field:'stat', width:100}">学生状态</th>
-        <th lay-data="{field:'nation', width:100}">民族</th>
+        <th lay-data="{field:'studid',width:80, sort: true}">ID</th>
+        <th lay-data="{field:'stuname'}">学生姓名</th>
+        <th lay-data="{field:'sex',templet: '#sexTpl', sort: true}">性别</th>
+        <th lay-data="{field:'phone'}">学生电话</th>
+        <th lay-data="{field:'addr'}">家庭地址</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
     </thead>

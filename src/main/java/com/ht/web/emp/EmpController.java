@@ -80,14 +80,13 @@ public class EmpController {
 
 
     /**
-     * @param empinfo
-     * @return
+     * @param
+     * @return 去到添加页面
      * 添加
      */
-    @RequestMapping("add")
-    public String add(Empinfo empinfo){
-        empinfoService.insert(empinfo);
-        return "";
+    @RequestMapping("toadd")
+    public String toadd(){
+        return "emp/empadd";
     }
 
     /**

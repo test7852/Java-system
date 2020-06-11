@@ -25,6 +25,13 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 </style>
 <body>
 <!--数据表格样式及附件-->
@@ -32,19 +39,9 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>编辑
     </a>
-    <a class="layui-btn layui-btn-xs" lay-event="data">
-        <i class="layui-icon">&#xe6b2;</i>资料
-    </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
-</script>
-<script type="text/html" id="sexTpl">
-    {{#  if(d.emp_sex === '女'){ }}
-    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-    {{#  } else { }}
-    {{ d.emp_sex }}
-    {{#  } }}
 </script>
 <!--搜索栏-->
 <div class="layui-form-item">
@@ -69,6 +66,7 @@
         </div>
         <label class="layui-form-label">验证</label>
         <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+        <button type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
 </div>
 
@@ -81,10 +79,10 @@
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
             <th lay-data="{field:'hourid', width:80, sort: true}">ID</th>
-            <th lay-data="{field:'huorname', width:80}">宿舍房号</th>
-            <th lay-data="{field:'addr', width:80}">宿舍地址</th>
-            <th lay-data="{field:'count', width:100}">宿舍人数</th>
-            <th lay-data="{field:'numberbeds', width:100}">床位数</th>
+            <th lay-data="{field:'huorname'}">宿舍房号</th>
+            <th lay-data="{field:'addr'}">宿舍地址</th>
+            <th lay-data="{field:'count'}">宿舍人数</th>
+            <th lay-data="{field:'numberbeds'}">床位数</th>
             <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
         </tr>
         </thead>

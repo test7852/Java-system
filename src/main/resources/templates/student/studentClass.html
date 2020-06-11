@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <!--suppress ThymeleafVariablesResolveInspection-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Responsive Admin Dashboard Template">
-        <meta name="keywords" content="admin,dashboard">
-        <meta name="author" content="skcats">
-		<title></title>
-		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
-        <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-        <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-        <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
-	</head>
-	<style>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Admin Dashboard Template">
+    <meta name="keywords" content="admin,dashboard">
+    <meta name="author" content="skcats">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
+</head>
+<style>
     .layui-table-page {
         text-align: center;
     }
@@ -25,12 +25,19 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
-	</style>
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
+</style>
 <body>
-<!--数据表格样式及附件-->	
+<!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">
-        <i class="layui-icon">&#xe642;</i>编辑
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
     <a class="layui-btn layui-btn-xs" lay-event="data">
         <i class="layui-icon">&#xe6b2;</i>资料
@@ -38,91 +45,81 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
-	</script>
-	<script type="text/html" id="sexTpl">
-	    {{#  if(d.emp_sex === '女'){ }}
-	    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-	    {{#  } else { }}
-	    {{ d.emp_sex }}
-	    {{#  } }}
-	</script>
- <!--搜索栏-->
-  <div class="layui-form-item">
+</script>
+<!--搜索栏-->
+<div class="layui-form-item">
     <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-      </div>
-     <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-     
-      <div class="layui-input-inline">
-        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-      </div>
+
+        <div class="layui-input-inline">
+            <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+        </div>
         <label class="layui-form-label">验证</label>
     </div>
     <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-      </div>
-      <label class="layui-form-label">验证</label>
-       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">验证</label>
     </div>
-  </div>
+    <div class="layui-inline">
+
+        <div class="layui-input-inline">
+            <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">验证</label>
+        <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+        <button type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
+    </div>
+</div>
 
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
-<table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/studentClass/data', page:true, id:'tab',toolbar: '#toolbarDemo' }"
-       lay-filter="test">
-    <thead>
-    <tr>
-        <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-        <th lay-data="{field:'classid', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'classno', width:80}">班级编号</th>
-        <th lay-data="{field:'classname', width:80}">班级名称</th>
-        <th lay-data="{field:'count', width:100}">班级人数</th>
-        <th lay-data="{field:'remark', width:100}">说明</th>
-        <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
-    </tr>
-    </thead>
-</table>
+    <table class="layui-table"
+           lay-data="{width:1150,height:650, url:'/studentClass/data', page:true, id:'tab'}"
+           lay-filter="tab">
+        <thead>
+        <tr>
+            <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
+            <th lay-data="{field:'classid', width:80, sort: true}">ID</th>
+            <th lay-data="{field:'classno', edit: 'false'}">班级编号</th>
+            <th lay-data="{field:'classname', edit: 'false'}">班级名称</th>
+            <th lay-data="{field:'count', sort: true, edit: 'false'}">班级人数</th>
+            <th lay-data="{field:'remark', edit: 'false'}">说明</th>
+            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
+        </tr>
+        </thead>
+    </table>
 </div>
 </body>
 <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
+
     layui.use('table', function () {
         var table = layui.table;
 
+        //监听单元格编辑
+        table.on('edit(tab)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+            $.ajax({
+                url: '/studentClass/update',
+                type: 'post',
+                data: {
+                    classid:data.classid,
+                    classno:data.classno,
+                    classname:data.classname,
+                    count:data.count,
+                    remark:data.remark
+                },
+                dataType: 'text'
+            })
+        });
 
-        //头工具栏事件
-        table.on('toolbar(test)', function (obj) {
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch (obj.event) {
-                case 'getCheckData':
-                    layer.msg("添加")
-                    // var data = checkStatus.data;
-                    // layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-                case 'LAYTABLE_TIPS':
-                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
-                    break;
-            }
-            ;
-        })
         //监听行工具事件
-        table.on('tool(test)', function (obj) {
+        table.on('tool(tab)', function (obj) {
             var data = obj.data;
             //console.log(obj)
             if (obj.event === 'del') {
@@ -135,14 +132,26 @@
                         data: {
                             id:data.classid
                         },
-                        dataType: 'text',
+                        dataType: 'text'
                     })
                 });
             } else if (obj.event === 'edit') {
-                layer.msg(data.classid);
+                if($(".falg").html()=="ON"){
+                    // 打开可编辑状态：
+                    $(".layui-table").find('td').data('edit', true);
+                    // layer.msg(data.emp_id);
+                    $(".falg").html("YES")
+                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
+
+                }else {
+                    $(".layui-table").find('td').data('edit', false);
+                    $(".falg").html("ON")
+                }
+
+            } else if(obj.event= 'data'){
+
             }
         })
-
-    })
+    });
 </script>
 </html>

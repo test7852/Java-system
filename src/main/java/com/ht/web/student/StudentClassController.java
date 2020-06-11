@@ -1,6 +1,8 @@
 package com.ht.web.student;
 
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Student;
+import com.ht.bean.student.Studentclass;
 import com.ht.service.student.StudentclassService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -49,7 +51,20 @@ public class StudentClassController {
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
         System.out.println("id = " + id);
-//        studentclassService.deleteByPrimaryKey(id);
+// 待删除       studentclassService.deleteByPrimaryKey(id);
         return "redirect:studentClass/list";
+    }
+
+    /**
+     * @param studentclass
+     * @return 修改
+     */
+    @RequestMapping("update")
+    @ResponseBody
+    public Integer updata(Studentclass studentclass){
+        System.out.println("studentclass = " + studentclass.toString());
+        int updatacurr = studentclassService.updateByPrimaryKeySelective(studentclass);
+        System.out.println(updatacurr);
+        return updatacurr;
     }
 }
