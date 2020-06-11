@@ -40,12 +40,34 @@ public class StudentClassController {
 
     /**
      * @return
-     * 去员工资料表
+     * 去班级添加
+     */
+    @RequestMapping("/toadd")
+    public String toadd() {
+        return "student/studentClassAdd";
+    }
+
+    /**
+     * @param studentclass
+     * @return
+     * 添加班级
+     */
+    @RequestMapping("add")
+    public Integer add(Studentclass studentclass){
+        //使用的时候放开注释
+        int i = studentclassService.insertSelective(studentclass);
+        return i;
+    }
+
+    /**
+     * @return
+     * 去班级页面
      */
     @RequestMapping("list")
     public String list(){
         return "student/studentClass";
     }
+
 
 
     @RequestMapping("del")
