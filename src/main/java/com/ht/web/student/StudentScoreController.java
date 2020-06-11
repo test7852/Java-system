@@ -22,7 +22,7 @@ import java.util.Map;
 public class StudentScoreController {
     @Resource
     private StudentScoreService studentScoreService;
-//去到列表
+//去到列表+
     @RequestMapping("scorelistUi")
     public String scorelistUi(){
         return "student/scorelist";

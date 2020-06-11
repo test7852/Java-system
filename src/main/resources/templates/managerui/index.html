@@ -9,7 +9,7 @@
         <meta name="keywords" content="admin,dashboard">
         <meta name="author" content="skcats">
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        
+
         <!-- Title -->
         <title>Home</title>
         <!--<div th:replace="includeJS::indexjs"></div>title-->
@@ -44,7 +44,7 @@
         <script th:src="@{/assets/js/pages/dashboard.js}"></script>
     </head>
     <body>
-        
+
         <!-- Page Container 手风琴内容-->
         <div class="page-container">
             <!-- Page Sidebar -->
@@ -72,8 +72,8 @@
                                     <i class="fa fa-user-circle-o"></i><span> 员工管理 </span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="goto" href=""><i class="fa fa-bank"></i> 部门管理</a></li>
-                                    <li><a target="goto" th:href="@{/emp/emplistUi}"><i class="fa fa-files-o"></i> 员工资料</a></li>
+                                    <li><a target="goto" href="javascript:void(0);"><i class="fa fa-bank"></i> 部门管理</a></li>
+                                    <li><a target="goto" th:href="@{/skip/emplist}"><i class="fa fa-files-o"></i> 员工资料</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-leanpub"></i> 周报审阅</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> 谈心记录</a></li>
@@ -167,7 +167,7 @@
                     </div>
                 </div>
             </div><!-- /Page Sidebar -->
-            
+
             <!-- Page Content -->
             <div class="page-content">
                 <!-- Page Header -->
@@ -194,9 +194,9 @@
                                     <i class="fa fa-angle-down"></i>
                                 </button>
                             </div>
-                        
+
                             <!-- Collect the nav links, forms, and other content for toggling -->
-                        
+
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
