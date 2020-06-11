@@ -1,10 +1,14 @@
 package com.ht.service.student.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.student.StudentreplyscoreMapper;
 import com.ht.bean.student.Studentreplyscore;
 import com.ht.service.student.StudentreplyscoreService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/10 10:27
@@ -15,6 +19,16 @@ public class StudentreplyscoreServiceImpl implements StudentreplyscoreService{
 
     @Resource
     private StudentreplyscoreMapper studentreplyscoreMapper;
+
+    @Override
+    public List<Studentreplyscore> allPageStuRecord(Pager pager) {
+        return studentreplyscoreMapper.allPageStuRecord(pager);
+    }
+
+    @Override
+    public int getTotalRow() {
+        return studentreplyscoreMapper.getTotalRow();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer replyid) {
