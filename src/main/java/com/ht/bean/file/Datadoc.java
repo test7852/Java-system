@@ -42,6 +42,9 @@ public class Datadoc {
     */
     private Integer empid;
 
+    public Datadoc() {
+    }
+
     public Datadoc(Integer docid, String dataname, String url, String optime, String remark, Integer empid) {
         this.docid = docid;
         this.dataname = dataname;
@@ -50,4 +53,5 @@ public class Datadoc {
         this.remark = remark;
         this.empid = empid;
     }
+
 }
