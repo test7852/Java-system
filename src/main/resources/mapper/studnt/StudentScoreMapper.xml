@@ -152,4 +152,14 @@
       remark = #{remark,jdbcType=VARCHAR}
     where scoreId = #{scoreid,jdbcType=INTEGER}
   </update>
+
+  <!--  分页-->
+  <select id="allPageStuScore" resultType="StudentScore">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    select * from student_score limit #{kais},#{pageSize}
+  </select>
+  <!--  查询总数-->
+  <select id="getTotalRow" resultType="int">
+    select count(*) from student_score
+  </select>
 </mapper>

@@ -1,13 +1,19 @@
 package com.ht.service.student;
 
 import com.ht.bean.student.Studentreplyscore;
-    /**
+import com.ht.util.Pager;
+
+import java.util.List;
+
+/**
  * @author 王金宝
  * @date 2020/6/10 10:27
  * 
  */
 public interface StudentreplyscoreService{
+    List<Studentreplyscore> allPageStuRecord(Pager pager);//分页查询
 
+    int getTotalRow();//获取总行数
 
     int deleteByPrimaryKey(Integer replyid);
 

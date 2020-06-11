@@ -1,10 +1,14 @@
 package com.ht.service.student.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.student.StudentScoreMapper;
 import com.ht.bean.student.StudentScore;
 import com.ht.service.student.StudentScoreService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/10 10:27
@@ -15,6 +19,16 @@ public class StudentScoreServiceImpl implements StudentScoreService{
 
     @Resource
     private StudentScoreMapper studentScoreMapper;
+
+    @Override
+    public List<StudentScore> allPageStuScore(Pager pager) {
+        return studentScoreMapper.allPageStuScore(pager);
+    }
+
+    @Override
+    public int getTotalRow() {
+        return studentScoreMapper.getTotalRow();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer scoreid) {
