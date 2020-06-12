@@ -14,7 +14,7 @@ import java.util.List;
 public interface DatadocMapper {
     int selCount();//查询总数
 
-    List<Studentclass> sybase(Pager pager);//分页
+    List<Datadoc> sybase(Pager pager);//分页
 
     int deleteByPrimaryKey(Integer docid);
 

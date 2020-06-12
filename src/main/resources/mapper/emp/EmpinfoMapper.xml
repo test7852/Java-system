@@ -321,7 +321,7 @@
   <!-- 获取所有员工姓名-->
   <select id="allEmpName" resultType="string">
     <![CDATA[
-        select emp_name from empinfo
+        select emp_name  from empinfo where emp_name not in(select chairman from dep)
         ]]>
     </select>
 </mapper>
