@@ -101,6 +101,7 @@
 
   <!--分页查询-->
   <select id="selbypage" resultType="course">
+    <!--<bind name="kais" value="(currPage-1)*pageSize"></bind>-->
     <![CDATA[
           select * from course limit #{startRow},#{pageSize};
         ]]>

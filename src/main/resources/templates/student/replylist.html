@@ -34,7 +34,7 @@
     }
 	</style>
 <body>
-<!--数据表格样式及附件-->
+<!--数据表格样式及附件-->	
 <script type="text/html" id="bar">
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
@@ -56,29 +56,29 @@
 <!--搜索栏-->
 <div class="layui-form-item">
     <div class="layui-inline">
-
-        <div class="layui-input-inline">
-            <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-        </div>
+      
+      <div class="layui-input-inline">
+        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      </div>
+     <label class="layui-form-label">验证</label>
+    </div>
+    <div class="layui-inline">
+     
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
         <label class="layui-form-label">验证</label>
     </div>
     <div class="layui-inline">
-
-        <div class="layui-input-inline">
-            <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-
-        <div class="layui-input-inline">
-            <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">验证</label>
-        <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+      
+      <div class="layui-input-inline">
+        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+      </div>
+      <label class="layui-form-label">验证</label>
+       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
         <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
-</div>
+  </div>
 
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
@@ -131,13 +131,24 @@
 
 
 
+        //点击添加iframe窗方法(添加)
+        $("#add").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '新增答辩成绩',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['620px', '450px'],
+                content: ['/reply/toadd']//这是链接你的页面地址 url
+            });
+        });
+
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
             var data = obj.data;
             //console.log(obj)
             if (obj.event === 'del') {
                 layer.confirm('真的删除么?', function (index) {
-                    alert(data.replyid);
+
                     obj.del();
                     layer.close(index);
                     $.ajax({

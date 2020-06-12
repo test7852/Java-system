@@ -68,8 +68,9 @@ public class EmpController {
      * 添加
      */
     @RequestMapping("add")
-    public void add(Empinfo empinfo){
+    public void add(Empinfo empinfo) {
         empinfoService.insert(empinfo);
+    }
     @RequestMapping("toadd")
     public String toadd(){
         return "emp/empadd";

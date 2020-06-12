@@ -75,8 +75,7 @@ public class TeacherBeController {
     //值班管理  新增
     @RequestMapping("/teacheradd")
     @ResponseBody
-    public Integer teacheradd(Teacherbe teacherbe){
-        System.out.println(teacherbe);
+    public Integer teacheradd(Teacherbe teacherbe,String emp_name){
         int insert = teacherbeService.insert(teacherbe);
         return insert;
     }

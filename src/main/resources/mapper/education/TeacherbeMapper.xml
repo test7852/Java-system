@@ -7,7 +7,7 @@
     <id column="beid" jdbcType="INTEGER" property="beid" />
     <result column="week" jdbcType="VARCHAR" property="week" />
     <result column="schedulingname" jdbcType="VARCHAR" property="schedulingname" />
-    <result column="emp_Name" jdbcType="VARCHAR" property="empName" />
+    <result column="emp_name" jdbcType="VARCHAR" property="emp_name" />
     <result column="beask" jdbcType="VARCHAR" property="beask" />
     <result column="besum" jdbcType="INTEGER" property="besum" />
     <result column="explain" jdbcType="VARCHAR" property="explain" />
@@ -30,10 +30,10 @@
   </delete>
   <insert id="insert" keyColumn="beid" keyProperty="beid" parameterType="com.ht.bean.education.Teacherbe" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into teacherbe (week, schedulingname, emp_Name, 
+    insert into teacherbe (week, schedulingname, emp_name,
       beask, besum, `explain`
       )
-    values (#{week,jdbcType=VARCHAR}, #{schedulingname,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
+    values (#{week,jdbcType=VARCHAR}, #{schedulingname,jdbcType=VARCHAR}, #{emp_name,jdbcType=VARCHAR},
       #{beask,jdbcType=VARCHAR}, #{besum,jdbcType=INTEGER}, #{explain,jdbcType=VARCHAR}
       )
   </insert>
@@ -47,8 +47,8 @@
       <if test="schedulingname != null">
         schedulingname,
       </if>
-      <if test="empName != null">
-        emp_Name,
+      <if test="emp_name != null">
+        emp_name,
       </if>
       <if test="beask != null">
         beask,
@@ -67,8 +67,8 @@
       <if test="schedulingname != null">
         #{schedulingname,jdbcType=VARCHAR},
       </if>
-      <if test="empName != null">
-        #{empName,jdbcType=VARCHAR},
+      <if test="emp_name != null">
+        #{emp_name,jdbcType=VARCHAR},
       </if>
       <if test="beask != null">
         #{beask,jdbcType=VARCHAR},
@@ -91,8 +91,8 @@
       <if test="schedulingname != null">
         schedulingname = #{schedulingname,jdbcType=VARCHAR},
       </if>
-      <if test="empName != null">
-        emp_Name = #{empName,jdbcType=VARCHAR},
+      <if test="emp_name != null">
+        emp_name = #{emp_name,jdbcType=VARCHAR},
       </if>
       <if test="beask != null">
         beask = #{beask,jdbcType=VARCHAR},
@@ -111,7 +111,7 @@
     update teacherbe
     set week = #{week,jdbcType=VARCHAR},
       schedulingname = #{schedulingname,jdbcType=VARCHAR},
-      emp_Name = #{empName,jdbcType=VARCHAR},
+      emp_name = #{emp_name,jdbcType=VARCHAR},
       beask = #{beask,jdbcType=VARCHAR},
       besum = #{besum,jdbcType=INTEGER},
       `explain` = #{explain,jdbcType=VARCHAR}
