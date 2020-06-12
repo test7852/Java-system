@@ -73,13 +73,18 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
     <table class="layui-table"
-           lay-data="{width:1150,height:650, url:'/studentFloor/data', page:true, id:'tab',toolbar: '#toolbarDemo' }"
+           lay-data="{width:1150,height:650, url:'/teacher/teacherdata', page:true, id:'tab',toolbar: '#toolbarDemo' }"
            lay-filter="tab">
         <thead>
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'floorid', sort: true}">楼栋ID</th>
-            <th lay-data="{field:'floorname'}">楼栋名称</th>
+            <th lay-data="{field:'beid', sort: true}">ID</th>
+            <th lay-data="{field:'week'}">星期</th>
+            <th lay-data="{field:'schedulingname'}">排班名称</th>
+            <th lay-data="{field:'emp_name'}">员工姓名</th>
+            <th lay-data="{field:'beask'}">值班要求</th>
+            <th lay-data="{field:'besum'}">总值班</th>
+            <th lay-data="{field:'explain'}">说明</th>
             <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
         </tr>
         </thead>
@@ -93,17 +98,28 @@
     layui.use('table', function () {
         var table = layui.table;
 
+
+
+
+
+
+
         //监听单元格编辑(修改)
         table.on('edit(tab)', function(obj){
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
             $.ajax({
-                url: '/studentFloor/update',
+                url: '/teacher/teacherupd',
                 type: 'post',
                 data: {
-                    floorid:data.floorid,
-                    floorname:data.floorname,
+                    beid:data.beid,
+                    week:data.week,
+                    schedulingname:data.schedulingname,
+                    emp_name:data.emp_name,
+                    beask:data.beask,
+                    besum:data.besum,
+                    explain:data.explain
                 },
                 dataType: 'text'
             })
@@ -116,7 +132,7 @@
                 title: '新增楼栋',
                 maxmin: true, //开启最大化最小化按钮
                 area: ['450px', '300px'],
-                content: ['/studentFloor/toadd']//这是链接你的页面地址 url
+                content: ['/teacher/teachertoadd']//这是链接你的页面地址 url
             });
         })
 
@@ -130,10 +146,10 @@
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/studentFloor/del',
+                        url: '/teacher/teacherdel',
                         type: 'post',
                         data: {
-                            id:data.floorid
+                            beid:data.beid
                         },
                         dataType: 'text',
                     })

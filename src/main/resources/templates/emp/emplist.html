@@ -25,6 +25,13 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 	</style>
 <body>
 <!--数据表格样式及附件-->	
@@ -103,14 +110,14 @@
     layui.use('table', function () {
         var table = layui.table;
 
-            //监听单元格编辑
+        //监听单元格编辑（修改）
         table.on('edit(tab)', function(obj){
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
-            layer.msg(data.emp_name)
+            layer.msg(data.emp_name);
             $.ajax({
-                url: '/emp/updata',
+                url: '/emp/update',
                 type: 'post',
                 data: {
                     emp_id:data.emp_id,
@@ -123,14 +130,10 @@
                     qqcode:data.qqcode,
                     address:data.address
                 },
-                dataType: 'text',
+                dataType: 'text'
             })
-
-
-
-            // layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
-
         });
+
 
         //点击添加iframe窗方法
         $("#add").on('click',function(){
@@ -140,33 +143,10 @@
                 title: '员工新增',
                 maxmin: true, //开启最大化最小化按钮
                 area: ['550px', '600px'],
-                content: ['/emp/toAdd']//这是链接你的页面地址 url
+                content: ['/emp/toadd']//这是链接你的页面地址 url
             });
         })
 
-        //头工具栏事件
-        table.on('toolbar(test)', function (obj) {
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch (obj.event) {
-                case 'getCheckData':
-                    layer.msg("添加")
-                    // var data = checkStatus.data;
-                    // layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-                case 'LAYTABLE_TIPS':
-                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
-                    break;
-            }
-            ;
-        })
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
             var data = obj.data;
@@ -181,19 +161,17 @@
                         data: {
                             id:data.emp_id
                         },
-                        dataType: 'text',
+                        dataType: 'text'
                     })
                 });
             } else if (obj.event == 'edit') {
                 if($(".falg").html()=="ON"){
                     // 打开可编辑状态：
-                    $(".layui-table").find('td').data('edit', true)
-                    // layer.msg(data.emp_id);
+                    $(".layui-table").find('td').data('edit', true);
                     $(".falg").html("YES")
-                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
 
                 }else {
-                    $(".layui-table").find('td').data('edit', false)
+                    $(".layui-table").find('td').data('edit', false);
                     $(".falg").html("ON")
                 }
 

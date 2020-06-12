@@ -49,19 +49,6 @@ public class StuController {
     }
 
     /**
-     * @param pager
-     * @param map
-     * @return
-     * 分页
-     */
-    @RequestMapping("list")
-    public String list(Pager pager, Map map){
-        pager.page(studentService.getTotalRow());
-        map.put("",studentService.allPageStu(pager));
-        return "";
-    }
-
-    /**
      * @param student
      * @return
      * 去添加页面
@@ -113,8 +100,7 @@ public class StuController {
      */
     @RequestMapping("del")
     public String del(int studid){
-
-        studentService.deleteByPrimaryKey(studid);
+//(待删除)    studentService.deleteByPrimaryKey(studid);
         return "redirect:stu/stulistUi";
     }
 }

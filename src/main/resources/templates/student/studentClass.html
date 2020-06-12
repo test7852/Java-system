@@ -25,6 +25,13 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 </style>
 <body>
 <!--数据表格样式及附件-->
@@ -38,13 +45,6 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
-</script>
-<script type="text/html" id="sexTpl">
-    {{#  if(d.emp_sex === '女'){ }}
-    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-    {{#  } else { }}
-    {{ d.emp_sex }}
-    {{#  } }}
 </script>
 <!--搜索栏-->
 <div class="layui-form-item">
@@ -76,93 +76,59 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
     <table class="layui-table"
-           lay-data="{width:1150,height:650, url:'/studentClass/data', page:true, id:'tab',toolbar: '#toolbarDemo' }"
-           lay-filter="test">
+           lay-data="{width:1150,height:650, url:'/studentClass/data', page:true, id:'tab'}"
+           lay-filter="tab">
         <thead>
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
             <th lay-data="{field:'classid', width:80, sort: true}">ID</th>
-            <th lay-data="{field:'classno', width:80}">班级编号</th>
-            <th lay-data="{field:'classname', width:80}">班级名称</th>
-            <th lay-data="{field:'count', width:100}">班级人数</th>
-            <th lay-data="{field:'remark', width:100}">说明</th>
-            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
+            <th lay-data="{field:'classno', edit: 'false'}">班级编号</th>
+            <th lay-data="{field:'classname', edit: 'false'}">班级名称</th>
+            <th lay-data="{field:'count', sort: true, edit: 'false'}">班级人数</th>
+            <th lay-data="{field:'remark', edit: 'false'}">说明</th>
+            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
         </tr>
         </thead>
     </table>
 </div>
 </body>
-<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
 
     layui.use('table', function () {
         var table = layui.table;
 
-        //监听单元格编辑
+        //监听单元格编辑(修改)
         table.on('edit(tab)', function(obj){
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
-            layer.msg(data.emp_name)
             $.ajax({
-                url: '/emp/updata',
+                url: '/studentClass/update',
                 type: 'post',
                 data: {
-                    emp_id:data.emp_id,
-                    emp_name:data.emp_name,
-                    emp_sex:data.emp_sex,
-                    // birthday:birthday,
-                    cardno:data.cardno,
-                    nation:data.nation,
-                    phone:data.phone,
-                    qqcode:data.qqcode,
-                    address:data.address
+                    classid:data.classid,
+                    classno:data.classno,
+                    classname:data.classname,
+                    count:data.count,
+                    remark:data.remark
                 },
-                dataType: 'text',
+                dataType: 'text'
             })
-
-
-
-            // layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
-
         });
 
-        //点击添加iframe窗方法
+        //点击添加iframe窗方法(添加)
         $("#add").on('click',function(){
-            //iframe窗
             layer.open({
                 type: 2,
-                title: '员工新增',
+                title: '新增班级',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['550px', '600px'],
-                content: ['/emp/toAdd']//这是链接你的页面地址 url
+                area: ['620px', '350px'],
+                content: ['/studentClass/toadd']//这是链接你的页面地址 url
             });
-        })
+        });
 
-        //头工具栏事件
-        table.on('toolbar(test)', function (obj) {
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch (obj.event) {
-                case 'getCheckData':
-                    layer.msg("添加")
-                    // var data = checkStatus.data;
-                    // layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-                case 'LAYTABLE_TIPS':
-                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
-                    break;
-            }
-            ;
-        })
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
             var data = obj.data;
@@ -172,24 +138,22 @@
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/emp/del',
+                        url: '/studentClass/del',
                         type: 'post',
                         data: {
-                            id:data.emp_id
+                            id:data.classid
                         },
-                        dataType: 'text',
+                        dataType: 'text'
                     })
                 });
-            } else if (obj.event == 'edit') {
+            } else if (obj.event === 'edit') {
                 if($(".falg").html()=="ON"){
                     // 打开可编辑状态：
-                    $(".layui-table").find('td').data('edit', true)
-                    // layer.msg(data.emp_id);
+                    $(".layui-table").find('td').data('edit', true);
                     $(".falg").html("YES")
-                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
 
                 }else {
-                    $(".layui-table").find('td').data('edit', false)
+                    $(".layui-table").find('td').data('edit', false);
                     $(".falg").html("ON")
                 }
 

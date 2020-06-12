@@ -95,10 +95,12 @@ public class StudentreplyscoreController {
      * @return
      * 修改学生信息
      */
-    @RequestMapping("upd")
-    public String upd(Studentreplyscore studentreplyscore){
-        studentreplyscoreService.updateByPrimaryKey(studentreplyscore);
-        return "";
+    @RequestMapping("update")
+    @ResponseBody
+    public Integer update(Studentreplyscore studentreplyscore){
+        System.out.println(studentreplyscore.toString());
+        int selective = studentreplyscoreService.updateByPrimaryKeySelective(studentreplyscore);
+        return selective;
     }
 
     /**
@@ -108,8 +110,7 @@ public class StudentreplyscoreController {
      */
     @RequestMapping("del")
     public String del(int replyid){
-        System.out.println(replyid+"       replyid");
-        studentreplyscoreService.deleteByPrimaryKey(replyid);
+// (待删除)       studentreplyscoreService.deleteByPrimaryKey(replyid);
         return "redirect:reply/replyUi";
     }
 }

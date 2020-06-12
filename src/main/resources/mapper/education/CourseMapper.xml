@@ -105,4 +105,9 @@
           select * from course limit #{startRow},#{pageSize};
         ]]>
   </select>
+
+  <!--查询课程类别-->
+  <select id="selCtype" resultType="coursetype">
+    select * from coursetype;
+  </select>
 </mapper>

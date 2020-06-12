@@ -29,4 +29,6 @@ public interface CourseMapper {
     int selCountcEdu();//查询总数据
 
     List<Course> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
+
+    List<Coursetype> selCtype();//查询课程类别
 }

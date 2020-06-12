@@ -2,114 +2,147 @@
 <!--suppress ThymeleafVariablesResolveInspection-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
-    <script th:src="@{/layui/layui.js}"></script>
-    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+	<script th:src="@{/layui/layui.js}"></script>
+	<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 600px;margin-left: 30px;}
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-left: 140px;margin-top: 20px;}
+	.index{width: 600px;margin-left: 30px;}
+	.layui-input{width: 120px;}
+	.menu li{float: left;}
+	.layui-form-label{margin-top: 15px}
+	.layui-input{margin-top: 15px}
+	button{margin-left: 140px;margin-top: 20px;}
 
-    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+	::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/emp/add}" method="post">
-    <div class="index">
-        <ul class="menu">
-            <input type="hidden" name="emp_id">
-            <li>
-                <label class="layui-form-label">员工姓名：</label>
-                <input  name="emp_name" required lay-verify="required" placeholder="员工姓名" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">
-                    <i class="layui-icon">&#xe662;</i>
-                    <i class="layui-icon">&#xe661;</i>性别</label>
-                <input  name="emp_sex" required lay-verify="required" placeholder="性别" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 生日：</label>
-                <input  name="birthday" required lay-verify="required" placeholder="生日" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 籍贯：</label>
-                <input  name="nation" required lay-verify="required" placeholder="籍贯" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i>身份证：</label>
-                <input style="width: 350px;"  name="cardno" required lay-verify="required" placeholder="身份证" autocomplete="off" class="layui-input">
-            </li>
+<form class="layui-form" action="">
+	<div class="index">
+		<ul class="menu">
+			<li>
+				<label class="layui-form-label">员工姓名：</label>
+				<input  name="password" required lay-verify="required" placeholder="员工姓名" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label">毕业学校：</label>
+				<input  name="password" required lay-verify="required" placeholder="毕业学校" autocomplete="off" class="layui-input">
+			</li>
 
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe678;</i> 号码：</label>
-                <input style="width: 350px;" name="phone" required lay-verify="required" placeholder="手机号码" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe676;</i> 号码：</label>
-                <input style="width: 350px;"  name="qqcode" required lay-verify="required" placeholder="QQ号码" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe677;</i> 微信：</label>
-                <input style="width: 350px;"  name="weixin" required lay-verify="required" placeholder="微信号码" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">邮箱地址：</label>
-                <input style="width: 350px;"  name="email" required lay-verify="required" placeholder="邮箱地址" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">婚姻状况：</label>
-                <input  name="married" required lay-verify="required" placeholder="婚姻状况" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">毕业学校：</label>
-                <input  name="university" required lay-verify="required" placeholder="毕业学校" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe656;</i> 专业：</label>
-                <input style="width: 350px;"  name="major" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">家庭地址：</label>
-                <input style="width: 350px;"  name="address" required lay-verify="required" placeholder="家庭地址" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 学历：</label>
-                <input  name="education" required lay-verify="required" placeholder="学历" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">入职日期：</label>
-                <input  name="hireday" required lay-verify="required" placeholder="入职日期" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">支付宝：</label>
-                <input style="width: 350px;"  name="zfb" required lay-verify="required" placeholder="支付宝" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">离职日期：</label>
-                <input  name="fireday" required lay-verify="required" placeholder="离职日期" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">登录密码：</label>
-                <input  name="password" required lay-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
-    </div>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 生日：</label>
+				<input  name="password" required lay-verify="required" placeholder="生日" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 籍贯：</label>
+				<input  name="password" required lay-verify="required" placeholder="籍贯" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe66f;</i>身份证：</label>
+				<input style="width: 350px;"  name="password" id="identity" required lay-verify="required" placeholder="身份证" autocomplete="off" class="layui-input">
+			</li>
+
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe678;</i> 号码：</label>
+				<input style="width: 350px;" name="password" required lay-verify="required" placeholder="手机号码" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label">离职日期：</label>
+				<input  name="password" id="dimission" required lay-verify="required" placeholder="离职日期" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label">入职日期：</label>
+				<input  name="password" id="entry" required lay-verify="required" placeholder="入职日期" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe656;</i> 专业：</label>
+				<!--<select name="city" lay-verify="required">
+                      <option value=""></option>
+                      <option value="0">北京</option>
+                      <option value="1">上海</option>
+                      <option value="2">广州</option>
+                      <option value="3">深圳</option>
+                      <option value="4">杭州</option>
+                </select>-->
+				<input style="width: 350px;"  name="password" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe676;</i> 号码：</label>
+				<input style="width: 350px;"  name="password" required lay-verify="required" placeholder="QQ号码" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe677;</i> 微信：</label>
+				<input style="width: 350px;"  name="password" required lay-verify="required" placeholder="微信号码" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label">邮箱地址：</label>
+				<input style="width: 350px;"  name="password" required lay-verify="required" placeholder="邮箱地址" autocomplete="off" class="layui-input">
+			</li>
+
+
+			<li>
+				<label class="layui-form-label">家庭地址：</label>
+				<input style="width: 350px;"  name="password" required lay-verify="required" placeholder="家庭地址" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 学历：</label>
+				<input  name="password" required lay-verify="required" placeholder="学历" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label">登录密码：</label>
+				<input  name="password" required lay-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input">
+			</li>
+			<li>
+				<label class="layui-form-label">支付宝：</label>
+				<input style="width: 350px;"  name="password" required lay-verify="required" placeholder="支付宝" autocomplete="off" class="layui-input">
+			</li>
+
+
+			<li>
+				<span class="layui-form-label">婚姻状况：</span>
+				<input type="radio" name="marriage" value="男" title="已婚">
+				<input type="radio" name="marriage" value="女" title="未婚" checked>
+			</li>
+			<li>
+				<label class="layui-form-label">
+					<i class="layui-icon">&#xe662;</i>
+					<i class="layui-icon">&#xe661;</i>姓别</label>
+				<input type="radio" name="sex" value="男" title="男" checked>
+				<input type="radio" name="sex" value="女" title="女">
+			</li>
+
+
+			<li>
+				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+			</li>
+
+		</ul>
+	</div>
 
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
-    layui.use('form', function(){
+    layui.use(['form','laydate'], function(){
         var form = layui.form;
+        var laydate=layui.laydate;
+
+        $("#identity").on('click',function(){
+            layer.tips('认真填写身份证信息', '#identity');
+        })
+
+
+        //常规用法
+        laydate.render({
+            elem: '#entry'
+        });
+
+        //常规用法
+        laydate.render({
+            elem: '#dimission'
+        });
 
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法

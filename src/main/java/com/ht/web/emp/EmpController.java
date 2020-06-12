@@ -63,13 +63,16 @@ public class EmpController {
 
 
     /**
-     * @param empinfo
-     * @return
+     * @param
+     * @return 去到添加页面
      * 添加
      */
     @RequestMapping("add")
     public void add(Empinfo empinfo){
         empinfoService.insert(empinfo);
+    @RequestMapping("toadd")
+    public String toadd(){
+        return "emp/empadd";
     }
 
     /**
@@ -92,7 +95,7 @@ public class EmpController {
      * @return
      * 修改
      */
-    @RequestMapping("updata")
+    @RequestMapping("update")
     @ResponseBody
     public Integer updata(Empinfo empinfo){
         System.out.println("empinfo.toString() = " + empinfo.toString());

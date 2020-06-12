@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+		<script th:src="@{/layui/layui.js}"></script>
+		<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+	</head>
+	<style>
+		.index{width: 600px;margin-left: 30px;}
+		.layui-input{width: 120px;}
+		.menu li{float: left;}
+		.layui-form-label{margin-top: 15px}
+		.layui-input{margin-top: 15px}
+		button{margin-left: 140px;margin-top: 20px;}
+		
+		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+	</style>
+	<body>
+		<form class="layui-form" th:action="@{/course/ceduadd}">
+		<div class="index">
+			<ul class="menu">
+				<li>
+					<label class="layui-form-label">课程名称：</label>
+					<input style="width: 350px;"  name="coursename" required lay-verify="required" placeholder="课程名称" autocomplete="off" class="layui-input">
+				</li>
+				<li>
+					<label class="layui-form-label">说明：</label>
+					<input style="width: 350px;" name="remark" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
+				</li>
+				<li>
+					<label class="layui-form-label">是否必修：</label>
+					<input type="radio" name="isobligatory" value="是" title="是" checked>
+					<input type="radio" name="isobligatory" value="否" title="否">
+				</li>
+				<li>
+					 <label class="layui-form-label">课程类别：</label>
+					 <select name="coursetypeid" lay-filter="mySelect">
+						<option th:each="p:${list}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}"></option>
+					 </select>
+				</li>
+				<li>
+					 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+				</li>
+			</ul>
+		</div>
+		
+		</form>
+	</body>
+	<script type="text/javascript" th:inline="none">
+			layui.use('form', function(){
+			  var form = layui.form;
+
+			  //监听提交
+			  //你可以在这里做操作  也可以不使用这个方法
+			  // form.on('submit(formDemo)', function(data){
+			  //   layer.msg(JSON.stringify(data.field));
+			  //   return false;
+			  // });
+			});
+	</script>
+</html>

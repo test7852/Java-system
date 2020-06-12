@@ -1,6 +1,8 @@
 package com.ht.web.student;
 
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Student;
+import com.ht.bean.student.Studentclass;
 import com.ht.service.student.StudentclassService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -23,11 +25,6 @@ public class StudentClassController {
     @Resource
     private StudentclassService studentclassService;
 
-    @RequestMapping("toAdd")
-    public String toAdd(){
-        return "student/stulist";
-    }
-
 
     @RequestMapping("data")
     @ResponseBody
@@ -43,6 +40,27 @@ public class StudentClassController {
 
     /**
      * @return
+     * 去班级添加
+     */
+    @RequestMapping("/toadd")
+    public String toadd() {
+        return "student/studentClassAdd";
+    }
+
+    /**
+     * @param studentclass
+     * @return
+     * 添加班级
+     */
+    @RequestMapping("add")
+    public Integer add(Studentclass studentclass){
+        //使用的时候放开注释
+        int i = studentclassService.insertSelective(studentclass);
+        return i;
+    }
+
+    /**
+     * @return
      * 去班级页面
      */
     @RequestMapping("list")
@@ -51,10 +69,24 @@ public class StudentClassController {
     }
 
 
+
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
         System.out.println("id = " + id);
-//        studentclassService.deleteByPrimaryKey(id);
+//(待删除)       studentclassService.deleteByPrimaryKey(id);
         return "redirect:studentClass/list";
+    }
+
+    /**
+     * @param studentclass
+     * @return 修改
+     */
+    @RequestMapping("update")
+    @ResponseBody
+    public Integer updata(Studentclass studentclass){
+        System.out.println("studentclass = " + studentclass.toString());
+        int updatacurr = studentclassService.updateByPrimaryKeySelective(studentclass);
+        System.out.println(updatacurr);
+        return updatacurr;
     }
 }

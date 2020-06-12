@@ -24,19 +24,23 @@ public class StudentfloorController {
     @Resource
     private StudentfloorService studentfloorService;
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test(){
 
-        return "Studentfloor";
+    //楼栋数据
+    @RequestMapping("data")
+    @ResponseBody
+    public JsonData data(@Param("limit")int limit , @Param("page")int page){
+        Pager pager = new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(studentfloorService.selCount());
+        jsonData.setData(studentfloorService.sybase(pager));
+        return jsonData;
     }
 
-
-
-
+    //去添加页面
     @RequestMapping("/toadd")
     public String toadd() {
-        return "sfadd";
+        return "student/flooradd";
     }
 
     @RequestMapping("/add")
@@ -52,25 +56,13 @@ public class StudentfloorController {
         return "staffupd";
     }
 
-    @RequestMapping("/upd")
-    public String upd(Studentfloor studentfloor){
-        studentfloorService.updateByPrimaryKey(studentfloor);
-        return "redirect:stafflist";
-    }
-
-
-
-    @RequestMapping("data")
+    //修改楼栋资料
+    @RequestMapping("/update")
     @ResponseBody
-    public JsonData data(@Param("limit")int limit , @Param("page")int page){
-        Pager pager = new Pager();
-        pager.setPageSize(limit);
-        pager.setCurrPage(page);
-        jsonData.setCount(studentfloorService.selCount());
-        jsonData.setData(studentfloorService.sybase(pager));
-        return jsonData;
+    public Integer upd(Studentfloor studentfloor){
+        int i = studentfloorService.updateByPrimaryKeySelective(studentfloor);
+        return i;
     }
-
 
     @RequestMapping("list")
     public String list(){
@@ -80,8 +72,7 @@ public class StudentfloorController {
 
     @RequestMapping("/del")
     public String del(Integer id) {
-        System.out.println(id);
-//        studentfloorService.deleteByPrimaryKey(id);
+//(待删除)        studentfloorService.deleteByPrimaryKey(id);
         return "redirect:studentFloor/list";
     }
 }

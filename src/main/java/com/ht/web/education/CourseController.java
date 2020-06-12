@@ -1,12 +1,17 @@
 package com.ht.web.education;
 
 import com.ht.bean.education.Course;
+import com.ht.bean.education.Coursetype;
+import com.ht.bean.json.JsonData;
 import com.ht.service.education.CourseService;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,53 +25,58 @@ public class CourseController {
     @Resource
     private CourseService courseService;//课程管理
 
-    //课程管理  分页查
-    @RequestMapping("/cedulist")
-    public String cedulist(Pager pager, Map map){
-        //前台最大展示数
-        pager.pageSize=8;
-        //查询总数据
-        pager.page(courseService.selCountcEdu());
-        //查询总页数
-        pager.data=courseService.selByPage(pager);
-        map.put("page",pager);
-        return "";
+    @Resource
+    private JsonData jsonData;
+
+    //去到课程管理界面
+    @RequestMapping("/courselist")
+    public String courselist(){
+        return "education/courselist";
     }
 
+    //课程管理  分页查的数据
+    @RequestMapping("/coursedata")
+    @ResponseBody
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
+        Pager pager=new Pager();
+        pager.setCurrPage(page);
+        pager.setPageSize(limit);
+        jsonData.setCount(courseService.selCountcEdu());
+        jsonData.setData(courseService.selByPage(pager));
+        return jsonData;
+    }
 
-
-    //课程管理   根据id删除
+    //课程管理  根据id删除
     @RequestMapping("/cedudel")
-    public String cedudel(Integer coursetypeid){
-        courseService.deleteByPrimaryKey(coursetypeid);
-        return "";
+    @ResponseBody
+    public Integer coursedel(Integer courseid){
+        int i = courseService.deleteByPrimaryKey(courseid);
+        System.out.println("删除的id:"+courseid);
+        return i;
     }
 
-    //课程管理   根据id查询  去修改界面
-    @RequestMapping("/cedutoupd")
-    public String cedutoupd(Integer courseid,Map map){
-        Course course = courseService.selectByPrimaryKey(courseid);
-        map.put("list",course);
-        return "";
-    }
-
-    //课程管理   修改
+    //课程管理  修改
     @RequestMapping("/ceduupd")
-    public String ceduupd(Course course){
-        courseService.updateByPrimaryKey(course);
-        return "";
+    @ResponseBody
+    public Integer ceduupd(Course course){
+        int i = courseService.updateByPrimaryKey(course);
+        return i;
     }
 
-    //课程管理   去新增界面
+    //去到课程管理新增界面
     @RequestMapping("/cedutoadd")
-    public String cedutoadd(){
-        return "";
+    public String cedutoadd(Map map){
+        List<Coursetype> list = courseService.selCtypes();
+        map.put("list",list);
+        return "education/courseadd";
     }
 
-    //课程管理   新增
+    //新增
     @RequestMapping("/ceduadd")
-    public String ceduadd(Course course){
-        courseService.insert(course);
-        return "";
+    @ResponseBody
+    public Integer ceduadd(Course course){
+        System.out.println(course);
+        int insert = courseService.insert(course);
+        return insert;
     }
 }

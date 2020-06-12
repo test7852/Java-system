@@ -117,4 +117,22 @@
       `explain` = #{explain,jdbcType=VARCHAR}
     where beid = #{beid,jdbcType=INTEGER}
   </update>
+
+  <!--查询总数据-->
+  <select id="selTeahcerbe" resultType="int">
+    select count(*) from teacherbe;
+  </select>
+
+  <!--分页查询-->
+  <select id="selbypage" resultType="teacherbe">
+    <!--<bind name="kais" value="(currPage-1)*pageSize"></bind>-->
+    <![CDATA[
+          select * from teacherbe limit #{startRow},#{pageSize};
+        ]]>
+  </select>
+
+  <!--查询员工-->
+  <select id="selEmplist" resultType="empinfo">
+    select * from empinfo;
+  </select>
 </mapper>
