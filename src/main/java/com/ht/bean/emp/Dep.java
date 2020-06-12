@@ -38,4 +38,10 @@ public class Dep {
     * 是否为人事部
     */
     private Integer personnel;
+
+    /**
+     * 用来存放父级部门的名称
+     */
+    private String fname;
+
 }

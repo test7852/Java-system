@@ -35,6 +35,11 @@ public class EmpinfoServiceImpl implements EmpinfoService{
     }
 
     @Override
+    public List<String> allEmpName() {
+        return empinfoMapper.allEmpName();
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer empId) {
         return empinfoMapper.deleteByPrimaryKey(empId);
     }

@@ -22,11 +22,12 @@ import java.util.Map;
 public class StudentScoreController {
     @Resource
     private StudentScoreService studentScoreService;
-//去到列表+
+    //去到列表+
     @RequestMapping("scorelistUi")
     public String scorelistUi(){
         return "student/scorelist";
     }
+
     //加载数据
     @Resource
     private JsonData jsonData;
@@ -57,15 +58,15 @@ public class StudentScoreController {
     }
 
     /**
-     * @param studentScore
+     * @param
      * @return
      * 去添加页面
      */
     @RequestMapping("toadd")
-    public String toadd(StudentScore studentScore){
-        studentScoreService.insert(studentScore);
-        return "";
+    public String toadd(){
+        return "student/scoreadd";
     }
+
 
     /**
      * @param studentScore
@@ -73,7 +74,9 @@ public class StudentScoreController {
      * 添加学生信息
      */
     @RequestMapping("add")
+    @ResponseBody
     public String add(StudentScore studentScore){
+        System.out.println("studentScore："+studentScore.toString());
         studentScoreService.insert(studentScore);
         return "";
     }
@@ -96,10 +99,13 @@ public class StudentScoreController {
      * 修改学生信息
      */
     @RequestMapping("upd")
-    public String upd(StudentScore studentScore){
-        studentScoreService.updateByPrimaryKey(studentScore);
-        return "";
+    @ResponseBody
+    public Integer upd(StudentScore studentScore){
+        System.out.println("studentScore："+studentScore.toString());
+        int updatacurr = studentScoreService.updateByPrimaryKey(studentScore);
+        return updatacurr;
     }
+
 
     /**
      * @param id
