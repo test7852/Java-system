@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    .index{width: 500px;margin-left: 30px;height: 200px}
+    .layui-input{width: 120px;}
+    .menu li{float: left;}
+    .layui-form-label{margin-top: 15px}
+    .layui-input{margin-top: 15px}
+    button{margin-left: 140px;margin-top: 20px;}
+
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<form class="layui-form" th:action="@{/score/add}">
+    <div class="index">
+        <ul class="menu">
+            <li>
+                <label class="layui-form-label">学生id：</label>
+                <input  name="stuid" required lay-verify="required" placeholder="学生表外键" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">学生成绩：</label>
+                <input  name="score" required lay-verify="required" placeholder="学生成绩" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">补考成绩：</label>
+                <input  name="rescore" required lay-verify="required" placeholder="补考成绩" autocomplete="off" class="layui-input"/>
+            </li>
+            </br>
+            <li>
+                <label class="layui-form-label">关联课程：</label>
+                <input  name="courseid" required lay-verify="required" placeholder="关联课程id" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">关联学期：</label>
+                <input  name="termid" required lay-verify="required" placeholder="关联学期id" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">考试时间：</label>
+                <input  name="scoretime" required lay-verify="required" placeholder="考试时间" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">录入人员：</label>
+                <input  name="empid" required lay-verify="required" placeholder="录入人员" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">备注：</label>
+                <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label"> 类型：</label>
+                <select name="testtype" lay-filter="mySelect">
+                    <option value="笔试">笔试</option>
+                    <option value="机试">机试</option>
+                    <option value="模拟面试">模拟面试</option>
+                </select>
+            </li>
+            <li>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+            </li>
+        </ul>
+    </div>
+
+</form>
+</body>
+<script type="text/javascript" th:inline="none">
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        //你可以在这里做操作  也可以不使用这个方法
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return true;
+        });
+    });
+</script>
+</html>
