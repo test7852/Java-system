@@ -34,43 +34,51 @@
     }
 	</style>
 <body>
-<!--数据表格样式及附件-->	
+<!--数据表格样式及附件-->
 <script type="text/html" id="bar">
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
-    <a class="layui-btn layui-btn-xs" lay-event="ck">
-        <i class="layui-icon">&#xe6b2;</i>查看
+    <a class="layui-btn layui-btn-xs" lay-event="data">
+        <i class="layui-icon">&#xe6b2;</i>资料
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
-	</script>
- <!--搜索栏-->
-  <div class="layui-form-item">
+</script>
+<script type="text/html" id="sexTpl">
+    {{#  if(d.emp_sex === '女'){ }}
+    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
+    {{#  } else { }}
+    {{ d.emp_sex }}
+    {{#  } }}
+</script>
+<!--搜索栏-->
+<div class="layui-form-item">
     <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-      </div>
-     <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-     
-      <div class="layui-input-inline">
-        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-      </div>
+
+        <div class="layui-input-inline">
+            <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+        </div>
         <label class="layui-form-label">验证</label>
     </div>
     <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-      </div>
-      <label class="layui-form-label">验证</label>
-       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">验证</label>
     </div>
-  </div>
+    <div class="layui-inline">
+
+        <div class="layui-input-inline">
+            <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">验证</label>
+        <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
+    </div>
+</div>
 
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
@@ -104,29 +112,24 @@
     layui.use('table', function () {
         var table = layui.table;
 
-        //监听单元格编辑(修改)
-        table.on('edit(tab)', function(obj){
-            alert(obj.data);
-            var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
-            $.ajax({
-                url: '/reply/update',
-                type: 'post',
-                data: {
-                    replyid:data.replyid,
-                    studentid:data.studentid,
-                    projectid:data.projectid,
-                    empid:data.empid,
-                    score1:data.score1,
-                    score2:data.score2,
-                    score3:data.score4,
-                    score4:data.score4,
-                    score5:data.score5
-                },
-                dataType: 'text'
-            })
-        });
+
+
+        //点击添加iframe窗方法
+        $("#add").on('click',function(){
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '员工新增',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                content: ['/reply/toadd']//这是链接你的页面地址 url
+            });
+        })
+
+
+
+
+
 
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
@@ -134,7 +137,7 @@
             //console.log(obj)
             if (obj.event === 'del') {
                 layer.confirm('真的删除么?', function (index) {
-
+                    alert(data.replyid);
                     obj.del();
                     layer.close(index);
                     $.ajax({
@@ -149,18 +152,47 @@
             } else if (obj.event == 'edit') {
                 if($(".falg").html()=="ON"){
                     // 打开可编辑状态：
-                    $(".layui-table").find('td').data('edit', true);
+                    $(".layui-table").find('td').data('edit', true)
+                    // layer.msg(data.emp_id);
                     $(".falg").html("YES")
+                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
 
                 }else {
-                    $(".layui-table").find('td').data('edit', false);
+                    $(".layui-table").find('td').data('edit', false)
                     $(".falg").html("ON")
                 }
 
-            }else if (obj.event === 'ck') {
+            } else if (obj.event === 'ck') {
 
             }
         })
+
+        //监听单元格编辑
+        table.on('edit(tab)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+            layer.msg(data.replyid)
+            $.ajax({
+                url: '/reply/upd',
+                type: 'post',
+                data: {
+                    replyid:data.replyid,
+                    studentid:data.studentid,
+                    projectid:data.projectid,
+                    empid:data.empid,
+                    score1:data.score1,
+                    score2:data.score2,
+                    score3:data.score3,
+                    score4:data.score4,
+                    score5:data.score5,
+                    score6:data.score6,
+                    score7:data.score7,
+                    remark:data.remark
+                },
+                dataType: 'text',
+            })
+        });
 
     })
 </script>

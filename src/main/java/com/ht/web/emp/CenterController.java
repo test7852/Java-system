@@ -29,4 +29,11 @@ public class CenterController {
     public String emplist(){
         return "emp/emplist";
     }
+
+    //去部门列表页面
+    @RequestMapping("deplist")
+    public String deplist(){
+        return "emp/deplist";
+    }
+
 }

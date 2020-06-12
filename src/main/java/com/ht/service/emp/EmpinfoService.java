@@ -11,11 +11,31 @@ import java.util.List;
  */
 public interface EmpinfoService{
 
-    Empinfo login(Empinfo empinfo);//登录
+    /**
+     * @param empinfo
+     * @return
+     * 登录
+     */
+    Empinfo login(Empinfo empinfo);
 
-    int selprocount();//查询总数
+    /**
+     * @return
+     * 查询总数
+     */
+    int selprocount();
 
-    List<Empinfo> allPageEmp(Pager pager);//分页
+    /**
+     * @param pager
+     * @return
+     * 分页查询
+     */
+    List<Empinfo> allPageEmp(Pager pager);
+
+    /**
+     * @return
+     * 获取所有员工姓名
+     */
+    List<String> allEmpName();
 
     int deleteByPrimaryKey(Integer empId);
 

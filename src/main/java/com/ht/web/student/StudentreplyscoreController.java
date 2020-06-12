@@ -22,7 +22,7 @@ import java.util.Map;
 public class StudentreplyscoreController {
     @Resource
     private StudentreplyscoreService studentreplyscoreService;
-//去到列表
+    //去到列表
     @RequestMapping("replyUi")
     public String stusclistUi(){
         return "student/replylist";
@@ -73,6 +73,7 @@ public class StudentreplyscoreController {
      * 添加学生信息
      */
     @RequestMapping("add")
+    @ResponseBody
     public String add(Studentreplyscore studentreplyscore){
         studentreplyscoreService.insert(studentreplyscore);
         return "";
@@ -95,12 +96,12 @@ public class StudentreplyscoreController {
      * @return
      * 修改学生信息
      */
-    @RequestMapping("update")
+    @RequestMapping("upd")
     @ResponseBody
-    public Integer update(Studentreplyscore studentreplyscore){
-        System.out.println(studentreplyscore.toString());
-        int selective = studentreplyscoreService.updateByPrimaryKeySelective(studentreplyscore);
-        return selective;
+    public String upd(Studentreplyscore studentreplyscore){
+        System.out.println(studentreplyscore.toString()+"55");
+        studentreplyscoreService.updateByPrimaryKey(studentreplyscore);
+        return "";
     }
 
     /**
@@ -110,7 +111,7 @@ public class StudentreplyscoreController {
      */
     @RequestMapping("del")
     public String del(int replyid){
-// (待删除)       studentreplyscoreService.deleteByPrimaryKey(replyid);
+        studentreplyscoreService.deleteByPrimaryKey(replyid);
         return "redirect:reply/replyUi";
     }
 }
