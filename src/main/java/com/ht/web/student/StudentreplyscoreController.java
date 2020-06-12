@@ -22,11 +22,12 @@ import java.util.Map;
 public class StudentreplyscoreController {
     @Resource
     private StudentreplyscoreService studentreplyscoreService;
-//去到列表
+    //去到列表
     @RequestMapping("replyUi")
     public String stusclistUi(){
         return "student/replylist";
     }
+
     //加载数据
     @Resource
     private JsonData jsonData;
@@ -56,16 +57,12 @@ public class StudentreplyscoreController {
         return "";
     }
 
-    /**
-     * @param studentreplyscore
-     * @return
-     * 去添加页面
-     */
+    //去添加
     @RequestMapping("toadd")
-    public String toadd(Studentreplyscore studentreplyscore){
-        studentreplyscoreService.insert(studentreplyscore);
-        return "";
+    public String toadd(){
+        return "student/replyadd";
     }
+
 
     /**
      * @param studentreplyscore
@@ -73,6 +70,7 @@ public class StudentreplyscoreController {
      * 添加学生信息
      */
     @RequestMapping("add")
+    @ResponseBody
     public String add(Studentreplyscore studentreplyscore){
         studentreplyscoreService.insert(studentreplyscore);
         return "";
@@ -95,14 +93,13 @@ public class StudentreplyscoreController {
      * @return
      * 修改学生信息
      */
-    @RequestMapping("update")
+    @RequestMapping("upd")
     @ResponseBody
-    public Integer update(Studentreplyscore studentreplyscore){
-        System.out.println(studentreplyscore.toString());
-        int selective = studentreplyscoreService.updateByPrimaryKeySelective(studentreplyscore);
-        return selective;
+    public String upd(Studentreplyscore studentreplyscore){
+        System.out.println(studentreplyscore.toString()+"55");
+        studentreplyscoreService.updateByPrimaryKey(studentreplyscore);
+        return "";
     }
-
     /**
      * @param replyid
      * @return
@@ -110,7 +107,8 @@ public class StudentreplyscoreController {
      */
     @RequestMapping("del")
     public String del(int replyid){
-// (待删除)       studentreplyscoreService.deleteByPrimaryKey(replyid);
+        System.out.println(replyid+"       replyid");
+        studentreplyscoreService.deleteByPrimaryKey(replyid);
         return "redirect:reply/replyUi";
     }
 }

@@ -124,4 +124,10 @@
       select * from dep where depid = #{parentid}
     ]]>
   </select>
+  <!-- 获取所有一级部门-->
+  <select id="getAllFdep" resultType="com.ht.bean.emp.Dep">
+    <![CDATA[
+      select * from dep where depid in(select parentid from dep)
+    ]]>
+  </select>
 </mapper>

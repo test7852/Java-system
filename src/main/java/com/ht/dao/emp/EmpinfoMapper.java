@@ -10,12 +10,31 @@ import java.util.List;
  * @date 2020/6/7 20:19
  */
 public interface EmpinfoMapper {
-//    登录
+    /**
+     * @param empinfo
+     * @return
+     * 登录
+     */
     Empinfo login(Empinfo empinfo);
-//    查询总数
+
+    /**
+     * @return
+     * 查询总数
+     */
     int selprocount();
-//    分页查询
+
+    /**
+     * @param pager
+     * @return
+     * 分页查询
+     */
     List<Empinfo> allPageEmp(Pager pager);
+
+    /**
+     * @return
+     * 获取所有员工姓名
+     */
+    List<String> allEmpName();
 
     int deleteByPrimaryKey(Integer empId);
 

@@ -65,4 +65,9 @@ public class DepServiceImpl implements DepService{
         return depMapper.getDepByFid(fid);
     }
 
+    @Override
+    public List<Dep> getAllFdep() {
+        return depMapper.getAllFdep();
+    }
+
 }

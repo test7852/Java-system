@@ -44,4 +44,10 @@ public interface DepMapper {
      */
     Dep getDepByFid(int fid);
 
+    /**
+     * @return
+     * 获取所有一级部门
+     */
+    List<Dep> getAllFdep();
+
 }
