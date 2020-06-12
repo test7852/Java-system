@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+		<script th:src="@{/layui/layui.js}"></script>
+		<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+	</head>
+	<style>
+		.index{width: 600px;margin-left: 30px;}
+		.layui-input{width: 120px;}
+		.menu li{float: left;}
+		.layui-form-label{margin-top: 15px}
+		.layui-input{margin-top: 15px}
+		button{margin-left: 140px;margin-top: 20px;}
+		
+		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+	</style>
+	<body>
+		<form class="layui-form" th:action="@{/teacher/teacheradd}">
+		<div class="index">
+			<ul class="menu">
+				<li>
+					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 星期：</label>
+					<select name="week" lay-filter="mySelect">
+						<option value="星期一">星期一</option>
+						<option value="星期二">星期二</option>
+						<option value="星期三">星期三</option>
+						<option value="星期四">星期四</option>
+						<option value="星期五">星期五</option>
+						<option value="星期六">星期六</option>
+						<option value="星期七">星期七</option>
+					</select>
+				</li>
+				<li>
+					<label class="layui-form-label">排班名称：</label>
+					<input name="week" required lay-verify="required" autocomplete="off" class="layui-input">
+				</li>
+				<li>
+					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 员工姓名：</label>
+					<select name="emp_name" lay-filter="mySelect">
+						<option th:each="p:${list}" th:value="${p.emp_name}" th:text="${p.emp_name}">张先生</option>
+					</select>
+				</li>
+				<li>
+					<label class="layui-form-label">值班要求：</label>
+					<input name="beask" required lay-verify="required" autocomplete="off" class="layui-input">
+				</li>
+				<li>
+					<label class="layui-form-label">总值班</label>
+					<input type="radio" name="besum" value="是" title="是" checked>
+					<input type="radio" name="besum" value="否" title="否">
+				</li>
+				<li>
+					<label class="layui-form-label">说明：</label>
+					<input name="explain" required lay-verify="required" autocomplete="off" class="layui-input">
+				</li>
+				<li>
+					 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+				</li>
+			</ul>
+		</div>
+		
+		</form>
+	</body>
+	<script type="text/javascript" th:inline="none">
+			layui.use('form', function(){
+			  var form = layui.form;
+
+			  //监听提交
+			  //你可以在这里做操作  也可以不使用这个方法
+			  // form.on('submit(formDemo)', function(data){
+			  //   layer.msg(JSON.stringify(data.field));
+			  //   return false;
+			  // });
+			});
+	</script>
+</html>

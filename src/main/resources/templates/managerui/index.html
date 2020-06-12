@@ -11,7 +11,7 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Home</title>
+        <title>主页</title>
         <!--<div th:replace="includeJS::indexjs"></div>title-->
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -44,12 +44,12 @@
         <script th:src="@{/assets/js/pages/dashboard.js}"></script>
     </head>
     <body>
-        
+
         <!-- Page Container 手风琴内容-->
         <div class="page-container">
             <!-- Page Sidebar -->
             <div class="page-sidebar">
-                <a class="logo-box" href="index.html">
+                <a class="logo-box" th:href="@{/skip/index}">
                     <span>懵逼树</span>
                     <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
                     <i class="icon-close" id="sidebar-toggle-button-close"></i>
@@ -58,7 +58,7 @@
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
                             <li class="active-page">
-                                <a th:href="@{/emp/login}">
+                                <a th:href="@{/skip/index}">
                                     <i class="menu-icon icon-home4"></i><span> 首 页</span>
                                 </a>
                             </li>
@@ -72,8 +72,8 @@
                                     <i class="fa fa-user-circle-o"></i><span> 员工管理 </span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="javascript:void(0);"><i class="fa fa-bank"></i> 部门管理</a></li>
-                                    <li><a target="goto" th:href="@{/emp/emplistUi}"><i class="fa fa-files-o"></i> 员工资料</a></li>
+                                    <li><a target="goto" href="javascript:void(0);"><i class="fa fa-bank"></i> 部门管理</a></li>
+                                    <li><a target="goto" th:href="@{/skip/emplist}"><i class="fa fa-files-o"></i> 员工资料</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-leanpub"></i> 周报审阅</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> 谈心记录</a></li>
@@ -100,8 +100,8 @@
                                     <i class="fa fa-sitemap"></i><span> 教务管理</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="goto" th:href="@{/coursetype/coursetypelist}"><i class="fa fa-cube"></i> 课程类别</a></li>
-                                    <li><a target="goto" th:href="@{/course/courselist}"><i class="fa fa-files-o"></i> 课程管理</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-cube"></i> 课程类别</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-cubes"></i> 课程管理</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-fire"></i>   试讲培训</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i> 值班管理</a></li>
                                 </ul>
@@ -129,7 +129,7 @@
                                     <i class="fa fa-folder-o"></i><span> 文件管理</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="javascript:void(0);"><i class="fa fa-folder-open-o"></i> 资料文档</a></li>
+                                    <li><a target="goto" th:href="@{/dataDoc/list}"><i class="fa fa-folder-open-o"></i> 资料文档</a></li>
                                 </ul>
                             </li>
                             <li>

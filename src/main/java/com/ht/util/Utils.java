@@ -33,7 +33,6 @@ public class Utils {
         String newFileName = picName + extName;
         File targetFile = new File(dirName , newFileName);
         file.transferTo(targetFile);
-
         return new Datadoc(0,oriName,newFileName,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),"aa",1);
         //返回新文件名
     }

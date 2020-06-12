@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.TeacherbeMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Teacherbe">
+    <!--@mbg.generated-->
+    <!--@Table teacherbe-->
+    <id column="beid" jdbcType="INTEGER" property="beid" />
+    <result column="week" jdbcType="VARCHAR" property="week" />
+    <result column="schedulingname" jdbcType="VARCHAR" property="schedulingname" />
+    <result column="emp_Name" jdbcType="VARCHAR" property="empName" />
+    <result column="beask" jdbcType="VARCHAR" property="beask" />
+    <result column="besum" jdbcType="INTEGER" property="besum" />
+    <result column="explain" jdbcType="VARCHAR" property="explain" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    beid, week, schedulingname, emp_Name, beask, besum, `explain`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from teacherbe
+    where beid = #{beid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from teacherbe
+    where beid = #{beid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="beid" keyProperty="beid" parameterType="com.ht.bean.education.Teacherbe" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into teacherbe (week, schedulingname, emp_Name, 
+      beask, besum, `explain`
+      )
+    values (#{week,jdbcType=VARCHAR}, #{schedulingname,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
+      #{beask,jdbcType=VARCHAR}, #{besum,jdbcType=INTEGER}, #{explain,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="beid" keyProperty="beid" parameterType="com.ht.bean.education.Teacherbe" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into teacherbe
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="week != null">
+        week,
+      </if>
+      <if test="schedulingname != null">
+        schedulingname,
+      </if>
+      <if test="empName != null">
+        emp_Name,
+      </if>
+      <if test="beask != null">
+        beask,
+      </if>
+      <if test="besum != null">
+        besum,
+      </if>
+      <if test="explain != null">
+        `explain`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="week != null">
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulingname != null">
+        #{schedulingname,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="beask != null">
+        #{beask,jdbcType=VARCHAR},
+      </if>
+      <if test="besum != null">
+        #{besum,jdbcType=INTEGER},
+      </if>
+      <if test="explain != null">
+        #{explain,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Teacherbe">
+    <!--@mbg.generated-->
+    update teacherbe
+    <set>
+      <if test="week != null">
+        week = #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="schedulingname != null">
+        schedulingname = #{schedulingname,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        emp_Name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="beask != null">
+        beask = #{beask,jdbcType=VARCHAR},
+      </if>
+      <if test="besum != null">
+        besum = #{besum,jdbcType=INTEGER},
+      </if>
+      <if test="explain != null">
+        `explain` = #{explain,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where beid = #{beid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Teacherbe">
+    <!--@mbg.generated-->
+    update teacherbe
+    set week = #{week,jdbcType=VARCHAR},
+      schedulingname = #{schedulingname,jdbcType=VARCHAR},
+      emp_Name = #{empName,jdbcType=VARCHAR},
+      beask = #{beask,jdbcType=VARCHAR},
+      besum = #{besum,jdbcType=INTEGER},
+      `explain` = #{explain,jdbcType=VARCHAR}
+    where beid = #{beid,jdbcType=INTEGER}
+  </update>
+
+  <!--查询总数据-->
+  <select id="selTeahcerbe" resultType="int">
+    select count(*) from teacherbe;
+  </select>
+
+  <!--分页查询-->
+  <select id="selbypage" resultType="teacherbe">
+    <!--<bind name="kais" value="(currPage-1)*pageSize"></bind>-->
+    <![CDATA[
+          select * from teacherbe limit #{startRow},#{pageSize};
+        ]]>
+  </select>
+
+  <!--查询员工-->
+  <select id="selEmplist" resultType="empinfo">
+    select * from empinfo;
+  </select>
+</mapper>

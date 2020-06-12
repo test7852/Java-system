@@ -34,7 +34,7 @@
     `password`, `status`, post_Id
   </sql>
 <!--  登录-->
-  <select id="login" resultType="Empinfo">
+  <select id="login" resultType="Empinfo" parameterType="Empinfo">
     <!--自动转义特殊字符，避免可能出现的标签格式问题-->
     <![CDATA[
           select * from empinfo where Phone=#{phone} and password=#{password}
@@ -63,7 +63,7 @@
       alipay, hireDay, fireDay, 
       `password`, `status`, post_Id
       )
-    values (#{empName,jdbcType=VARCHAR}, #{depId,jdbcType=INTEGER}, #{empSex,jdbcType=VARCHAR}, 
+    values (#{emp_name,jdbcType=VARCHAR}, #{dep_id,jdbcType=INTEGER}, #{emp_sex,jdbcType=VARCHAR},
       #{birthday,jdbcType=VARCHAR}, #{cardno,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{qqcode,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{married,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, 
