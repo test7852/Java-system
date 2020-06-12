@@ -104,4 +104,24 @@
       personnel = #{personnel,jdbcType=INTEGER}
     where depid = #{depid,jdbcType=INTEGER}
   </update>
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from dep
+    ]]>
+  </select>
+
+  <!--  分页-->
+  <select id="allPageDep" resultType="com.ht.bean.emp.Dep">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+      select * from dep limit #{kais},#{pageSize}
+    ]]>
+  </select>
+<!--  根据父id查找父级部门-->
+  <select id="getDepByFid" resultType="com.ht.bean.emp.Dep">
+    <![CDATA[
+      select * from dep where depid = #{parentid}
+    ]]>
+  </select>
 </mapper>
