@@ -24,10 +24,6 @@ public class EmpController {
     private JsonData jsonData;
 
 
-    @RequestMapping("toAdd")
-    public String toAdd(){
-        return "emp/empadd";
-    }
     /**
      * @param empinfo
      * @return
@@ -68,8 +64,10 @@ public class EmpController {
      * 添加
      */
     @RequestMapping("add")
-    public void add(Empinfo empinfo){
+    public void add(Empinfo empinfo) {
         empinfoService.insert(empinfo);
+    }
+
     @RequestMapping("toadd")
     public String toadd(){
         return "emp/empadd";
