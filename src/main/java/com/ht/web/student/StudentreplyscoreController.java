@@ -43,28 +43,13 @@ public class StudentreplyscoreController {
         return jsonData;
     }
 
-    /**
-     * @param pager
-     * @param map
-     * @return
-     * 分页
-     */
-    @RequestMapping("list")
-    public String list(Pager pager, Map map){
-        pager.page(studentreplyscoreService.getTotalRow());
-        map.put("",studentreplyscoreService.allPageStuRecord(pager));
-        return "";
-    }
 
     /**
-     * @param studentreplyscore
-     * @return
      * 去添加页面
      */
     @RequestMapping("toadd")
-    public String toadd(Studentreplyscore studentreplyscore){
-        studentreplyscoreService.insert(studentreplyscore);
-        return "";
+    public String toadd(){
+        return "student/replyadd";
     }
 
     /**
@@ -73,6 +58,7 @@ public class StudentreplyscoreController {
      * 添加学生信息
      */
     @RequestMapping("add")
+    @ResponseBody
     public String add(Studentreplyscore studentreplyscore){
         studentreplyscoreService.insert(studentreplyscore);
         return "";

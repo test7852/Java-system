@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    .index{width: 500px;margin-left: 30px;height: 200px}
+    .layui-input{width: 120px;}
+    .menu li{float: left;}
+    .layui-form-label{margin-top: 15px}
+    .layui-input{margin-top: 15px}
+    button{margin-left: 140px;margin-top: 20px;}
+
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<form class="layui-form" th:action="@{/reply/add}">
+    <div class="index">
+        <ul class="menu">
+            <li>
+                <label class="layui-form-label">学生id：</label>
+                <input  name="studentid" required lay-verify="required" placeholder="学生表外键" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">答辩项目：</label>
+                <input  name="projectid" required lay-verify="required" placeholder="关联答辩项目" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">打分老师：</label>
+                <input  name="empid" required lay-verify="required" placeholder="打分老师管理员工表外键" autocomplete="off" class="layui-input"/>
+            </li>
+            </br>
+            <li>
+                <label class="layui-form-label">功能完善：</label>
+                <input  name="score1" required lay-verify="required" placeholder="功能完善50" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">技术难度：</label>
+                <input  name="score2" required lay-verify="required" placeholder="技术难度10" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">界面完美：</label>
+                <input  name="score3" required lay-verify="required" placeholder="界面完美10" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">回答问题：</label>
+                <input  name="score4" required lay-verify="required" placeholder="回答问题10" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">演示方法：</label>
+                <input  name="score5" required lay-verify="required" placeholder="演示方法10" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">语言表达：</label>
+                <input  name="score6" required lay-verify="required" placeholder="语言表达10" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">总分100：</label>
+                <input  name="score7" required lay-verify="required" placeholder="总分100" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <label class="layui-form-label">备注：</label>
+                <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input"/>
+            </li>
+            <li>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+            </li>
+        </ul>
+    </div>
+
+</form>
+</body>
+<script type="text/javascript" th:inline="none">
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        //你可以在这里做操作  也可以不使用这个方法
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return true;
+        });
+    });
+</script>
+</html>

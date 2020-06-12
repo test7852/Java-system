@@ -30,7 +30,7 @@ public class Teacherbe {
     /**
     * 员工姓名
     */
-    private String empName;
+    private String emp_name;
 
     /**
     * 值班要求
