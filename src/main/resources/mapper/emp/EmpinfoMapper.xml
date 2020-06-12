@@ -33,13 +33,6 @@
     Email, married, University, Major, Education, Address, alipay, hireDay, fireDay, 
     `password`, `status`, post_Id
   </sql>
-<!--  登录-->
-  <select id="login" resultType="Empinfo" parameterType="Empinfo">
-    <!--自动转义特殊字符，避免可能出现的标签格式问题-->
-    <![CDATA[
-          select * from empinfo where Phone=#{phone} and password=#{password}
-        ]]>
-  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -303,13 +296,32 @@
     where emp_Id = #{emp_id,jdbcType=INTEGER}
   </update>
 
+
+  <!--  登录-->
+  <select id="login" resultType="Empinfo" parameterType="Empinfo">
+    <!--自动转义特殊字符，避免可能出现的标签格式问题-->
+    <![CDATA[
+          select * from empinfo where Phone=#{phone} and password=#{password}
+        ]]>
+  </select>
+
 <!--  分页-->
   <select id="allPageEmp" resultType="com.ht.bean.emp.Empinfo">
     <bind name="kais" value="(currPage-1)*pageSize"></bind>
-    select * from empinfo limit #{kais},#{pageSize}
+    <![CDATA[
+        select * from empinfo limit #{kais},#{pageSize}
+    ]]>
   </select>
 <!--  查询总数-->
   <select id="selprocount" resultType="int">
+    <![CDATA[
         select count(*) from empinfo
+        ]]>
+    </select>
+  <!-- 获取所有员工姓名-->
+  <select id="allEmpName" resultType="string">
+    <![CDATA[
+        select emp_name from empinfo
+        ]]>
     </select>
 </mapper>
