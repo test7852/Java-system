@@ -32,7 +32,7 @@ public interface EmpinfoMapper {
 
     /**
      * @return
-     * 获取所有员工姓名
+     * 获取所有员工姓名 id
      */
     List<String> allEmpName();
 

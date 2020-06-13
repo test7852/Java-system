@@ -27,7 +27,7 @@ public class DatadocServiceImpl implements DatadocService{
     }
 
     @Override
-    public List<Studentclass> sybase(Pager pager) {
+    public List<Datadoc> sybase(Pager pager) {
         return datadocMapper.sybase(pager);
     }
 

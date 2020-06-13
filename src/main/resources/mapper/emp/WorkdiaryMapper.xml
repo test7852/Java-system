@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.emp.WorkdiaryMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Workdiary">
+    <!--@mbg.generated-->
+    <!--@Table workdiary-->
+    <id column="worklogid" jdbcType="INTEGER" property="worklogid" />
+    <result column="Empid" jdbcType="INTEGER" property="empid" />
+    <result column="Workday" jdbcType="VARCHAR" property="workday" />
+    <result column="weekCur" jdbcType="VARCHAR" property="weekcur" />
+    <result column="studentQuestion" jdbcType="VARCHAR" property="studentquestion" />
+    <result column="Idea" jdbcType="VARCHAR" property="idea" />
+    <result column="weekNext" jdbcType="VARCHAR" property="weeknext" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    worklogid, Empid, Workday, weekCur, studentQuestion, Idea, weekNext
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from workdiary
+    where worklogid = #{worklogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from workdiary
+    where worklogid = #{worklogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="worklogid" keyProperty="worklogid" parameterType="com.ht.bean.emp.Workdiary" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into workdiary (Empid, Workday, weekCur, 
+      studentQuestion, Idea, weekNext
+      )
+    values (#{empid,jdbcType=INTEGER}, #{workday,jdbcType=VARCHAR}, #{weekcur,jdbcType=VARCHAR}, 
+      #{studentquestion,jdbcType=VARCHAR}, #{idea,jdbcType=VARCHAR}, #{weeknext,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="worklogid" keyProperty="worklogid" parameterType="com.ht.bean.emp.Workdiary" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into workdiary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        Empid,
+      </if>
+      <if test="workday != null">
+        Workday,
+      </if>
+      <if test="weekcur != null">
+        weekCur,
+      </if>
+      <if test="studentquestion != null">
+        studentQuestion,
+      </if>
+      <if test="idea != null">
+        Idea,
+      </if>
+      <if test="weeknext != null">
+        weekNext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="workday != null">
+        #{workday,jdbcType=VARCHAR},
+      </if>
+      <if test="weekcur != null">
+        #{weekcur,jdbcType=VARCHAR},
+      </if>
+      <if test="studentquestion != null">
+        #{studentquestion,jdbcType=VARCHAR},
+      </if>
+      <if test="idea != null">
+        #{idea,jdbcType=VARCHAR},
+      </if>
+      <if test="weeknext != null">
+        #{weeknext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Workdiary">
+    <!--@mbg.generated-->
+    update workdiary
+    <set>
+      <if test="empid != null">
+        Empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="workday != null">
+        Workday = #{workday,jdbcType=VARCHAR},
+      </if>
+      <if test="weekcur != null">
+        weekCur = #{weekcur,jdbcType=VARCHAR},
+      </if>
+      <if test="studentquestion != null">
+        studentQuestion = #{studentquestion,jdbcType=VARCHAR},
+      </if>
+      <if test="idea != null">
+        Idea = #{idea,jdbcType=VARCHAR},
+      </if>
+      <if test="weeknext != null">
+        weekNext = #{weeknext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where worklogid = #{worklogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Workdiary">
+    <!--@mbg.generated-->
+    update workdiary
+    set Empid = #{empid,jdbcType=INTEGER},
+      Workday = #{workday,jdbcType=VARCHAR},
+      weekCur = #{weekcur,jdbcType=VARCHAR},
+      studentQuestion = #{studentquestion,jdbcType=VARCHAR},
+      Idea = #{idea,jdbcType=VARCHAR},
+      weekNext = #{weeknext,jdbcType=VARCHAR}
+    where worklogid = #{worklogid,jdbcType=INTEGER}
+  </update>
+
+  <!--查询总数-->
+  <select id="selworkcount" resultType="int">
+    select count(*) from workdiary
+  </select>
+
+  <!--分页-->
+  <select id="allPageWorkdiary" resultType="Workdiary">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+    select * from workdiary limit #{kais},#{pageSize}
+    ]]>
+  </select>
+</mapper>
