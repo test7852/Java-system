@@ -25,6 +25,9 @@
         <link th:href="@{/assets/css/ecaps.min.css}" rel="stylesheet">
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 
+        <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+        <script th:src="@{/layui/layui.js}"></script>
+
         <!-- Javascripts -->
         <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
         <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
@@ -43,6 +46,9 @@
         <script th:src="@{/assets/js/ecaps.min.js}"></script>
         <script th:src="@{/assets/js/pages/dashboard.js}"></script>
     </head>
+    <style>
+        .layui-tab ul.layui-tab-title li:nth-child(1) i { display: none;} /*第一个不可删除*/
+    </style>
     <body>
 
         <!-- Page Container 手风琴内容-->
@@ -64,17 +70,30 @@
                             </li>
                             <li>
                                  <a href="javascript:void(0);">
-                                    <i class="fa fa-user-secret"></i><span> 教师</span>
+                                    <i class="fa fa-user-o"></i><span> 个人主页</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
+                                <ul class="sub-menu">
+                                    <li><a href="javascript:void(0);"><i class="fa fa-envelope-open"></i> 我的邮件</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-file-text"></i> 员工请假</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i> 我的周报</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i> 考勤管理</a></li>
+                                    <li><a href="javascript:void(0);"><i class="fa fa-fax"></i> 离职申请</a></li>
+                                </ul>
                             </li>
                             <li >
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-user-circle-o"></i><span> 员工管理 </span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="goto" th:href="@{/skip/deplist}"><i class="fa fa-bank"></i> 部门管理</a></li>
-                                    <li><a target="goto" th:href="@{/skip/emplist}"><i class="fa fa-files-o"></i> 员工资料</a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
+                                    <li><a href="#" data-id="部门管理" data-title="部门管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/skip/deplist"><i class="fa fa-bank"></i> 部门管理</a></li>
+
+                                    <li><a href="#" data-id="员工资料" data-title="员工资料" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/skip/emplist"><i class="fa fa-files-o"></i> 员工资料</a></li>
+
+                                    <li><a href="#" data-id="周报管理" data-title="周报管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/skip/worklist"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
+
                                     <li><a href="javascript:void(0);"><i class="fa fa-leanpub"></i> 周报审阅</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-heart"></i> 谈心记录</a></li>
                                     <li><a href="javascript:void(0);"><i class="fa fa-heartbeat"></i> 谈心审阅</a></li>
@@ -87,12 +106,23 @@
                                     <i class="fa fa-child"></i><span> 学生管理</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="goto" th:href="@{/studentClass/list}"><i class="fa fa-users"></i> 班级管理</a></li>
-                                    <li><a target="goto" th:href="@{/studentFloor/list}"><i class="fa fa-ravelry"></i> 楼栋管理</a></li>
-                                    <li><a target="goto" th:href="@{/studentHuor/list}"><i class="fa fa-certificate"></i> 宿舍管理</a></li>
-                                    <li><a target="goto" th:href="@{/stu/stulistUi}"><i class="fa fa-newspaper-o"></i> 学生资料</a></li>
-                                    <li><a target="goto" th:href="@{/score/scorelistUi}"><i class="fa fa-mortar-board"></i> 考试成绩</a></li>
-                                    <li><a target="goto" th:href="@{/reply/replyUi}"><i class="fa fa-mortar-board"></i> 答辩成绩</a></li>
+                                    <li><a href="#" data-id="班级管理" data-title="班级管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/studentClass/list"><i class="fa fa-users"></i> 班级管理</a></li>
+
+                                    <li><a href="#" data-id="楼栋管理" data-title="楼栋管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/studentFloor/list"><i class="fa fa-ravelry"></i> 楼栋管理</a></li>
+
+                                    <li><a href="#" data-id="宿舍管理" data-title="宿舍管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/studentHuor/list"><i class="fa fa-certificate"></i> 宿舍管理</a></li>
+
+                                    <li><a href="#" data-id="学生资料" data-title="学生资料" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/stu/stulistUi"><i class="fa fa-newspaper-o"></i> 学生资料</a></li>
+
+                                    <li><a href="#" data-id="考试成绩" data-title="考试成绩" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/score/scorelistUi"><i class="fa fa-mortar-board"></i> 考试成绩</a></li>
+
+                                    <li><a href="#" data-id="答辩成绩" data-title="答辩成绩" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/reply/replyUi"><i class="fa fa-mortar-board"></i> 答辩成绩</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -100,10 +130,15 @@
                                     <i class="fa fa-sitemap"></i><span> 教务管理</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a target="goto" th:href="@{/coursetype/coursetypelist}"><i class="fa fa-cube"></i> 课程类别</a></li>
-                                    <li><a target="goto" th:href="@{/course/courselist}"><i class="fa fa-files-o"></i> 课程管理</a></li>
+                                    <li><a href="#" data-id="课程类别" data-title="课程类别" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/coursetype/coursetypelist"><i class="fa fa-cube"></i> 课程类别</a></li>
+
+                                    <li><a href="#" data-id="课程管理" data-title="课程管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/course/courselist"><i class="fa fa-files-o"></i> 课程管理</a></li>
+
                                     <li><a href="javascript:void(0);"><i class="fa fa-fire"></i>   试讲培训</a></li>
-                                    <li><a target="goto" th:href="@{/teacher/teacherlist}"><i class="fa fa-files-o"></i> 值班管理</a></li>
+                                    <li><a href="#" data-id="值班管理" data-title="值班管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/teacher/teacherlist"><i class="fa fa-files-o"></i> 值班管理</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -257,16 +292,24 @@
                 </div><!-- /Page Header -->
                 <!-- Page Inner -->
                 <div class="page-inner">
-                    <div class="page-title">
-                        <h3 class="breadcrumb-header">首 页</h3>
-                    </div>
+                    <!--引入页面-->
+                    <article style="" id="main-wrapper">
+                        <div class="layui-tab" lay-allowClose="true" lay-filter="demo">
+                            <ul class="layui-tab-title" id="layui_tab">
+                                <li lay-id="shouye" class="layui-this">
+                                    首页
+                                </li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <div id="neir" class="layui-tab-item layui-show" style="width: 100%">
+                                    <iframe src="https://www.layui.com" name="goto"  frameborder="0"  style="width: calc(100vw - 250px);height: calc(100vh - 150px);"></iframe>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div id="main-wrapper">
-                        <iframe width="100%" height="800px" src="http://baidu.com" scrolling="yes" frameborder="0" name="goto"></iframe>
-                    </div><!-- Main Wrapper -->
-
+                    </article><!-- Main Wrapper -->
                     <div class="page-footer">
-                        <p>懵逼树 &copy; 2020. 由火箭组合开发 懵逼树后台管理系统</p>
+                        <p>智慧树 &copy; 2020. 由火箭组合开发 智慧树后台管理系统</p>
                     </div>
                 </div><!-- /Page Inner 邮箱内容 -->
                 <div class="page-right-sidebar" id="main-right-sidebar">
@@ -431,4 +474,90 @@
             </div><!-- /Page Content -->
         </div><!-- /Page Container -->
     </body>
+    <script>
+        layui.use(['element','jquery'], function() {
+            var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            var $ = layui.jquery;
+
+
+
+            //触发事件
+            var active = {
+                //在这里给active绑定几项事件，后面可通过active调用这些事件
+                tabAdd: function(url,id,name) {
+                    //新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+                    //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+                    element.tabAdd('demo', {
+                        title: name,
+                        content: '<iframe data-frameid="'+id+'" src="'+url+'" scrolling="auto" frameborder="0" name="goto" style="width: calc(100vw - 250px);height: calc(100vh - 150px);"></iframe>',
+                        id: id //规定好的id
+                    })
+                    CustomRightClick(id); //给tab绑定右击事件
+                },
+                tabChange: function(id) {
+                    //切换到指定Tab项
+                    element.tabChange('demo', id); //根据传入的id传入到指定的tab项
+                },
+                tabDelete: function (id) {
+                    element.tabDelete("demo", id);//删除
+                }
+                , tabDeleteAll: function (ids) {//删除所有
+                    $.each(ids, function (i,item) {
+                        element.tabDelete("demo", item); //ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除
+                    })
+                }
+            };
+
+
+            //当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
+            $('.site-demo-active').on('click', function() {
+                var dataid = $(this);
+
+                //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+                if ($(".layui-tab-title li[lay-id]").length <= 0) {
+                    //如果比零小，则直接打开新的tab项
+                    active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
+                } else {
+                    //否则判断该tab项是否以及存在
+
+                    var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
+                    $.each($(".layui-tab-title li[lay-id]"), function () {
+                        //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+                        if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                            isData = true;
+                        }
+                    })
+                    if (isData == false) {
+                        //标志为false 新增一个tab项
+                        active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
+                    }
+                }
+                //最后不管是否新增tab，最后都转到要打开的选项页面上
+                active.tabChange(dataid.attr("data-id"));
+            });
+
+            function CustomRightClick(id) {
+                //取消右键  rightmenu属性开始是隐藏的 ，当右击的时候显示，左击的时候隐藏
+                $('.layui-tab-title li').on('contextmenu', function () { return false; })
+                $('.layui-tab-title,.layui-tab-title li').click(function () {
+                    $('.rightmenu').hide();
+                });
+                //桌面点击右击
+                $('.layui-tab-title li').on('contextmenu', function (e) {
+                    var popupmenu = $(".rightmenu");
+                    popupmenu.find("li").attr("data-id",id); //在右键菜单中的标签绑定id属性
+
+                    //判断右侧菜单的位置
+                    l = ($(document).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
+                    t = ($(document).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+                    popupmenu.css({ left: l, top: t }).show(); //进行绝对定位
+                    //alert("右键菜单")
+                    return false;
+                });
+            }
+
+
+
+        });
+    </script>
 </html>

@@ -117,4 +117,17 @@
       weekNext = #{weeknext,jdbcType=VARCHAR}
     where worklogid = #{worklogid,jdbcType=INTEGER}
   </update>
+
+  <!--查询总数-->
+  <select id="selworkcount" resultType="int">
+    select count(*) from workdiary
+  </select>
+
+  <!--分页-->
+  <select id="allPageWorkdiary" resultType="Workdiary">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+    select * from workdiary limit #{kais},#{pageSize}
+    ]]>
+  </select>
 </mapper>

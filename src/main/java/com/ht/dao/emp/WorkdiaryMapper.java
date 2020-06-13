@@ -1,6 +1,9 @@
 package com.ht.dao.emp;
 
 import com.ht.bean.emp.Workdiary;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +11,11 @@ import com.ht.bean.emp.Workdiary;
  * 
  */
 public interface WorkdiaryMapper {
+
+    int selworkcount();//查询总数
+
+    List<Workdiary> allPageWorkdiary(Pager pager);
+
     int deleteByPrimaryKey(Integer worklogid);
 
     int insert(Workdiary record);

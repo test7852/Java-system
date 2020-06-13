@@ -36,4 +36,10 @@ public class CenterController {
         return "emp/deplist";
     }
 
+    //去到周报管理页面
+    @RequestMapping("worklist")
+    public String worklist(){
+        return "emp/workdiarylist";
+    }
+
 }
