@@ -91,7 +91,6 @@ public class FileController {
 
             // 如果文件名存在，则进行下载
             if (file.exists()) {
-                System.out.println("11111111111111111111111111111111111111111");
                 // 配置文件下载
                 response.setHeader("content-type", "application/octet-stream");
                 response.setContentType("application/octet-stream");

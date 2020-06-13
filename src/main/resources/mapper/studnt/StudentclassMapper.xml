@@ -162,6 +162,11 @@
   </select>
   <!--  查询总数-->
   <select id="selCount" resultType="int">
-        select count(*) from studentclass
-    </select>
+      select count(*) from studentclass
+  </select>
+
+  <!--  查询所有-->
+  <select id="selList" resultType="com.ht.bean.student.Studentclass">
+      select * from studentclass
+  </select>
 </mapper>

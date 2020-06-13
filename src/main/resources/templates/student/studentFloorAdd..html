@@ -18,7 +18,7 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" action="">
+<form class="layui-form" th:action="@{/studentFloor/add}">
     <div class="index">
         <ul class="menu">
             <li>
@@ -26,7 +26,7 @@
                 <input  name="floorname" required lay-verify="required" placeholder="楼栋名称" autocomplete="off" class="layui-input">
             </li>
             <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" >立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
             </li>
         </ul>
@@ -39,10 +39,10 @@
 
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
-        form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
+        // form.on('submit(formDemo)', function(data){
+        //     layer.msg(JSON.stringify(data.field));
+        //     retur        n false;
+        // });
     });
 </script>
 </html>

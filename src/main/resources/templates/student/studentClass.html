@@ -76,7 +76,7 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
     <table class="layui-table"
-           lay-data="{width:1150,height:650, url:'/studentClass/data', page:true, id:'tab'}"
+           lay-data="{width:1150,height:650, url:'/studentClass/data', page:true, id:'tab',toolbar: '#toolbarDemo'}"
            lay-filter="tab">
         <thead>
         <tr>
@@ -114,7 +114,14 @@
                     count:data.count,
                     remark:data.remark
                 },
-                dataType: 'text'
+                dataType: 'text',
+                success(date){
+                    if(date == 0){
+                        location.reload();
+                        alert("修改失败，请检查是否重复");
+
+                    }
+                }
             })
         });
 

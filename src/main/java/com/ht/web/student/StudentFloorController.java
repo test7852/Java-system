@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author xmf
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("studentFloor")
-public class StudentfloorController {
+public class StudentFloorController {
     @Resource
     private JsonData jsonData;
     @Resource
@@ -38,21 +39,28 @@ public class StudentfloorController {
     }
 
     //去添加页面
-    @RequestMapping("/toadd")
-    public String toadd() {
-        return "student/flooradd";
+    @RequestMapping("/toAdd")
+    public String toAdd() {
+        return "student/studentFloorAdd.";
     }
 
     @RequestMapping("/add")
-    public String add(Studentfloor studentfloor) {
-        studentfloorService.insert(studentfloor);
-        return "redirect:stafflist";
+    @ResponseBody
+    public Integer add(Studentfloor studentfloor) {
+        List<Studentfloor> list = studentfloorService.selList();
+        for (Studentfloor studentFloor:list) {
+            if (studentfloor.getFloorname().equals(studentFloor.getFloorname()) || studentFloor.getFloorname()==studentfloor.getFloorname()){
+                return 0;
+            }
+        }
+        int i = studentfloorService.insert(studentfloor);
+        return i;
     }
 
-    @RequestMapping("/toupd")
-    public String toupd(int id,Model model){
-        Studentfloor studentfloor = studentfloorService.selectByPrimaryKey(id);
-        model.addAttribute("studentfloor",studentfloor);
+    @RequestMapping("/toUpdte")
+    public String toUpdte(int id,Model model){
+        Studentfloor studentFloor = studentfloorService.selectByPrimaryKey(id);
+        model.addAttribute("studentFloor",studentFloor);
         return "staffupd";
     }
 
@@ -60,7 +68,13 @@ public class StudentfloorController {
     @RequestMapping("/update")
     @ResponseBody
     public Integer upd(Studentfloor studentfloor){
-        int i = studentfloorService.updateByPrimaryKeySelective(studentfloor);
+        List<Studentfloor> list = studentfloorService.selList();
+        for (Studentfloor studentFloor:list) {
+            if (studentfloor.getFloorname().equals(studentFloor.getFloorname()) || studentFloor.getFloorname()==studentfloor.getFloorname()){
+                return 0;
+            }
+        }
+        Integer i = studentfloorService.updateByPrimaryKeySelective(studentfloor);
         return i;
     }
 
@@ -72,7 +86,7 @@ public class StudentfloorController {
 
     @RequestMapping("/del")
     public String del(Integer id) {
-//(待删除)        studentfloorService.deleteByPrimaryKey(id);
+        studentfloorService.deleteByPrimaryKey(id);
         return "redirect:studentFloor/list";
     }
 }
