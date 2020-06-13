@@ -19,39 +19,41 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/dep/add}" method="post">
+<form class="layui-form" th:action="@{/dep/upd}" method="post">
     <div class="index">
         <ul class="menu">
+            <input type="hidden" name="depid" th:value="${dep.depid}">
             <li>
                 <label class="layui-form-label">部门名称：</label>
-                <input  name="depname" required lay-verify="required" placeholder="部门名称" autocomplete="off" class="layui-input">
+                <input  name="depname" required lay-verify="required" placeholder="部门名称" autocomplete="off" class="layui-input" th:value="${dep.depname}">
             </li>
-            <br>
+
 
             <li>
                 <div class="layui-input-inline">
                     <select name="parentid">
-                        <option value="0" selected="">请选择上级部门</option>
-                        <option th:each="dep:${deps}"th:value="${dep.depid}" th:text="${dep.depname}">浙江省</option>
+                        <option value="0" >请选择上级部门</option>
+                        <option th:each="d:${deps}"th:value="${d.depid}" th:text="${d.depname}" th:selected="${d.depid == dep.parentid}">浙江省</option>
                     </select>
                 </div>
             </li>
-            <br>
+
             <li>
                 <div class="layui-input-inline">
                     <select name="chairman">
-                        <option value="0" selected="">请选择部门负责人</option>
-                        <option th:each="name:${names}"th:value="${name}" th:text="${name}">浙江省</option>
+                        <option value="0">请选择部门负责人</option>
+                        <option th:value="${dep.chairman}" th:text="${dep.empname}" selected="true">浙江省</option>
+                        <option th:each="e:${emp}"th:value="${e.emp_id}" th:text="${e.emp_name}">浙江省</option>
                     </select>
                 </div>
             </li>
-            <br>
+
 
             <li>
                 <label class="layui-form-label">备注：</label>
-                <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input">
+                <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input" th:value="${dep.remark}">
             </li>
-            <br>
+
             <li>
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
@@ -68,7 +70,7 @@
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify("添加成功"));
+            layer.msg(JSON.stringify("修改成功"));
             return true;
         });
     });

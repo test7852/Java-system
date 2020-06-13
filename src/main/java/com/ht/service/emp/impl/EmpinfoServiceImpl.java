@@ -8,6 +8,7 @@ import com.ht.bean.emp.Empinfo;
 import com.ht.service.emp.EmpinfoService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lrq
@@ -35,7 +36,7 @@ public class EmpinfoServiceImpl implements EmpinfoService{
     }
 
     @Override
-    public List<String> allEmpName() {
+    public List<Empinfo> allEmpName() {
         return empinfoMapper.allEmpName();
     }
 

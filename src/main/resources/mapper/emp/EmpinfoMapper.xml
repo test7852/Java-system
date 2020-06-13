@@ -318,10 +318,10 @@
         select count(*) from empinfo
         ]]>
     </select>
-  <!-- 获取所有员工姓名-->
-  <select id="allEmpName" resultType="string">
+  <!-- 获取所有员工姓名 id-->
+  <select id="allEmpName" resultType="com.ht.bean.emp.Empinfo">
     <![CDATA[
-        select emp_name  from empinfo where emp_name not in(select chairman from dep)
+        select * from empinfo where emp_id not in(select chairman from dep)
         ]]>
     </select>
 </mapper>

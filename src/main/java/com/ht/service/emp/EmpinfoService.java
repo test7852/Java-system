@@ -4,6 +4,7 @@ import com.ht.bean.emp.Empinfo;
 import com.ht.util.Pager;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lrq
@@ -33,9 +34,9 @@ public interface EmpinfoService{
 
     /**
      * @return
-     * 获取所有员工姓名
+     * 获取所有员工
      */
-    List<String> allEmpName();
+    List<Empinfo> allEmpName();
 
     int deleteByPrimaryKey(Integer empId);
 
