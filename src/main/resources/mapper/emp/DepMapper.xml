@@ -7,7 +7,7 @@
     <id column="depid" jdbcType="INTEGER" property="depid" />
     <result column="depName" jdbcType="VARCHAR" property="depname" />
     <result column="parentId" jdbcType="INTEGER" property="parentid" />
-    <result column="chairman" jdbcType="VARCHAR" property="chairman" />
+    <result column="chairman" jdbcType="INTEGER" property="chairman" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="personnel" jdbcType="INTEGER" property="personnel" />
   </resultMap>

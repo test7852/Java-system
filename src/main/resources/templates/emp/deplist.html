@@ -25,12 +25,19 @@
     .layui-input-inline{margin-left: 50px;}
     .layui-form-item{margin-top: 20px;}
     .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
 	</style>
 <body>
 <!--数据表格样式及附件-->	
     <script type="text/html" id="bar">
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
-        <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
+    <a id="upd" class="layui-btn layui-btn-xs" lay-event="upd">
+        <i class="layui-icon">&#xe642;</i>编辑
     </a>
     <a class="layui-btn layui-btn-xs" lay-event="data">
         <i class="layui-icon">&#xe6b2;</i>资料
@@ -39,13 +46,7 @@
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 	</script>
-	<script type="text/html" id="sexTpl">
-	    {{#  if(d.emp_sex === '女'){ }}
-	    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-	    {{#  } else { }}
-	    {{ d.emp_sex }}
-	    {{#  } }}
-	</script>
+
  <!--搜索栏-->
   <div class="layui-form-item">
     <div class="layui-inline">
@@ -82,9 +83,9 @@
     <tr>
         <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
         <th lay-data="{field:'depid', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'depname', width:80,edit: 'false'}">部门名称</th>
-        <th lay-data="{field:'fname', width:100}">上级部门</th>
-        <th lay-data="{field:'chairman', width:100,edit: 'false'}">部门负责人</th>
+        <th lay-data="{field:'depname', edit: 'false'}">部门名称</th>
+        <th lay-data="{field:'fname'}">上级部门</th>
+        <th lay-data="{field:'empname', edit: 'false'}">部门负责人</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
     </tr>
     </thead>
@@ -98,34 +99,6 @@
     layui.use('table', function () {
         var table = layui.table;
 
-            //监听单元格编辑
-        table.on('edit(tab)', function(obj){
-            var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
-            layer.msg(data.emp_name)
-            $.ajax({
-                url: '/emp/updata',
-                type: 'post',
-                data: {
-                    emp_id:data.emp_id,
-                    emp_name:data.emp_name,
-                    emp_sex:data.emp_sex,
-                    // birthday:birthday,
-                    cardno:data.cardno,
-                    nation:data.nation,
-                    phone:data.phone,
-                    qqcode:data.qqcode,
-                    address:data.address
-                },
-                dataType: 'text',
-            })
-
-
-
-            // layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
-
-        });
 
         //点击添加iframe窗方法
         $("#add").on('click',function(){
@@ -138,6 +111,17 @@
                 content: ['/dep/toadd']//这是链接你的页面地址 url
             });
         })
+
+        function upd(depid){
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '部门修改',
+                maxmin: true, //开启最大化最小化a按钮
+                area: ['550px', '600px'],
+                content: ['/dep/toupd?depid='+depid]//这是链接你的页面地址 url
+            });
+        }
 
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
@@ -171,31 +155,29 @@
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/emp/del',
+                        url: '/dep/del',
                         type: 'post',
                         data: {
-                            id:data.emp_id
+                            depid:data.depid
                         },
-                        dataType: 'text',
+                        dataType: 'json',
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("删除成功"));
+                                }else {
+
+                                }
+                        },
                     })
                 });
-            } else if (obj.event == 'edit') {
-                if($(".falg").html()=="ON"){
-                    // 打开可编辑状态：
-                    $(".layui-table").find('td').data('edit', true)
-                    // layer.msg(data.emp_id);
-                    $(".falg").html("YES")
-                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
-
-                }else {
-                    $(".layui-table").find('td').data('edit', false)
-                    $(".falg").html("ON")
-                }
-
-            } else if(obj.event= 'data'){
+            }else if (obj.event == 'upd') {//修改
+                upd(data.depid)
+            }else if(obj.event= 'data'){
 
             }
         })
+
+
     });
 </script>
 </html>

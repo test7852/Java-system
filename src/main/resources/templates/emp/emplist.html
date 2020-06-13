@@ -161,7 +161,14 @@
                         data: {
                             id:data.emp_id
                         },
-                        dataType: 'text'
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("删除成功"));
+                            }else {
+
+                            }
+                        },
+                        dataType: 'json',
                     })
                 });
             } else if (obj.event == 'edit') {

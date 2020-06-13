@@ -27,7 +27,7 @@ public class Dep {
     /**
     * 部门负责人
     */
-    private String chairman;
+    private Integer chairman;
 
     /**
     * 备注
@@ -43,5 +43,9 @@ public class Dep {
      * 用来存放父级部门的名称
      */
     private String fname;
+    /**
+     * 用来存放员工的名称
+     */
+    private String empname;
 
 }
