@@ -9,7 +9,7 @@
 		<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 	</head>
 	<style>
-		.index{width: 600px;margin-left: 30px;}
+		.index{width: 800px;margin-left: 30px;height: 400px}
 		.layui-input{width: 120px;}
 		.menu li{float: left;}
 		.layui-form-label{margin-top: 15px}
@@ -19,47 +19,51 @@
 		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 	<body>
-		<form class="layui-form" th:action="@{/teacher/teacheradd}">
+		<form class="layui-form" th:action="@{/trial/trialadd}">
 		<div class="index">
 			<ul class="menu">
 				<li>
-					<label class="layui-form-label">排班名称：</label>
-					<input name="schedulingname" required lay-verify="required" autocomplete="off" class="layui-input">
+					<label class="layui-form-label">日期：</label>
+					<input  name="date" required lay-verify="required" autocomplete="off" class="layui-input">
 				</li>
 				<li>
 					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 星期：</label>
-					<select name="week" lay-filter="mySelect">
+					<select name="time" lay-filter="mySelect">
 						<option value="星期一">星期一</option>
 						<option value="星期二">星期二</option>
 						<option value="星期三">星期三</option>
 						<option value="星期四">星期四</option>
 						<option value="星期五">星期五</option>
 						<option value="星期六">星期六</option>
-						<option value="星期七">星期七</option>
+						<option value="星期七">星期日</option>
 					</select>
 				</li>
 				<li>
-					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 员工姓名：</label>
-					<select name="emp_name" lay-filter="mySelect">
-						<option th:each="p:${list}" th:value="${p.emp_name}" th:text="${p.emp_name}">张先生</option>
+					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 课程类别id：</label>
+					<select name="courseid" lay-filter="mySelect">
+						<option th:each="c:${clist}" th:value="${c.courseid}" th:text="${c.coursename}">张先生</option>
 					</select>
 				</li>
 				<li>
-					<label class="layui-form-label">值班要求：</label>
-					<input name="beask" required lay-verify="required" autocomplete="off" class="layui-input">
+					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 授课类型：</label>
+					<select name="type" lay-filter="mySelect">
+						<option value="试讲">试讲</option>
+						<option value="培训">培训</option>
+					</select>
 				</li>
 				<li>
-					<label class="layui-form-label">总值班</label>
-					<input type="radio" name="besum" value="1" title="是" checked>
-					<input type="radio" name="besum" value="2" title="否">
+					<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 员工id关联员工表：</label>
+					<select name="empid" lay-filter="mySelect">
+						<option th:each="e:${elist}" th:value="${e.emp_id}" th:text="${e.emp_name}">张先生</option>
+					</select>
 				</li>
 				<li>
-					<label class="layui-form-label">说明：</label>
-					<input name="explain" required lay-verify="required" autocomplete="off" class="layui-input">
+					<label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 备注：</label>
+					<input  name="remark" required lay-verify="required" autocomplete="off" class="layui-input">
 				</li>
 				<li>
-					 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-					 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+					<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
 				</li>
 			</ul>
 		</div>

@@ -1,7 +1,12 @@
 package com.ht.web.emp;
+import com.ht.bean.emp.Dep;
 import com.ht.bean.emp.Empinfo;
+import com.ht.bean.emp.Post;
 import com.ht.bean.json.JsonData;
+import com.ht.service.emp.DepService;
 import com.ht.service.emp.EmpinfoService;
+import com.ht.service.emp.PostService;
+import com.ht.util.Contants;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 员工管理
@@ -20,6 +26,10 @@ import javax.servlet.http.HttpSession;
 public class EmpController {
     @Resource
     private EmpinfoService empinfoService;
+    @Resource
+    private DepService depService;
+    @Resource
+    private PostService postService;
     @Resource
     private JsonData jsonData;
 
@@ -33,7 +43,7 @@ public class EmpController {
     @ResponseBody
     public Boolean login(Empinfo empinfo, HttpSession session){
         Empinfo user = empinfoService.login(empinfo);
-        if (user == null){
+        if (user == null || user.getStatus() == Contants.STATUS_SW){
             return false;
         }
         session.setAttribute("user",user);
@@ -53,10 +63,19 @@ public class EmpController {
         pager.setPageSize(limit);
         pager.setCurrPage(page);
         jsonData.setCount(empinfoService.selprocount());
-        jsonData.setData(empinfoService.allPageEmp(pager));
+        List<Empinfo> list = (empinfoService.allPageEmp(pager));
+        //根据部门id和职务id去找
+        for (Empinfo empinfo : list){
+            Dep dep = depService.selectByPrimaryKey(empinfo.getDep_id());
+            Post post = postService.selectByPrimaryKey(empinfo.getPost_Id());
+            //赋值
+            empinfo.setDepname(dep.getDepname());
+            empinfo.setPostname(post.getPos_Name());
+        }
+        jsonData.setData(list);
+
         return jsonData;
     }
-
 
     /**
      * @param
@@ -99,5 +118,17 @@ public class EmpController {
         System.out.println("empinfo.toString() = " + empinfo.toString());
         int updatacurr = empinfoService.updateByPrimaryKeySelective(empinfo);
         return updatacurr;
+    }
+
+    @RequestMapping("set")
+    @ResponseBody
+    public Boolean set(Empinfo empinfo){
+        if (empinfo.getStatus() == Contants.STATUS_SU){
+            empinfo.setStatus(Contants.STATUS_SW);
+        }else {
+            empinfo.setStatus(Contants.STATUS_SU);
+        }
+        empinfoService.updateByPrimaryKeySelective(empinfo);
+        return true;
     }
 }

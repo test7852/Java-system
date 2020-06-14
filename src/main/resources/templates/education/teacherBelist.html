@@ -99,11 +99,6 @@
         var table = layui.table;
 
 
-
-
-
-
-
         //监听单元格编辑(修改)
         table.on('edit(tab)', function(obj){
             var value = obj.value //得到修改后的值
@@ -131,7 +126,7 @@
                 type: 2,
                 title: '新增楼栋',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['450px', '300px'],
+                area: ['550px', '350px'],
                 content: ['/teacher/teachertoadd']//这是链接你的页面地址 url
             });
         })

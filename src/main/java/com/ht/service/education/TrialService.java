@@ -1,7 +1,13 @@
 package com.ht.service.education;
 
+import com.ht.bean.education.Course;
 import com.ht.bean.education.Trial;
-    /**
+import com.ht.bean.emp.Empinfo;
+import com.ht.util.Pager;
+
+import java.util.List;
+
+/**
  * @author 王金宝
  * @date 2020/6/12 10:36
  * 
@@ -20,5 +26,13 @@ public interface TrialService{
     int updateByPrimaryKeySelective(Trial record);
 
     int updateByPrimaryKey(Trial record);
+
+    int selTrial();//查询总数据
+
+    List<Trial> selByPage(Pager pager);//分页查询
+
+    List<Course> Coulist();//查询课程管理
+
+    List<Empinfo> Emplist();//查询emp
 
 }

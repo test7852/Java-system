@@ -41,7 +41,7 @@
                 <div class="layui-input-inline">
                     <select name="chairman">
                         <option value="0" selected="">请选择部门负责人</option>
-                        <option th:each="name:${names}"th:value="${name}" th:text="${name}">浙江省</option>
+                        <option th:each="e:${emp}"th:value="${e.emp_id}" th:text="${e.emp_name}">浙江省</option>
                     </select>
                 </div>
             </li>
