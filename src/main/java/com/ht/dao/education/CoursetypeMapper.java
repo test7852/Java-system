@@ -3,7 +3,7 @@ package com.ht.dao.education;
 import com.ht.bean.education.Coursetype;
 import com.ht.bean.emp.Empinfo;
 import org.apache.ibatis.annotations.Param;
-import org.omg.PortableInterceptor.INACTIVE;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
