@@ -83,5 +83,11 @@ public class Empinfo {
 
     private Integer status;
 
-    private Integer postId;
+    private Integer post_Id;
+
+    //新加字段
+    //职位
+    private String postname;
+    //部门
+    private String depname;
 }

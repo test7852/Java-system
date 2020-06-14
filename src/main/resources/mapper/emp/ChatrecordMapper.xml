@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.emp.ChatrecordMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Chatrecord">
+    <!--@mbg.generated-->
+    <!--@Table chatrecord-->
+    <id column="Chatid" jdbcType="INTEGER" property="chatid" />
+    <result column="sayface" jdbcType="INTEGER" property="sayface" />
+    <result column="teacher" jdbcType="INTEGER" property="teacher" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="sayscon" jdbcType="VARCHAR" property="sayscon" />
+    <result column="chatDate" jdbcType="VARCHAR" property="chatdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    Chatid, sayface, teacher, addr, sayscon, chatDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from chatrecord
+    where Chatid = #{chatid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from chatrecord
+    where Chatid = #{chatid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Chatid" keyProperty="chatid" parameterType="com.ht.bean.emp.Chatrecord" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into chatrecord (sayface, teacher, addr, 
+      sayscon, chatDate)
+    values (#{sayface,jdbcType=INTEGER}, #{teacher,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, 
+      #{sayscon,jdbcType=VARCHAR}, #{chatdate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="Chatid" keyProperty="chatid" parameterType="com.ht.bean.emp.Chatrecord" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into chatrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sayface != null">
+        sayface,
+      </if>
+      <if test="teacher != null">
+        teacher,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="sayscon != null">
+        sayscon,
+      </if>
+      <if test="chatdate != null">
+        chatDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sayface != null">
+        #{sayface,jdbcType=INTEGER},
+      </if>
+      <if test="teacher != null">
+        #{teacher,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sayscon != null">
+        #{sayscon,jdbcType=VARCHAR},
+      </if>
+      <if test="chatdate != null">
+        #{chatdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Chatrecord">
+    <!--@mbg.generated-->
+    update chatrecord
+    <set>
+      <if test="sayface != null">
+        sayface = #{sayface,jdbcType=INTEGER},
+      </if>
+      <if test="teacher != null">
+        teacher = #{teacher,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sayscon != null">
+        sayscon = #{sayscon,jdbcType=VARCHAR},
+      </if>
+      <if test="chatdate != null">
+        chatDate = #{chatdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Chatid = #{chatid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Chatrecord">
+    <!--@mbg.generated-->
+    update chatrecord
+    set sayface = #{sayface,jdbcType=INTEGER},
+      teacher = #{teacher,jdbcType=INTEGER},
+      addr = #{addr,jdbcType=VARCHAR},
+      sayscon = #{sayscon,jdbcType=VARCHAR},
+      chatDate = #{chatdate,jdbcType=VARCHAR}
+    where Chatid = #{chatid,jdbcType=INTEGER}
+  </update>
+</mapper>

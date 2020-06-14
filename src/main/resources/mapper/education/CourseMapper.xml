@@ -107,6 +107,18 @@
         ]]>
   </select>
 
+  <!--&lt;!&ndash;分页查询&ndash;&gt;-->
+  <!--<select id="selbypage" resultType="map">-->
+    <!--&lt;!&ndash;<bind name="kais" value="(currPage-1)*pageSize"></bind>&ndash;&gt;-->
+    <!--<![CDATA[-->
+          <!--select a.courseTypeId,courseId,courseName,isobligatory,a.remark,b.courseTypeName,courseid-->
+          <!--from course AS a-->
+          <!--INNER JOIN coursetype AS b-->
+          <!--where a.courseTypeId = b.courseTypeId-->
+          <!--limit #{startRow},#{pageSize}-->
+        <!--]]>-->
+  <!--</select>-->
+
   <!--查询课程类别-->
   <select id="selCtype" resultType="coursetype">
     select * from coursetype;

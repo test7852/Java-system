@@ -12,5 +12,12 @@ public class Contants {
      * 文件上传路径
      */
     public static final String PRO_FILE_SAVE_PATH="D:\\fFile\\";
-
+    /**
+     * 启用
+     */
+    public static final int STATUS_SU=1;
+    /**
+     * 禁用
+     */
+    public static final int STATUS_SW=2;
 }

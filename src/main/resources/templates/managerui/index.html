@@ -48,6 +48,13 @@
     </head>
     <style>
         .layui-tab ul.layui-tab-title li:nth-child(1) i { display: none;} /*第一个不可删除*/
+        .page-header{
+            margin-top: -25px;
+        }
+        .page-inner{
+            margin-left: -25px;
+            margin-right: -40px;
+        }
     </style>
     <body>
 
@@ -94,6 +101,9 @@
                                     <li><a href="#" data-id="员工资料" data-title="员工资料" class="site-demo-active"data-type="tabAdd"
                                            data-url="/skip/emplist"><i class="fa fa-files-o"></i> 员工资料</a></li>
 
+                                    <li><a href="#" data-id="职位管理" data-title="职位管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/skip/postlist"><i class="fa fa-files-o"></i> 职位管理</a></li>
+
                                     <li><a href="#" data-id="周报管理" data-title="周报管理" class="site-demo-active"data-type="tabAdd"
                                            data-url="/skip/worklist"><i class="fa fa-file-word-o"></i> 周报管理</a></li>
 
@@ -139,7 +149,9 @@
                                     <li><a href="#" data-id="课程管理" data-title="课程管理" class="site-demo-active"data-type="tabAdd"
                                            data-url="/course/courselist"><i class="fa fa-files-o"></i> 课程管理</a></li>
 
-                                    <li><a href="javascript:void(0);"><i class="fa fa-fire"></i>   试讲培训</a></li>
+                                    <li><a href="#" data-id="试讲培训" data-title="试讲培训" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/trial/triallist"><i class="fa fa-fire"></i> 试讲培训</a></li>
+
                                     <li><a href="#" data-id="值班管理" data-title="值班管理" class="site-demo-active"data-type="tabAdd"
                                            data-url="/teacher/teacherlist"><i class="fa fa-files-o"></i> 值班管理</a></li>
                                 </ul>
@@ -304,7 +316,7 @@
                                 </li>
                             </ul>
                             <div class="layui-tab-content">
-                                <div id="neir" class="layui-tab-item layui-show" style="width: 100%">
+                                <div id="neir" class="layui-tab-item layui-show">
                                     <iframe src="https://www.layui.com" name="goto"  frameborder="0"  style="width: calc(100vw - 250px);height: calc(100vh - 150px);"></iframe>
                                 </div>
                             </div>
@@ -482,8 +494,6 @@
             var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
             var $ = layui.jquery;
 
-
-
             //触发事件
             var active = {
                 //在这里给active绑定几项事件，后面可通过active调用这些事件
@@ -522,7 +532,6 @@
                     active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
                 } else {
                     //否则判断该tab项是否以及存在
-
                     var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
                     $.each($(".layui-tab-title li[lay-id]"), function () {
                         //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开

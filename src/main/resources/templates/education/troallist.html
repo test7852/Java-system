@@ -70,19 +70,21 @@
     </div>
   </div>
 
-<!--数据表格 coursetypeid 数据表格使用的是方法渲染-->
+<!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/course/coursedata', page:true, id:'tab'}"
+       lay-data="{width:1150,height:650, url:'/trial/trialdata', page:true, id:'tab'}"
        lay-filter="tab">
     <thead>
     <tr>
         <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-        <th lay-data="{field:'courseid', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'coursename'}">课程名称</th>
-        <th lay-data="{field:'isobligatory'}">是否必修</th>
-        <th lay-data="{field:'coursetypeid'}">课程类别id</th>
-        <th lay-data="{field:'remark'}">说明</th>
+        <th lay-data="{field:'trialid', width:80, sort: true}">ID</th>
+        <th lay-data="{field:'date'}">日期</th>
+        <th lay-data="{field:'time'}">星期</th>
+        <th lay-data="{field:'courseid'}">课程id</th>
+        <th lay-data="{field:'type'}">授课类型</th>
+        <th lay-data="{field:'empid'}">员工id关联员工表</th>
+        <th lay-data="{field:'remark'}">备注</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
     </thead>
@@ -103,13 +105,15 @@
                 ,field = obj.field; //得到字段
             //layer.msg(data.emp_name)
             $.ajax({
-                url: '/course/ceduupd',
+                url: '/trial/trialupd',
                 type: 'post',
                 data: {
+                    trialid:data.trialid,
+                    date:data.date,
+                    time:data.time,
                     courseid:data.courseid,
-                    coursename:data.coursename,
-                    isobligatory:data.isobligatory,
-                    coursetypeid:data.coursetypeid,
+                    type:data.type,
+                    empid:data.empid,
                     remark:data.remark,
                 },
                 dataType: 'text',
@@ -123,8 +127,8 @@
                 type: 2,
                 title: '新增',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['550px', '350px'],
-                content: ['/course/cedutoadd']//这是链接你的页面地址 url
+                area: ['800px', '400px'],
+                content: ['/trial/trialtoadd']//这是链接你的页面地址 url
             });
         })
 
@@ -140,10 +144,10 @@
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/course/cedudel',
+                        url: '/trial/trialdel',
                         type: 'post',
                         data: {
-                            courseid:data.courseid
+                            trialid:data.trialid
                         },
                         dataType: 'text',
                     })

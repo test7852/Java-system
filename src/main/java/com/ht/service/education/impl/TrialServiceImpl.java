@@ -1,10 +1,16 @@
 package com.ht.service.education.impl;
 
+import com.ht.bean.education.Course;
+import com.ht.bean.emp.Empinfo;
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.bean.education.Trial;
 import com.ht.dao.education.TrialMapper;
 import com.ht.service.education.TrialService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/12 10:36
@@ -44,6 +50,26 @@ public class TrialServiceImpl implements TrialService{
     @Override
     public int updateByPrimaryKey(Trial record) {
         return trialMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int selTrial() {
+        return trialMapper.selTroal();
+    }
+
+    @Override
+    public List<Trial> selByPage(Pager pager) {
+        return trialMapper.selbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
+    }
+
+    @Override
+    public List<Course> Coulist() {
+        return trialMapper.selCou();
+    }
+
+    @Override
+    public List<Empinfo> Emplist() {
+        return trialMapper.selEmp();
     }
 
 }

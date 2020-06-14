@@ -31,15 +31,15 @@
 					<input style="width: 350px;" name="remark" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
 				</li>
 				<li>
+					 <label class="layui-form-label">课程类别：</label>
+					 <select style="width: 350px;" name="coursetypeid" lay-filter="mySelect">
+						<option th:each="p:${list}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}"></option>
+					 </select>
+				</li>
+				<li>
 					<label class="layui-form-label">是否必修：</label>
 					<input type="radio" name="isobligatory" value="是" title="是" checked>
 					<input type="radio" name="isobligatory" value="否" title="否">
-				</li>
-				<li>
-					 <label class="layui-form-label">课程类别：</label>
-					 <select name="coursetypeid" lay-filter="mySelect">
-						<option th:each="p:${list}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}"></option>
-					 </select>
 				</li>
 				<li>
 					 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
