@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--suppress ThymeleafVariablesResolveInspection-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
@@ -15,16 +14,9 @@
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 	</head>
 	<style>
-    .layui-table-page {
+    .layui-table {
         text-align: center;
     }
-
-    .utable .layui-laypage .layui-laypage-curr .layui-laypage-em {
-        background-color: #1E9FFF;
-    }
-    .layui-input-inline{margin-left: 50px;}
-    .layui-form-item{margin-top: 20px;}
-    .layui-form-label{width: 80px;}
     .layui-table-view thead th {
         text-align: center;
         font-weight: bold;
@@ -34,81 +26,83 @@
     }
 	</style>
 <body>
-<!--数据表格样式及附件-->	
-    <script type="text/html" id="bar">
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
-        <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
+<!--数据表格样式及附件-->
+    <script id="toolbarDemo" type="text/html">
+        <div class="layui-btn-container">
+            <button id="add" class="layui-btn layui-btn-sm" lay-event="add">新增</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">工作经历</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">教育背景</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">家庭关系信息</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">员工考核</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">证件上传</button>
+        </div>
+    </script>
+<!--表内功能-->
+    <script id="bar" type="text/html">
+    {{#  if(d.status == 1){ }}
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="no">
+        <i class="layui-icon">&#xe642;</i>禁用
     </a>
-    <a class="layui-btn layui-btn-xs" lay-event="data">
-        <i class="layui-icon">&#xe6b2;</i>资料
+    {{# }if(d.status == 2) { }}
+    <a class="layui-btn layui-btn-xs" lay-event="yes">
+        <i class="layui-icon">&#xe642;</i>启用
+    </a>
+    {{#  } }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe6b2;</i>编辑
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="reset">
+        <i class="layui-icon">&#xe640;</i>重置密码
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
-        <i class="layui-icon">&#xe640;</i>丢弃
+        <i class="layui-icon">&#xe640;</i>删除
     </a>
 	</script>
-	<script type="text/html" id="sexTpl">
-	    {{#  if(d.emp_sex === '女'){ }}
-	    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-	    {{#  } else { }}
-	    {{ d.emp_sex }}
-	    {{#  } }}
-	</script>
- <!--搜索栏-->
-  <div class="layui-form-item">
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-      </div>
-     <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-     
-      <div class="layui-input-inline">
-        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-      </div>
-        <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-      </div>
-      <label class="layui-form-label">验证</label>
-       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
-        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
-    </div>
-  </div>
-
-<!--数据表格  数据表格使用的是方法渲染-->
-<div class="utable">
-<table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/emp/empdata', page:true, id:'tab'}"
-       lay-filter="tab">
-    <thead>
-    <tr>
-        <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-        <th lay-data="{field:'emp_id', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'emp_name', width:80,edit: 'false'}">用户名</th>
-        <th lay-data="{field:'emp_sex', width:80,templet: '#sexTpl', sort: true,edit: 'false'}">性别</th>
-        <th lay-data="{field:'birthday', width:100}">生日</th>
-        <th lay-data="{field:'cardno', width:100,edit: 'false'}">身份证</th>
-        <th lay-data="{field:'address', width:100,edit: 'false'}">地区</th>
-        <th lay-data="{field:'phone', width:100,edit: 'false'}">手机号码</th>
-        <th lay-data="{field:'qqcode', width:100,edit: 'false'}">QQ</th>
-        <th lay-data="{field:'nation', width:100,edit: 'false'}">籍贯</th>
-        <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
-    </tr>
-    </thead>
-</table>
-</div>
+<!--表格-->
+<table class="layui-table" id="demo" lay-filter="demo"></table>
 </body>
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
-
     layui.use('table', function () {
         var table = layui.table;
+
+        //方法渲染
+        table.render({
+            elem: '#demo'
+            ,id: 'tab'
+            ,height: 650
+            ,width: 1150
+            ,url: '/emp/empdata' //数据接口
+            ,page: true //开启分页
+            ,toolbar: '#toolbarDemo'
+            ,cols: [[ //表头
+                {type: 'radio', title: '选择', fixed: 'left'}
+                ,{field: 'emp_id', title: '编号', width:80, sort: true}
+                ,{field: 'emp_name', title: '用户名', width:80}
+                ,{field: 'emp_sex', title: '性别', width:60}
+                ,{field: 'depname', title: '部门', width:100}
+                ,{field: 'postname', title: '职务', width: 80}
+                ,{field: 'phone', title: '电话', width: 120}
+                ,{field: 'address', title: '家庭地址', width: 180}
+                ,{field: 'status', title: '状态', width: 80, templet: aaa}
+                ,{field: 'education', title: '学历', width:60}
+                ,{fixed: 'right', title:'操作', toolbar: '#bar', width:310}
+            ]]
+        });
+
+        //启用禁用
+        function aaa(data){
+            var status = data.status;
+            var btns = "";
+            if (status == 1) {
+                return"启用";
+            }
+            if (status == 2) {
+                btns += '<span style="color:#ed2a4a">禁用</span>';
+            }
+            return btns;
+        }
 
         //监听单元格编辑（修改）
         table.on('edit(tab)', function(obj){
@@ -134,7 +128,6 @@
             })
         });
 
-
         //点击添加iframe窗方法
         $("#add").on('click',function(){
             //iframe窗
@@ -148,10 +141,9 @@
         })
 
         //监听行工具事件
-        table.on('tool(tab)', function (obj) {
-            var data = obj.data;
-            //console.log(obj)
-            if (obj.event === 'del') {
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data;//获取数据
+            if (obj.event === 'del') {//删除
                 layer.confirm('真的删除么?', function (index) {
                     obj.del();
                     layer.close(index);
@@ -161,28 +153,48 @@
                         data: {
                             id:data.emp_id
                         },
-                        success:function(data){
-                            if(data){
-                                layer.msg(JSON.stringify("删除成功"));
-                            }else {
-
-                            }
-                        },
-                        dataType: 'json',
                     })
                 });
-            } else if (obj.event == 'edit') {
-                if($(".falg").html()=="ON"){
-                    // 打开可编辑状态：
-                    $(".layui-table").find('td').data('edit', true);
-                    $(".falg").html("YES")
-
-                }else {
-                    $(".layui-table").find('td').data('edit', false);
-                    $(".falg").html("ON")
-                }
-
-            } else if(obj.event= 'data'){
+            } else if (obj.event == "yes") {//禁用
+                $.ajax({
+                    url: '/emp/set',
+                    type: 'post',
+                    data: {
+                        emp_id:data.emp_id
+                        ,status:data.status
+                    },
+                    dataType: 'json',
+                    success : function(data) {
+                        if (data){
+                            document.location.href="/skip/emplist";
+                        }
+                    }
+                })
+            } else if(obj.event === 'no'){//启用
+                    $.ajax({
+                        url: '/emp/set',
+                        type: 'post',
+                        data: {
+                            emp_id:data.emp_id
+                            ,status:data.status
+                        },
+                        dataType: 'json',
+                        success : function(data) {
+                            if (data){
+                                document.location.href="/skip/emplist";
+                            }
+                        }
+                    })
+            }else if (obj.event === 'edit'){//编辑
+                layer.open({
+                    type: 2,
+                    title: '员工新增',
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['850px', '500px'],
+                    content: ['/emp/toadd']//这是链接你的页面地址 url
+                });
+            }
+            else if (obj.event === 'reset'){//重置
 
             }
         })
