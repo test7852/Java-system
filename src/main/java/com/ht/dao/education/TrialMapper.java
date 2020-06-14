@@ -1,6 +1,11 @@
 package com.ht.dao.education;
 
+import com.ht.bean.education.Course;
 import com.ht.bean.education.Trial;
+import com.ht.bean.emp.Empinfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -19,4 +24,12 @@ public interface TrialMapper {
     int updateByPrimaryKeySelective(Trial record);
 
     int updateByPrimaryKey(Trial record);
+
+    int selTroal();//查询总数据
+
+    List<Trial> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
+
+    List<Course> selCou();//查询课程管理
+
+    List<Empinfo> selEmp();//查询员工
 }

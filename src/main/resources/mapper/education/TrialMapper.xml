@@ -123,4 +123,26 @@
       remark = #{remark,jdbcType=VARCHAR}
     where trialid = #{trialid,jdbcType=INTEGER}
   </update>
+
+  <!--查询总数据-->
+  <select id="selTroal" resultType="int">
+    select count(*) from trial;
+  </select>
+
+  <!--分页查询-->
+  <select id="selbypage" resultType="trial">
+    <![CDATA[
+          select * from trial limit #{startRow},#{pageSize};
+        ]]>
+  </select>
+
+  <!--查询课程管理-->
+  <select id="selCou" resultType="course">
+    select * from course;
+  </select>
+
+  <!--查询emp-->
+  <select id="selEmp" resultType="empinfo">
+    select * from empinfo;
+  </select>
 </mapper>
