@@ -124,10 +124,17 @@
   </select>
 
   <!--分页-->
-  <select id="allPageWorkdiary" resultType="Workdiary">
+  <select id="allPageWorkdiary" resultType="Map">
     <bind name="kais" value="(currPage-1)*pageSize"></bind>
     <![CDATA[
-    select * from workdiary limit #{kais},#{pageSize}
+    select b.*,a.emp_Name from workdiary b left join empinfo a on b.Empid = a.emp_Id limit #{kais},#{pageSize}
     ]]>
   </select>
+
+  <select id="myworkdiary" resultType="Map">
+    <![CDATA[
+    select b.*,a.emp_Name from workdiary b left join empinfo a on b.Empid = a.emp_Id  where b.Empid = #{empid}
+    ]]>
+  </select>
+
 </mapper>

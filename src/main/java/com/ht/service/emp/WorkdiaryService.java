@@ -2,6 +2,7 @@ package com.ht.service.emp;
 
 import com.ht.bean.emp.Workdiary;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface WorkdiaryService{
     int selworkcount();//查询总行数
 
     List<Workdiary> allPageWorkdiary(Pager pager);
+
+    List<Workdiary> myworkdiary(Integer empid);
 
     int deleteByPrimaryKey(Integer worklogid);
 

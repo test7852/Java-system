@@ -20,6 +20,7 @@ public class WorkdiaryServiceImpl implements WorkdiaryService{
     @Resource
     private WorkdiaryMapper workdiaryMapper;
 
+
     @Override
     public int selworkcount() {
         return workdiaryMapper.selworkcount();
@@ -29,6 +30,13 @@ public class WorkdiaryServiceImpl implements WorkdiaryService{
     public List<Workdiary> allPageWorkdiary(Pager pager) {
         return workdiaryMapper.allPageWorkdiary(pager);
     }
+
+    //我的周报数据
+    @Override
+    public List<Workdiary> myworkdiary(Integer empid) {
+        return workdiaryMapper.myworkdiary(empid);
+    }
+
 
     @Override
     public int deleteByPrimaryKey(Integer worklogid) {
