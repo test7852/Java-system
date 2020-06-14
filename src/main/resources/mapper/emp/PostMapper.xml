@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.ht.bean.emp.Post">
     <!--@mbg.generated-->
     <!--@Table post-->
-    <id column="pos_Id" jdbcType="INTEGER" property="posId" />
-    <result column="pos_Name" jdbcType="VARCHAR" property="posName" />
+    <id column="pos_Id" jdbcType="INTEGER" property="pos_Id" />
+    <result column="pos_Name" jdbcType="VARCHAR" property="pos_Name" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
@@ -26,19 +26,19 @@
   <insert id="insert" keyColumn="pos_Id" keyProperty="posId" parameterType="com.ht.bean.emp.Post" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into post (pos_Name)
-    values (#{posName,jdbcType=VARCHAR})
+    values (#{pos_Name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="pos_Id" keyProperty="posId" parameterType="com.ht.bean.emp.Post" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into post
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="posName != null">
+      <if test="pos_Name != null">
         pos_Name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="posName != null">
-        #{posName,jdbcType=VARCHAR},
+      <if test="pos_Name != null">
+        #{pos_Name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -46,16 +46,16 @@
     <!--@mbg.generated-->
     update post
     <set>
-      <if test="posName != null">
-        pos_Name = #{posName,jdbcType=VARCHAR},
+      <if test="pos_Name != null">
+        pos_Name = #{pos_Name,jdbcType=VARCHAR},
       </if>
     </set>
-    where pos_Id = #{posId,jdbcType=INTEGER}
+    where pos_Id = #{pos_Id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Post">
     <!--@mbg.generated-->
     update post
-    set pos_Name = #{posName,jdbcType=VARCHAR}
-    where pos_Id = #{posId,jdbcType=INTEGER}
+    set pos_Name = #{pos_Name,jdbcType=VARCHAR}
+    where pos_Id = #{pos_Id,jdbcType=INTEGER}
   </update>
 </mapper>

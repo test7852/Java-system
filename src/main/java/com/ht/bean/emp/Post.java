@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class Post {
-    private Integer posId;
+    private Integer pos_Id;
 
-    private String posName;
+    private String pos_Name;
 }
