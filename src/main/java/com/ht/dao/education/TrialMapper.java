@@ -6,6 +6,7 @@ import com.ht.bean.emp.Empinfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -27,7 +28,7 @@ public interface TrialMapper {
 
     int selTroal();//查询总数据
 
-    List<Trial> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
+    List<Map> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
 
     List<Course> selCou();//查询课程管理
 

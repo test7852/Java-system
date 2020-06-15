@@ -37,11 +37,12 @@ public class CourseController {
     //课程管理  分页查的数据
     @RequestMapping("/coursedata")
     @ResponseBody
-    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page,Map map ){
         Pager pager=new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
         jsonData.setCount(courseService.selCountcEdu());
+        List<Map> maps = courseService.selByPage(pager);
         jsonData.setData(courseService.selByPage(pager));
         return jsonData;
     }
@@ -52,14 +53,6 @@ public class CourseController {
     public Integer coursedel(Integer courseid){
         int i = courseService.deleteByPrimaryKey(courseid);
         System.out.println("删除的id:"+courseid);
-        return i;
-    }
-
-    //课程管理  修改
-    @RequestMapping("/ceduupd")
-    @ResponseBody
-    public Integer ceduupd(Course course){
-        int i = courseService.updateByPrimaryKey(course);
         return i;
     }
 
@@ -78,5 +71,24 @@ public class CourseController {
         System.out.println(course);
         int insert = courseService.insert(course);
         return insert;
+    }
+
+    //去到修改界面
+    @RequestMapping("/coursetoupd")
+    public String coursetoupd(Integer courseid,Map map){
+        System.out.println("修改的Id"+courseid);
+        Course course = courseService.selectByPrimaryKey(courseid);
+        List<Coursetype> coursetypes = courseService.selCtypes();
+        map.put("typelist",coursetypes);
+        map.put("list",course);
+        return "education/courseupd";
+    }
+
+    //课程管理  修改
+    @RequestMapping("/ceduupd")
+    @ResponseBody
+    public Integer ceduupd(Course course){
+        int i = courseService.updateByPrimaryKey(course);
+        return i;
     }
 }

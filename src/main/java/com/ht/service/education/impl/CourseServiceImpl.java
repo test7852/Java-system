@@ -58,7 +58,7 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<Course> selByPage(Pager pager) {
+    public List<Map> selByPage(Pager pager) {
         return courseMapper.selbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
     }
 

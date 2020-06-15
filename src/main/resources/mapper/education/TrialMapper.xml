@@ -129,10 +129,19 @@
     select count(*) from trial;
   </select>
 
+  <!--&lt;!&ndash;分页查询&ndash;&gt;-->
+  <!--<select id="selbypage" resultType="trial">-->
+    <!--<![CDATA[-->
+          <!--select * from trial limit #{startRow},#{pageSize};-->
+        <!--]]>-->
+  <!--</select>-->
+
   <!--分页查询-->
-  <select id="selbypage" resultType="trial">
+  <select id="selbypage" resultType="map">
     <![CDATA[
-          select * from trial limit #{startRow},#{pageSize};
+          select * from trial, course, empinfo
+          WHERE trial.courseid = course.courseid AND trial.empid = empinfo.emp_Id
+          limit #{startRow},#{pageSize}
         ]]>
   </select>
 
