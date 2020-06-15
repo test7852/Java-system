@@ -22,20 +22,44 @@ import java.util.Map;
 public class StuController {
     @Resource
     private StudentService studentService;
-
+//去学生页面
     @RequestMapping("stulistUi")
     public String stulistUi(){
         return"student/stulist";
     }
-
+//去查看
     @RequestMapping("select")
-    public String select(Integer studid){
-        System.out.println(studid);
-        return "student/stuselect";
+    public String select(Integer studid,Map map){
+
+        Student student=studentService.selectByPrimaryKey(studid);
+        System.out.println("查看："+student.toString());
+        map.put("student", student);
+        return "student/stusel";
     }
+//重置密码
+    @RequestMapping("reset")
+    @ResponseBody
+    public String reset(Integer studid){
+        Student student=studentService.selectByPrimaryKey(studid);
+        System.out.println("重置前："+student.toString());
+        student.setPassword("123456");
+        System.out.println("重置后："+student.toString());
+        studentService.insert(student);
+        return "成功";
+    }
+    /**
+     * @param
+     * @return
+     * 去添加页面
+     */
+    @RequestMapping("toadd")
+    public String toadd(){
+        return "student/stuadd";
+    }
+
     @Resource
     private JsonData jsonData;
-
+//layui加载数据
     @RequestMapping("studata")
     @ResponseBody
     public JsonData empdata(@Param("limit")int limit , @Param("page")int page ){
@@ -48,16 +72,7 @@ public class StuController {
         return jsonData;
     }
 
-    /**
-     * @param student
-     * @return
-     * 去添加页面
-     */
-    @RequestMapping("toadd")
-    public String toadd(Student student){
-        studentService.insert(student);
-        return "";
-    }
+
 
     /**
      * @param student
@@ -65,22 +80,15 @@ public class StuController {
      * 添加学生信息
      */
     @RequestMapping("add")
+    @ResponseBody
     public String add(Student student){
+        student.setPassword("123456");
         studentService.insert(student);
-        return "";
+        System.out.println("新增："+student.toString());
+        return "成功";
     }
 
-    /**
-     * @param stuid
-     * @param map
-     * @return
-     * 去修改页面
-     */
-    @RequestMapping("toupd")
-    public String toupd(int stuid,Map map){
-        map.put("",studentService.selectByPrimaryKey(stuid));
-        return "";
-    }
+
 
     /**
      * @param student
@@ -88,9 +96,11 @@ public class StuController {
      * 修改学生信息
      */
     @RequestMapping("upd")
-    public String upd(Student student){
-        studentService.updateByPrimaryKey(student);
-        return "";
+    @ResponseBody
+    public Integer upd(Student student){
+        int updatacurr= studentService.updateByPrimaryKey(student);
+        System.out.println("修改："+student.toString());
+        return updatacurr;
     }
 
     /**
@@ -100,7 +110,8 @@ public class StuController {
      */
     @RequestMapping("del")
     public String del(int studid){
-//(待删除)    studentService.deleteByPrimaryKey(studid);
+        System.out.println("删除："+studid);
+        studentService.deleteByPrimaryKey(studid);
         return "redirect:stu/stulistUi";
     }
 }

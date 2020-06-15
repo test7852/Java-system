@@ -130,4 +130,10 @@
       select * from dep where depid in(select parentid from dep)
     ]]>
   </select>
+<!--  根据部门名称找部门-->
+    <select id="getDepByName" resultMap="BaseResultMap">
+      <![CDATA[
+        select * from dep where depname = #{depname} and parentid = #{parentid}
+       ]]>
+    </select>
 </mapper>

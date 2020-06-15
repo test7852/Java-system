@@ -42,4 +42,21 @@ public class CenterController {
         return "emp/workdiarylist";
     }
 
+    //去到职位管理页面
+    @RequestMapping("postlist")
+    public String postlist(){
+        return "emp/postlist";
+    }
+    //去到职位添加页面
+    @RequestMapping("postadd")
+    public String postadd(){
+        return "emp/postadd";
+    }
+
+    //去到我的周报管理页面
+    @RequestMapping("myworklist")
+    public String myworklist(){
+        return "emp/myworkdiary";
+    }
+
 }

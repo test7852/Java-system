@@ -1,8 +1,8 @@
 package com.ht.web.emp;
 
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.emp.Workdiary;
 import com.ht.bean.json.JsonData;
-import com.ht.dao.emp.WorkdiaryMapper;
 import com.ht.service.emp.WorkdiaryService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -39,10 +41,24 @@ public class WorkdiaryController {
         pager.setPageSize(limit);
         jsonData.setCount(workdiaryService.selworkcount());
         List<Workdiary> list = workdiaryService.allPageWorkdiary(pager);
-        System.out.println(list.toString());
         jsonData.setData(workdiaryService.allPageWorkdiary(pager));
         return jsonData;
     }
 
-
+    /**
+     * @return 我的周报数据
+     */
+    @RequestMapping("myworkdiarydata")
+    @ResponseBody
+    public JsonData myworkdiarydata(@Param("limit")int limit , @Param("page")int page, HttpServletRequest request){
+        Pager pager=new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(workdiaryService.selworkcount());
+        HttpSession session = request.getSession();
+        Empinfo user = (Empinfo) session.getAttribute("user");
+        Integer id = user.getEmp_id();
+        jsonData.setData(workdiaryService.myworkdiary(id));
+        return jsonData;
+    }
 }

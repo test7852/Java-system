@@ -45,19 +45,6 @@ public class StudentScoreController {
     }
 
     /**
-     * @param pager
-     * @param map
-     * @return
-     * 分页
-     */
-    @RequestMapping("list")
-    public String list(Pager pager, Map map){
-        pager.page(studentScoreService.getTotalRow());
-        map.put("",studentScoreService.allPageStuScore(pager));
-        return "";
-    }
-
-    /**
      * @param
      * @return
      * 去添加页面
@@ -76,7 +63,7 @@ public class StudentScoreController {
     @RequestMapping("add")
     @ResponseBody
     public String add(StudentScore studentScore){
-        System.out.println("studentScore："+studentScore.toString());
+        System.out.println("添加："+studentScore.toString());
         studentScoreService.insert(studentScore);
         return "";
     }
@@ -101,8 +88,8 @@ public class StudentScoreController {
     @RequestMapping("upd")
     @ResponseBody
     public Integer upd(StudentScore studentScore){
-        System.out.println("studentScore："+studentScore.toString());
         int updatacurr = studentScoreService.updateByPrimaryKey(studentScore);
+        System.out.println("修改："+studentScore.toString());
         return updatacurr;
     }
 
@@ -114,7 +101,8 @@ public class StudentScoreController {
      */
     @RequestMapping("del")
     public String del(int id){
-//(待删除)        studentScoreService.deleteByPrimaryKey(id);
+        studentScoreService.deleteByPrimaryKey(id);
+        System.out.println("删除："+id);
         return "redirect:score/scorelistUi";
     }
 }

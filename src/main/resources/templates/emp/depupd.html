@@ -19,7 +19,7 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/dep/upd}" method="post">
+<form class="layui-form" id="m_form">
     <div class="index">
         <ul class="menu">
             <input type="hidden" name="depid" th:value="${dep.depid}">
@@ -70,8 +70,30 @@
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify("修改成功"));
-            return true;
+
+                    $.ajax({
+                        url: '/dep/upd',
+                        type: 'post',
+                        data:data.field,
+                        dataType: 'json',
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("修改成功"));
+                                //先得到当前iframe层的索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //再执行关闭
+                                parent.layer.close(index);
+                                window.parent.location.reload();
+                            }else {
+                                $("#name").val("");
+                                layer.msg('部门名称重复 修改失败', { icon: 5, time: 2000 });
+                            }
+                        },
+                    })
+
+            //$('.layui-laypage-btn').click();//刷新
+
+            return false;
         });
     });
 </script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    .index{width: 600px;margin-left: 30px;}
+    .layui-input{width: 120px;}
+    .menu li{float: left;}
+    .layui-form-label{margin-top: 15px}
+    .layui-input{margin-top: 15px}
+    button{margin-left: 140px;margin-top: 20px;}
+
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<form class="layui-form">
+    <div class="index">
+        <ul class="menu">
+            <li>
+                <label class="layui-form-label">职位名称：</label>
+                <input id="name"  required lay-verify="required" placeholder="职位名称" autocomplete="off" class="layui-input">
+            </li>
+
+            <li>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+            </li>
+        </ul>
+    </div>
+
+</form>
+</body>
+<script type="text/javascript" th:inline="none">
+
+
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            //你可以在这里做操作  也可以不使用这个方法
+            form.on('submit(formDemo)', function(data){
+                    var pos_Name = $("#name").val();
+                    $.ajax({
+                        url: '/post/add',
+                        type: 'post',
+                        data: {
+                            pos_Name:pos_Name,
+                        },
+                        dataType: 'json',
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("添加成功"));
+                                //先得到当前iframe层的索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //再执行关闭
+                                parent.layer.close(index);
+                                window.parent.location.reload();
+                            }else {
+                                $("#name").val("");
+                                layer.msg('职位名称重复 添加失败', { icon: 5, time: 2000 });
+                            }
+                        },
+                    })
+                //$('.layui-laypage-btn').click();//刷新
+                return false;
+            });
+        });
+
+</script>
+</html>
