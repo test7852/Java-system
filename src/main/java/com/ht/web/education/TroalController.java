@@ -56,15 +56,6 @@ public class TroalController {
         return i;
     }
 
-    //试讲培训 根据id修改
-    @RequestMapping("/trialupd")
-    @ResponseBody
-    public Integer trialupd(Trial trial){
-        int i = trialService.updateByPrimaryKey(trial);
-        System.out.println("修改:"+trial);
-        return i;
-    }
-
     //试讲培训 去新增界面
     @RequestMapping("/trialtoadd")
     public String trialtoadd(Map map){
@@ -75,13 +66,34 @@ public class TroalController {
         return "education/troaladd";
     }
 
-    //试讲培训 进行修改
+    //试讲培训 进行新增
     @RequestMapping("/trialadd")
     @ResponseBody
     public Integer trialadd(Trial trial){
         System.out.println("新增:"+trial);
         int insert = trialService.insert(trial);
         return insert;
+    }
+
+    //去修改界面
+    @RequestMapping("/trialtoupd")
+    public String trialtoupd(Integer trialid,Map map){
+        Trial trial = trialService.selectByPrimaryKey(trialid);
+        List<Empinfo> emplist = trialService.Emplist();
+        List<Course> coulist = trialService.Coulist();
+        map.put("emplist",emplist);
+        map.put("coulist",coulist);
+        map.put("trial",trial);
+        return "education/troalupd";
+    }
+
+    //试讲培训 根据id修改
+    @RequestMapping("/trialupd")
+    @ResponseBody
+    public Integer trialupd(Trial trial){
+        int i = trialService.updateByPrimaryKey(trial);
+        System.out.println("修改:"+trial);
+        return i;
     }
 
 }

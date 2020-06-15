@@ -99,25 +99,25 @@
     select count(*) from course;
   </select>
 
-  <!--分页查询-->
-  <select id="selbypage" resultType="course">
-    <!--<bind name="kais" value="(currPage-1)*pageSize"></bind>-->
-    <![CDATA[
-          select * from course limit #{startRow},#{pageSize};
-        ]]>
-  </select>
-
   <!--&lt;!&ndash;分页查询&ndash;&gt;-->
-  <!--<select id="selbypage" resultType="map">-->
+  <!--<select id="selbypage" resultType="course">-->
     <!--&lt;!&ndash;<bind name="kais" value="(currPage-1)*pageSize"></bind>&ndash;&gt;-->
     <!--<![CDATA[-->
-          <!--select a.courseTypeId,courseId,courseName,isobligatory,a.remark,b.courseTypeName,courseid-->
-          <!--from course AS a-->
-          <!--INNER JOIN coursetype AS b-->
-          <!--where a.courseTypeId = b.courseTypeId-->
-          <!--limit #{startRow},#{pageSize}-->
+          <!--select * from course limit #{startRow},#{pageSize};-->
         <!--]]>-->
   <!--</select>-->
+
+  <!--分页查询-->
+  <select id="selbypage" resultType="map">
+    <!--<bind name="kais" value="(currPage-1)*pageSize"></bind>-->
+    <![CDATA[
+          select a.courseTypeId,courseId,courseName,isobligatory,a.remark,b.courseTypeName,courseid
+          from course AS a
+          INNER JOIN coursetype AS b
+          where a.courseTypeId = b.courseTypeId
+          limit #{startRow},#{pageSize}
+        ]]>
+  </select>
 
   <!--查询课程类别-->
   <select id="selCtype" resultType="coursetype">

@@ -10,6 +10,7 @@ import com.ht.dao.education.TrialMapper;
 import com.ht.service.education.TrialService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -58,7 +59,7 @@ public class TrialServiceImpl implements TrialService{
     }
 
     @Override
-    public List<Trial> selByPage(Pager pager) {
+    public List<Map> selByPage(Pager pager) {
         return trialMapper.selbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
     }
 

@@ -6,6 +6,7 @@ import com.ht.bean.emp.Empinfo;
 import com.ht.util.Pager;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -29,7 +30,7 @@ public interface TrialService{
 
     int selTrial();//查询总数据
 
-    List<Trial> selByPage(Pager pager);//分页查询
+    List<Map> selByPage(Pager pager);//分页查询
 
     List<Course> Coulist();//查询课程管理
 
