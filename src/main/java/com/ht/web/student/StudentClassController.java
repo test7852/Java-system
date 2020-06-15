@@ -46,6 +46,7 @@ public class StudentClassController {
      */
     @RequestMapping("/toadd")
     public String toadd() {
+
         return "student/studentClassAdd";
     }
 
