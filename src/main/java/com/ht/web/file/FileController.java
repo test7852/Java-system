@@ -1,5 +1,6 @@
 package com.ht.web.file;
 
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.file.Datadoc;
 import com.ht.bean.json.JsonData;
 import com.ht.service.file.DatadocService;
@@ -33,9 +34,11 @@ public class FileController {
     private DatadocService datadocService;
 
     @RequestMapping("add")
-    public String add(MultipartFile file) throws IOException {
+    public String add(MultipartFile file,HttpServletRequest request) throws IOException {
+        Empinfo e = (Empinfo) request.getSession().getAttribute("user");
+        System.out.println(e);
         Datadoc datadoc = Utils.fileUpload(file);
-        System.out.println(datadoc);
+        datadocService.insert(datadoc);
         return "redirect:/dataDoc/toAdd";
     }
     @RequestMapping("toAdd")
@@ -67,23 +70,20 @@ public class FileController {
 
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
-        System.out.println("id = " + id);
-//        studentclassService.deleteByPrimaryKey(id);
-        return "redirect:studentClass/list";
+        datadocService.deleteByPrimaryKey(id);
+        return "redirect:/dataDoc/list";
     }
 
 
     //实现Spring Boot 的文件下载功能，映射网址为/download
     @RequestMapping("/download")
-    public String downloadFile(HttpServletRequest request,
-                               HttpServletResponse response) throws UnsupportedEncodingException {
-        // 获取指定目录下的第一个文件
-        File scFileDir = new File(Contants.PRO_FILE_SAVE_PATH);
-        File TrxFiles[] = scFileDir.listFiles();
-        System.out.println(TrxFiles[0]);
-        String fileName = TrxFiles[0].getName(); //下载的文件名
-
-        // 如果文件名不为空，则进行下载
+    @ResponseBody
+    public void downloadFile(HttpServletRequest request,
+                               HttpServletResponse response,
+                               Integer id) throws UnsupportedEncodingException {
+        Datadoc datadoc = datadocService.selectByPrimaryKey(id);
+        String fileName = datadoc.getUrl();
+//         如果文件名不为空，则进行下载
         if (fileName != null) {
             //设置文件路径
             String realPath = Contants.PRO_FILE_SAVE_PATH;
@@ -133,6 +133,6 @@ public class FileController {
                 }
             }
         }
-        return null;
+        return;
     }
 }
