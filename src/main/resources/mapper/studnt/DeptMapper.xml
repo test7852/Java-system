@@ -69,4 +69,30 @@
       remark = #{remark,jdbcType=VARCHAR}
     where deptid = #{deptid,jdbcType=INTEGER}
   </update>
+
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from dept
+    ]]>
+  </select>
+
+  <!--  分页-->
+  <select id="allPageDept" resultType="com.ht.bean.student.Dept">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+      select * from dept limit #{kais},#{pageSize}
+    ]]>
+  </select>
+
+  <!-- 根据系名称查找系-->
+  <select id="selectByName" resultType="com.ht.bean.student.Dept">
+    <![CDATA[
+        select * from dept where deptName = #{deptName}
+    ]]>
+  </select>
+
+
+
 </mapper>
