@@ -61,7 +61,8 @@ public class StudentreplyscoreController {
     @ResponseBody
     public String add(Studentreplyscore studentreplyscore){
         studentreplyscoreService.insert(studentreplyscore);
-        return "";
+        System.out.println("添加："+studentreplyscore.toString());
+        return "ok";
     }
 
     /**
@@ -84,8 +85,9 @@ public class StudentreplyscoreController {
     @RequestMapping("update")
     @ResponseBody
     public Integer update(Studentreplyscore studentreplyscore){
-        System.out.println(studentreplyscore.toString());
+
         int selective = studentreplyscoreService.updateByPrimaryKeySelective(studentreplyscore);
+        System.out.println("修改："+studentreplyscore.toString());
         return selective;
     }
 
@@ -97,6 +99,7 @@ public class StudentreplyscoreController {
     @RequestMapping("del")
     public String del(int replyid){
 // (待删除)       studentreplyscoreService.deleteByPrimaryKey(replyid);
+        System.out.println("修改："+replyid);
         return "redirect:reply/replyUi";
     }
 }
