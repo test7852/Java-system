@@ -84,9 +84,7 @@ public class PostController {
     @ResponseBody
     public Boolean add(Post post){
         Post post1 = postService.selectByName(post.getPos_Name());
-        System.out.println(post.toString());
         if(post1 == null){
-            System.out.println("======");
             postService.insert(post);
             return true;
         }

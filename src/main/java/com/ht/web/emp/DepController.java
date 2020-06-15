@@ -2,6 +2,7 @@ package com.ht.web.emp;
 
 import com.ht.bean.emp.Dep;
 import com.ht.bean.emp.Empinfo;
+import com.ht.bean.emp.Post;
 import com.ht.bean.json.JsonData;
 import com.ht.service.emp.DepService;
 import com.ht.service.emp.EmpinfoService;
@@ -80,9 +81,15 @@ public class DepController {
      * 添加部门信息
      */
     @RequestMapping("add")
-    public String add(Dep dep){
-        depService.insert(dep);
-        return "emp/deplist";
+    @ResponseBody
+    public Boolean add(Dep dep){
+        Dep dep1 = depService.getDepByName(dep);
+        if(dep1 == null){
+            depService.insert(dep);
+            return true;
+        }
+        return false;
+
     }
 
     /**
@@ -106,10 +113,18 @@ public class DepController {
      * 修改部门信息
      */
     @RequestMapping("upd")
-    public String upd(Dep dep){
-        System.out.println(dep.toString());
-        depService.updateByPrimaryKeySelective(dep);
-        return "emp/deplist";
+    @ResponseBody
+    public Boolean upd(Dep dep){
+        Dep dep1 = depService.getDepByName(dep);
+        Dep dep2 = depService.selectByPrimaryKey(dep.getDepid());
+        if(dep1 == null){
+            depService.updateByPrimaryKeySelective(dep);
+            return true;
+        }else if(dep.getDepname().equals(dep2.getDepname())){
+            depService.updateByPrimaryKeySelective(dep);
+            return true;
+        }
+        return false;
     }
 
     @RequestMapping("del")

@@ -48,5 +48,11 @@ public interface DepService{
      * 获取所有一级部门
      */
     List<Dep> getAllFdep();
+    /**
+     * @param dep
+     * @return
+     * 根据名称找部门
+     */
+    Dep getDepByName(Dep dep);
 
 }
