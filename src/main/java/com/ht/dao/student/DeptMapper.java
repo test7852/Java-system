@@ -1,6 +1,10 @@
 package com.ht.dao.student;
 
+import com.ht.bean.emp.Post;
 import com.ht.bean.student.Dept;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +12,28 @@ import com.ht.bean.student.Dept;
  * 
  */
 public interface DeptMapper {
+    /**
+     * @return
+     * 查询总数
+     */
+    int getTotalRow();
+
+    /**
+     * @param pager
+     * @return
+     * 分页查询
+     */
+    List<Dept> allPageDept(Pager pager);
+
+    /**
+     * @param deptName
+     * @return
+     * 根据系名称查找系
+     */
+    Dept selectByName(String deptName);
+
+
+
     int deleteByPrimaryKey(Integer deptid);
 
     int insert(Dept record);
