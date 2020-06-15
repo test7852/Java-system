@@ -29,18 +29,18 @@
 <!--数据表格样式及附件-->
     <script id="toolbarDemo" type="text/html">
         <div class="layui-btn-container">
-            <button id="add" class="layui-btn layui-btn-sm" lay-event="add">新增</button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">工作经历</button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">教育背景</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll">家庭关系信息</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll">员工考核</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll">证件上传</button>
+            <button id="add" class="layui-btn layui-btn-sm">新增</button>
+            <button class="layui-btn layui-btn-sm" lay-event="word">工作经历</button>
+            <button class="layui-btn layui-btn-sm" lay-event="education">教育背景</button>
+            <button class="layui-btn layui-btn-sm" lay-event="relation">家庭关系信息</button>
+            <button class="layui-btn layui-btn-sm" lay-event="assess">员工考核</button>
+            <button class="layui-btn layui-btn-sm" lay-event="voucher">证件上传</button>
         </div>
     </script>
 <!--表内功能-->
     <script id="bar" type="text/html">
     {{#  if(d.status == 1){ }}
-    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="no">
+    <a id="ann" class="layui-btn layui-btn-warm layui-btn-xs" lay-event="no">
         <i class="layui-icon">&#xe642;</i>禁用
     </a>
     {{# }if(d.status == 2) { }}
@@ -91,43 +91,6 @@
             ]]
         });
 
-        //启用禁用
-        function aaa(data){
-            var status = data.status;
-            var btns = "";
-            if (status == 1) {
-                return"启用";
-            }
-            if (status == 2) {
-                btns += '<span style="color:#ed2a4a">禁用</span>';
-            }
-            return btns;
-        }
-
-        //监听单元格编辑（修改）
-        table.on('edit(tab)', function(obj){
-            var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
-            layer.msg(data.emp_name);
-            $.ajax({
-                url: '/emp/update',
-                type: 'post',
-                data: {
-                    emp_id:data.emp_id,
-                    emp_name:data.emp_name,
-                    emp_sex:data.emp_sex,
-                    // birthday:birthday,
-                    cardno:data.cardno,
-                    nation:data.nation,
-                    phone:data.phone,
-                    qqcode:data.qqcode,
-                    address:data.address
-                },
-                dataType: 'text'
-            })
-        });
-
         //点击添加iframe窗方法
         $("#add").on('click',function(){
             //iframe窗
@@ -135,10 +98,22 @@
                 type: 2,
                 title: '员工新增',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['550px', '600px'],
+                area: ['1000px', '500px'],
                 content: ['/emp/toadd']//这是链接你的页面地址 url
             });
         })
+
+        //头工具栏事件
+        table.on('toolbar(demo)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+            var data = checkStatus.data;
+            if (data.length === 0){
+                alert("请选择数据");
+            }else if (obj.event === "word"){
+                layer.alert(JSON.stringify(data));
+            }
+
+        });
 
         //监听行工具事件
         table.on('tool(demo)', function (obj) {
@@ -166,7 +141,9 @@
                     dataType: 'json',
                     success : function(data) {
                         if (data){
-                            document.location.href="/skip/emplist";
+                            //执行重载
+                            $('.layui-laypage-btn').click();
+                            //document.location.href="/skip/emplist";
                         }
                     }
                 })
@@ -181,23 +158,59 @@
                         dataType: 'json',
                         success : function(data) {
                             if (data){
-                                document.location.href="/skip/emplist";
+                                //执行重载
+                                $('.layui-laypage-btn').click();
+                                //document.location.href="/skip/emplist";
                             }
                         }
                     })
             }else if (obj.event === 'edit'){//编辑
                 layer.open({
                     type: 2,
-                    title: '员工新增',
+                    title: '员工编辑',
                     maxmin: true, //开启最大化最小化按钮
                     area: ['850px', '500px'],
-                    content: ['/emp/toadd']//这是链接你的页面地址 url
+                    content: ['/emp/edit?emp_id='+data.emp_id]//这是链接你的页面地址 url
                 });
             }
-            else if (obj.event === 'reset'){//重置
+            else if (obj.event === 'reset'){//重置密码
+                layer.confirm('确认重置密码吗?', function (index) {
+                    $.ajax({
+                        url: '/emp/reset',
+                        type: 'post',
+                        data: {
+                            emp_id: data.emp_id
+                            , password: data.password
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data) {
+                                layer.msg(JSON.stringify("重置密码成功!"))
 
+                                //执行重载
+                                $('.layui-laypage-btn').click();
+                                //table.reload('tab');
+                            } else {
+                                layer.msg(JSON.stringify("已是最初密码!"))
+                            }
+                        }
+                    })
+                })
             }
         })
+
+        //启用禁用
+        function aaa(data){
+            var status = data.status;
+            var btns = "";
+            if (status == 1) {
+                return"启用";
+            }
+            if (status == 2) {
+                btns += '<span style="color:#ed2a4a">禁用</span>';
+            }
+            return btns;
+        }
     });
 </script>
 </html>

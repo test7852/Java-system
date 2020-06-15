@@ -10,6 +10,7 @@ import com.ht.util.Contants;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -79,17 +80,19 @@ public class EmpController {
 
     /**
      * @param
-     * @return 去到添加页面
-     * 添加
+     * @return
+     * 去到添加页面
      */
-    @RequestMapping("add")
-    public void add(Empinfo empinfo) {
-        empinfoService.insert(empinfo);
+    @RequestMapping("toadd")
+    public String toadd(Model model){
+
+        return "emp/empadd";
     }
 
-    @RequestMapping("toadd")
-    public String toadd(){
-        return "emp/empadd";
+    @RequestMapping("add")
+    public void add(Empinfo empinfo) {
+
+        empinfoService.insert(empinfo);
     }
 
     /**
@@ -120,6 +123,11 @@ public class EmpController {
         return updatacurr;
     }
 
+    /**
+     * @param empinfo
+     * @return
+     * 修改状态
+     */
     @RequestMapping("set")
     @ResponseBody
     public Boolean set(Empinfo empinfo){
@@ -131,4 +139,32 @@ public class EmpController {
         empinfoService.updateByPrimaryKeySelective(empinfo);
         return true;
     }
+
+    /**
+     * @param empinfo
+     * @return
+     * 重置密码
+     */
+    @RequestMapping("reset")
+    @ResponseBody
+    public Boolean reset(Empinfo empinfo){
+        if (Contants.PASSWORD_TA.equals(empinfo.getPassword())){
+           return false;
+        }
+        empinfo.setPassword(Contants.PASSWORD_TA);
+        empinfoService.updateByPrimaryKeySelective(empinfo);
+        return true;
+    }
+
+    /**
+     * @param empinfo
+     * @return
+     * 编辑
+     */
+    @RequestMapping("toedit")
+    public String edit(Empinfo empinfo){
+
+        return "emp/empedit";
+    }
+
 }
