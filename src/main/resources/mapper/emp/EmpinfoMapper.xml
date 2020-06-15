@@ -324,4 +324,12 @@
         select * from empinfo where emp_id not in(select chairman from dep)
         ]]>
     </select>
+
+  <!-- 根据职位获取员工-->
+  <select id="selByPostId" resultType="com.ht.bean.emp.Empinfo">
+    <![CDATA[
+        select * from empinfo where post_id=#{postid}
+        ]]>
+    </select>
+
 </mapper>

@@ -38,6 +38,13 @@ public interface EmpinfoService{
      */
     List<Empinfo> allEmpName();
 
+    /**
+     * @param postid
+     * @return
+     * 根据职位id找员工
+     */
+    List<Empinfo> selByPostId(int postid);
+
     int deleteByPrimaryKey(Integer empId);
 
     int insert(Empinfo record);

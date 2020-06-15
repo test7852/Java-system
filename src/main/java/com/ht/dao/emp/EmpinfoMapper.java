@@ -1,6 +1,7 @@
 package com.ht.dao.emp;
 
 import com.ht.bean.emp.Empinfo;
+import com.ht.bean.emp.Post;
 import com.ht.util.Pager;
 
 import java.util.List;
@@ -36,6 +37,14 @@ public interface EmpinfoMapper {
      * 获取所有员工姓名 id
      */
     List<Empinfo> allEmpName();
+
+
+    /**
+     * @param postid
+     * @return
+     * 根据职位id找员工
+     */
+    List<Empinfo> selByPostId(int postid);
 
     int deleteByPrimaryKey(Integer empId);
 
