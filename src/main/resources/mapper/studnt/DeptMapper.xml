@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.student.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.student.Dept">
+    <!--@mbg.generated-->
+    <!--@Table dept-->
+    <id column="deptid" jdbcType="INTEGER" property="deptid" />
+    <result column="deptName" jdbcType="VARCHAR" property="deptname" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    deptid, deptName, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dept
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from dept
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="deptid" keyProperty="deptid" parameterType="com.ht.bean.student.Dept" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into dept (deptName, remark)
+    values (#{deptname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="deptid" keyProperty="deptid" parameterType="com.ht.bean.student.Dept" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptname != null">
+        deptName,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptname != null">
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.student.Dept">
+    <!--@mbg.generated-->
+    update dept
+    <set>
+      <if test="deptname != null">
+        deptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.student.Dept">
+    <!--@mbg.generated-->
+    update dept
+    set deptName = #{deptname,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -20,4 +20,18 @@ public class Contants {
      * 禁用
      */
     public static final int STATUS_SW=2;
+
+    /**
+     * 默认密码
+     */
+    public static final String PASSWORD_TA="123456";
+
+    /**
+     * 班主任
+     */
+    public static final Integer POST_CLASS=4;
+    /**
+     * 教师
+     */
+    public static final Integer POST_TEACHER=5;
 }

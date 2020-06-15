@@ -36,13 +36,14 @@
 <body>
 <!--数据表格样式及附件-->	
     <script type="text/html" id="bar">
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
-        <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
+    <a id="upd" class="layui-btn layui-btn-xs" lay-event="upd">
+        <i class="layui-icon">&#xe642;</i>编辑
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 	</script>
+
  <!--搜索栏-->
   <div class="layui-form-item">
     <div class="layui-inline">
@@ -81,9 +82,9 @@
         <th lay-data="{field:'trialid', width:80, sort: true}">ID</th>
         <th lay-data="{field:'date'}">日期</th>
         <th lay-data="{field:'time'}">星期</th>
-        <th lay-data="{field:'courseid'}">课程id</th>
+        <th lay-data="{field:'courseName'}">课程/章节</th>
         <th lay-data="{field:'type'}">授课类型</th>
-        <th lay-data="{field:'empid'}">员工id关联员工表</th>
+        <th lay-data="{field:'emp_name'}">授课老师</th>
         <th lay-data="{field:'remark'}">备注</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
@@ -91,34 +92,13 @@
 </table>
 </div>
 </body>
-<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
 
     layui.use('table', function () {
         var table = layui.table;
 
-            //监听单元格编辑
-        table.on('edit(tab)', function(obj){
-            var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
-            //layer.msg(data.emp_name)
-            $.ajax({
-                url: '/trial/trialupd',
-                type: 'post',
-                data: {
-                    trialid:data.trialid,
-                    date:data.date,
-                    time:data.time,
-                    courseid:data.courseid,
-                    type:data.type,
-                    empid:data.empid,
-                    remark:data.remark,
-                },
-                dataType: 'text',
-            })
-        });
 
         //点击添加iframe窗方法
         $("#add").on('click',function(){
@@ -126,20 +106,52 @@
             layer.open({
                 type: 2,
                 title: '新增',
-                maxmin: true, //开启最大化最小化按钮
-                area: ['800px', '400px'],
+                maxmin: true, //开启最大化最小化a按钮
+                area: ['550px', '600px'],
                 content: ['/trial/trialtoadd']//这是链接你的页面地址 url
             });
         })
 
+        //去到修改界面
+        function upd(trialid){
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '修改',
+                maxmin: true, //开启最大化最小化a按钮
+                area: ['550px', '600px'],
+                content: ['/trial/trialtoupd?trialid='+trialid]//这是链接你的页面地址 url
+            });
+        }
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    layer.msg("添加")
+                    // var data = checkStatus.data;
+                    // layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            }
+            ;
+        })
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
             var data = obj.data;
             //console.log(obj)
-            if (obj.event === 'de' +
-                '' +
-                '' +
-                'l') {
+            if (obj.event === 'del') {
                 layer.confirm('真的删除么?', function (index) {
                     obj.del();
                     layer.close(index);
@@ -149,26 +161,24 @@
                         data: {
                             trialid:data.trialid
                         },
-                        dataType: 'text',
+                        dataType: 'json',
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("删除成功"));
+                                }else {
+
+                                }
+                        },
                     })
                 });
-            } else if (obj.event === 'edit') {
-                if($(".falg").html()=="ON"){
-                    // 打开可编辑状态：
-                    $(".layui-table").find('td').data('edit', true)
-                    // layer.msg(data.emp_id);
-                    $(".falg").html("YES")
-                    // $("#edit").SetAttribute('class','layui-btn layui-btn-danger');
-
-                }else {
-                    $(".layui-table").find('td').data('edit', false)
-                    $(".falg").html("ON")
-                }
-
-            } else if(obj.event= 'data'){
+            }else if (obj.event == 'upd') {//修改
+                upd(data.trialid)
+            }else if(obj.event= 'data'){
 
             }
         })
+
+
     });
 </script>
 </html>

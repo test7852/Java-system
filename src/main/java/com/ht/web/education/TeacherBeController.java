@@ -43,7 +43,6 @@ public class TeacherBeController {
         pager.setPageSize(limit);
         jsonData.setCount(teacherbeService.selTea());
         jsonData.setData(teacherbeService.selByPage(pager));
-        System.out.println("jsonData = " + jsonData.getData().toString());
         return jsonData;
     }
 
@@ -56,10 +55,21 @@ public class TeacherBeController {
         return i;
     }
 
+    //去修改
+    @RequestMapping("/teachertoupd")
+    public String teachertoupd(Integer beid,Map map){
+        Teacherbe teacherbe = teacherbeService.selectByPrimaryKey(beid);
+        List<Empinfo> empinfos = teacherbeService.listEmp();
+        map.put("elist",empinfos);
+        map.put("tlist",teacherbe);
+        return "education/teacherBeupd";
+    }
+
     //值班管理  修改
     @RequestMapping("/teacherupd")
     @ResponseBody
     public Integer teacherupd(Teacherbe teacherbe){
+        System.out.println("修改"+teacherbe);
         int i = teacherbeService.updateByPrimaryKey(teacherbe);
         return i;
     }

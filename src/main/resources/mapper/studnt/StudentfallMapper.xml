@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.student.StudentfallMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.student.Studentfall">
+    <!--@mbg.generated-->
+    <!--@Table studentfall-->
+    <id column="fallid" jdbcType="INTEGER" property="fallid" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    fallid, `level`, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from studentfall
+    where fallid = #{fallid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from studentfall
+    where fallid = #{fallid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="fallid" keyProperty="fallid" parameterType="com.ht.bean.student.Studentfall" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into studentfall (`level`, remark)
+    values (#{level,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="fallid" keyProperty="fallid" parameterType="com.ht.bean.student.Studentfall" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into studentfall
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.student.Studentfall">
+    <!--@mbg.generated-->
+    update studentfall
+    <set>
+      <if test="level != null">
+        `level` = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fallid = #{fallid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.student.Studentfall">
+    <!--@mbg.generated-->
+    update studentfall
+    set `level` = #{level,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where fallid = #{fallid,jdbcType=INTEGER}
+  </update>
+</mapper>

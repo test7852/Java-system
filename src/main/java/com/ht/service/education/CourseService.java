@@ -29,7 +29,7 @@ public interface CourseService{
 
     int selCountcEdu();//查询总数据
 
-    List<Course> selByPage(Pager pager);//分页查询
+    List<Map> selByPage(Pager pager);//分页查询
 
     List<Coursetype> selCtypes();//查询课程类别
 
