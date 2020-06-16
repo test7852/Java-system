@@ -36,13 +36,13 @@
                 </select>
             </li>
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 排班名称：</label>
-                <input  name="schedulingname" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${tlist.schedulingname}">
+            <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 排班名称：</label>
+            <input  name="schedulingname" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${tlist.schedulingname}">
             </li>
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 员工姓名：</label>
                 <select name="emp_name" lay-filter="mySelect">
-                    <option th:each="e:${elist}" th:value="${e.emp_name}" th:text="${e.emp_name}" th:selected="${tlist.emp_name==e.emp_name}">你好</option>
+                    <option th:each="e:${elist}" th:value="${e.emp_name}" th:text="${e.emp_name}" th:selected="${tlist.emp_name==e.emp_name}">张先生</option>
                 </select>
             </li>
             <li>
@@ -61,7 +61,7 @@
                 <input  name="explain" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${tlist.explain}">
             </li>
             <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
             </li>
         </ul>
@@ -69,18 +69,27 @@
 
 </form>
 </body>
+<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
+
+    function gbi() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+        window.parent.location.reload();
+
+    }
+
     layui.use('form', function(){
         var form = layui.form;
 
-        //监听提交   你可以在这里做操作  也可以不使用这个方法
-        form.on('submit(formDemo)', function(data){
-        //     function acc() {
-        //        
-        //     }
-        //
+        //监听提交
+        // 你可以在这里做操作  也可以不使用这个方法
+        // form.on('submit(formDemo)', function(data){
+        //     layer.msg(JSON.stringify("修改成功"));
+        //     layer.close(index);
         //     return true;
         // });
-     });
+    });
 </script>
 </html>

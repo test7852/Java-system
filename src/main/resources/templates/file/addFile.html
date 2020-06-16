@@ -6,12 +6,33 @@
 </head>
 <body>
 
-<form th:action="@{/file/add}" method="post" enctype="multipart/form-data">
+<form class="layui-form" th:action="@{/dataDoc/add}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="empId" value="1">
     文件上传：<input type="file" name="file"/><br>
-    <input type="submit" value="提交">
 
+    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
 </form>
 
+
 </body>
+<script type="text/javascript" th:inline="none">
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        //你可以在这里做操作  也可以不使用这个方法
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify("添加成功"));
+            //先得到当前iframe层的索引
+            var index = parent.layer.getFrameIndex(window.name);
+            alert(index);
+            //再执行关闭
+            parent.layer.close(index);
+            window.parent.location.reload();
+
+            return true;
+        });
+    });
+</script>
+
 </html>

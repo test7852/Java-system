@@ -13,6 +13,8 @@ import java.util.List;
  *  
  */
 public interface StudentfloorMapper {
+    List<Studentfloor> selList();//查询所有
+
     int selCount();//查询总数
 
     List<Studentfloor> sybase(Pager pager);//分页

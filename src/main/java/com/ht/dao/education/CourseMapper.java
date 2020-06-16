@@ -32,4 +32,7 @@ public interface CourseMapper {
     List<Map> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
 
     List<Coursetype> selCtype();//查询课程类别
+
+    List<Course> selCourse();//查询课程类别
+
 }

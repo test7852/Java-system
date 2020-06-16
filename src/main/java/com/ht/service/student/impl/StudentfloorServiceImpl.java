@@ -21,6 +21,11 @@ public class StudentfloorServiceImpl implements StudentfloorService{
     private StudentfloorMapper studentfloorMapper;
 
     @Override
+    public List<Studentfloor> selList() {
+        return studentfloorMapper.selList();
+    }
+
+    @Override
     public List<Studentfloor> sybase(Pager pager) {
         return studentfloorMapper.sybase(pager);
     }

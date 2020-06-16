@@ -9,35 +9,26 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 600px;margin-left: 30px;}
+    .index{width: 520px;margin-left: 50px;}
     .layui-input{width: 120px;}
     .menu li{float: left;}
     .layui-form-label{margin-top: 15px}
     .layui-input{margin-top: 15px}
-    button{margin-top: 70px;margin-left: 10px}
-
+    button{margin-top: 70px;margin-left: 20px}
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form" th:action="@{/studentClass/add}">
     <div class="index">
         <ul class="menu">
-            <li>
-                <label class="layui-form-label">分班编号：</label>
-                <input  name="classid" required lay-verify="required" placeholder="分班编号" autocomplete="off" class="layui-input">
-            </li>
+<!--            <li>-->
+<!--                <label class="layui-form-label">分班编号：</label>-->
+<!--                <input  name="classid" required lay-verify="required" placeholder="分班编号" autocomplete="off" class="layui-input">-->
+<!--            </li>-->
             <li>
                 <label class="layui-form-label"> 班级编号：</label>
                 <input  name="classno" required lay-verify="required" placeholder="班级编号" autocomplete="off" class="layui-input">
             </li>
-                <li>
-                    <label class="layui-form-label"><i class="layui-icon">&#xe66c;</i> 院系</label>
-                    <input  name="deptid" required lay-verify="required" placeholder="院系" autocomplete="off" class="layui-input">
-                </li>
-                <li>
-                    <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
-                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
-                </li>
             <li>
                 <label class="layui-form-label"> 班级名称：</label>
                 <input  name="classname" required lay-verify="required" placeholder="班级名称" autocomplete="off" class="layui-input">
@@ -46,21 +37,61 @@
                 <label class="layui-form-label"> 班级人数：</label>
                 <input name="count" required lay-verify="required" placeholder="班级人数" autocomplete="off" class="layui-input">
             </li>
-            <li>
-                <label class="layui-form-label"> 授课老师：</label>
-                <input  name="teacher" required lay-verify="required" placeholder="授课老师" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i> 班主任：</label>
-                <input  name="classteacher" required lay-verify="required" placeholder="班主任" autocomplete="off" class="layui-input">
-            </li>
+
+
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe6b2;</i> 备注：</label>
                 <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input">
             </li>
             <li>
-                <label class="layui-form-label">班级类别：</label>
-                <input  name="falled" required lay-verify="required" placeholder="班级类别" autocomplete="off" class="layui-input">
+                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
+                <select name=""  >
+                    <option value="010">北京</option>
+                    <option value="021" disabled>上海（禁用效果）</option>
+                    <option value="0571" selected>杭州</option>
+                </select>
+
+                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
+            </li>
+            <li>
+                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
+                <select name=""  >
+                    <option value="010">北京</option>
+                    <option value="021" disabled>上海（禁用效果）</option>
+                    <option value="0571" selected>杭州</option>
+                </select>
+
+                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
+            </li>
+            <li>
+                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
+                <select name=""  >
+                    <option value="010">北京</option>
+                    <option value="021" disabled>上海（禁用效果）</option>
+                    <option value="0571" selected>杭州</option>
+                </select>
+
+                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
+            </li>
+            <li>
+                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
+                <select name=""  >
+                    <option value="010">北京</option>
+                    <option value="021" disabled>上海（禁用效果）</option>
+                    <option value="0571" selected>杭州</option>
+                </select>
+
+                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
+            </li>
+            <li>
+                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
+                <select name=""  >
+                    <option value="010">北京</option>
+                    <option value="021" disabled>上海（禁用效果）</option>
+                    <option value="0571" selected>杭州</option>
+                </select>
+
+                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
             </li>
         </ul>
         <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button><!--测试提交值的时候把 lay-filter="formDemo"注释掉可直接提交-->

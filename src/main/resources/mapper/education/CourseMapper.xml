@@ -115,12 +115,17 @@
           from course AS a
           INNER JOIN coursetype AS b
           where a.courseTypeId = b.courseTypeId
-          limit #{startRow},#{pageSize}
+          ORDER by courseid desc limit #{startRow},#{pageSize}
         ]]>
   </select>
 
   <!--查询课程类别-->
   <select id="selCtype" resultType="coursetype">
     select * from coursetype;
+  </select>
+
+  <!---->
+  <select id="selCourse" resultType="course">
+    select * from course;
   </select>
 </mapper>

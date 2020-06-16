@@ -39,14 +39,14 @@
     select 
     <include refid="Base_Column_List" />
     from empinfo
-    where emp_Id = #{empId,jdbcType=INTEGER}
+    where emp_Id = #{emp_id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from empinfo
-    where emp_Id = #{empId,jdbcType=INTEGER}
+    where emp_Id = #{emp_id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="emp_Id" keyProperty="empId" parameterType="com.ht.bean.emp.Empinfo" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="emp_Id" keyProperty="emp_id" parameterType="com.ht.bean.emp.Empinfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into empinfo (emp_Name, dep_Id, emp_Sex, 
       Birthday, Cardno, nation, 
@@ -65,7 +65,7 @@
       #{password,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{post_Id,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="emp_Id" keyProperty="empId" parameterType="com.ht.bean.emp.Empinfo" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="emp_Id" keyProperty="emp_id" parameterType="com.ht.bean.emp.Empinfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into empinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -321,7 +321,7 @@
   <!-- 获取所有员工姓名 id-->
   <select id="allEmpName" resultType="com.ht.bean.emp.Empinfo">
     <![CDATA[
-        select * from empinfo where emp_id not in(select chairman from dep)
+        select * from empinfo where emp_Id not in(select chairman from dep)
         ]]>
     </select>
 
@@ -339,4 +339,10 @@
         ]]>
   </select>
 
+  <!--  根据号码名称找员工-->
+  <select id="getEmpByName" resultMap="BaseResultMap">
+    <![CDATA[
+        select * from empinfo where Phone = #{phone}
+       ]]>
+  </select>
 </mapper>

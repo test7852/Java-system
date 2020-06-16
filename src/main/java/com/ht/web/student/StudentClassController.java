@@ -1,9 +1,13 @@
 package com.ht.web.student;
 
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
 import com.ht.bean.student.Student;
 import com.ht.bean.student.Studentclass;
+import com.ht.bean.student.Studentfloor;
+import com.ht.service.emp.EmpinfoService;
 import com.ht.service.student.StudentclassService;
+import com.ht.util.Contants;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 王钟华
@@ -24,6 +29,8 @@ public class StudentClassController {
     private JsonData jsonData;
     @Resource
     private StudentclassService studentclassService;
+    @Resource
+    private EmpinfoService empinfoService;
 
 
     @RequestMapping("data")
@@ -44,6 +51,9 @@ public class StudentClassController {
      */
     @RequestMapping("/toadd")
     public String toadd() {
+        List<Empinfo> lecturer = empinfoService.selByPostId(Contants.POST_CLASS);
+        List<Empinfo> classTeacher = empinfoService.selByPostId(Contants.POST_TEACHER);
+
         return "student/studentClassAdd";
     }
 
@@ -54,8 +64,14 @@ public class StudentClassController {
      */
     @RequestMapping("add")
     public Integer add(Studentclass studentclass){
-        //使用的时候放开注释
-        int i = studentclassService.insertSelective(studentclass);
+        List<Studentclass> list = studentclassService.selList();
+        for (Studentclass studentclass1:list) {
+            if (studentclass.getClassname().equals(studentclass1.getClassname()) || studentclass1.getClassname()==studentclass.getClassname()
+            || studentclass.getClassno().equals(studentclass1.getClassno()) || studentclass1.getClassno()==studentclass.getClassno()){
+                return 0;
+            }
+        }
+        Integer i = studentclassService.insertSelective(studentclass);
         return i;
     }
 
@@ -73,7 +89,7 @@ public class StudentClassController {
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
         System.out.println("id = " + id);
-//(待删除)       studentclassService.deleteByPrimaryKey(id);
+       studentclassService.deleteByPrimaryKey(id);
         return "redirect:studentClass/list";
     }
 
@@ -83,10 +99,15 @@ public class StudentClassController {
      */
     @RequestMapping("update")
     @ResponseBody
-    public Integer updata(Studentclass studentclass){
-        System.out.println("studentclass = " + studentclass.toString());
-        int updatacurr = studentclassService.updateByPrimaryKeySelective(studentclass);
-        System.out.println(updatacurr);
-        return updatacurr;
+    public Integer updata(Studentclass studentclass) {
+        List<Studentclass> list = studentclassService.selList();
+        for (Studentclass studentclass1 : list) {
+            if (studentclass.getClassname().equals(studentclass1.getClassname()) || studentclass1.getClassname() == studentclass.getClassname()
+                    || studentclass.getClassno().equals(studentclass1.getClassno()) || studentclass1.getClassno() == studentclass.getClassno()) {
+                return 0;
+            }
+        }
+        Integer i = studentclassService.updateByPrimaryKeySelective(studentclass);
+        return i;
     }
 }

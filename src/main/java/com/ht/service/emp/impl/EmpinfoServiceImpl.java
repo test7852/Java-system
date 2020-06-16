@@ -1,5 +1,6 @@
 package com.ht.service.emp.impl;
 
+import com.ht.bean.emp.Dep;
 import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -48,6 +49,11 @@ public class EmpinfoServiceImpl implements EmpinfoService{
     @Override
     public Empinfo selectcrux(Empinfo empinfo) {
         return empinfoMapper.selectcrux(empinfo);
+    }
+
+    @Override
+    public Empinfo getEmpByName(Empinfo empinfo) {
+        return empinfoMapper.getEmpByName(empinfo);
     }
 
     @Override

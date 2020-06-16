@@ -2,6 +2,7 @@ package com.ht.dao.education;
 
 import com.ht.bean.education.Coursetype;
 import com.ht.bean.emp.Empinfo;
+import com.ht.bean.emp.Post;
 import org.apache.ibatis.annotations.Param;
 
 import org.springframework.stereotype.Repository;
@@ -31,4 +32,5 @@ public interface CoursetypeMapper {
 
     List<Coursetype> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
 
+    Coursetype selname(String coursetypename);
 }

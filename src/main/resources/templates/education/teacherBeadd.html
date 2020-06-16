@@ -35,7 +35,7 @@
 						<option value="星期四">星期四</option>
 						<option value="星期五">星期五</option>
 						<option value="星期六">星期六</option>
-						<option value="星期七">星期七</option>
+						<option value="星期日">星期日</option>
 					</select>
 				</li>
 				<li>
@@ -58,7 +58,7 @@
 					<input name="explain" required lay-verify="required" autocomplete="off" class="layui-input">
 				</li>
 				<li>
-					 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					 <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
 					 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
 				</li>
 			</ul>
@@ -66,8 +66,18 @@
 		
 		</form>
 	</body>
+	<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
 	<script type="text/javascript" th:inline="none">
-			layui.use('form', function(){
+
+        function gbi() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            window.parent.location.reload();
+
+        }
+
+        layui.use('form', function(){
 			  var form = layui.form;
 
 			  //监听提交

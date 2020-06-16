@@ -32,6 +32,13 @@ public interface DeptService{
      */
     Dept selectByName(String deptName);
 
+    /**
+     *
+     * @return
+     * 获取所有系
+     */
+    List<Dept> allDept();
+
 
     int deleteByPrimaryKey(Integer deptid);
 

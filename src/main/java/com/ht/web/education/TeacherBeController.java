@@ -43,6 +43,7 @@ public class TeacherBeController {
         pager.setPageSize(limit);
         jsonData.setCount(teacherbeService.selTea());
         jsonData.setData(teacherbeService.selByPage(pager));
+//        System.out.println("jsonData = " + jsonData.getData().toString());
         return jsonData;
     }
 
@@ -62,7 +63,7 @@ public class TeacherBeController {
         List<Empinfo> empinfos = teacherbeService.listEmp();
         map.put("elist",empinfos);
         map.put("tlist",teacherbe);
-        return "education/teacherBeupd";
+        return "education/teacherbeupd";
     }
 
     //值班管理  修改
