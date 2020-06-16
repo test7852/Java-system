@@ -121,7 +121,13 @@
 <!--  根据父id查找父级部门-->
   <select id="getDepByFid" resultType="com.ht.bean.emp.Dep">
     <![CDATA[
-      select * from dep where depid = #{parentid}
+      select * from dep where depid = #{fid}
+    ]]>
+  </select>
+  <!--  根据id查找子级部门-->
+  <select id="getDepByid" resultType="com.ht.bean.emp.Dep">
+    <![CDATA[
+      select * from dep where parentid = #{id}
     ]]>
   </select>
   <!-- 获取所有一级部门-->

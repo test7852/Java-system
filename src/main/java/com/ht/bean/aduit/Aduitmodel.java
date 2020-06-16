@@ -1,4 +1,4 @@
-package com.ht.bean.emp;
+package com.ht.bean.aduit;
 
 import lombok.Data;
 
@@ -33,4 +33,9 @@ public class Aduitmodel {
     * 说明
     */
     private String remark;
+
+    /**
+     * 用来存放部门姓名
+     */
+    private String depname;
 }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.aduit.EquipmentrepairCopy1Mapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.aduit.EquipmentrepairCopy1">
+    <!--@mbg.generated-->
+    <!--@Table equipmentrepair_copy1-->
+    <id column="equipmentId" jdbcType="INTEGER" property="equipmentid" />
+    <result column="equipmenttype" jdbcType="VARCHAR" property="equipmenttype" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="classes" jdbcType="INTEGER" property="classes" />
+    <result column="student" jdbcType="INTEGER" property="student" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="depId" jdbcType="INTEGER" property="depid" />
+    <result column="usertype" jdbcType="INTEGER" property="usertype" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    equipmentId, equipmenttype, `status`, classes, student, remark, depId, usertype, 
+    starttime, endtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from equipmentrepair_copy1
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from equipmentrepair_copy1
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="equipmentId" keyProperty="equipmentid" parameterType="com.ht.bean.aduit.EquipmentrepairCopy1" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into equipmentrepair_copy1 (equipmenttype, `status`, classes, 
+      student, remark, depId, 
+      usertype, starttime, endtime
+      )
+    values (#{equipmenttype,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{classes,jdbcType=INTEGER}, 
+      #{student,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{depid,jdbcType=INTEGER}, 
+      #{usertype,jdbcType=INTEGER}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="equipmentId" keyProperty="equipmentid" parameterType="com.ht.bean.aduit.EquipmentrepairCopy1" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into equipmentrepair_copy1
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="equipmenttype != null">
+        equipmenttype,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="classes != null">
+        classes,
+      </if>
+      <if test="student != null">
+        student,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="depid != null">
+        depId,
+      </if>
+      <if test="usertype != null">
+        usertype,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="equipmenttype != null">
+        #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="classes != null">
+        #{classes,jdbcType=INTEGER},
+      </if>
+      <if test="student != null">
+        #{student,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null">
+        #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null">
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.aduit.EquipmentrepairCopy1">
+    <!--@mbg.generated-->
+    update equipmentrepair_copy1
+    <set>
+      <if test="equipmenttype != null">
+        equipmenttype = #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="classes != null">
+        classes = #{classes,jdbcType=INTEGER},
+      </if>
+      <if test="student != null">
+        student = #{student,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null">
+        depId = #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null">
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.aduit.EquipmentrepairCopy1">
+    <!--@mbg.generated-->
+    update equipmentrepair_copy1
+    set equipmenttype = #{equipmenttype,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      classes = #{classes,jdbcType=INTEGER},
+      student = #{student,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      depId = #{depid,jdbcType=INTEGER},
+      usertype = #{usertype,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=VARCHAR}
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </update>
+</mapper>
