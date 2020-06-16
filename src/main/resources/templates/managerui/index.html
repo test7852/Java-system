@@ -24,6 +24,7 @@
         <!-- Theme Styles -->
         <link th:href="@{/assets/css/ecaps.min.css}" rel="stylesheet">
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
+        <link rel="icon" th:href="@{/img/manager/register/logo.png}" type="image/png">
 
         <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
         <script th:src="@{/layui/layui.js}"></script>
@@ -55,6 +56,7 @@
             margin-left: -25px;
             margin-right: -40px;
         }
+        ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
     </style>
     <body>
 
@@ -312,7 +314,7 @@
                 <div class="page-inner">
                     <!--引入页面-->
                     <article style="" id="main-wrapper">
-                        <div class="layui-tab" lay-allowClose="true" lay-filter="demo">
+                        <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="demo">
                             <ul class="layui-tab-title" id="layui_tab">
                                 <li lay-id="shouye" class="layui-this">
                                     首页
