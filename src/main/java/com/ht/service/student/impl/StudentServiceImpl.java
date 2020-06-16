@@ -60,4 +60,9 @@ public class StudentServiceImpl implements StudentService{
         return studentMapper.getTotalRow();
     }
 
+    @Override
+    public List<Student> allStu() {
+        return studentMapper.allStu();
+    }
+
 }

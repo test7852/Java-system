@@ -1,7 +1,12 @@
 package com.ht.web.student;
 
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Replyscore;
+import com.ht.bean.student.Student;
 import com.ht.bean.student.Studentreplyscore;
+import com.ht.service.student.ReplyscoreService;
+import com.ht.service.student.StudentService;
 import com.ht.service.student.StudentreplyscoreService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -10,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,12 +28,17 @@ import java.util.Map;
 @RequestMapping("reply")
 public class StudentreplyscoreController {
     @Resource
-    private StudentreplyscoreService studentreplyscoreService;
+    private StudentreplyscoreService studentreplyscoreService;// 学生答辩
+    @Resource
+    private StudentService studentService;//学生
+    @Resource
+    private ReplyscoreService replyscoreService;//学生答辩成绩中间表
     //去到列表
     @RequestMapping("replyUi")
     public String stusclistUi(){
         return "student/replylist";
     }
+
     //加载数据
     @Resource
     private JsonData jsonData;
@@ -48,7 +60,9 @@ public class StudentreplyscoreController {
      * 去添加页面
      */
     @RequestMapping("toadd")
-    public String toadd(){
+    public String toadd(Map map){
+        List<Student> studentList= studentService.allStu();
+        map.put("student", studentList);
         return "student/replyadd";
     }
 
@@ -59,9 +73,18 @@ public class StudentreplyscoreController {
      */
     @RequestMapping("add")
     @ResponseBody
-    public String add(Studentreplyscore studentreplyscore){
+    public String add(Studentreplyscore studentreplyscore,HttpSession session){
+        Empinfo empinfo= (Empinfo)session.getAttribute("user");
+        studentreplyscore.setEmpid(empinfo.getEmp_id());
         studentreplyscoreService.insert(studentreplyscore);
-        return "";
+        System.out.println("studentreplyscore添加："+studentreplyscore);
+        Student stu=studentService.selectByPrimaryKey(studentreplyscore.getStudentid());
+        Replyscore replyscore =new Replyscore();
+        replyscore.setEmpid(studentreplyscore.getStudentid());
+        replyscore.setClazz(String.valueOf(stu.getClazz()));
+        replyscore.setReplyid(studentreplyscore.getReplyid());
+        replyscoreService.insert(replyscore);
+        return "true";
     }
 
     /**

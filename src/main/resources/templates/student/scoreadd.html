@@ -19,12 +19,14 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/score/add}">
+<form class="layui-form">
     <div class="index">
         <ul class="menu">
             <li>
                 <label class="layui-form-label">学生id：</label>
-                <input  name="stuid" required lay-verify="required" placeholder="学生表外键" autocomplete="off" class="layui-input"/>
+                <select name="stuid">
+                    <option th:each="s:${student}" th:value="${s.studid}" th:text="${s.stuname}"></option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">学生成绩：</label>
@@ -37,7 +39,10 @@
             </br>
             <li>
                 <label class="layui-form-label">关联课程：</label>
-                <input  name="courseid" required lay-verify="required" placeholder="关联课程id" autocomplete="off" class="layui-input"/>
+                <select name="courseid">
+                    <option th:each="p:${course}" th:value="${p.courseid}" th:text="${p.coursename}"></option>
+                </select>
+
             </li>
             <li>
                 <label class="layui-form-label">关联学期：</label>
@@ -45,11 +50,8 @@
             </li>
             <li>
                 <label class="layui-form-label">考试时间：</label>
-                <input  name="scoretime" required lay-verify="required" placeholder="考试时间" autocomplete="off" class="layui-input"/>
-            </li>
-            <li>
-                <label class="layui-form-label">录入人员：</label>
-                <input  name="empid" required lay-verify="required" placeholder="录入人员" autocomplete="off" class="layui-input"/>
+
+                <input type="text" class="layui-input" id="test2" name="scoretime" required lay-verify="required" placeholder="考试时间"/>
             </li>
             <li>
                 <label class="layui-form-label">备注：</label>
@@ -73,15 +75,44 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
-    layui.use('form', function(){
-        var form = layui.form;
 
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test2' //指定元素
+        });
+    });
+
+    layui.use('form', function(){
+         var form = layui.form;
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return true;
+            $.ajax({
+                url: '/score/add',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data){
+                        layer.msg(JSON.stringify("添加成功"));
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        window.parent.location.reload();
+                    }
+                },
+            })
+            //$('.layui-laypage-btn').click();//刷新
+            return false;
         });
     });
+
+
+
+
+
 </script>
 </html>

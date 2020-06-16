@@ -26,4 +26,6 @@ public interface StudentMapper {
     List<Student> allPageStu(Pager pager);
 
     int getTotalRow();
+
+    List<Student> allStu();
 }
