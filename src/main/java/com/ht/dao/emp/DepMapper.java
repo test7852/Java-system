@@ -57,4 +57,10 @@ public interface DepMapper {
      */
     Dep getDepByName(Dep dep);
 
+    /**
+     * @return
+     * 获取所有部门
+     */
+    List<Dep> list();
+
 }

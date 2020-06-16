@@ -31,6 +31,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> selolist() {
+        return postMapper.selolist();
+    }
+
+    @Override
+    public List<Post> elselist() {
+        return postMapper.elselist();
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer posId) {
         return postMapper.deleteByPrimaryKey(posId);
     }

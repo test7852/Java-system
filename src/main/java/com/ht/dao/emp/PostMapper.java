@@ -28,6 +28,18 @@ public interface PostMapper {
      */
     Post selectByName(String postName);
 
+    /**
+     * @return
+     * 查找所有不在校长和副校长的职位
+     */
+    List<Post> selolist();
+
+    /**
+     * @return
+     * 查找校长和副校长的职位
+     */
+    List<Post> elselist();
+
     int deleteByPrimaryKey(Integer posId);
 
     int insert(Post record);

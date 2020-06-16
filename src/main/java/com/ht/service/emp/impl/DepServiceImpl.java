@@ -75,4 +75,9 @@ public class DepServiceImpl implements DepService{
         return depMapper.getDepByName(dep);
     }
 
+    @Override
+    public List<Dep> list() {
+        return depMapper.list();
+    }
+
 }
