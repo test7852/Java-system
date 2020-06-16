@@ -1,6 +1,9 @@
 package com.ht.web.student;
 
+import com.ht.bean.emp.Dep;
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Dept;
 import com.ht.bean.student.Major;
 import com.ht.service.emp.DepService;
 import com.ht.service.student.DeptService;
@@ -43,7 +46,15 @@ public class MajorController {
         pager.setPageSize(limit);
         pager.setCurrPage(page);
         jsonData.setCount(majorService.selCount());
-        jsonData.setData(majorService.sybase(pager));
+        List<Major> majorList = majorService.sybase(pager);
+        for(Major major : majorList){
+            Dept dept = deptService.selectByPrimaryKey(major.getDeptid());
+            if(dept != null){
+                major.setDeptname(dept.getDeptname());
+            }
+
+        }
+        jsonData.setData(majorList);
         return jsonData;
     }
 
@@ -103,8 +114,8 @@ public class MajorController {
 
     @RequestMapping("toAdd")
     public String toAdd(Map map){
-//        List l = deptService.();
-//        map.put("deps",l);
+        List l = deptService.allDept();
+        map.put("depts",l);
         return "/student/majoradd";
     }
 }
