@@ -72,9 +72,12 @@ public class CourseTypeController {
     //新增
     @RequestMapping("/coursetypeadd")
     @ResponseBody
-    public Integer coursetypeadd(Coursetype coursetype){
-        System.out.println(coursetype);
-        int insert = coursetypeService.insert(coursetype);
-        return insert;
+    public Boolean coursetypeadd(Coursetype coursetype){
+
+        if( coursetype == null){//如果数据库没有这个姓名就可以新增
+            coursetypeService.insert(coursetype);
+            return true;
+        }
+        return false;
     }
 }

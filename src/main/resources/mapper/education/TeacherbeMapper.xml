@@ -127,7 +127,7 @@
   <select id="selbypage" resultType="teacherbe">
     <!--<bind name="kais" value="(currPage-1)*pageSize"></bind>-->
     <![CDATA[
-          select * from teacherbe limit #{startRow},#{pageSize};
+          select * from teacherbe ORDER by beid desc limit #{startRow},#{pageSize};
         ]]>
   </select>
 
