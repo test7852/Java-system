@@ -103,7 +103,7 @@ public class MajorController {
 
     @RequestMapping("toAdd")
     public String toAdd(Map map){
-//        List l = deptService();
+//        List l = deptService.();
 //        map.put("deps",l);
         return "/student/majoradd";
     }
