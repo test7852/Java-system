@@ -36,8 +36,14 @@
 <body>
 <!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-event="data">
+    <a class="layui-btn layui-btn-xs" lay-event="search">
         <i class="layui-icon">&#xe615;</i>查看周报
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe642;</i>编辑
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+        <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 </script>
 <!--搜索栏-->
@@ -63,6 +69,7 @@
         </div>
         <label class="layui-form-label">验证</label>
         <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 搜索</button>
+        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
 </div>
 
@@ -81,7 +88,7 @@
             <th lay-data="{field:'studentQuestion',edit: 'false'}">问题学生情况反馈</th>
             <th lay-data="{field:'Idea', edit: 'false'}">意见建议</th>
             <th lay-data="{field:'weekNext',edit: 'false'}">下周工作计划</th>
-            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar'}"></th>
+            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar',width:255}"></th>
         </tr>
         </thead>
     </table>
@@ -94,19 +101,58 @@
     layui.use('table', function () {
         var table = layui.table;
 
+        //查看周报
+        function search(id) {
+            layer.open({
+                type: 2,
+                title: '查看周报',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['800px', '600px'],
+                content: '/workdiary/searchwork?worklogid='+id//这是链接你的页面地址 url
+            })
+        }
+
+        //编辑周报
+        function edit(id) {
+            layer.open({
+                type: 2,
+                title: '编辑周报',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['800px', '600px'],
+                content: '/workdiary/toeditwork?worklogid='+id//这是链接你的页面地址 url
+            })
+        }
+
+        //添加周报
+        $("#add").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '添加周报',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['800px', '600px'],
+                content: ['/workdiary/toaddwork']//这是链接你的页面地址 url
+            });
+        })
+
+
         //监听行工具事件
-        table.on('tool(bar)', function (obj) {
+        table.on('tool(tab)', function (obj) {
+
             var data = obj.data;
-            //console.log(obj)
-            if (obj.event === 'del') {
+            var id = data.worklogid;
+            if (obj.event === 'search') {
+                search(id);
+            }else if(obj.event === 'edit'){
+                edit(id);
+            }else if(obj.event === 'del'){
                 layer.confirm('真的删除么?', function (index) {
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/emp/del',
+                        url: '/workdiary/delworkdiary',
                         type: 'post',
                         data: {
-                            id:data.emp_id
+                            id:data.worklogid
                         },
                         dataType: 'text'
                     })

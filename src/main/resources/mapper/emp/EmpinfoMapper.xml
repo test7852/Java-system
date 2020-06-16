@@ -129,7 +129,7 @@
       <if test="status != null">
         `status`,
       </if>
-      <if test="postId != null">
+      <if test="post_Id != null">
         post_Id,
       </if>
     </trim>
@@ -331,5 +331,12 @@
         select * from empinfo where post_id=#{postid}
         ]]>
     </select>
+
+  <!-- 根据宏图部门找唯一职位-->
+  <select id="selectcrux" resultType="com.ht.bean.emp.Empinfo">
+    <![CDATA[
+        select * from empinfo where dep_id=#{dep_id} and post_id=#{post_Id}
+        ]]>
+  </select>
 
 </mapper>

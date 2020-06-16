@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,13 +86,26 @@ public class EmpController {
      */
     @RequestMapping("toadd")
     public String toadd(Model model){
-
+        List<Dep> deps = depService.list();
+        model.addAttribute("deps",deps);
         return "emp/empadd";
+    }
+
+    @RequestMapping("selectpost")
+    @ResponseBody
+    public List<Post> selectpost(Integer id,Empinfo empinfo){
+        if(id == 1){
+            List<Post> list = postService.elselist();
+            return list;
+        }
+        List<Post> list = postService.selolist();
+        return list;
     }
 
     @RequestMapping("add")
     public void add(Empinfo empinfo) {
-
+        System.out.println("添加成功");
+        empinfo.setStatus(Contants.STATUS_SU);//默认开启
         empinfoService.insert(empinfo);
     }
 

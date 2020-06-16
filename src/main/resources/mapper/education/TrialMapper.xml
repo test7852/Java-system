@@ -141,7 +141,7 @@
     <![CDATA[
           select * from trial, course, empinfo
           WHERE trial.courseid = course.courseid AND trial.empid = empinfo.emp_Id
-          limit #{startRow},#{pageSize}
+          ORDER by trialid desc limit #{startRow},#{pageSize}
         ]]>
   </select>
 

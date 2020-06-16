@@ -46,6 +46,13 @@ public interface EmpinfoMapper {
      */
     List<Empinfo> selByPostId(int postid);
 
+    /**
+     * @param empinfo
+     * @return
+     * 找宏图软件找唯一职位
+     */
+    Empinfo selectcrux(Empinfo empinfo);
+
     int deleteByPrimaryKey(Integer empId);
 
     int insert(Empinfo record);

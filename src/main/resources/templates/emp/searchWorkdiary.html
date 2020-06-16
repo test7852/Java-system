@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="work:${list}">
+    <p style="margin:0pt 0pt 10pt; text-align:center">
+        <span style="font-family:黑体; font-size:25pt">懵逼树工作周报</span>
+    </p>
+    <center>
+    <p style="margin:0pt 0pt 10pt">
+        部门：<span style="font-family:微软雅黑; font-size:11pt" th:text="${work.depName}"></span>
+        <span style="font-family:微软雅黑; font-size:11pt">&nbsp; </span>
+        <span style="width:32.12pt; text-indent:0pt; display:inline-block"></span>
+        <span style="width:36pt; text-indent:0pt; display:inline-block"></span>
+        姓名：<span style="font-family:微软雅黑; font-size:11pt" th:text="${work.emp_Name}"></span>
+        <span style="width:3pt; text-indent:0pt; display:inline-block"></span>
+        <span style="width:36pt; text-indent:0pt; display:inline-block"></span>
+        <span style="width:36pt; text-indent:0pt; display:inline-block"></span>
+        时间：<span style="font-family:微软雅黑; font-size:11pt" th:text="${work.Workday}"></span>
+    </p>
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt; width:428.35pt;margin: 0px auto">
+        <tbody><tr style="height:204.2pt">
+            <td rowspan="3" style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:middle; width:15.9pt">
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">本</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">周</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">总</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">结</span></p>
+            </td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:middle; width:25.3pt">
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">本</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">周</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">情</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">况</span></p>
+            </td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:354pt">
+                <p style="margin:0pt"><span style="font-family:Tahoma; font-size:11pt" th:text="${work.weekCur}"></span></p></td>
+        </tr>
+        <tr style="height:69.2pt">
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:middle; width:25.3pt">
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">问题学生</span></p>
+            </td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:354pt">
+                <p style="margin:0pt"><span style="font-family:Tahoma; font-size:11pt" th:text="${work.studentQuestion}"></span></p></td>
+        </tr>
+        <tr style="height:85.2pt">
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:middle; width:25.3pt">
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">意见建议</span></p>
+            </td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:354pt">
+                <p style="margin:0pt"><span style="font-family:Tahoma; font-size:11pt" th:text="${work.Idea}"></span></p></td>
+        </tr>
+        <tr style="height:241.25pt">
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:middle; width:15.9pt">
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">下</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">周</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">计</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:Tahoma; font-size:11pt">&nbsp;</span>
+                </p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">划</span></p>
+            </td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:middle; width:25.3pt">
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">下</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">周</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">计</span></p>
+                <p style="margin:0pt; text-align:center"><span style="font-family:微软雅黑; font-size:11pt">划</span></p>
+            </td>
+            <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:354pt">
+                <p style="margin:0pt"><span style="font-family:Tahoma; font-size:11pt" th:text="${work.weekNext}"></span></p></td>
+        </tr>
+        </tbody></table>
+    </center>
+</div>
+</body>
+</html>

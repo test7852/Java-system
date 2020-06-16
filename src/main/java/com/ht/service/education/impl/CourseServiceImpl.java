@@ -67,5 +67,10 @@ public class CourseServiceImpl implements CourseService{
         return courseMapper.selCtype();
     }
 
+    @Override
+    public List<Course> selCourse() {
+        return courseMapper.selCourse();
+    }
+
 
 }

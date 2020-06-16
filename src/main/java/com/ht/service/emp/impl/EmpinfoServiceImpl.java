@@ -46,6 +46,11 @@ public class EmpinfoServiceImpl implements EmpinfoService{
     }
 
     @Override
+    public Empinfo selectcrux(Empinfo empinfo) {
+        return empinfoMapper.selectcrux(empinfo);
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer empId) {
         return empinfoMapper.deleteByPrimaryKey(empId);
     }

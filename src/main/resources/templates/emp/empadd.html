@@ -19,7 +19,7 @@
 	::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" action="">
+<form class="layui-form" action="/emp/add" method="post">
 	<div class="index">
 		<ul class="menu">
 			<li>
@@ -33,9 +33,16 @@
 
 			<li>
 				<label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 部门：</label>
-				<select name="dep_id" lay-verify="required">
-					<option value="1">本科</option>
-					<option value="2">专科</option>
+				<select lay-filter="selectTheme" id="board" name="dep_id">
+					<option value="0"></option>
+					<option th:each="e:${deps}"th:value="${e.depid}" th:text="${e.depname}">部门</option>
+				</select>
+			</li>
+
+			<li>
+				<label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 职位：</label>
+				<select id="theme" name="post_Id">
+					<option></option>
 				</select>
 			</li>
 
@@ -76,7 +83,6 @@
 				<label class="layui-form-label">邮箱地址：</label>
 				<input style="width: 350px;"  name="email" required lay-verify="required" placeholder="邮箱地址" autocomplete="off" class="layui-input">
 			</li>
-
 
 			<li>
 				<label class="layui-form-label">家庭地址：</label>
@@ -125,11 +131,32 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
-    layui.use(['form','laydate'], function(){
+	layui.use(['form','laydate'], function(){
         var form = layui.form;
         var laydate=layui.laydate;
 
-        $("#identity").on('click',function(){
+
+		form.on('select(selectTheme)', function (data) {//对应lay-filter="selectTheme"
+			var index1 = $('#board option:selected').val();//对应id="board"  得到一级菜单选中值的value
+			var optionJson = [];
+			$.ajax({
+				url: "/emp/selectpost",//对应controller层
+				type: "post",
+				data: {"id": index1},//将选中值的value传给controller
+				datatype: "json",
+				success: function (data) {
+					optionJson = data;
+					var selectObj = document.getElementById("theme");//对应id="theme"
+					selectObj.options.length = 0;
+					for (var i = 0; i < data.length; i++) {
+						selectObj.add(new Option(optionJson[i].pos_Name, optionJson[i].pos_Id));//对应数据库中名字，两个参数是(文本,value)
+					}
+					form.render();
+				}
+			})
+		});
+
+		$("#identity").on('click',function(){
             layer.tips('认真填写身份证信息', '#identity');
         })
 
@@ -148,7 +175,7 @@
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
             layer.msg(JSON.stringify(data.field));
-            return false;
+            return true;
         });
     });
 </script>

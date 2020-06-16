@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+</head>
+<body>
+<form class="layui-form" th:action="@{/workdiary/addwork}">
+    <ul class="menu">
+        <input type="hidden" th:value="${emp.emp_id}" name="emp_id">
+        <input type="hidden" th:value="${emp.dep_id}" name="dep_id">
+        <li>
+            <label class="layui-form-label">本周情況描述：</label>
+            <textarea name="weekcur" class="layui-textarea"></textarea>
+        </li>
+
+        <li>
+            <label class="layui-form-label">问题学生情况反馈：</label>
+            <textarea name="studentquestion" class="layui-textarea"></textarea>
+        </li>
+
+        <li>
+            <label class="layui-form-label">意见建议：</label>
+            <textarea name="idea" class="layui-textarea"></textarea>
+        </li>
+
+        <li>
+            <label class="layui-form-label">下周工作计划：</label>
+            <textarea name="weeknext" class="layui-textarea"></textarea>
+        </li>
+        <li>
+            <button class="layui-btn" onclick="ok()" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </li>
+    </ul>
+</form>
+</body>
+<script type="text/javascript">
+
+    function ok() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+        window.parent.location.reload();
+    }
+
+</script>
+</html>

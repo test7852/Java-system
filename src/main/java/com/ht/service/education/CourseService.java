@@ -33,5 +33,5 @@ public interface CourseService{
 
     List<Coursetype> selCtypes();//查询课程类别
 
-
+    List<Course> selCourse();
 }

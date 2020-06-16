@@ -86,7 +86,13 @@
   <!--分页查询-->
   <select id="selbypage" resultType="coursetype">
     <![CDATA[
-          select * from coursetype limit #{startRow},#{pageSize};
+          select * from coursetype ORDER by courseTypeId desc limit #{startRow},#{pageSize};
         ]]>
   </select>
+
+  <!--判断姓名是否重复-->
+  <select id="selName" resultType="coursetype">
+    select * from coursetype where courseTypeName = #{coursetypename};
+  </select>
+
 </mapper>

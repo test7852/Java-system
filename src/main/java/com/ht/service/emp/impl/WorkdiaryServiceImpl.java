@@ -1,5 +1,6 @@
 package com.ht.service.emp.impl;
 
+import com.ht.bean.emp.Dep;
 import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -37,6 +38,10 @@ public class WorkdiaryServiceImpl implements WorkdiaryService{
         return workdiaryMapper.myworkdiary(empid);
     }
 
+    @Override
+    public List<Workdiary> searchWorkdiary(Integer id) {
+        return workdiaryMapper.searchWorkdiary(id);
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer worklogid) {

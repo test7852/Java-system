@@ -136,4 +136,10 @@
         select * from dep where depname = #{depname} and parentid = #{parentid}
        ]]>
     </select>
+<!--  获取所有部门-->
+  <select id="list" resultType="com.ht.bean.emp.Dep">
+    <![CDATA[
+        select * from dep
+       ]]>
+  </select>
 </mapper>

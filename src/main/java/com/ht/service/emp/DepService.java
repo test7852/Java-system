@@ -55,4 +55,10 @@ public interface DepService{
      */
     Dep getDepByName(Dep dep);
 
+    /**
+     * @return
+     * 获取所有部门
+     */
+    List<Dep> list();
+
 }
