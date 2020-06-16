@@ -14,6 +14,12 @@
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 	</head>
 	<style>
+    .utable .layui-laypage .layui-laypage-curr .layui-laypage-em {
+            background-color: #1E9FFF;
+    }
+    .layui-table-page {
+            text-align: center;
+    }
     .layui-table {
         text-align: center;
     }
@@ -59,7 +65,10 @@
     </a>
 	</script>
 <!--表格-->
-<table class="layui-table" id="demo" lay-filter="demo"></table>
+<div class="utable">
+    <table class="layui-table" id="demo" lay-filter="demo"></table>
+</div>
+
 </body>
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
@@ -71,8 +80,8 @@
         table.render({
             elem: '#demo'
             ,id: 'tab'
-            ,height: 650
-            ,width: 1150
+            ,height: 600
+            ,width: 1200
             ,url: '/emp/empdata' //数据接口
             ,page: true //开启分页
             ,toolbar: '#toolbarDemo'

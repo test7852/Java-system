@@ -43,6 +43,7 @@ public class TeacherBeController {
         pager.setPageSize(limit);
         jsonData.setCount(teacherbeService.selTea());
         jsonData.setData(teacherbeService.selByPage(pager));
+//        System.out.println("jsonData = " + jsonData.getData().toString());
         return jsonData;
     }
 

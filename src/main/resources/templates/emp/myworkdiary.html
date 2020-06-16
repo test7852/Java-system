@@ -32,9 +32,12 @@
     .layui-table-view tbody td {
         text-align: center;
     }
+    .layui-form-label{
+
+    }
 </style>
 <body>
-<!--数据表格样式及附件-->
+<!--表格功能-->
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-xs" lay-event="search">
         <i class="layui-icon">&#xe615;</i>查看周报
@@ -46,30 +49,27 @@
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 </script>
+
+<!--头工具栏-->
+<script id="toolbarDemo" type="text/html">
+    <div class="layui-btn-container">
+        <button id="add" class="layui-btn layui-btn-sm">新增</button>
+    </div>
+</script>
+
 <!--搜索栏-->
-<div class="layui-form-item">
-    <div class="layui-inline">
-
-        <div class="layui-input-inline">
-            <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">日期范围</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="startandend">
+            </div>
         </div>
-        <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-
-        <div class="layui-input-inline">
-            <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        <div class="layui-inline">
+            <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 搜索</button>
+            <!--<button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>-->
         </div>
-        <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-
-        <div class="layui-input-inline">
-            <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">验证</label>
-        <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 搜索</button>
-        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
 </div>
 
@@ -158,7 +158,18 @@
                     })
                 });
             }
-        })
+        });
+
+
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //日期范围
+            laydate.render({
+                elem: '#startandend'
+                ,range: true
+            });
+        });
     });
 </script>
 </html>

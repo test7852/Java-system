@@ -8,6 +8,9 @@
     <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
     <script th:src="@{/layui/layui.js}"></script>
 </head>
+<style>
+    ::-webkit-scrollbar {display:none}
+</style>
 <body>
 <form class="layui-form" th:action="@{/workdiary/editwork}">
     <ul class="menu" th:each="work:${list}">
