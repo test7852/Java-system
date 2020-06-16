@@ -93,6 +93,11 @@
     ]]>
   </select>
 
-
+  <!--  获取所有系-->
+  <select id="allDept" resultType="com.ht.bean.student.Dept">
+    <![CDATA[
+      select * from dept
+    ]]>
+  </select>
 
 </mapper>

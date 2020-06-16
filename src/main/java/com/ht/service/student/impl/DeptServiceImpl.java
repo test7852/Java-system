@@ -36,6 +36,11 @@ public class DeptServiceImpl implements DeptService{
     }
 
     @Override
+    public List<Dept> allDept() {
+        return deptMapper.allDept();
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer deptid) {
         return deptMapper.deleteByPrimaryKey(deptid);
     }
