@@ -35,32 +35,30 @@
             </br>
             <li>
                 <label class="layui-form-label">功能完善：</label>
-                <input  name="score1" required lay-verify="required" placeholder="功能完善50" autocomplete="off" class="layui-input"/>
+                <input  name="score1" required lay-verify="required" placeholder="功能完善50" autocomplete="off" class="layui-input"  onkeyup="scores(this.value)"/>
+
             </li>
             <li>
                 <label class="layui-form-label">技术难度：</label>
-                <input  name="score2" required lay-verify="required" placeholder="技术难度10" autocomplete="off" class="layui-input"/>
+                <input  name="score2" required lay-verify="required" placeholder="技术难度10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">界面完美：</label>
-                <input  name="score3" required lay-verify="required" placeholder="界面完美10" autocomplete="off" class="layui-input"/>
+                <input  name="score3" required lay-verify="required" placeholder="界面完美10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">回答问题：</label>
-                <input  name="score4" required lay-verify="required" placeholder="回答问题10" autocomplete="off" class="layui-input"/>
+                <input  name="score4" required lay-verify="required" placeholder="回答问题10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">演示方法：</label>
-                <input  name="score5" required lay-verify="required" placeholder="演示方法10" autocomplete="off" class="layui-input"/>
+                <input  name="score5" required lay-verify="required" placeholder="演示方法10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">语言表达：</label>
-                <input  name="score6" required lay-verify="required" placeholder="语言表达10" autocomplete="off" class="layui-input"/>
+                <input  name="score6" required lay-verify="required" placeholder="语言表达10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
-            <li>
-                <label class="layui-form-label">总分100：</label>
-                <input  name="score7" required lay-verify="required" placeholder="总分100" autocomplete="off" class="layui-input"/>
-            </li>
+
             <li>
                 <label class="layui-form-label">备注：</label>
                 <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input"/>
@@ -75,6 +73,26 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
+
+    function score(o){
+        var value=o.value;
+        var min=0;
+        var max=10;
+        if(parseInt(value)<min||parseInt(value)>max){
+            alert('输入错误');
+            o.value='';
+        }
+    }
+
+    function scores(c){
+        var value=c;
+        var min=0;
+        var max=50;
+        if(parseInt(value)<min||parseInt(value)>max){
+            alert('输入错误');
+            value='';
+        }
+    }
 
 
     layui.use('form', function(){

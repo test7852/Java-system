@@ -76,6 +76,8 @@ public class StudentreplyscoreController {
     public String add(Studentreplyscore studentreplyscore,HttpSession session){
         Empinfo empinfo= (Empinfo)session.getAttribute("user");
         studentreplyscore.setEmpid(empinfo.getEmp_id());
+        int i= Integer.parseInt(studentreplyscore.getScore1())+Integer.parseInt(studentreplyscore.getScore2())+Integer.parseInt(studentreplyscore.getScore3())+Integer.parseInt(studentreplyscore.getScore4())+Integer.parseInt(studentreplyscore.getScore5())+Integer.parseInt(studentreplyscore.getScore6());
+        studentreplyscore.setScore7(i+"");
         studentreplyscoreService.insert(studentreplyscore);
         System.out.println("studentreplyscore添加："+studentreplyscore);
         Student stu=studentService.selectByPrimaryKey(studentreplyscore.getStudentid());
