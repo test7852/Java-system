@@ -11,6 +11,8 @@ import java.util.List;
  * 
  */
 public interface MajorService{
+    List<Major> byDeptId (Integer id);//根据系id查找该系下面的所有专业
+
     List<Major> selList();//查询所有
 
     int selCount();//查询总数

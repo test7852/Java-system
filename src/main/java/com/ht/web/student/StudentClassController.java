@@ -2,11 +2,13 @@ package com.ht.web.student;
 
 import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
-import com.ht.bean.student.Student;
-import com.ht.bean.student.Studentclass;
-import com.ht.bean.student.Studentfloor;
+import com.ht.bean.student.*;
+import com.ht.service.emp.DepService;
 import com.ht.service.emp.EmpinfoService;
+import com.ht.service.student.DeptService;
+import com.ht.service.student.MajorService;
 import com.ht.service.student.StudentclassService;
+import com.ht.service.student.StudentfallService;
 import com.ht.util.Contants;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王钟华
@@ -31,7 +34,12 @@ public class StudentClassController {
     private StudentclassService studentclassService;
     @Resource
     private EmpinfoService empinfoService;
-
+    @Resource
+    private DeptService deptService;
+    @Resource
+    private MajorService majorService;
+    @Resource
+    private StudentfallService studentfallService;
 
     @RequestMapping("data")
     @ResponseBody
@@ -50,10 +58,15 @@ public class StudentClassController {
      * 去班级添加
      */
     @RequestMapping("/toadd")
-    public String toadd() {
-        List<Empinfo> lecturer = empinfoService.selByPostId(Contants.POST_CLASS);
-        List<Empinfo> classTeacher = empinfoService.selByPostId(Contants.POST_TEACHER);
-
+    public String toadd(Map map) {
+        List<Empinfo> lecturers = empinfoService.selByPostId(Contants.POST_CLASS);
+        List<Empinfo> classTeachers = empinfoService.selByPostId(Contants.POST_TEACHER);
+        List<Dept> depts = deptService.allDept();
+        List<Studentfall> studentFalls = studentfallService.selList();
+        map.put("studentFalls",studentFalls);
+        map.put("lecturers",lecturers);
+        map.put("classTeachers",classTeachers);
+        map.put("depts",depts);
         return "student/studentClassAdd";
     }
 
@@ -63,6 +76,7 @@ public class StudentClassController {
      * 添加班级
      */
     @RequestMapping("add")
+    @ResponseBody
     public Integer add(Studentclass studentclass){
         List<Studentclass> list = studentclassService.selList();
         for (Studentclass studentclass1:list) {
@@ -86,11 +100,25 @@ public class StudentClassController {
 
 
 
+
+
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
         System.out.println("id = " + id);
        studentclassService.deleteByPrimaryKey(id);
         return "redirect:studentClass/list";
+    }
+
+
+    /**
+     * @param id
+     * @return 根据系id查找所在该系下的专业
+     */
+    @RequestMapping("byDeptId")
+    @ResponseBody
+    public List byDeptId(Integer id) {
+        List<Major> l  = majorService.byDeptId(id);
+        return l;
     }
 
     /**

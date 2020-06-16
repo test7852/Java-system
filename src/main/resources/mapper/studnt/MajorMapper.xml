@@ -105,4 +105,12 @@
     ]]>
   </select>
 
+<!--  根据系id查找该系下面的所有专业-->
+  <select id="byDeptId" resultType="com.ht.bean.student.Major">
+    <![CDATA[
+        select * from major where deptid = #{id}
+    ]]>
+  </select>
+
+
 </mapper>

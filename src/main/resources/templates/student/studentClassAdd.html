@@ -43,52 +43,43 @@
                 <label class="layui-form-label"><i class="layui-icon">&#xe6b2;</i> 备注：</label>
                 <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input">
             </li>
+            <br>
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
-                <select name=""  >
-                    <option value="010">北京</option>
-                    <option value="021" disabled>上海（禁用效果）</option>
-                    <option value="0571" selected>杭州</option>
+                <label ><i class="layui-icon">&#xe705;</i> 授课老师：</label>
+                <select   name="teacher">
+                    <option value="0"></option>
+                    <option th:each="l:${lecturers}"th:value="${l.emp_id}" th:text="${l.emp_name}">部门</option>
                 </select>
-
-                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
             </li>
+
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
-                <select name=""  >
-                    <option value="010">北京</option>
-                    <option value="021" disabled>上海（禁用效果）</option>
-                    <option value="0571" selected>杭州</option>
+                <label><i class="layui-icon">&#xe705;</i> 班主任：</label>
+                <select  name="classteacher">
+                    <option value="0"></option>
+                    <option th:each="c:${classTeachers}"th:value="${c.emp_id}" th:text="${c.emp_name}">部门</option>
                 </select>
-
-                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
             </li>
+
+
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
-                <select name=""  >
-                    <option value="010">北京</option>
-                    <option value="021" disabled>上海（禁用效果）</option>
-                    <option value="0571" selected>杭州</option>
+                <label><i class="layui-icon">&#xe705;</i> 所在系：</label>
+                <select lay-filter="selectTheme" id="board" name="deptid">
+                    <option value="0" >请选择所在系</option>
+                    <option th:each="e:${depts}"th:value="${e.deptid}" th:text="${e.deptname}">所在系</option>
                 </select>
-
-                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
             </li>
+
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
-                <select name=""  >
-                    <option value="010">北京</option>
-                    <option value="021" disabled>上海（禁用效果）</option>
-                    <option value="0571" selected>杭州</option>
+                <label ><i class="layui-icon">&#xe705;</i> 专业：</label>
+                <select id="theme" name="majorid">
+                    <option></option>
                 </select>
-
-                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
             </li>
+
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe663;</i> 专业</label>
-                <select name=""  >
-                    <option value="010">北京</option>
-                    <option value="021" disabled>上海（禁用效果）</option>
-                    <option value="0571" selected>杭州</option>
+                <label ><i class="layui-icon">&#xe663;</i> 届别</label>
+                <select name="falled"  >
+                    <option th:each="c:${studentFalls}"th:value="${c.fallid}" th:text="${c.level}">部门</option>
                 </select>
 
                 <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
@@ -103,12 +94,49 @@
     layui.use('form', function(){
         var form = layui.form;
 
+        form.on('select(selectTheme)', function (data) {//对应lay-filter="selectTheme"
+            var index1 = $('#board option:selected').val();//对应id="board"  得到一级菜单选中值的value
+            var optionJson = [];
+            $.ajax({
+                url: "/studentClass/byDeptId",//对应controller层
+                type: "post",
+                data: {"id": index1},//将选中值的value传给controller
+                datatype: "json",
+                success: function (data) {
+                    optionJson = data;
+                    var selectObj = document.getElementById("theme");//对应id="theme"
+                    selectObj.options.length = 0;
+                    for (var i = 0; i < data.length; i++) {
+                        selectObj.add(new Option(optionJson[i].majorname, optionJson[i].majorid));//对应数据库中名字，两个参数是(文本,value)
+                    }
+                    form.render();
+                }
+            })
+        });
+
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
-        // form.on('submit(formDemo)', function(data){
-        //     layer.msg(JSON.stringify(data.field));
-        //     return true;//true为允许提交，false为不可
-        // });
+        form.on('submit(formDemo)', function(data){
+            $.ajax({
+                url: '/studentClass/add',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data != 0){
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        layer.msg(JSON.stringify("添加成功"));
+                        window.parent.location.reload();
+                    }else {
+                        layer.msg('数据错误，添加失败！', { icon: 5, time: 2000 });
+                    }
+                },
+            })
+            return false;
+        });
     });
 </script>
 </html>
