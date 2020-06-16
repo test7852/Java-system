@@ -96,4 +96,11 @@
     ]]>
   </select>
 
+  <!--  查询所有-->
+  <select id="list" resultType="com.ht.bean.emp.Post">
+  <![CDATA[
+      select * from post
+    ]]>
+  </select>
+
 </mapper>
