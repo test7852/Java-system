@@ -1,6 +1,10 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.Major;
+import com.ht.bean.student.Studentfall;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +12,20 @@ import com.ht.bean.student.Major;
  * 
  */
 public interface MajorMapper {
+
+    List<Major> selList();//查询所有
+
+    int selCount();//查询总数
+
+    List<Major> sybase(Pager pager);//分页
+
+    /**
+     * @param majorname
+     * @return
+     * 根据职位名称查找职位
+     */
+    Major selectByName(String majorname);
+
     int deleteByPrimaryKey(Integer majorid);
 
     int insert(Major record);

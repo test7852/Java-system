@@ -65,12 +65,13 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/studentFall/data', page:true, id:'tab'}"
+       lay-data="{width:1150,height:650, url:'/major/data', page:true, id:'tab'}"
        lay-filter="tab">
     <thead>
     <tr>
-        <th lay-data="{field:'fallid', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'level', width:120, sort: true,edit:true}">界别名称</th>
+        <th lay-data="{field:'majorid', width:80, sort: true}">ID</th>
+        <th lay-data="{field:'majorname', width:120, sort: true,edit:true}">专业名称</th>
+        <th lay-data="{field:'deptid', width:120, sort: true,edit:true}">所在系</th>
         <th lay-data="{field:'remark', width:120, sort: true,edit:true}">说明</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
     </tr>
@@ -95,11 +96,12 @@
                 ,field = obj.field; //得到字段
             layer.msg(data.fallid);
             $.ajax({
-                url: '/studentFall/update',
+                url: '/major/update',
                 type: 'post',
                 data: {
-                    fallid:data.fallid,
-                    level:data.level,
+                    majorid:data.majorid,
+                    majorname:data.majorname,
+                    deptid:data.deptid,
                     remark:data.remark,
                 },
                 dataType: 'json',
@@ -123,7 +125,7 @@
                 title: '新增界别',
                 maxmin: true, //开启最大化最小化按钮
                 area: ['550px', '600px'],
-                content: ['/studentFall/toAdd']//这是链接你的页面地址 url
+                content: ['/major/toAdd']//这是链接你的页面地址 url
             });
         })
 
@@ -136,10 +138,10 @@
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/studentFall/del',
+                        url: '/major/del',
                         type: 'post',
                         data: {
-                            id:data.fallid
+                            id:data.majorid
                         },
                         success:function(data){
                             if(data){

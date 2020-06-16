@@ -1,6 +1,5 @@
 package com.ht.dao.student;
 
-import com.ht.bean.emp.Post;
 import com.ht.bean.student.Studentfall;
 import com.ht.util.Pager;
 

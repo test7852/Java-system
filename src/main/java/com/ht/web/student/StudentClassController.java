@@ -1,10 +1,13 @@
 package com.ht.web.student;
 
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
 import com.ht.bean.student.Student;
 import com.ht.bean.student.Studentclass;
 import com.ht.bean.student.Studentfloor;
+import com.ht.service.emp.EmpinfoService;
 import com.ht.service.student.StudentclassService;
+import com.ht.util.Contants;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,8 @@ public class StudentClassController {
     private JsonData jsonData;
     @Resource
     private StudentclassService studentclassService;
+    @Resource
+    private EmpinfoService empinfoService;
 
 
     @RequestMapping("data")
@@ -46,6 +51,8 @@ public class StudentClassController {
      */
     @RequestMapping("/toadd")
     public String toadd() {
+        List<Empinfo> lecturer = empinfoService.selByPostId(Contants.POST_CLASS);
+        List<Empinfo> classTeacher = empinfoService.selByPostId(Contants.POST_TEACHER);
 
         return "student/studentClassAdd";
     }
