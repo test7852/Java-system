@@ -36,7 +36,7 @@
 <body>
 <!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-event="data">
+    <a class="layui-btn layui-btn-xs" lay-event="search">
         <i class="layui-icon">&#xe615;</i>查看周报
     </a>
 </script>
@@ -93,24 +93,23 @@
 
     layui.use('table', function () {
         var table = layui.table;
+        
+        function search(id) {
+            layer.open({
+                type: 2,
+                title: '查看周报',
+                maxmin: true, //开启最大化最小化按钮
+                area: ['700px', '600px'],
+                content: '/workdiary/searchwork?worklogid='+id//这是链接你的页面地址 url
+            })
+        }
 
         //监听行工具事件
-        table.on('tool(bar)', function (obj) {
+        table.on('tool(tab)', function (obj) {
             var data = obj.data;
-            //console.log(obj)
-            if (obj.event === 'del') {
-                layer.confirm('真的删除么?', function (index) {
-                    obj.del();
-                    layer.close(index);
-                    $.ajax({
-                        url: '/emp/del',
-                        type: 'post',
-                        data: {
-                            id:data.emp_id
-                        },
-                        dataType: 'text'
-                    })
-                });
+            var id = data.worklogid;
+            if (obj.event === 'search') {
+                 search(id);
             }
         })
     });

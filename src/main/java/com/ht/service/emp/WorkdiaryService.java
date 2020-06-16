@@ -1,5 +1,6 @@
 package com.ht.service.emp;
 
+import com.ht.bean.emp.Dep;
 import com.ht.bean.emp.Workdiary;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -18,6 +19,8 @@ public interface WorkdiaryService{
     List<Workdiary> allPageWorkdiary(Pager pager);
 
     List<Workdiary> myworkdiary(Integer empid);
+
+    List<Workdiary> searchWorkdiary(Integer id);
 
     int deleteByPrimaryKey(Integer worklogid);
 

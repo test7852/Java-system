@@ -137,4 +137,10 @@
     ]]>
   </select>
 
+  <select id="searchWorkdiary" resultType="Map">
+    select a.*,b.emp_Name,c.depName from workdiary a
+      inner join empinfo b on a.Empid = b.emp_Id
+      inner join dep c on b.dep_Id = c.depid  where a.worklogid = #{worklogid}
+  </select>
+
 </mapper>
