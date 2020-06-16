@@ -1,10 +1,14 @@
 package com.ht.service.student.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.bean.student.Major;
 import com.ht.dao.student.MajorMapper;
 import com.ht.service.student.MajorService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/15 20:29
@@ -15,6 +19,26 @@ public class MajorServiceImpl implements MajorService{
 
     @Resource
     private MajorMapper majorMapper;
+
+    @Override
+    public List<Major> selList() {
+        return majorMapper.selList();
+    }
+
+    @Override
+    public int selCount() {
+        return majorMapper.selCount();
+    }
+
+    @Override
+    public List<Major> sybase(Pager pager) {
+        return majorMapper.sybase(pager);
+    }
+
+    @Override
+    public Major selectByName(String majorname) {
+        return majorMapper.selectByName(majorname);
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer majorid) {

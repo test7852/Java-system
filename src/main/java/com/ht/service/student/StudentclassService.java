@@ -1,6 +1,5 @@
 package com.ht.service.student;
 
-import com.ht.bean.emp.Empinfo;
 import com.ht.bean.student.Studentclass;
 import com.ht.util.Pager;
 
@@ -12,6 +11,7 @@ import java.util.List;
  * 
  */
 public interface StudentclassService{
+    List<Studentclass> selList();//查询所有
 
     int selCount();//查询总数
 

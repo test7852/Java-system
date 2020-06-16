@@ -27,4 +27,5 @@ public interface StudentScoreMapper {
     int updateByPrimaryKeySelective(StudentScore record);
 
     int updateByPrimaryKey(StudentScore record);
+
 }

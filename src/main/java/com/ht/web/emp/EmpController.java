@@ -103,10 +103,17 @@ public class EmpController {
     }
 
     @RequestMapping("add")
-    public void add(Empinfo empinfo) {
-        System.out.println("添加成功");
-        empinfo.setStatus(Contants.STATUS_SU);//默认开启
-        empinfoService.insert(empinfo);
+    @ResponseBody
+    public Boolean add(Empinfo empinfo) {
+        System.out.println(empinfo);
+        Empinfo cf = empinfoService.getEmpByName(empinfo);
+        System.out.println(cf);
+        if (cf == null){
+            empinfo.setStatus(Contants.STATUS_SU);//默认开启
+            empinfoService.insert(empinfo);
+            return true;
+        }
+        return false;
     }
 
     /**

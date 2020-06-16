@@ -1,6 +1,7 @@
 package com.ht.dao.student;
 
 import com.ht.bean.student.Studentclass;
+import com.ht.bean.student.Studentfloor;
 import com.ht.util.Pager;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.List;
  * 
  */
 public interface StudentclassMapper {
+
+    List<Studentclass> selList();//查询所有
+
     int selCount();//查询总数
 
     List<Studentclass> sybase(Pager pager);//分页

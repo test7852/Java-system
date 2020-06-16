@@ -1,11 +1,9 @@
 package com.ht.dao.emp;
 
 import com.ht.bean.emp.Empinfo;
-import com.ht.bean.emp.Post;
 import com.ht.util.Pager;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author lrq
@@ -52,6 +50,13 @@ public interface EmpinfoMapper {
      * 找宏图软件找唯一职位
      */
     Empinfo selectcrux(Empinfo empinfo);
+
+    /**
+     * @param empinfo
+     * @return
+     * 根据名称找部门
+     */
+    Empinfo getEmpByName(Empinfo empinfo);
 
     int deleteByPrimaryKey(Integer empId);
 

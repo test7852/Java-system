@@ -69,4 +69,32 @@
       remark = #{remark,jdbcType=VARCHAR}
     where fallid = #{fallid,jdbcType=INTEGER}
   </update>
+
+
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from studentfall
+    ]]>
+  </select>
+
+  <!--  分页-->
+  <select id="allPagePost" resultType="com.ht.bean.student.Studentfall">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+      select * from studentfall limit #{kais},#{pageSize}
+    ]]>
+  </select>
+
+  <!-- 根据职位名称查找职位-->
+  <select id="selectByName" resultType="Studentfall">
+    <![CDATA[
+        select * from studentfall where level = #{level}
+    ]]>
+  </select>
+
+
+
+
 </mapper>

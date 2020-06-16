@@ -31,4 +31,9 @@ public class Major {
     * 说明
     */
     private String remark;
+
+    /**
+     * 系名称
+     */
+    private String deptname;
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.emp.AduitmodelMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Aduitmodel">
+    <!--@mbg.generated-->
+    <!--@Table aduitmodel-->
+    <id column="aduitModelid" jdbcType="INTEGER" property="aduitmodelid" />
+    <result column="aduitName" jdbcType="VARCHAR" property="aduitname" />
+    <result column="Scores" jdbcType="INTEGER" property="scores" />
+    <result column="Depid" jdbcType="INTEGER" property="depid" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    aduitModelid, aduitName, Scores, Depid, Remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from aduitmodel
+    where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from aduitmodel
+    where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="aduitModelid" keyProperty="aduitmodelid" parameterType="com.ht.bean.emp.Aduitmodel" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into aduitmodel (aduitName, Scores, Depid, 
+      Remark)
+    values (#{aduitname,jdbcType=VARCHAR}, #{scores,jdbcType=INTEGER}, #{depid,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="aduitModelid" keyProperty="aduitmodelid" parameterType="com.ht.bean.emp.Aduitmodel" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into aduitmodel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aduitname != null">
+        aduitName,
+      </if>
+      <if test="scores != null">
+        Scores,
+      </if>
+      <if test="depid != null">
+        Depid,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aduitname != null">
+        #{aduitname,jdbcType=VARCHAR},
+      </if>
+      <if test="scores != null">
+        #{scores,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null">
+        #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Aduitmodel">
+    <!--@mbg.generated-->
+    update aduitmodel
+    <set>
+      <if test="aduitname != null">
+        aduitName = #{aduitname,jdbcType=VARCHAR},
+      </if>
+      <if test="scores != null">
+        Scores = #{scores,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null">
+        Depid = #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Aduitmodel">
+    <!--@mbg.generated-->
+    update aduitmodel
+    set aduitName = #{aduitname,jdbcType=VARCHAR},
+      Scores = #{scores,jdbcType=INTEGER},
+      Depid = #{depid,jdbcType=INTEGER},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
+  </update>
+</mapper>

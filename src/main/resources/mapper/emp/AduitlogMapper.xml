@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.emp.AduitlogMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Aduitlog">
+    <!--@mbg.generated-->
+    <!--@Table aduitlog-->
+    <id column="aduitLogid" jdbcType="INTEGER" property="aduitlogid" />
+    <result column="aduitModelid" jdbcType="INTEGER" property="aduitmodelid" />
+    <result column="Empid" jdbcType="INTEGER" property="empid" />
+    <result column="Scores" jdbcType="VARCHAR" property="scores" />
+    <result column="auditDate" jdbcType="VARCHAR" property="auditdate" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="auditPerson" jdbcType="VARCHAR" property="auditperson" />
+    <result column="Image" jdbcType="VARCHAR" property="image" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    aduitLogid, aduitModelid, Empid, Scores, auditDate, Remark, auditPerson, Image
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from aduitlog
+    where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from aduitlog
+    where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="aduitLogid" keyProperty="aduitlogid" parameterType="com.ht.bean.emp.Aduitlog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into aduitlog (aduitModelid, Empid, Scores, 
+      auditDate, Remark, auditPerson, 
+      Image)
+    values (#{aduitmodelid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}, #{scores,jdbcType=VARCHAR}, 
+      #{auditdate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{auditperson,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="aduitLogid" keyProperty="aduitlogid" parameterType="com.ht.bean.emp.Aduitlog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into aduitlog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aduitmodelid != null">
+        aduitModelid,
+      </if>
+      <if test="empid != null">
+        Empid,
+      </if>
+      <if test="scores != null">
+        Scores,
+      </if>
+      <if test="auditdate != null">
+        auditDate,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="auditperson != null">
+        auditPerson,
+      </if>
+      <if test="image != null">
+        Image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aduitmodelid != null">
+        #{aduitmodelid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="scores != null">
+        #{scores,jdbcType=VARCHAR},
+      </if>
+      <if test="auditdate != null">
+        #{auditdate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditperson != null">
+        #{auditperson,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Aduitlog">
+    <!--@mbg.generated-->
+    update aduitlog
+    <set>
+      <if test="aduitmodelid != null">
+        aduitModelid = #{aduitmodelid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        Empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="scores != null">
+        Scores = #{scores,jdbcType=VARCHAR},
+      </if>
+      <if test="auditdate != null">
+        auditDate = #{auditdate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditperson != null">
+        auditPerson = #{auditperson,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        Image = #{image,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Aduitlog">
+    <!--@mbg.generated-->
+    update aduitlog
+    set aduitModelid = #{aduitmodelid,jdbcType=INTEGER},
+      Empid = #{empid,jdbcType=INTEGER},
+      Scores = #{scores,jdbcType=VARCHAR},
+      auditDate = #{auditdate,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      auditPerson = #{auditperson,jdbcType=VARCHAR},
+      Image = #{image,jdbcType=VARCHAR}
+    where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
+  </update>
+</mapper>
