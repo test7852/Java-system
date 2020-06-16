@@ -43,7 +43,7 @@
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 职位：</label>
                 <select id="theme" name="post_Id">
-                    <option th:each="e:${posts}" th:selected="${e.pos_Id == emp.post_Id}" th:disabled="${emp.dep_id == 1}" th:value="${e.pos_Id}" th:text="${e.pos_Name}">职务</option>
+                    <option th:each="e:${posts}" th:selected="${e.pos_Id == emp.post_Id}" th:value="${e.pos_Id}" th:text="${e.pos_Name}">职务</option>
                 </select>
             </li>
 
