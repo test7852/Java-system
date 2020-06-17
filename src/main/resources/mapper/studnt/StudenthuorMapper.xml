@@ -133,7 +133,7 @@
     </select>
 
   <!--  查询所有-->
-  <select id="selList" resultType="com.ht.bean.student.Studenthuor">
+  <select id="selByFid" resultType="com.ht.bean.student.Studenthuor">
         select * from studenthuor where floorId=#{floorId}
     </select>
 </mapper>
