@@ -1,8 +1,15 @@
 package com.ht.web.student;
 
+import com.ht.bean.education.Course;
+import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Classscore;
+import com.ht.bean.student.Student;
 import com.ht.bean.student.StudentScore;
+import com.ht.service.education.CourseService;
+import com.ht.service.student.ClassscoreService;
 import com.ht.service.student.StudentScoreService;
+import com.ht.service.student.StudentService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -10,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +30,13 @@ import java.util.Map;
 @RequestMapping("score")
 public class StudentScoreController {
     @Resource
-    private StudentScoreService studentScoreService;
+    private StudentScoreService studentScoreService;//学生成绩
+    @Resource
+    private CourseService courseService;//课程管理
+    @Resource
+    private StudentService studentService;//学生
+    @Resource
+    private ClassscoreService classscoreService;//学生班级成绩中间表
     //去到列表+
     @RequestMapping("scorelistUi")
     public String scorelistUi(){
@@ -50,7 +65,11 @@ public class StudentScoreController {
      * 去添加页面
      */
     @RequestMapping("toadd")
-    public String toadd(){
+    public String toadd(Map map){
+        List<Student> studentList= studentService.allStu();
+        List<Course> courseList= courseService.selCourse();
+        map.put("student", studentList);
+        map.put("course", courseList);
         return "student/scoreadd";
     }
 
@@ -62,10 +81,18 @@ public class StudentScoreController {
      */
     @RequestMapping("add")
     @ResponseBody
-    public String add(StudentScore studentScore){
+    public String add(StudentScore studentScore,HttpSession session){
+        Empinfo empinfo= (Empinfo)session.getAttribute("user");
+        studentScore.setEmpid(empinfo.getEmp_id());
         System.out.println("添加："+studentScore.toString());
+        Student stu=studentService.selectByPrimaryKey(studentScore.getStuid());
         studentScoreService.insert(studentScore);
-        return "";
+        Classscore classscore=new Classscore();
+        classscore.setScoreid(studentScore.getScoreid());
+        classscore.setEmpid(studentScore.getEmpid());
+        classscore.setClazz(String.valueOf(stu.getClazz()));
+        classscoreService.insert(classscore);
+        return "true";
     }
 
     /**

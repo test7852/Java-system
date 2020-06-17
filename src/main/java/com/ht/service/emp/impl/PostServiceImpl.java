@@ -41,6 +41,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> list() {
+        return postMapper.list();
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer posId) {
         return postMapper.deleteByPrimaryKey(posId);
     }

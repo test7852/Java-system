@@ -51,6 +51,13 @@ public interface DepMapper {
     List<Dep> getAllFdep();
 
     /**
+     * @param id
+     * @return
+     * 根据id查找子级部门
+     */
+    List<Dep> getDepByid(int id);
+
+    /**
      * @param dep
      * @return
      * 根据名称找部门

@@ -554,5 +554,7 @@
         select count(*) from student
     </select>
 
-
+  <select id="allStu" resultType="Student">
+    select * from student
+  </select>
 </mapper>

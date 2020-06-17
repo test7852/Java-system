@@ -1,4 +1,4 @@
-package com.ht.bean.emp;
+package com.ht.bean.aduit;
 
 import lombok.Data;
 

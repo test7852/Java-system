@@ -22,103 +22,107 @@
 <form class="layui-form">
     <div class="index">
         <ul class="menu">
+            <input type="hidden" name="emp_id" th:value="${emp.emp_id}">
+            <input type="hidden" name="status" th:value="${emp.status}">
             <li>
                 <label class="layui-form-label">员工姓名：</label>
-                <input  name="password" required lay-verify="required" placeholder="员工姓名" autocomplete="off" class="layui-input">
+                <input  name="emp_name" th:value="${emp.emp_name}" required lay-verify="required" placeholder="员工姓名" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label">毕业学校：</label>
-                <input  name="password" required lay-verify="required" placeholder="毕业学校" autocomplete="off" class="layui-input">
+                <input name="university" th:value="${emp.university}" required lay-verify="required" placeholder="毕业学校" autocomplete="off" class="layui-input">
+            </li>
+
+            <li>
+                <label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 部门：</label>
+                <select lay-filter="selectTheme" id="board" name="dep_id">
+                    <option th:each="e:${deps}" th:selected="${e.depid == emp.dep_id}" th:value="${e.depid}" th:text="${e.depname}">部门</option>
+                </select>
+            </li>
+
+            <li>
+                <label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 职位：</label>
+                <select id="theme" name="post_Id">
+                    <option th:each="e:${posts}" th:selected="${e.pos_Id == emp.post_Id}" th:value="${e.pos_Id}" th:text="${e.pos_Name}">职务</option>
+                </select>
             </li>
 
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 生日：</label>
-                <input  name="password" required lay-verify="required" placeholder="生日" autocomplete="off" class="layui-input">
+                <input  name="birthday" th:value="${emp.birthday}" required lay-verify="required" placeholder="生日" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 籍贯：</label>
-                <input  name="password" required lay-verify="required" placeholder="籍贯" autocomplete="off" class="layui-input">
+                <input  name="nation" th:value="${emp.nation}" required lay-verify="required" placeholder="籍贯" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i>身份证：</label>
-                <input style="width: 350px;"  name="password" id="identity" required lay-verify="required" placeholder="身份证" autocomplete="off" class="layui-input">
+                <input style="width: 350px;"  name="cardno" th:value="${emp.cardno}" id="identity" required lay-verify="required" placeholder="身份证" autocomplete="off" class="layui-input">
             </li>
 
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe678;</i> 号码：</label>
-                <input style="width: 350px;" name="password" required lay-verify="required" placeholder="手机号码" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label">离职日期：</label>
-                <input  name="password" id="dimission" required lay-verify="required" placeholder="离职日期" autocomplete="off" class="layui-input">
+                <input style="width: 350px;" name="phone" th:value="${emp.phone}" required lay-verify="required" placeholder="手机号码" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label">入职日期：</label>
-                <input  name="password" id="entry" required lay-verify="required" placeholder="入职日期" autocomplete="off" class="layui-input">
+                <input  name="hireday" th:value="${emp.hireday}" id="entry" required lay-verify="required" placeholder="入职日期" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe656;</i> 专业：</label>
-                <!--<select name="city" lay-verify="required">
-                      <option value=""></option>
-                      <option value="0">北京</option>
-                      <option value="1">上海</option>
-                      <option value="2">广州</option>
-                      <option value="3">深圳</option>
-                      <option value="4">杭州</option>
-                </select>-->
-                <input style="width: 350px;"  name="password" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
+                <input style="width: 350px;" name="major" th:value="${emp.major}" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
             </li>
             <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe676;</i> 号码：</label>
-                <input style="width: 350px;"  name="password" required lay-verify="required" placeholder="QQ号码" autocomplete="off" class="layui-input">
+                <label class="layui-form-label"><i class="layui-icon">&#xe676;</i> QQ号码：</label>
+                <input style="width: 350px;" name="qqcode" th:value="${emp.qqcode}" required lay-verify="required" placeholder="QQ号码" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe677;</i> 微信：</label>
-                <input style="width: 350px;"  name="password" required lay-verify="required" placeholder="微信号码" autocomplete="off" class="layui-input">
+                <input style="width: 350px;" name="weixin" th:value="${emp.weixin}" required lay-verify="required" placeholder="微信号码" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label">邮箱地址：</label>
-                <input style="width: 350px;"  name="password" required lay-verify="required" placeholder="邮箱地址" autocomplete="off" class="layui-input">
+                <input style="width: 350px;" name="email" th:value="${emp.email}" required lay-verify="required" placeholder="邮箱地址" autocomplete="off" class="layui-input">
             </li>
-
 
             <li>
                 <label class="layui-form-label">家庭地址：</label>
-                <input style="width: 350px;"  name="password" required lay-verify="required" placeholder="家庭地址" autocomplete="off" class="layui-input">
+                <input style="width: 350px;" name="address" th:value="${emp.address}" required lay-verify="required" placeholder="家庭地址" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 学历：</label>
-                <input  name="password" required lay-verify="required" placeholder="学历" autocomplete="off" class="layui-input">
+                <select id="bk" name="education" lay-verify="required">
+                    <option th:selected="${emp.education == '本科'}" value="本科">本科</option>
+                    <option th:selected="${emp.education == '专科'}" value="专科">专科</option>
+                </select>
+                <!--				<input  name="password" required lay-verify="required" placeholder="学历" autocomplete="off" class="layui-input">-->
             </li>
             <li>
                 <label class="layui-form-label">登录密码：</label>
-                <input  name="password" required lay-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input">
+                <input  name="password" th:value="${emp.password}" lay-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label">支付宝：</label>
-                <input style="width: 350px;"  name="password" required lay-verify="required" placeholder="支付宝" autocomplete="off" class="layui-input">
+                <input style="width: 350px;"  name="alipay" th:value="${emp.alipay}" lay-verify="required" placeholder="支付宝" autocomplete="off" class="layui-input">
             </li>
 
 
             <li>
                 <span class="layui-form-label">婚姻状况：</span>
-                <input type="radio" name="marriage" value="男" title="已婚">
-                <input type="radio" name="marriage" value="女" title="未婚" checked>
+                <input type="radio" th:checked="${emp.married == '未婚'}" name="married" value="已婚" title="已婚">
+                <input type="radio" th:checked="${emp.married == '已婚'}" name="married" value="未婚" title="未婚" checked>
             </li>
             <li>
                 <label class="layui-form-label">
                     <i class="layui-icon">&#xe662;</i>
                     <i class="layui-icon">&#xe661;</i>姓别</label>
-                <input type="radio" name="sex" value="男" title="男" checked>
-                <input type="radio" name="sex" value="女" title="女">
+                <input type="radio" th:checked="${emp.emp_sex == '男'}" name="emp_sex" value="男" title="男" checked>
+                <input type="radio" th:checked="${emp.emp_sex == '女'}" name="emp_sex" value="女" title="女">
             </li>
-
-
             <li>
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
             </li>
-
         </ul>
     </div>
 
@@ -147,7 +151,28 @@
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            $.ajax({
+                url: '/emp/update',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data){
+                        // layer.msg('大部分参数都是可以公用的<br>合理搭配，展示不一样的风格', {
+                        //     time: 2000, //20s后自动关闭
+                        //     btn: ['知道了']
+                        // })
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        window.parent.location.reload();
+                    }else {
+                        $("#phone").val("");
+                        layer.msg('号码重复 编辑失败', { icon: 5, time: 2000 });
+                    }
+                },
+            })
             return false;
         });
     });

@@ -1,10 +1,10 @@
-package com.ht.service.emp.impl;
+package com.ht.service.aduit.impl;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import com.ht.bean.emp.Aduitlog;
-import com.ht.dao.emp.AduitlogMapper;
-import com.ht.service.emp.AduitlogService;
+import com.ht.bean.aduit.Aduitlog;
+import com.ht.dao.aduit.AduitlogMapper;
+import com.ht.service.aduit.AduitlogService;
 /**
  * @author 王金宝
  * @date 2020/6/16 9:07

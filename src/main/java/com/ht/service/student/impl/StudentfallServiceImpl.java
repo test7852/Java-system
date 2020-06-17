@@ -37,6 +37,11 @@ public class StudentfallServiceImpl implements StudentfallService{
     }
 
     @Override
+    public List<Studentfall> selList() {
+        return studentfallMapper.selList();
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer fallid) {
         return studentfallMapper.deleteByPrimaryKey(fallid);
     }

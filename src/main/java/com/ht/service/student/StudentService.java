@@ -29,4 +29,5 @@ public interface StudentService{
 
     int getTotalRow();  //获取总行数
 
+    List<Student> allStu();
 }

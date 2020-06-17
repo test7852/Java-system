@@ -54,7 +54,7 @@ public interface EmpinfoMapper {
     /**
      * @param empinfo
      * @return
-     * 根据名称找部门
+     * 根据号码找员工
      */
     Empinfo getEmpByName(Empinfo empinfo);
 
