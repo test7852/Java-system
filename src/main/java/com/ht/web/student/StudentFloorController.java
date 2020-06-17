@@ -57,7 +57,7 @@ public class StudentFloorController {
         return i;
     }
 
-    @RequestMapping("/toUpdte")
+    @RequestMapping("/toUpdate")
     public String toUpdte(int id,Model model){
         Studentfloor studentFloor = studentfloorService.selectByPrimaryKey(id);
         model.addAttribute("studentFloor",studentFloor);

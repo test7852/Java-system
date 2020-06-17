@@ -1,8 +1,11 @@
 package com.ht.web.student;
 
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Studentfloor;
 import com.ht.bean.student.Studenthuor;
 import com.ht.service.emp.EmpinfoService;
+import com.ht.service.student.StudentfallService;
+import com.ht.service.student.StudentfloorService;
 import com.ht.service.student.StudenthuorService;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author xmf
@@ -24,7 +29,8 @@ public class studenthuorController {
     private JsonData jsonData;
     @Resource
     private StudenthuorService studenthuorService;
-
+    @Resource
+    private StudentfloorService studentfloorService;
     @RequestMapping("data")
     @ResponseBody
     public JsonData data(@Param("limit")int limit , @Param("page")int page){
@@ -36,15 +42,17 @@ public class studenthuorController {
         return jsonData;
     }
 
-    @RequestMapping("/toadd")
-    public String toadd() {
-        return "sfadd";
+    @RequestMapping("/toAdd")
+    public String toAdd(Map map) {
+        List<Studentfloor> studentFloorList = studentfloorService.selList();
+        map.put("studentFloorList",studentFloorList);
+        return "student/studentHuorAdd";
     }
 
     @RequestMapping("/add")
     public String add(Studenthuor studenthuor) {
         studenthuorService.insert(studenthuor);
-        return "redirect:stafflist";
+        return "redirect:studentHuor/list";
     }
 
     /**
@@ -54,7 +62,6 @@ public class studenthuorController {
     @RequestMapping("/update")
     @ResponseBody
     public Integer upd(Studenthuor studenthuor){
-        System.out.println(studenthuor.toString());
         int i = studenthuorService.updateByPrimaryKeySelective(studenthuor);
         return i;
     }
@@ -72,7 +79,7 @@ public class studenthuorController {
     @RequestMapping("/del")
     public String del(Integer id) {
         System.out.println(id);
-// (待删除)       studenthuorService.deleteByPrimaryKey(id);
+        studenthuorService.deleteByPrimaryKey(id);
         return "redirect:studentHuor/list";
     }
 
