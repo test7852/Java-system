@@ -37,7 +37,7 @@ public class FileController {
     public String add(MultipartFile file,HttpServletRequest request) throws IOException {
         Empinfo e = (Empinfo) request.getSession().getAttribute("user");
         System.out.println(e);
-        Datadoc datadoc = Utils.fileUpload(file);
+        Datadoc datadoc = Utils.fileUpload(file,Contants.PRO_FILE_SAVE_PATH);
         datadocService.insert(datadoc);
         return "redirect:/dataDoc/toAdd";
     }

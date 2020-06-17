@@ -36,7 +36,7 @@
 <body>
 <!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="toUpdate">
         <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
@@ -155,8 +155,15 @@
                     $(".falg").html("ON")
                 }
 
-            } else if (obj.event === 'edit') {
-                layer.msg(data.hourid);
+            }else if(obj.event= 'toUpdate'){
+                alert(data.classid);
+                layer.open({
+                    type: 2,
+                    title: '编辑宿舍',
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['600px', '420px'],
+                    content: ['/studentHuor/toUpdate?id='+data.hourid]//这是链接你的页面地址 url
+                });
             }
         })
 

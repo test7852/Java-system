@@ -1,6 +1,7 @@
 package com.ht.web.student;
 
 import com.ht.bean.json.JsonData;
+import com.ht.bean.student.Studentclass;
 import com.ht.bean.student.Studentfloor;
 import com.ht.bean.student.Studenthuor;
 import com.ht.service.emp.EmpinfoService;
@@ -28,9 +29,11 @@ public class studenthuorController {
     @Resource
     private JsonData jsonData;
     @Resource
-    private StudenthuorService studenthuorService;
+    private StudenthuorService studenthuorService;//宿舍管理接口
     @Resource
-    private StudentfloorService studentfloorService;
+    private StudentfloorService studentfloorService;//楼栋管理接口
+
+    //表格数据渲染所要的分页数据
     @RequestMapping("data")
     @ResponseBody
     public JsonData data(@Param("limit")int limit , @Param("page")int page){
@@ -49,10 +52,27 @@ public class studenthuorController {
         return "student/studentHuorAdd";
     }
 
+
+    @RequestMapping("/toUpdate")
+    public String toUpdate(Map map) {
+        List<Studentfloor> studentFloorList = studentfloorService.selList();
+        map.put("studentFloorList",studentFloorList);
+        return "student/studentHuorUpdate";
+    }
     @RequestMapping("/add")
-    public String add(Studenthuor studenthuor) {
-        studenthuorService.insert(studenthuor);
-        return "redirect:studentHuor/list";
+    @ResponseBody
+    public Integer add(Studenthuor studenthuor) {
+
+        List<Studenthuor> list = studenthuorService.selList();
+        for (Studenthuor studenthuor1:list) {
+            if (studenthuor.getHuorname().equals(studenthuor1.getHuorname()) || studenthuor1.getHuorname()==studenthuor.getHuorname()
+                   ){
+                return 0;
+            }
+        }
+
+        Integer i = studenthuorService.insert(studenthuor);
+        return i;
     }
 
     /**
