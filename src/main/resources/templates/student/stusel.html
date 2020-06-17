@@ -19,7 +19,7 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/stu/upd}">
+<form class="layui-form">
     <div class="index">
         <ul class="menu">
             <li>
@@ -210,17 +210,31 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
+
+
     layui.use('form', function(){
         var form = layui.form;
-        var date= layui.laydate;
-        laydate.render({
-            elem: '#da'
-            ,type: 'datetime'
-        });
+
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            $.ajax({
+                url: '/stu/upd',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data){
+                        layer.msg(JSON.stringify("添加成功"));
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        window.parent.location.reload();
+                    }
+                },
+            })
+            //$('.layui-laypage-btn').click();//刷新
             return false;
         });
     });

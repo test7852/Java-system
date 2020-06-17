@@ -121,9 +121,12 @@ public class DepController {
             depService.updateByPrimaryKeySelective(dep);
             return true;
         }else if(dep.getDepname().equals(dep2.getDepname())){
-            depService.updateByPrimaryKeySelective(dep);
-            return true;
+            if(dep.getParentid() == dep2.getParentid()){
+                depService.updateByPrimaryKeySelective(dep);
+                return true;
+            }
         }
+
         return false;
     }
 

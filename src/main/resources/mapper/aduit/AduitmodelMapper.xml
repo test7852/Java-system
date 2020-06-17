@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ht.dao.emp.AduitmodelMapper">
-  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Aduitmodel">
+<mapper namespace="com.ht.dao.aduit.AduitmodelMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.aduit.Aduitmodel">
     <!--@mbg.generated-->
     <!--@Table aduitmodel-->
     <id column="aduitModelid" jdbcType="INTEGER" property="aduitmodelid" />
@@ -26,14 +26,14 @@
     delete from aduitmodel
     where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="aduitModelid" keyProperty="aduitmodelid" parameterType="com.ht.bean.emp.Aduitmodel" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="aduitModelid" keyProperty="aduitmodelid" parameterType="com.ht.bean.aduit.Aduitmodel" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into aduitmodel (aduitName, Scores, Depid, 
       Remark)
     values (#{aduitname,jdbcType=VARCHAR}, #{scores,jdbcType=INTEGER}, #{depid,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="aduitModelid" keyProperty="aduitmodelid" parameterType="com.ht.bean.emp.Aduitmodel" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="aduitModelid" keyProperty="aduitmodelid" parameterType="com.ht.bean.aduit.Aduitmodel" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into aduitmodel
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -65,7 +65,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Aduitmodel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.aduit.Aduitmodel">
     <!--@mbg.generated-->
     update aduitmodel
     <set>
@@ -84,7 +84,7 @@
     </set>
     where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Aduitmodel">
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.aduit.Aduitmodel">
     <!--@mbg.generated-->
     update aduitmodel
     set aduitName = #{aduitname,jdbcType=VARCHAR},
@@ -93,4 +93,28 @@
       Remark = #{remark,jdbcType=VARCHAR}
     where aduitModelid = #{aduitmodelid,jdbcType=INTEGER}
   </update>
+
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from aduitmodel
+    ]]>
+  </select>
+
+  <!--  分页-->
+  <select id="allPageAduitmodel" resultType="com.ht.bean.aduit.Aduitmodel">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+      select * from aduitmodel limit #{kais},#{pageSize}
+    ]]>
+  </select>
+  <!-- 获取所有考核指标-->
+  <select id="allAduitmodel" resultType="com.ht.bean.aduit.Aduitmodel">
+    <![CDATA[
+      select * from aduitmodel
+    ]]>
+  </select>
+
+
 </mapper>

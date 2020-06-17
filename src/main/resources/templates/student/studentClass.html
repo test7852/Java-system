@@ -39,8 +39,8 @@
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
-    <a class="layui-btn layui-btn-xs" lay-event="data">
-        <i class="layui-icon">&#xe6b2;</i>资料
+    <a class="layui-btn layui-btn-xs" lay-event="toUpdate">
+        <i class="layui-icon">&#xe6b2;</i>修改
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
@@ -164,8 +164,15 @@
                     $(".falg").html("ON")
                 }
 
-            } else if(obj.event= 'data'){
-
+            } else if(obj.event= 'toUpdate'){
+                alert(data.classid);
+                layer.open({
+                    type: 2,
+                    title: '修改班级',
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['600px', '420px'],
+                    content: ['/studentClass/toUpdate?id='+data.classid]//这是链接你的页面地址 url
+                });
             }
         })
     });

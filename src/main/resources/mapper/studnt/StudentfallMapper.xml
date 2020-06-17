@@ -94,7 +94,12 @@
     ]]>
   </select>
 
-
+  <!-- 查找所有届别-->
+  <select id="selList" resultType="Studentfall">
+    <![CDATA[
+        select * from studentfall
+    ]]>
+  </select>
 
 
 </mapper>

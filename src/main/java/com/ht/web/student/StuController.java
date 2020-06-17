@@ -44,8 +44,8 @@ public class StuController {
         System.out.println("重置前："+student.toString());
         student.setPassword("123456");
         System.out.println("重置后："+student.toString());
-        studentService.insert(student);
-        return "成功";
+        studentService.updateByPrimaryKey(student);
+        return "true";
     }
     /**
      * @param
@@ -85,7 +85,7 @@ public class StuController {
         student.setPassword("123456");
         studentService.insert(student);
         System.out.println("新增："+student.toString());
-        return "成功";
+        return "true";
     }
 
 
@@ -97,10 +97,10 @@ public class StuController {
      */
     @RequestMapping("upd")
     @ResponseBody
-    public Integer upd(Student student){
+    public String upd(Student student){
         int updatacurr= studentService.updateByPrimaryKey(student);
         System.out.println("修改："+student.toString());
-        return updatacurr;
+        return "true";
     }
 
     /**

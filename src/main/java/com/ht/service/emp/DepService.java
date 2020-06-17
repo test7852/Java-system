@@ -44,6 +44,12 @@ public interface DepService{
      */
     Dep getDepByFid(int fid);
     /**
+     * @param id
+     * @return
+     * 根据id查找子级部门
+     */
+    List<Dep> getDepByid(int id);
+    /**
      * @return
      * 获取所有一级部门
      */

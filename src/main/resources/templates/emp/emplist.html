@@ -44,7 +44,10 @@
     <script id="toolbarDemo" type="text/html">
         <div class="layui-btn-container">
             <button id="add" class="layui-btn layui-btn-sm">新增</button>
-            <button class="layui-btn layui-btn-sm" lay-event="word">工作经历</button>
+            <a th:href="@{/managerui/index.html#skip}" data-id="周报管理" data-title="周报管理" class="layui-btn layui-btn-sm" lay-event="word" data-type="tabAdd">
+                周报管理
+            </a>
+<!--            <button class="layui-btn layui-btn-sm" lay-event="word">工作经历</button>-->
             <button class="layui-btn layui-btn-sm" lay-event="education">教育背景</button>
             <button class="layui-btn layui-btn-sm" lay-event="relation">家庭关系信息</button>
             <button class="layui-btn layui-btn-sm" lay-event="assess">员工考核</button>
@@ -124,12 +127,20 @@
         table.on('toolbar(demo)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
             var data = checkStatus.data;
+            var ids = $.map(data,function(d){return d.emp_id;});//获取选中数据的id
             if (data.length === 0){
-                alert("请选择数据");
+                layer.msg('请选择数据', { icon: 5, time: 2000 });
             }else if (obj.event === "word"){
+                alert(ids)
+            }else if (obj.event === "education"){
+                alert(ids)
+            } else if (obj.event === "relation"){
+                layer.alert(JSON.stringify(data));
+            }else if (obj.event === "assess"){
+                layer.alert(JSON.stringify(data));
+            }else if (obj.event === "voucher"){
                 layer.alert(JSON.stringify(data));
             }
-
         });
 
         //监听行工具事件
@@ -186,8 +197,8 @@
                     type: 2,
                     title: '员工编辑',
                     maxmin: true, //开启最大化最小化按钮
-                    area: ['850px', '500px'],
-                    content: ['/emp/edit?emp_id='+data.emp_id]//这是链接你的页面地址 url
+                    area: ['1000px', '500px'],
+                    content: ['/emp/toedit?emp_id='+data.emp_id]//这是链接你的页面地址 url
                 });
             }
             else if (obj.event === 'reset'){//重置密码

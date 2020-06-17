@@ -21,6 +21,11 @@ public class MajorServiceImpl implements MajorService{
     private MajorMapper majorMapper;
 
     @Override
+    public List<Major> byDeptId(Integer id) {
+        return majorMapper.byDeptId(id);
+    }
+
+    @Override
     public List<Major> selList() {
         return majorMapper.selList();
     }

@@ -66,6 +66,11 @@ public class DepServiceImpl implements DepService{
     }
 
     @Override
+    public List<Dep> getDepByid(int id) {
+        return depMapper.getDepByid(id);
+    }
+
+    @Override
     public List<Dep> getAllFdep() {
         return depMapper.getAllFdep();
     }

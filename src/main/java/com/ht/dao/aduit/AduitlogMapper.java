@@ -1,6 +1,6 @@
-package com.ht.dao.emp;
+package com.ht.dao.aduit;
 
-import com.ht.bean.emp.Aduitlog;
+import com.ht.bean.aduit.Aduitlog;
 
 /**
  * @author 王金宝

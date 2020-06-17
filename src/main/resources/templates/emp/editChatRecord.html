@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+</head>
+<style>
+    ::-webkit-scrollbar {display:none}
+</style>
+<body>
+<form class="layui-form" th:action="@{/chatrecord/editchat}">
+ <div th:each="chat:${list}">
+     <input type="hidden" name="Chatid" th:value="${chat.Chatid}">
+     <input type="hidden" name="sayface" th:value="${chat.sayface}">
+     <input type="hidden" name="teacher" th:value="${chat.teacher}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">学生姓名</label>
+        <div class="layui-input-block">
+            <input type="text" disabled name="stuname" class="layui-input" th:value="${chat.stuname}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">谈心地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="addr" class="layui-input" th:value="${chat.addr}">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">谈心内容</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="sayscon" th:text="${chat.sayscon}"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" onclick="ok()" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </div>
+    </div>
+ </div>
+</form>
+</body>
+<script type="text/javascript">
+    function ok() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+        window.parent.location.reload();
+    }
+</script>
+</html>

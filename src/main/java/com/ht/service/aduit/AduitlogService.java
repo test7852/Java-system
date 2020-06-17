@@ -1,6 +1,6 @@
-package com.ht.service.emp;
+package com.ht.service.aduit;
 
-import com.ht.bean.emp.Aduitlog;
+import com.ht.bean.aduit.Aduitlog;
     /**
  * @author 王金宝
  * @date 2020/6/16 9:07

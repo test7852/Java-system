@@ -32,6 +32,13 @@ public interface StudentfallService{
      */
     Studentfall selectByName(String level);
 
+    /**
+     * @param
+     * @return
+     * 查找所有届别
+     */
+    List<Studentfall> selList();
+
 
 
     int deleteByPrimaryKey(Integer fallid);

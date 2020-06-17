@@ -19,50 +19,46 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/reply/add}">
+<form class="layui-form">
     <div class="index">
         <ul class="menu">
             <li>
                 <label class="layui-form-label">学生id：</label>
-                <input  name="studentid" required lay-verify="required" placeholder="学生表外键" autocomplete="off" class="layui-input"/>
+                <select name="studentid">
+                    <option th:each="s:${student}" th:value="${s.studid}" th:text="${s.stuname}"></option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">答辩项目：</label>
                 <input  name="projectid" required lay-verify="required" placeholder="关联答辩项目" autocomplete="off" class="layui-input"/>
             </li>
-            <li>
-                <label class="layui-form-label">打分老师：</label>
-                <input  name="empid" required lay-verify="required" placeholder="打分老师管理员工表外键" autocomplete="off" class="layui-input"/>
-            </li>
             </br>
             <li>
                 <label class="layui-form-label">功能完善：</label>
-                <input  name="score1" required lay-verify="required" placeholder="功能完善50" autocomplete="off" class="layui-input"/>
+                <input  name="score1" required lay-verify="required" placeholder="功能完善50" autocomplete="off" class="layui-input"  onkeyup="scores(this.value)"/>
+
             </li>
             <li>
                 <label class="layui-form-label">技术难度：</label>
-                <input  name="score2" required lay-verify="required" placeholder="技术难度10" autocomplete="off" class="layui-input"/>
+                <input  name="score2" required lay-verify="required" placeholder="技术难度10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">界面完美：</label>
-                <input  name="score3" required lay-verify="required" placeholder="界面完美10" autocomplete="off" class="layui-input"/>
+                <input  name="score3" required lay-verify="required" placeholder="界面完美10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">回答问题：</label>
-                <input  name="score4" required lay-verify="required" placeholder="回答问题10" autocomplete="off" class="layui-input"/>
+                <input  name="score4" required lay-verify="required" placeholder="回答问题10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">演示方法：</label>
-                <input  name="score5" required lay-verify="required" placeholder="演示方法10" autocomplete="off" class="layui-input"/>
+                <input  name="score5" required lay-verify="required" placeholder="演示方法10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
             <li>
                 <label class="layui-form-label">语言表达：</label>
-                <input  name="score6" required lay-verify="required" placeholder="语言表达10" autocomplete="off" class="layui-input"/>
+                <input  name="score6" required lay-verify="required" placeholder="语言表达10" autocomplete="off" class="layui-input" onkeyup="score(this)"/>
             </li>
-            <li>
-                <label class="layui-form-label">总分100：</label>
-                <input  name="score7" required lay-verify="required" placeholder="总分100" autocomplete="off" class="layui-input"/>
-            </li>
+
             <li>
                 <label class="layui-form-label">备注：</label>
                 <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input"/>
@@ -77,14 +73,51 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
+
+    function score(o){
+        var value=o.value;
+        var min=0;
+        var max=10;
+        if(parseInt(value)<min||parseInt(value)>max){
+            alert('输入错误');
+            o.value='';
+        }
+    }
+
+    function scores(c){
+        var value=c;
+        var min=0;
+        var max=50;
+        if(parseInt(value)<min||parseInt(value)>max){
+            alert('输入错误');
+            value='';
+        }
+    }
+
+
     layui.use('form', function(){
         var form = layui.form;
-
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return true;
+            $.ajax({
+                url: '/reply/add',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data){
+                        layer.msg(JSON.stringify("添加成功"));
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        window.parent.location.reload();
+                    }
+                },
+            })
+            //$('.layui-laypage-btn').click();//刷新
+            return false;
         });
     });
 </script>

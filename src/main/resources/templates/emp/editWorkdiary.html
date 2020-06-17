@@ -8,34 +8,49 @@
     <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
     <script th:src="@{/layui/layui.js}"></script>
 </head>
+<style>
+    ::-webkit-scrollbar {display:none}
+</style>
 <body>
 <form class="layui-form" th:action="@{/workdiary/editwork}">
-    <ul class="menu" th:each="work:${list}">
-        <input type="hidden" name="worklogid" th:value="${work.worklogid}">
-        <li>
-            <label class="layui-form-label">本周情況描述：</label>
-            <textarea name="weekcur" class="layui-textarea" th:text="${work.weekcur}"></textarea>
-        </li>
+<div th:each="work:${list}">
+    <input type="hidden" name="worklogid" th:value="${work.worklogid}">
 
-        <li>
-            <label class="layui-form-label">问题学生情况反馈：</label>
-            <textarea name="studentquestion" class="layui-textarea" th:text="${work.studentquestion}"></textarea>
-        </li>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">本周情況:</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="weekcur" th:text="${work.weekcur}"></textarea>
+        </div>
+    </div>
 
-        <li>
-            <label class="layui-form-label">意见建议：</label>
-            <textarea name="idea" class="layui-textarea" th:text="${work.idea}"></textarea>
-        </li>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">情况反馈:</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="studentquestion" th:text="${work.studentquestion}"></textarea>
+        </div>
+    </div>
 
-        <li>
-            <label class="layui-form-label">下周工作计划：</label>
-            <textarea name="weeknext" class="layui-textarea" th:text="${work.weeknext}"></textarea>
-        </li>
-        <li>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">意见建议:</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="idea" th:text="${work.idea}"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">下周计划:</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="weeknext" th:text="${work.weeknext}"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
             <button class="layui-btn" onclick="ok()" lay-submit lay-filter="formDemo">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-        </li>
-    </ul>
+        </div>
+    </div>
+</div>
 </form>
 </body>
 <script type="text/javascript">

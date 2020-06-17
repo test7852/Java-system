@@ -1,10 +1,14 @@
-package com.ht.service.emp.impl;
+package com.ht.service.aduit.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import com.ht.dao.emp.AduitmodelMapper;
-import com.ht.bean.emp.Aduitmodel;
-import com.ht.service.emp.AduitmodelService;
+import com.ht.dao.aduit.AduitmodelMapper;
+import com.ht.bean.aduit.Aduitmodel;
+import com.ht.service.aduit.AduitmodelService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/16 9:08
@@ -15,6 +19,21 @@ public class AduitmodelServiceImpl implements AduitmodelService{
 
     @Resource
     private AduitmodelMapper aduitmodelMapper;
+
+    @Override
+    public int getTotalRow() {
+        return aduitmodelMapper.getTotalRow();
+    }
+
+    @Override
+    public List<Aduitmodel> allPageAduitmodel(Pager pager) {
+        return aduitmodelMapper.allPageAduitmodel(pager);
+    }
+
+    @Override
+    public List<Aduitmodel> allAduitmodel() {
+        return aduitmodelMapper.allAduitmodel();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer aduitmodelid) {

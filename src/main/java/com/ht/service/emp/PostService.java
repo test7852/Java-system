@@ -38,6 +38,12 @@ public interface PostService{
      */
     List<Post> elselist();
 
+    /**
+     * @return
+     * 查找所有职位
+     */
+    List<Post> list();
+
 
     int deleteByPrimaryKey(Integer posId);
 

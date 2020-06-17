@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ht.dao.emp.AduitlogMapper">
-  <resultMap id="BaseResultMap" type="com.ht.bean.emp.Aduitlog">
+<mapper namespace="com.ht.dao.aduit.AduitlogMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.aduit.Aduitlog">
     <!--@mbg.generated-->
     <!--@Table aduitlog-->
     <id column="aduitLogid" jdbcType="INTEGER" property="aduitlogid" />
@@ -29,7 +29,7 @@
     delete from aduitlog
     where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="aduitLogid" keyProperty="aduitlogid" parameterType="com.ht.bean.emp.Aduitlog" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="aduitLogid" keyProperty="aduitlogid" parameterType="com.ht.bean.aduit.Aduitlog" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into aduitlog (aduitModelid, Empid, Scores, 
       auditDate, Remark, auditPerson, 
@@ -38,7 +38,7 @@
       #{auditdate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{auditperson,jdbcType=VARCHAR}, 
       #{image,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="aduitLogid" keyProperty="aduitlogid" parameterType="com.ht.bean.emp.Aduitlog" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="aduitLogid" keyProperty="aduitlogid" parameterType="com.ht.bean.aduit.Aduitlog" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into aduitlog
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -88,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.emp.Aduitlog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.aduit.Aduitlog">
     <!--@mbg.generated-->
     update aduitlog
     <set>
@@ -116,7 +116,7 @@
     </set>
     where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ht.bean.emp.Aduitlog">
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.aduit.Aduitlog">
     <!--@mbg.generated-->
     update aduitlog
     set aduitModelid = #{aduitmodelid,jdbcType=INTEGER},

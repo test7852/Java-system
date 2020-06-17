@@ -105,7 +105,6 @@ public class EmpController {
     @RequestMapping("add")
     @ResponseBody
     public Boolean add(Empinfo empinfo) {
-        System.out.println(empinfo);
         Empinfo cf = empinfoService.getEmpByName(empinfo);
         System.out.println(cf);
         if (cf == null){
@@ -138,10 +137,17 @@ public class EmpController {
      */
     @RequestMapping("update")
     @ResponseBody
-    public Integer updata(Empinfo empinfo){
-        System.out.println("empinfo.toString() = " + empinfo.toString());
-        int updatacurr = empinfoService.updateByPrimaryKeySelective(empinfo);
-        return updatacurr;
+    public Boolean updata(Empinfo empinfo){
+        Empinfo empinfo1 = empinfoService.getEmpByName(empinfo);//根据号码找
+        Empinfo empinfo2 = empinfoService.selectByPrimaryKey(empinfo.getEmp_id());//根据id找
+        if (empinfo1 == null){
+            empinfoService.updateByPrimaryKeySelective(empinfo);
+            return true;
+        }else if (empinfo2.getPhone().equals(empinfo.getPhone())){
+            empinfoService.updateByPrimaryKeySelective(empinfo);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -183,9 +189,27 @@ public class EmpController {
      * 编辑
      */
     @RequestMapping("toedit")
-    public String edit(Empinfo empinfo){
-
+    public String edit(Empinfo empinfo,Model model){
+        Empinfo empinfo1 = empinfoService.selectByPrimaryKey(empinfo.getEmp_id());
+        //获取部门
+        List<Dep> deps = depService.list();
+        //获取职位
+        List<Post> posts = postService.list();
+        model.addAttribute("deps",deps);
+        model.addAttribute("posts",posts);
+        model.addAttribute("emp",empinfo1);
         return "emp/empedit";
+    }
+
+    /**
+     * @param empinfo
+     * @return
+     * 编辑
+     */
+    @RequestMapping("toword")
+    public String word(Empinfo empinfo){
+        System.out.println(empinfo.getEmp_id());
+        return "emp/emppapers";
     }
 
 }

@@ -19,6 +19,8 @@ public interface MajorMapper {
 
     List<Major> sybase(Pager pager);//分页
 
+    List<Major> byDeptId (Integer id);//根据系id查找该系下面的所有专业
+
     /**
      * @param majorname
      * @return

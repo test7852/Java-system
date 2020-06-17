@@ -30,6 +30,12 @@ public interface StudentfallMapper {
      * 根据职位名称查找职位
      */
     Studentfall selectByName(String level);
+    /**
+     * @param
+     * @return
+     * 查找所有届别
+     */
+    List<Studentfall> selList();
 
 
     int deleteByPrimaryKey(Integer fallid);
