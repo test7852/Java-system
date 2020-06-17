@@ -23,6 +23,11 @@ public class StudenthuorServiceImpl implements StudenthuorService{
 
 
     @Override
+    public List<Studenthuor> selList() {
+        return studenthuorMapper.selList();
+    }
+
+    @Override
     public List<Studentfloor> sybase(Pager pager) {
         return studenthuorMapper.sybase(pager);
     }
