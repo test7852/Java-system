@@ -59,4 +59,10 @@ public class CenterController {
         return "emp/myworkdiary";
     }
 
+    //去到谈心记录页面
+    @RequestMapping("chatlist")
+    public String chatlist(){
+        return "emp/chatrecordlist";
+    }
+
 }

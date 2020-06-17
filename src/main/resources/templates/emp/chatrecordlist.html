@@ -39,10 +39,7 @@
 <body>
 <!--表格功能-->
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-event="search">
-        <i class="layui-icon">&#xe615;</i>查看周报
-    </a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="edit">
+    <a class="layui-btn layui-btn-green layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>编辑
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
@@ -57,36 +54,21 @@
     </div>
 </script>
 
-<!--搜索栏-->
-<div class="layui-form-item">
-    <div class="layui-inline">
-        <label class="layui-form-label">日期:</label>
-        <div class="layui-input-inline">
-            <input type="text" class="layui-input" id="startandend">
-        </div>
-        <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 搜索</button>
-    </div>
-    <div class="layui-inline">
-        <!--<button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 搜索</button>-->
-    </div>
-</div>
-
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
     <table class="layui-table"
-           lay-data="{width:1150,height:650, url:'/workdiary/myworkdiarydata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
+           lay-data="{width:1150,height:650, url:'/chatrecord/chatrecorddata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
            lay-filter="tab">
         <thead>
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'worklogid', width:80, sort: true}">编号</th>
-            <th lay-data="{field:'emp_Name', edit: 'false'}">员工名称</th>
-            <th lay-data="{field:'Workday'}">填写日期</th>
-            <th lay-data="{field:'weekCur', edit: 'false'}">本周情况描述</th>
-            <th lay-data="{field:'studentQuestion',edit: 'false'}">问题学生情况反馈</th>
-            <th lay-data="{field:'Idea', edit: 'false'}">意见建议</th>
-            <th lay-data="{field:'weekNext',edit: 'false'}">下周工作计划</th>
-            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar',width:255}"></th>
+            <th lay-data="{field:'Chatid', width:80, sort: true}">编号</th>
+            <th lay-data="{field:'stuname', width:100, edit: 'false'}">学生名称</th>
+            <th lay-data="{field:'emp_Name',width:100}">员工名称</th>
+            <th lay-data="{field:'addr', width:100}">地址</th>
+            <th lay-data="{field:'sayscon',edit: 'false'}">谈心内容</th>
+            <th lay-data="{field:'chatDate', width:115}">时间</th>
+            <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar',width:180}"></th>
         </tr>
         </thead>
     </table>
@@ -99,74 +81,50 @@
     layui.use('table', function () {
         var table = layui.table;
 
-        //查看周报
-        function search(id) {
-            layer.open({
-                type: 2,
-                title: '查看周报',
-                maxmin: true, //开启最大化最小化按钮
-                area: ['800px', '600px'],
-                content: '/workdiary/searchwork?worklogid='+id//这是链接你的页面地址 url
-            })
-        }
-
-        //编辑周报
+        //编辑谈心记录
         function edit(id) {
             layer.open({
                 type: 2,
-                title: '编辑周报',
+                title: '编辑谈心记录',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['800px', '600px'],
-                content: '/workdiary/toeditwork?worklogid='+id//这是链接你的页面地址 url
+                area: ['600px', '350px'],
+                content: ['/chatrecord/toeditchat?chatid='+id] //这是链接你的页面地址 url
             })
         }
 
-        //添加周报
+        //添加谈心记录
         $("#add").on('click',function(){
             layer.open({
                 type: 2,
-                title: '添加周报',
+                title: '添加谈心记录',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['800px', '600px'],
-                content: ['/workdiary/toaddwork']//这是链接你的页面地址 url
+                area: ['600px', '350px'],
+                content: ['/chatrecord/toaddchat']//这是链接你的页面地址 url
             });
-        })
+        });
 
 
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
 
             var data = obj.data;
-            var id = data.worklogid;
-            if (obj.event === 'search') {
-                search(id);
-            }else if(obj.event === 'edit'){
+            var id = data.Chatid;
+            if(obj.event === 'edit'){
                 edit(id);
             }else if(obj.event === 'del'){
                 layer.confirm('真的删除么?', function (index) {
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/workdiary/delworkdiary',
+                        url: '/chatrecord/delchatrecord',
                         type: 'post',
                         data: {
-                            id:data.worklogid
+                            id:data.Chatid
                         },
                         dataType: 'text'
                     })
                 });
             }
-        });
-
-
-        layui.use('laydate', function(){
-            var laydate = layui.laydate;
-
-            //日期范围
-            laydate.render({
-                elem: '#startandend'
-                ,range: true
-            });
         });
     });
 </script>

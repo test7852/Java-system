@@ -104,4 +104,27 @@
       chatDate = #{chatdate,jdbcType=VARCHAR}
     where Chatid = #{chatid,jdbcType=INTEGER}
   </update>
+
+  <select id="selchatcount" resultType="int">
+    select count(*) from chatrecord
+  </select>
+
+  <select id="allPageChatrecord" resultType="Map">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+    select a.*,b.emp_Name,c.stuname from chatrecord a
+      inner join empinfo b on a.teacher = b.emp_Id
+      inner join student c on a.sayface = c.Studid limit #{kais},#{pageSize}
+    ]]>
+  </select>
+
+  <select id="selectByChatid" resultType="Map">
+    select a.*,b.emp_Name,c.stuname from chatrecord a
+      inner join empinfo b on a.teacher = b.emp_Id
+      inner join student c on a.sayface = c.Studid where a.Chatid = #{Chatid}
+  </select>
+
+  <select id="selectStudent" resultType="Student">
+    select * from student
+  </select>
 </mapper>

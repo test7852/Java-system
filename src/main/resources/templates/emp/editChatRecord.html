@@ -12,35 +12,28 @@
     ::-webkit-scrollbar {display:none}
 </style>
 <body>
-<form class="layui-form" th:action="@{/workdiary/editwork}">
-<div th:each="work:${list}">
-    <input type="hidden" name="worklogid" th:value="${work.worklogid}">
-
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">本周情況:</label>
+<form class="layui-form" th:action="@{/chatrecord/editchat}">
+ <div th:each="chat:${list}">
+     <input type="hidden" name="Chatid" th:value="${chat.Chatid}">
+     <input type="hidden" name="sayface" th:value="${chat.sayface}">
+     <input type="hidden" name="teacher" th:value="${chat.teacher}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">学生姓名</label>
         <div class="layui-input-block">
-            <textarea class="layui-textarea" name="weekcur" th:text="${work.weekcur}"></textarea>
+            <input type="text" disabled name="stuname" class="layui-input" th:value="${chat.stuname}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">谈心地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="addr" class="layui-input" th:value="${chat.addr}">
         </div>
     </div>
 
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">情况反馈:</label>
+        <label class="layui-form-label">谈心内容</label>
         <div class="layui-input-block">
-            <textarea class="layui-textarea" name="studentquestion" th:text="${work.studentquestion}"></textarea>
-        </div>
-    </div>
-
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">意见建议:</label>
-        <div class="layui-input-block">
-            <textarea class="layui-textarea" name="idea" th:text="${work.idea}"></textarea>
-        </div>
-    </div>
-
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">下周计划:</label>
-        <div class="layui-input-block">
-            <textarea class="layui-textarea" name="weeknext" th:text="${work.weeknext}"></textarea>
+            <textarea class="layui-textarea" name="sayscon" th:text="${chat.sayscon}"></textarea>
         </div>
     </div>
 
@@ -50,16 +43,14 @@
             <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
         </div>
     </div>
-</div>
+ </div>
 </form>
 </body>
 <script type="text/javascript">
-
     function ok() {
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
         window.parent.location.reload();
     }
-
 </script>
 </html>

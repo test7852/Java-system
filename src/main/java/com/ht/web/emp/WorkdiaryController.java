@@ -92,6 +92,7 @@ public class WorkdiaryController {
 
     //删除我的周报数据
     @RequestMapping("delworkdiary")
+    @ResponseBody
     public Integer delworkdiary(Integer id){
         int i = workdiaryService.deleteByPrimaryKey(id);
         return i;

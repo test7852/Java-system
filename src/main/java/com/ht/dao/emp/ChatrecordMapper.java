@@ -1,6 +1,10 @@
 package com.ht.dao.emp;
 
 import com.ht.bean.emp.Chatrecord;
+import com.ht.bean.student.Student;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -8,6 +12,10 @@ import com.ht.bean.emp.Chatrecord;
  * 
  */
 public interface ChatrecordMapper {
+    int selchatcount();
+
+    List<Chatrecord> allPageChatrecord(Pager pager);
+
     int deleteByPrimaryKey(Integer chatid);
 
     int insert(Chatrecord record);
@@ -16,7 +24,11 @@ public interface ChatrecordMapper {
 
     Chatrecord selectByPrimaryKey(Integer chatid);
 
+    List<Chatrecord> selectByChatid(Integer chatid);
+
     int updateByPrimaryKeySelective(Chatrecord record);
 
     int updateByPrimaryKey(Chatrecord record);
+
+    List<Student> selectStudent();
 }

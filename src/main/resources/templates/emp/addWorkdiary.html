@@ -17,12 +17,12 @@
         <input type="hidden" th:value="${emp.emp_id}" name="emp_id">
         <input type="hidden" th:value="${emp.dep_id}" name="dep_id">
         <li>
-            <label class="layui-form-label">本周情況描述：</label>
+            <label class="layui-form-label">本周情況：</label>
             <textarea name="weekcur" class="layui-textarea"></textarea>
         </li>
 
         <li>
-            <label class="layui-form-label">问题学生情况反馈：</label>
+            <label class="layui-form-label">情况反馈：</label>
             <textarea name="studentquestion" class="layui-textarea"></textarea>
         </li>
 
@@ -32,13 +32,16 @@
         </li>
 
         <li>
-            <label class="layui-form-label">下周工作计划：</label>
+            <label class="layui-form-label">下周计划：</label>
             <textarea name="weeknext" class="layui-textarea"></textarea>
         </li>
-        <li>
-            <button class="layui-btn" onclick="ok()" lay-submit lay-filter="formDemo">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-        </li>
+        <center>
+            <li>
+                <button class="layui-btn" onclick="ok()" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+            </li>
+        </center>
+
     </ul>
 </form>
 </body>
