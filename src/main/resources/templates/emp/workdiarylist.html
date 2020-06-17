@@ -15,6 +15,7 @@
     <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 </head>
 <style>
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
     .layui-table-page {
         text-align: center;
     }
@@ -69,7 +70,7 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
     <table class="layui-table"
-           lay-data="{width:1150,height:650, url:'/workdiary/workdiarydata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
+           lay-data="{width:1150,height:520, url:'/workdiary/workdiarydata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
            lay-filter="tab">
         <thead>
         <tr>

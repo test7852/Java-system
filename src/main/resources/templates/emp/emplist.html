@@ -30,8 +30,16 @@
     .layui-table-view tbody td {
         text-align: center;
     }
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 <body>
+<script type="text/html" id="sexTpl">
+    {{#  if(d.emp_sex === '女'){ }}
+    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
+    {{#  } else { }}
+    {{ d.emp_sex }}
+    {{#  } }}
+</script>
 <!--数据表格样式及附件-->
     <script id="toolbarDemo" type="text/html">
         <div class="layui-btn-container">
@@ -57,11 +65,11 @@
         <i class="layui-icon">&#xe642;</i>启用
     </a>
     {{#  } }}
-    <a class="layui-btn layui-btn-xs" lay-event="edit">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe6b2;</i>编辑
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="reset">
-        <i class="layui-icon">&#xe640;</i>重置密码
+        <i class="layui-icon">&#xe669;</i>重置密码
     </a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>删除
@@ -91,14 +99,14 @@
             ,cols: [[ //表头
                 {type: 'radio', title: '选择', fixed: 'left'}
                 ,{field: 'emp_id', title: '编号', width:80, sort: true}
-                ,{field: 'emp_name', title: '用户名', width:80}
-                ,{field: 'emp_sex', title: '性别', width:60}
+                ,{field: 'emp_name', title: '用户名', width:120}
+                ,{field: 'emp_sex', title: '性别',templet: '#sexTpl', sort: true, width:60}
                 ,{field: 'depname', title: '部门', width:100}
                 ,{field: 'postname', title: '职务', width: 80}
-                ,{field: 'phone', title: '电话', width: 120}
-                ,{field: 'address', title: '家庭地址', width: 180}
+                ,{field: 'phone', title: '电话', width: 80, sort: true}
+                ,{field: 'address', title: '家庭地址', width: 120}
                 ,{field: 'status', title: '状态', width: 80, templet: aaa}
-                ,{field: 'education', title: '学历', width:60}
+                ,{field: 'education', title: '学历', width:120}
                 ,{fixed: 'right', title:'操作', toolbar: '#bar', width:310}
             ]]
         });
