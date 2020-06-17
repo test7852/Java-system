@@ -22,6 +22,7 @@
 <form class="layui-form">
     <div class="index">
         <ul class="menu">
+            <input name="aduitmodelid" type="hidden" th:value="${aduitmodel.aduitmodelid}">
             <li>
                 <label class="layui-form-label">考核内容：</label>
                 <input  name="aduitname" th:value="${aduitmodel.aduitname}" required lay-verify="required" placeholder="考核内容" autocomplete="off" class="layui-input">
@@ -30,8 +31,9 @@
 
             <li>
                 <div class="layui-input-inline">
+                    <label class="layui-form-label">部门：</label>
                     <select name="depid" lay-filter="selectTheme" id="board">
-                        <option value="0" selected="">请选择上级部门</option>
+                        <option value="-1" selected="">请选择上级部门</option>
                         <option th:each="dep1:${fdeps}"th:value="${dep1.depid}" th:text="${dep1.depname}" th:selected="${aduitmodel.depid == dep1.depid || dep1.depid == fdep.depid}">浙江省</option>
                     </select>
                 </div>
@@ -52,14 +54,15 @@
 
             <li>
                 <div class="layui-input-inline">
+                    <label class="layui-form-label">考核分数：</label>
                     <select name="scores">
                         <option value="0" selected="">请选择考核分数</option>
-                        <option value="-1" >-1</option>
-                        <option value="-2" >-2</option>
-                        <option value="-3" >-3</option>
-                        <option value="-4" >-4</option>
-                        <option value="-5" >-5</option>
-                        <option value="-10" >-10</option>
+                        <option value="-1" th:selected="${aduitmodel.scores == -1}" >-1</option>
+                        <option value="-2" th:selected="${aduitmodel.scores == -2}">-2</option>
+                        <option value="-3" th:selected="${aduitmodel.scores == -3}">-3</option>
+                        <option value="-4" th:selected="${aduitmodel.scores == -4}">-4</option>
+                        <option value="-5" th:selected="${aduitmodel.scores == -5}">-5</option>
+                        <option value="-10" th:selected="${aduitmodel.scores == -10}">-10</option>
                     </select>
                 </div>
             </li>
@@ -112,7 +115,7 @@
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
             $.ajax({
-                url: '/aduitmodel/add',
+                url: '/aduitmodel/upd',
                 type: 'post',
                 data:data.field,
                 dataType: 'json',

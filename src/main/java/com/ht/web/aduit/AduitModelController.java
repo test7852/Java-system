@@ -83,7 +83,7 @@ public class AduitModelController {
     @RequestMapping("add")
     @ResponseBody
     public Boolean add(Aduitmodel aduitmodel,Integer depid2){
-        System.out.println(depid2);
+
         if(depid2 != 0){
             aduitmodel.setDepid(depid2);
         }
@@ -103,15 +103,11 @@ public class AduitModelController {
     @RequestMapping("toupd")
     public String toupd(Map map,Integer id){
         Aduitmodel aduitmodel = aduitmodelService.selectByPrimaryKey(id);
-        System.out.println(aduitmodel.toString());
         Dep dep = depService.selectByPrimaryKey(aduitmodel.getDepid());
         map.put("fdeps",depService.getAllFdep());//返回所有父级对象
         map.put("aduitmodel",aduitmodel);//返回当前考核对象
-
         if(dep.getParentid() != 0){//判断当前部门是不是一级部门
-
             dep = depService.getDepByFid(dep.getParentid());//获取父级对象
-
         }
         map.put("fdep",dep);//将父级对象传过去
         map.put("deps",depService.getDepByid(dep.getDepid()));//获取所有子级
@@ -126,7 +122,7 @@ public class AduitModelController {
     @RequestMapping("upd")
     @ResponseBody
     public Boolean upd(Aduitmodel aduitmodel,Integer depid2){
-        System.out.println(depid2);
+
         if(depid2 != 0){
             aduitmodel.setDepid(depid2);
         }
