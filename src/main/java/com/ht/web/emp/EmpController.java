@@ -201,4 +201,15 @@ public class EmpController {
         return "emp/empedit";
     }
 
+    /**
+     * @param empinfo
+     * @return
+     * 编辑
+     */
+    @RequestMapping("toword")
+    public String word(Empinfo empinfo){
+        System.out.println(empinfo.getEmp_id());
+        return "emp/emppapers";
+    }
+
 }
