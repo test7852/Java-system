@@ -46,8 +46,10 @@
         <script th:src="@{/assets/plugins/chartjs/chart.min.js}"></script>
         <script th:src="@{/assets/js/ecaps.min.js}"></script>
         <script th:src="@{/assets/js/pages/dashboard.js}"></script>
+
     </head>
     <style>
+
         .layui-tab ul.layui-tab-title li:nth-child(1) i { display: none;} /*第一个不可删除*/
         .page-header{
             margin-top: -25px;
@@ -56,6 +58,10 @@
             margin-left: -25px;
             margin-right: -40px;
         }
+        body{
+             overflow-y: hidden;
+             overflow-x: hidden;
+         }
         ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
     </style>
     <body>
@@ -239,7 +245,7 @@
                     <div class="search-form">
                         <form action="#" method="GET">
                             <div class="input-group">
-                                <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                                    <input type="text" name="search" class="form-control search-input" placeholder="查找一些...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
                                 </span>
@@ -303,15 +309,15 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <!--个人资料部分-->
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img th:src="@{/img/manager/login/f2.jpeg}" alt="" class="img-circle"></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">配置文件</a></li>
-                                            <li><a href="#">日历</a></li>
-                                            <li><a href="#"><span class="badge pull-right badge-danger">99</span>消息</a></li>
+                                            <li><a href="#">用户中心</a></li>
+                                            <li><a href="#"><span class="badge pull-right badge-danger">99</span>我的 消息</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a href="#">账号 设置</a></li>
-                                            <li><a href="#">退出 登录</a></li>
+                                            <li><a data-url="/personage/topersonage" data-id="账号设置" data-title="账号设置" class="site-demo-active" data-type="tabAdd"  href="#" >账号 设置</a></li>
+                                            <li><a class="exit" href="#">退出 登录</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -337,8 +343,8 @@
                         </div>
 
                     </article><!-- Main Wrapper -->
-                    <div class="page-footer">
-                        <p>智慧树 &copy; 2020. 由火箭组合开发 智慧树后台管理系统</p>
+                    <div  class="page-footer">
+                        <p><button style="margin-left: 200%;" type="button" class="layui-btn layui-btn-normal">由浩瀚星空 梦想组合《只喜欢你，像风走了八千里 QWQ》</button></p><br><br><br>
                     </div>
                 </div><!-- /Page Inner 邮箱内容 -->
                 <div class="page-right-sidebar" id="main-right-sidebar">
@@ -504,9 +510,15 @@
         </div><!-- /Page Container -->
     </body>
     <script>
-        layui.use(['element','jquery'], function() {
+        layui.use(['element','jquery','layer'], function() {
             var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
             var $ = layui.jquery;
+            var layer=layui.layer;
+
+            //点击退出
+            $(".exit").on('click',function(){layer.msg("点击退出")})
+
+
 
             //触发事件
             var active = {
