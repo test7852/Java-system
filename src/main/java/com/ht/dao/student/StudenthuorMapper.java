@@ -13,6 +13,7 @@ import java.util.List;
  *  
  */
 public interface StudenthuorMapper {
+    List<Studenthuor> selList();//查询所有
 
     List<Studentfloor> sybase(Pager pager);//分页查询
 

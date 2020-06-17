@@ -3,7 +3,6 @@ package com.ht.web.student;
 import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
 import com.ht.bean.student.*;
-import com.ht.service.emp.DepService;
 import com.ht.service.emp.EmpinfoService;
 import com.ht.service.student.DeptService;
 import com.ht.service.student.MajorService;
@@ -71,6 +70,38 @@ public class StudentClassController {
     }
 
     /**
+     * @return
+     * 去班级修改
+     */
+    @RequestMapping("/toUpdate")
+    public String toUpdate(Map map,Integer id) {
+        System.out.println(id);
+        Studentclass studentclass = studentclassService.selectByPrimaryKey(id);
+        Empinfo teacher = empinfoService.selectByPrimaryKey(Integer.valueOf(studentclass.getTeacher()));
+        Empinfo classTeacher = empinfoService.selectByPrimaryKey(Integer.valueOf(studentclass.getClassteacher()));
+        Dept dept = deptService.selectByPrimaryKey(studentclass.getDeptid());
+        Studentfall studentfall = studentfallService.selectByPrimaryKey(studentclass.getFalled());
+        Major major = majorService.selectByPrimaryKey(studentclass.getMajorid());
+        List<Empinfo> lecturers = empinfoService.selByPostId(Contants.POST_CLASS);
+        List<Empinfo> classTeachers = empinfoService.selByPostId(Contants.POST_TEACHER);
+        List<Dept> depts = deptService.allDept();
+        List<Studentfall> studentFalls = studentfallService.selList();
+
+        map.put("teacher",teacher);
+        map.put("classTeacher",classTeacher);
+        map.put("dept",dept);
+        map.put("studentfall",studentfall);
+        map.put("major",major);
+
+        map.put("studentFalls",studentFalls);
+        map.put("lecturers",lecturers);
+        map.put("classTeachers",classTeachers);
+        map.put("depts",depts);
+        map.put("studentClass",studentclass);
+        return "student/studentClassUpdate";
+    }
+
+    /**
      * @param studentclass
      * @return
      * 添加班级
@@ -127,7 +158,7 @@ public class StudentClassController {
      */
     @RequestMapping("update")
     @ResponseBody
-    public Integer updata(Studentclass studentclass) {
+    public Integer update(Studentclass studentclass) {
         List<Studentclass> list = studentclassService.selList();
         for (Studentclass studentclass1 : list) {
             if (studentclass.getClassname().equals(studentclass1.getClassname()) || studentclass1.getClassname() == studentclass.getClassname()
