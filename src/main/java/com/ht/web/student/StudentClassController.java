@@ -75,7 +75,6 @@ public class StudentClassController {
      */
     @RequestMapping("/toUpdate")
     public String toUpdate(Map map,Integer id) {
-        System.out.println(id);
         Studentclass studentclass = studentclassService.selectByPrimaryKey(id);
         Empinfo teacher = empinfoService.selectByPrimaryKey(Integer.valueOf(studentclass.getTeacher()));
         Empinfo classTeacher = empinfoService.selectByPrimaryKey(Integer.valueOf(studentclass.getClassteacher()));
@@ -87,6 +86,7 @@ public class StudentClassController {
         List<Dept> depts = deptService.allDept();
         List<Studentfall> studentFalls = studentfallService.selList();
 
+        System.out.println(teacher+""+classTeacher);
         map.put("teacher",teacher);
         map.put("classTeacher",classTeacher);
         map.put("dept",dept);
@@ -98,6 +98,7 @@ public class StudentClassController {
         map.put("classTeachers",classTeachers);
         map.put("depts",depts);
         map.put("studentClass",studentclass);
+
         return "student/studentClassUpdate";
     }
 
@@ -161,6 +162,11 @@ public class StudentClassController {
     public Integer update(Studentclass studentclass) {
         List<Studentclass> list = studentclassService.selList();
         for (Studentclass studentclass1 : list) {
+            if (studentclass.getClassid() != null){
+                if (studentclass.getClassid() == studentclass1.getClassid()){
+                    continue;
+                }
+            }
             if (studentclass.getClassname().equals(studentclass1.getClassname()) || studentclass1.getClassname() == studentclass.getClassname()
                     || studentclass.getClassno().equals(studentclass1.getClassno()) || studentclass1.getClassno() == studentclass.getClassno()) {
                 return 0;

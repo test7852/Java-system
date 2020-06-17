@@ -11,6 +11,7 @@ import java.util.List;
  * 
  */
 public interface StudentclassService{
+
     List<Studentclass> selList();//查询所有
 
     int selCount();//查询总数
