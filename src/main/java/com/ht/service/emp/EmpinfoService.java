@@ -32,7 +32,7 @@ public interface EmpinfoService{
 
     /**
      * @return
-     * 获取所有员工
+     * 获取
      */
     List<Empinfo> allEmpName();
 
@@ -56,6 +56,12 @@ public interface EmpinfoService{
      * 根据号码找员工
      */
     Empinfo getEmpByName(Empinfo empinfo);
+
+    /**
+     * @return
+     * 获取所有员工
+     */
+    List<Empinfo> list();
 
     int deleteByPrimaryKey(Integer empId);
 

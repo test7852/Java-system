@@ -58,6 +58,12 @@ public interface EmpinfoMapper {
      */
     Empinfo getEmpByName(Empinfo empinfo);
 
+    /**
+     * @return
+     * 获取所有员工
+     */
+    List<Empinfo> list();
+
     int deleteByPrimaryKey(Integer empId);
 
     int insert(Empinfo record);

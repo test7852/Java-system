@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * @author lrq
  * @date 2020/6/17 8:21
+ * 配置类
  */
 
 public class LoginConfig implements WebMvcConfigurer {

@@ -345,4 +345,11 @@
         select * from empinfo where Phone = #{phone}
        ]]>
   </select>
+
+  <select id="list" resultType="com.ht.bean.emp.Empinfo">
+    <![CDATA[
+        select * from empinfo
+        ]]>
+  </select>
+
 </mapper>
