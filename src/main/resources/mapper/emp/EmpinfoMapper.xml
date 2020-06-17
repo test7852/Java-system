@@ -352,4 +352,11 @@
         ]]>
   </select>
 
+  <!--  根据名称找员工-->
+  <select id="empinfoByName" resultType="com.ht.bean.emp.Empinfo">
+    <![CDATA[
+        select * from empinfo where emp_Name = #{name}
+       ]]>
+  </select>
+
 </mapper>
