@@ -38,8 +38,11 @@
             </li>
             <li>
                 <label class="layui-form-label">性别</label>
-                <input type="radio" name="sex" value="男" title="男" checked>
-                <input type="radio" name="sex" value="女" title="女">
+
+                <select name="sex">
+                    <option value="男" th:selected="${'男'==student.sex}">男</option>
+                    <option value="女" th:selected="${'女'==student.sex}">女</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">年龄：</label>
@@ -59,11 +62,17 @@
             </li>
             <li>
                 <label class="layui-form-label">班级：</label>
-                <input  name="clazz" required lay-verify="required" placeholder="班级" autocomplete="off" class="layui-input" th:value="${student.clazz}"/>
+                <select name="clazz">
+                    <option th:each="sc:${studentclasses}" th:value="${sc.classid}" th:text="${sc.classname}" th:selected="${sc.classid==student.clazz}"></option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">宿舍：</label>
-                <input  name="huor" required lay-verify="required" placeholder="宿舍" autocomplete="off" class="layui-input" th:value="${student.huor}"/>
+
+                <select name="huor">
+                    <option th:each="sh:${studenthuorList}" th:value="${sh.hourid}" th:text="${sh.huoeiddsc}" th:selected="${sh.hourid==student.huor}"></option>
+                </select>
+
             </li>
             <li>
                 <label class="layui-form-label">入学时间：</label>
@@ -124,8 +133,11 @@
             </li>
             <li>
                 <label class="layui-form-label">是否中专</label>
-                <input type="radio" name="isvocational" value="是" title="是"checked>
-                <input type="radio" name="isvocational" value="否" title="否">
+
+                <select name="isvocational">
+                    <option value="是" th:selected="${'是'==student.isvocational}">是</option>
+                    <option value="否" th:selected="${'否'==student.isvocational}">否</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">中专学校：</label>
@@ -145,8 +157,11 @@
             </li>
             <li>
                 <label class="layui-form-label">是否低保</label>
-                <input type="radio" name="dibao" value="是" title="是" checked>
-                <input type="radio" name="dibao" value="否" title="否">
+
+                <select name="dibao">
+                    <option value="是" th:selected="${'是'==student.dibao}">是</option>
+                    <option value="否" th:selected="${'否'==student.dibao}">否</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">生源类型：</label>
@@ -158,8 +173,11 @@
             </li>
             <li>
                 <label class="layui-form-label">是否当兵</label>
-                <input type="radio" name="soldier" value="是" title="是" checked>
-                <input type="radio" name="soldier" value="否" title="否">
+
+                <select name="soldier">
+                    <option value="是" th:selected="${'是'==student.soldier}">是</option>
+                    <option value="否" th:selected="${'否'==student.soldier}">否</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">报名号：</label>
@@ -167,8 +185,11 @@
             </li>
             <li>
                 <label class="layui-form-label">是否住校</label>
-                <input type="radio" name="zhuxiao" value="是" title="是" checked>
-                <input type="radio" name="zhuxiao" value="否" title="否">
+
+                <select name="zhuxiao">
+                    <option value="是" th:selected="${'是'==student.zhuxiao}">是</option>
+                    <option value="否" th:selected="${'否'==student.zhuxiao}">否</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">备注：</label>
@@ -188,13 +209,17 @@
             </li>
             <li>
                 <label class="layui-form-label">是否送电脑</label>
-                <input type="radio" name="computer" value="是" title="是" checked>
-                <input type="radio" name="computer" value="否" title="否">
+                <select name="computer">
+                    <option value="是" th:selected="${'是'==student.computer}">是</option>
+                    <option value="否" th:selected="${'否'==student.computer}">否</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">是否领用</label>
-                <input type="radio" name="collar" value="是" title="是" checked>
-                <input type="radio" name="collar" value="否" title="否">
+                <select name="collar">
+                    <option value="是" th:selected="${'是'==student.collar}">是</option>
+                    <option value="否" th:selected="${'否'==student.collar}">否</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">助学金：</label>
@@ -209,6 +234,7 @@
 
 </form>
 </body>
+<script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
 
 
