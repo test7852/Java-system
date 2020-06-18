@@ -44,6 +44,7 @@ public class TroalController {
         pager.setPageSize(limit);
         jsonData.setCount(trialService.selTrial());
         jsonData.setData(trialService.selByPage(pager));
+        System.out.println(trialService.selByPage(pager));
         return jsonData;
     }
 
