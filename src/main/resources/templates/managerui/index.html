@@ -54,10 +54,6 @@
         .page-header{
             margin-top: -25px;
         }
-        .page-inner{
-            margin-left: -25px;
-            margin-right: -40px;
-        }
         body{
              overflow-y: hidden;
              overflow-x: hidden;
@@ -183,8 +179,10 @@
                                     <i class="fa fa-book"></i><span> 后勤管理</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="javascript:void(0);"><i class="fa fa-wrench"></i> 报修申请</a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-cog"></i> 维修管理</a></li>
+                                    <li><a href="#" data-id="保修申请" data-title="保修申请" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/wxgl/sqlist"><i class="fa fa-fire"></i> 保修申请</a></li>
+                                    <li><a href="#" data-id="维修管理" data-title="维修管理" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/wxgl/equiwxgllist"><i class="fa fa-fire"></i> 维修管理</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -196,7 +194,8 @@
                                     <li><a href="#" data-id="考核指标" data-title="考核指标" class="site-demo-active"data-type="tabAdd"
                                            data-url="/skip/aduitmodelList"><i class="fa fa-files-o"></i>考核指标</a></li>
 
-                                    <li><a href="javascript:void(0);"><i class="fa fa-pencil"></i>考核录入</a></li>
+                                    <li><a href="#" data-id="考核录入" data-title="考核录入" class="site-demo-active"data-type="tabAdd"
+                                           data-url="/skip/aduitlogList"><i class="fa fa-files-o"></i>考核录入</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -317,7 +316,7 @@
                                     </li>
                                     <!--个人资料部分-->
                                     <li class="dropdown user-dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img th:src="@{/img/manager/login/f2.jpeg}" alt="" class="img-circle"></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img th:src="@{/img/manager/login/f1.jpg}" alt="" class="img-circle"></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="#">用户中心</a></li>
                                             <li><a href="#"><span class="badge pull-right badge-danger">99</span>我的 消息</a></li>
@@ -332,7 +331,7 @@
                     </nav>
                 </div><!-- /Page Header -->
                 <!-- Page Inner -->
-                <div class="page-inner">
+                <div class="page-inner" style="margin-left: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px">
                     <!--引入页面-->
                     <article style="" id="main-wrapper">
                         <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="demo">
@@ -343,14 +342,14 @@
                             </ul>
                             <div class="layui-tab-content">
                                 <div id="neir" class="layui-tab-item layui-show">
-                                    <iframe src="https://www.layui.com" name="goto"  frameborder="0"  style="width: calc(100vw - 250px);height: calc(100vh - 150px);"></iframe>
+                                    <iframe src="https://www.layui.com" name="goto"  frameborder="0"  style="width:  calc(100vw - 250px);height: calc(100vh - 150px);"></iframe>
                                 </div>
                             </div>
                         </div>
 
                     </article><!-- Main Wrapper -->
                     <div  class="page-footer">
-                        <p><button style="margin-left: 200%;" type="button" class="layui-btn layui-btn-normal">由浩瀚星空 梦想组合《只喜欢你，像风走了八千里 QWQ》</button></p><br><br><br>
+                        <p><button style="margin-left: 200%;" type="button" class="layui-btn layui-btn-normal">由浩瀚星空 梦想组合《只喜欢你，像春骚了八千里 QWQ》</button></p><br><br><br>
                     </div>
                 </div><!-- /Page Inner 邮箱内容 -->
                 <div class="page-right-sidebar" id="main-right-sidebar">

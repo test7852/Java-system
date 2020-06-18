@@ -28,4 +28,6 @@ public interface CoursetypeService{
     int selCountEdu();//查询总数据
 
     List<Coursetype> selByPage(Pager pager);//分页查询
+
+    Coursetype selName(String coursetypename);
 }

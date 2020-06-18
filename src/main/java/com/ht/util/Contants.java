@@ -4,6 +4,9 @@ package com.ht.util;
  * Created by Administrator on 2020/4/27.
  */
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 静态常量类
  */
@@ -11,7 +14,17 @@ public class Contants {
     /**
      * 文件上传路径
      */
-    public static final String PRO_FILE_SAVE_PATH="D:\\fFile\\";
+    public static final String PRO_FILE_SAVE_PATH="D:\\fFile\\doc\\";
+
+
+    /**
+     * 文件上传路径2
+     */
+    public static final String PRO_FILE_SAVE_ADUIT="D:\\fFile\\aduit\\";
+
+
+
+
     /**
      * 启用
      */

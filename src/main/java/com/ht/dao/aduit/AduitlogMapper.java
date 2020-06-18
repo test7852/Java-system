@@ -1,6 +1,10 @@
 package com.ht.dao.aduit;
 
 import com.ht.bean.aduit.Aduitlog;
+import com.ht.bean.aduit.Aduitmodel;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -19,4 +23,23 @@ public interface AduitlogMapper {
     int updateByPrimaryKeySelective(Aduitlog record);
 
     int updateByPrimaryKey(Aduitlog record);
+
+    /**
+     * @return
+     * 查询总数
+     */
+    int getTotalRow();
+
+    /**
+     * @param pager
+     * @return
+     * 分页查询
+     */
+    List<Aduitlog> allPageAduitlog(Pager pager);
+
+    /**
+     * @return
+     * 获取所有考核入录
+     */
+    List<Aduitlog> allAduitlog();
 }

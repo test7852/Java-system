@@ -20,41 +20,42 @@
 </style>
 <body>
 <form class="layui-form" th:action="@{/course/ceduupd}" method="post">
-    <div class="index">
-        <ul class="menu">
-            <input type="hidden" name="courseid" th:value="${list.courseid}">
-            <li>
-                <label class="layui-form-label">课程名称：</label>
-                <input  name="coursename" required lay-verify="required" placeholder="课程名称" autocomplete="off" class="layui-input" th:value="${list.coursename}">
-            </li>
-
-            <li>
-                <label class="layui-form-label">是否必修：</label>
-                <select name="isobligatory">
-                    <option value="是" th:selected="${'是'==list.isobligatory}">是</option>
-                    <option value="否" th:selected="${'否'==list.isobligatory}">否</option>
-                </select>
-            </li>
-
-            <li>
-                <label class="layui-form-label">课程类别：</label>
-                <select name="coursetypeid">
-                    <option th:each="p:${typelist}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}" th:selected="${list.coursetypeid==p.coursetypeid}"></option>
-                </select>
-            </li>
-
-            <li>
-                <label class="layui-form-label">说明：</label>
-                <input name="remark" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input" th:value="${list.remark}">
-            </li>
-
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+    <input type="hidden" name="courseid" th:value="${list.courseid}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名称</label>
+        <div class="layui-input-block">
+            <input  name="coursename" required lay-verify="required" placeholder="课程名称" autocomplete="off" class="layui-input" th:value="${list.coursename}">
+        </div>
     </div>
-
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程类别：</label>
+        <div class="layui-input-block">
+            <select name="coursetypeid">
+                <option th:each="p:${typelist}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}" 	></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否必修</label>
+        <div class="layui-input-block">
+            <select name="isobligatory">
+                <option value="是" th:selected="${'是'==list.isobligatory}">是</option>
+                <option value="否" th:selected="${'否'==list.isobligatory}">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <input name="remark" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input" th:value="${list.remark}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
 </form>
 </body>
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
@@ -72,11 +73,10 @@
         var form = layui.form;
 
         //监听提交
-        // 你可以在这里做操作  也可以不使用这个方法
+        //你可以在这里做操作  也可以不使用这个方法
         // form.on('submit(formDemo)', function(data){
-        //     layer.msg(JSON.stringify("修改成功"));
-        //     layer.close(index);
-        //     return true;
+        //   layer.msg(JSON.stringify(data.field));
+        //   return false;
         // });
     });
 </script>

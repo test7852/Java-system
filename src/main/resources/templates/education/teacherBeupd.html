@@ -19,54 +19,67 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/teacher/teacherupd}" method="post">
-    <div class="index">
-        <ul class="menu">
-            <input type="hidden" name="beid" th:value="${tlist.beid}">
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 星期：</label>
-                <select name="week" lay-filter="mySelect">
-                    <option value="星期一" th:selected="${'星期一'==tlist.week}">星期一</option>
-                    <option value="星期二" th:selected="${'星期二'==tlist.week}">星期二</option>
-                    <option value="星期三" th:selected="${'星期三'==tlist.week}">星期三</option>
-                    <option value="星期四" th:selected="${'星期四'==tlist.week}">星期四</option>
-                    <option value="星期五" th:selected="${'星期五'==tlist.week}">星期五</option>
-                    <option value="星期六" th:selected="${'星期六'==tlist.week}">星期六</option>
-                    <option value="星期日" th:selected="${'星期日'==tlist.week}">星期日</option>
-                </select>
-            </li>
-            <li>
-            <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 排班名称：</label>
-            <input  name="schedulingname" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${tlist.schedulingname}">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 员工姓名：</label>
-                <select name="emp_name" lay-filter="mySelect">
-                    <option th:each="e:${elist}" th:value="${e.emp_name}" th:text="${e.emp_name}" th:selected="${tlist.emp_name==e.emp_name}">张先生</option>
-                </select>
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 值班要求：</label>
-                <input  name="beask" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${tlist.beask}">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 总值班：</label>
-                <select name="besum" lay-filter="mySelect">
-                    <option value="1" th:selected="${1==tlist.besum}">是</option>
-                    <option value="2" th:selected="${2==tlist.besum}">否</option>
-                </select>
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 说明：</label>
-                <input  name="explain" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${tlist.explain}">
-            </li>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+<form class="layui-form" th:action="@{/teacher/teacherupd}">
+    <input type="hidden" name="beid" th:value="${tlist.beid}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">排班名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="schedulingname" th:value="${tlist.schedulingname}" required  lay-verify="required" placeholder="排班名称" autocomplete="off" class="layui-input">
+        </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">星期</label>
+        <div class="layui-input-block">
+            <select name="week" lay-verify="required">
+                <option value="星期一" th:selected="${'星期一'==tlist.week}">星期一</option>
+                <option value="星期二" th:selected="${'星期二'==tlist.week}">星期二</option>
+                <option value="星期三" th:selected="${'星期三'==tlist.week}">星期三</option>
+                <option value="星期四" th:selected="${'星期四'==tlist.week}">星期四</option>
+                <option value="星期五" th:selected="${'星期五'==tlist.week}">星期五</option>
+                <option value="星期六" th:selected="${'星期六'==tlist.week}">星期六</option>
+                <option value="星期日" th:selected="${'星期日'==tlist.week}">星期日</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">员工姓名</label>
+        <div class="layui-input-block">
+            <select name="emp_name" lay-verify="required">
+                <option th:each="e:${elist}" th:value="${e.emp_name}" th:text="${e.emp_name}" th:selected="${tlist.emp_name==e.emp_name}">张先生</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">值班要求</label>
+        <div class="layui-input-block">
+            <input type="text" name="beask" th:value="${tlist.beask}" required  lay-verify="required" placeholder="值班要求" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">总值班</label>
+        <select name="besum" lay-verify="required">
+            <option value="1" th:selected="${1==tlist.besum}">是</option>
+            <option value="2" th:selected="${2==tlist.besum}">否</option>
+        </select>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <input type="text" name="explain" th:value="${tlist.explain}" required  lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
 </form>
 </body>
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>

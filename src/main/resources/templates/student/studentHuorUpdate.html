@@ -27,28 +27,28 @@
             <!--            </li>-->
             <li>
                 <label class="layui-form-label"> 宿舍房号：</label>
-                <input  name="huorname" required lay-verify="required" placeholder="宿舍房号" autocomplete="off" class="layui-input">
+                <input  name="huorname" th:value="${studenthuor.huorname}" required lay-verify="required" placeholder="宿舍房号" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"> 宿舍地址：</label>
-                <input  name="addr" required lay-verify="required" placeholder="宿舍地址" autocomplete="off" class="layui-input">
+                <input  name="addr" th:value="${studenthuor.addr}"  required lay-verify="required" placeholder="宿舍地址" autocomplete="off" class="layui-input">
             </li>
             <li>
                 <label class="layui-form-label"> 宿舍人数：</label>
-                <input name="count" type="number" required lay-verify="required"  id="count" placeholder="宿舍人数" autocomplete="off" class="layui-input"
+                <input name="count" type="number" th:value="${studenthuor.count}" id="count" required lay-verify="required" placeholder="宿舍人数" autocomplete="off" class="layui-input"
                        onkeyup="limitInput(this);">
             </li>
 
             <li>
                 <label class="layui-form-label"> 总床位数：</label>
-                    <input name="numberbeds" type="number" id="number" onkeyup="limitInput(this);" required lay-verify="required"  placeholder="床位数" autocomplete="off" class="layui-input">
+                <input name="numberbeds" type="number" id="number" onkeyup="limitInput(this);"   th:value="${studenthuor.numberbeds}"   required lay-verify="required"  placeholder="床位数" autocomplete="off" class="layui-input">
             </li>
 <li><br> <br></li>
 
             <li>
                 <label ><i class="layui-icon">&#xe705;</i> 所在楼栋：</label>
                 <select   name="teacher">
-                    <option value="0">请选择所在楼栋</option>
+                    <option th:value="${studentfloor.floorid}"  th:text="${studentfloor.floorname}">请选择所在楼栋</option>
                     <option th:each="l:${studentFloorList}"th:value="${l.floorid}" th:text="${l.floorname}"></option>
                 </select>
             </li>
@@ -70,6 +70,7 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
+
     var i = document.getElementById("number").value;;
     var j = document.getElementById("count").value;
     function limitInput(o){
@@ -90,10 +91,11 @@
         }
     }
 
-
-
     layui.use('form', function(){
         var form = layui.form;
+
+
+
         form.on('select(selectTheme)', function (data) {//对应lay-filter="selectTheme"
             var index1 = $('#board option:selected').val();//对应id="board"  得到一级菜单选中值的value
             var optionJson = [];

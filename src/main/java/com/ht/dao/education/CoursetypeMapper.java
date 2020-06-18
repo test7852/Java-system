@@ -32,5 +32,5 @@ public interface CoursetypeMapper {
 
     List<Coursetype> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
 
-    Coursetype selname(String coursetypename);
+    Coursetype selName(String coursetypename);//根据姓名查询是否重复
 }

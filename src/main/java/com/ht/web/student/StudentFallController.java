@@ -33,7 +33,6 @@ public class StudentFallController {
     @RequestMapping("data")
     @ResponseBody
     public JsonData  data(int limit,int page){
-
         Pager pager = new Pager();
         pager.setPageSize(limit);
         pager.setCurrPage(page);
@@ -45,7 +44,7 @@ public class StudentFallController {
     /**
      * @param studentfall
      * @return
-     * 修改职位信息
+     * 修改届别信息
      */
     @RequestMapping("update")
     @ResponseBody
@@ -61,7 +60,7 @@ public class StudentFallController {
     /**
      * @param id
      * @return
-     * 删除职位
+     * 删除届别
      */
     @RequestMapping("del")
     @ResponseBody
@@ -76,7 +75,7 @@ public class StudentFallController {
     /**
      * @param studentfall
      * @return
-     * 添加职位
+     * 添加届别
      */
     @RequestMapping("add")
     @ResponseBody
@@ -90,12 +89,13 @@ public class StudentFallController {
     }
 
 
+    //去届别页面
     @RequestMapping("list")
     public String list(){
         return "/student/studentfall";
     }
 
-
+    //去添加页面
     @RequestMapping("toAdd")
     public String toAdd(){
         return "/student/studentfalladd";

@@ -15,7 +15,9 @@ import java.util.List;
 public interface StudenthuorMapper {
     List<Studenthuor> selList();//查询所有
 
-    List<Studentfloor> sybase(Pager pager);//分页查询
+    List<Studenthuor> selByFid(Integer floorId);//根据楼栋id查找所有宿舍
+
+    List<Studenthuor> sybase(Pager pager);//分页查询
 
     int selCount();//查询总数
 

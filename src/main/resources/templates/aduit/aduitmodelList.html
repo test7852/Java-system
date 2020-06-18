@@ -77,7 +77,6 @@
     layui.use('table', function () {
         var table = layui.table;
 
-
         //点击添加iframe窗方法
         $("#add").on('click',function(){
             //iframe窗
@@ -85,7 +84,7 @@
                 type: 2,
                 title: '考核指标新增',
                 maxmin: true, //开启最大化最小化a按钮
-                area: ['550px', '600px'],
+                area: ['550px', '350px'],
                 content: ['/aduitmodel/toadd']//这是链接你的页面地址 url
             });
         })
@@ -144,7 +143,7 @@
                     type: 2,
                     title: '考核指标修改',
                     maxmin: true, //开启最大化最小化a按钮
-                    area: ['550px', '600px'],
+                    area: ['550px', '350px'],
                     content: ['/aduitmodel/toupd?id='+data.aduitmodelid]//这是链接你的页面地址 url
                 });
 

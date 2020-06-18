@@ -82,14 +82,14 @@
     ]]>
   </select>
 
-  <!--  查询不是校长-->
+  <!--  查询不是负责人-->
   <select id="selolist" resultType="com.ht.bean.emp.Post">
     <![CDATA[
       select * from post where pos_id not in(1,2)
     ]]>
   </select>
 
-  <!--  查询是校长-->
+  <!--  查询是-->
   <select id="elselist" resultType="com.ht.bean.emp.Post">
   <![CDATA[
       select * from post where pos_id in(1,2)

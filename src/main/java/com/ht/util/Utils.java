@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class Utils {
 
-    public static Datadoc fileUpload(MultipartFile file) throws IOException {
+    public static Datadoc fileUpload(MultipartFile file,String path) throws IOException {
         //生成一个唯一的文件名
         String picName = UUID.randomUUID().toString();;
 
@@ -23,7 +23,7 @@ public class Utils {
         }
 
         //设置该文件存储位置，并保存该文件
-        String dirName = Contants.PRO_FILE_SAVE_PATH;
+        String dirName = path;
         //创建文件夹
         File dirFile = new File(dirName);
         if(!dirFile.exists()){

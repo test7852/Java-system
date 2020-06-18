@@ -1,10 +1,14 @@
 package com.ht.service.aduit.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.bean.aduit.Aduitlog;
 import com.ht.dao.aduit.AduitlogMapper;
 import com.ht.service.aduit.AduitlogService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/16 9:07
@@ -44,6 +48,21 @@ public class AduitlogServiceImpl implements AduitlogService{
     @Override
     public int updateByPrimaryKey(Aduitlog record) {
         return aduitlogMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int getTotalRow() {
+        return aduitlogMapper.getTotalRow();
+    }
+
+    @Override
+    public List<Aduitlog> allPageAduitlog(Pager pager) {
+        return aduitlogMapper.allPageAduitlog(pager);
+    }
+
+    @Override
+    public List<Aduitlog> allAduitlog() {
+        return aduitlogMapper.allAduitlog();
     }
 
 }

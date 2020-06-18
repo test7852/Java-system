@@ -1,14 +1,17 @@
 package com.ht.web.personage;
 
 import com.ht.bean.emp.Empinfo;
+import com.ht.bean.json.JsonData;
+import com.ht.service.emp.DepService;
 import com.ht.service.emp.EmpinfoService;
+import com.ht.service.emp.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 /**
  * 半口香甜吴一玄
@@ -60,6 +63,8 @@ public class personController {
         Integer update= empinfoService.updateByPrimaryKeySelective(empinfo);
         return update;
     }
+
+
 
 
 

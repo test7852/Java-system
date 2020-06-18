@@ -37,7 +37,7 @@ public class FileController {
     public String add(MultipartFile file,HttpServletRequest request) throws IOException {
         Empinfo e = (Empinfo) request.getSession().getAttribute("user");
         System.out.println(e);
-        Datadoc datadoc = Utils.fileUpload(file);
+        Datadoc datadoc = Utils.fileUpload(file,Contants.PRO_FILE_SAVE_PATH);
         datadocService.insert(datadoc);
         return "redirect:/dataDoc/toAdd";
     }
@@ -81,6 +81,8 @@ public class FileController {
     public void downloadFile(HttpServletRequest request,
                                HttpServletResponse response,
                                Integer id) throws UnsupportedEncodingException {
+
+
         Datadoc datadoc = datadocService.selectByPrimaryKey(id);
         String fileName = datadoc.getUrl();
 //         如果文件名不为空，则进行下载
