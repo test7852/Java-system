@@ -128,4 +128,30 @@
       Image = #{image,jdbcType=VARCHAR}
     where aduitLogid = #{aduitlogid,jdbcType=INTEGER}
   </update>
+
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from aduitlog
+    ]]>
+  </select>
+
+  <!--  分页-->
+  <select id="allPageAduitlog" resultType="com.ht.bean.aduit.Aduitlog">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+      select * from aduitlog limit #{kais},#{pageSize}
+    ]]>
+  </select>
+  <!-- 获取所有考核入录-->
+  <select id="allAduitlog" resultType="com.ht.bean.aduit.Aduitlog">
+    <![CDATA[
+      select * from aduitlog
+    ]]>
+  </select>
+
+
+
+
 </mapper>

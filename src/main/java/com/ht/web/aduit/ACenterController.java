@@ -14,8 +14,13 @@ public class ACenterController {
 
     //去到考核指标管理页面
     @RequestMapping("aduitmodelList")
-    public String postlist(){
+    public String modellist(){
         return "aduit/aduitmodelList";
+    }
+    //去到考核指标管理页面
+    @RequestMapping("aduitlogList")
+    public String loglist(){
+        return "aduit/aduitlogList";
     }
 
 }

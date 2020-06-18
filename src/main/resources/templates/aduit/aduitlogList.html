@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="skcats">
+		<title></title>
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+        <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+        <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
+	</head>
+	<style>
+    .layui-table-page {
+        text-align: center;
+    }
+
+    .utable .layui-laypage .layui-laypage-curr .layui-laypage-em {
+        background-color: #1E9FFF;
+    }
+    .layui-input-inline{margin-left: 50px;}
+    .layui-form-item{margin-top: 20px;}
+    .layui-form-label{width: 80px;}
+    .layui-table-view thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    .layui-table-view tbody td {
+        text-align: center;
+    }
+	</style>
+<body>
+<!--数据表格样式及附件-->	
+    <script type="text/html" id="bar">
+
+        {{#  if(d.image === null){ }}
+
+        <a id="ann" class="layui-btn layui-btn-warm layui-btn-xs" lay-event="upload">
+            <i class="layui-icon">&#xe642;</i>上传图片
+        </a>
+
+        {{#  } else { }}
+
+        <a class="layui-btn layui-btn-xs" lay-event="look">
+            <i class="layui-icon">&#xe642;</i>查看图片
+        </a>
+
+        {{#  } }}
+
+    <a id="upd" class="layui-btn layui-btn-xs" lay-event="upd">
+        <i class="layui-icon">&#xe642;</i>编辑
+    </a>
+
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+        <i class="layui-icon">&#xe640;</i>丢弃
+    </a>
+	</script>
+
+<!--数据表格样式及附件-->
+<script id="toolbarDemo" type="text/html">
+    <div class="layui-btn-container">
+        <button id="add" class="layui-btn layui-btn-sm">新增</button>
+    </div>
+</script>
+
+<!--数据表格  数据表格使用的是方法渲染-->
+<div class="utable">
+<table class="layui-table"
+       lay-data="{width:1150,height:650, url:'/aduitlog/listdata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
+       lay-filter="tab">
+    <thead>
+    <tr>
+        <th lay-data="{field:'aduitlogid', width:80, sort: true}">ID</th>
+        <th lay-data="{field:'aduitname', edit: 'false'}">考核内容</th>
+        <th lay-data="{field:'empname'}">员工姓名</th>
+        <th lay-data="{field:'scores'}">考核分数</th>
+        <th lay-data="{field:'auditperson'}">录入人员</th>
+        <th lay-data="{field:'auditdate'}">考核时间</th>
+        <th lay-data="{field:'remark', edit: 'false'}">说明</th>
+        <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
+    </tr>
+    </thead>
+</table>
+</div>
+</body>
+<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:inline="none">
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+
+        //点击添加iframe窗方法
+        $("#add").on('click',function(){
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '考核录入新增',
+                maxmin: true, //开启最大化最小化a按钮
+                area: ['550px', '600px'],
+                content: ['/aduitlog/toadd']//这是链接你的页面地址 url
+            });
+        })
+
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    layer.msg("添加")
+                    // var data = checkStatus.data;
+                    // layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            }
+            ;
+        })
+        //监听行工具事件
+        table.on('tool(tab)', function (obj) {
+            var data = obj.data;
+            //console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('真的删除么?', function (index) {
+                    obj.del();
+                    layer.close(index);
+                    $.ajax({
+                        url: '/aduitlog/del',
+                        type: 'post',
+                        data: {
+                            id:data.aduitlogid
+                        },
+                        dataType: 'json',
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("删除成功"));
+                                }else {
+
+                                }
+                        },
+                    })
+                });
+            }else if (obj.event == 'upd') {//修改
+
+                layer.open({
+                    type: 2,
+                    title: '考核指标修改',
+                    maxmin: true, //开启最大化最小化a按钮
+                    area: ['550px', '600px'],
+                    content: ['/aduitlog/toupd?id='+data.aduitlogid]//这是链接你的页面地址 url
+                });
+
+            }else if (obj.event == 'upload') {//上传
+
+                layer.open({
+                    type: 2,
+                    title: '上传图片',
+                    maxmin: true, //开启最大化最小化a按钮
+                    area: ['550px', '600px'],
+                    content: ['/aduitlog/toupload?id='+data.aduitlogid]//这是链接你的页面地址 url
+                });
+
+            }else if (obj.event == 'look') {//查看
+
+                layer.open({
+                    type: 2,
+                    title: '查看图片',
+                    maxmin: true, //开启最大化最小化a按钮
+                    area: ['550px', '600px'],
+                    content: ['/aduitlog/tolook?id='+data.aduitlogid]//这是链接你的页面地址 url
+                });
+
+            }
+
+        })
+
+
+    });
+</script>
+</html>

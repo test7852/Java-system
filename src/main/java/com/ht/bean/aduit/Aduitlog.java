@@ -48,4 +48,16 @@ public class Aduitlog {
     * 图片
     */
     private String image;
+
+    /**
+     * 考核内容
+     */
+    private String aduitname;
+    /**
+     * 员工姓名
+     */
+    private String empname;
+
+
+
 }
