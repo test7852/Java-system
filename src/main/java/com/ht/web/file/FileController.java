@@ -81,6 +81,8 @@ public class FileController {
     public void downloadFile(HttpServletRequest request,
                                HttpServletResponse response,
                                Integer id) throws UnsupportedEncodingException {
+
+
         Datadoc datadoc = datadocService.selectByPrimaryKey(id);
         String fileName = datadoc.getUrl();
 //         如果文件名不为空，则进行下载
