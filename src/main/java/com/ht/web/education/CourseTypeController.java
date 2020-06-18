@@ -73,8 +73,9 @@ public class CourseTypeController {
     @RequestMapping("/coursetypeadd")
     @ResponseBody
     public Boolean coursetypeadd(Coursetype coursetype){
-
-        if( coursetype == null){//如果数据库没有这个姓名就可以新增
+        System.out.println(coursetype);
+        Coursetype c = coursetypeService.selName(coursetype.getCoursetypename());
+        if( c == null){//如果数据库没有这个姓名就可以新增
             coursetypeService.insert(coursetype);
             return true;
         }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * 半口香甜吴一玄
@@ -30,8 +31,10 @@ public class personController {
      * @return
      */
     @RequestMapping("topersonage")
-    public String topersonage(Model model){
-        Empinfo empinfo= empinfoService.selectByPrimaryKey(5);
+    public String topersonage(Model model, HttpSession session){
+//        Empinfo user = (Empinfo)session.getAttribute("user");
+//        Empinfo empinfo= empinfoService.selectByPrimaryKey(user.getEmp_id());
+        Empinfo empinfo= empinfoService.selectByPrimaryKey(1);
         model.addAttribute("person",empinfo);
         return "personage/personage";
     }

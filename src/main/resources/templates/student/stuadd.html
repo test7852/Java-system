@@ -53,21 +53,30 @@
             </li>
             <li>
                 <label class="layui-form-label">班级：</label>
-                <input  name="clazz" required lay-verify="required" placeholder="班级" autocomplete="off" class="layui-input"/>
+
+                <select name="clazz">
+                    <option th:each="sc:${studentclasses}" th:value="${sc.classid}" th:text="${sc.classname}"></option>
+                </select>
+            </li>
+            <li>
+                <label class="layui-form-label">楼栋：</label>
+                <select lay-filter="selectTheme" id="board" name="floo">
+                    <option value="0" >请选择楼栋</option>
+                    <option  th:each="sf:${studentfloorList}" th:value="${sf.floorid}" th:text="${sf.floorname}">所在系</option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">宿舍：</label>
-                <input  name="huor" required lay-verify="required" placeholder="宿舍" autocomplete="off" class="layui-input"/>
+
+                <select id="theme" name="huor">
+                    <option></option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">入学时间：</label>
                 <input type="text" class="layui-input" id="test1" name="entertime" placeholder="入学时间">
             </li>
 
-            <li>
-                <label class="layui-form-label">介绍老师：</label>
-                <input  name="introduretech" required lay-verify="required" placeholder="介绍老师" autocomplete="off" class="layui-input"/>
-            </li>
             <li>
                 <label class="layui-form-label">学生状态：</label>
                 <input  name="stat" required lay-verify="required" placeholder="学生状态" autocomplete="off" class="layui-input"/>
@@ -89,12 +98,19 @@
                 <input  name="cardid" required lay-verify="required" placeholder="身份证号" autocomplete="off" class="layui-input"/>
             </li>
             <li>
-                <label class="layui-form-label">就读专业：</label>
-                <input  name="professional" required lay-verify="required" placeholder="就读专业" autocomplete="off" class="layui-input"/>
+                <label class="layui-form-label">系名：</label>
+
+                <select lay-filter="selectThemes" id="boards" name="professional">
+                    <option value="0" >请选择系</option>
+                    <option  th:each="dp:${deptList}" th:value="${dp.deptid}" th:text="${dp.deptname}"></option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">专业类别：</label>
-                <input  name="prolevel" required lay-verify="required" placeholder="专业类别" autocomplete="off" class="layui-input"/>
+
+                <select id="themes" name="prolevel">
+                    <option></option>
+                </select>
             </li>
             <li>
                 <label class="layui-form-label">学习类别：</label>
@@ -206,15 +222,50 @@
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="none">
 
-    function gbi() {
-        var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
-        window.parent.location.reload();
-
-    }
-
     layui.use('form', function(){
         var form = layui.form;
+
+        form.on('select(selectTheme)', function (data) {//对应lay-filter="selectTheme"
+            var index1 = $('#board option:selected').val();//对应id="board"  得到一级菜单选中值的value
+            var optionJson = [];
+            $.ajax({
+                url: "/stu/byhuorid",//对应controller层
+                type: "post",
+                data: {"floorId": index1},//将选中值的value传给controller
+                datatype: "json",
+                success: function (data) {
+                    optionJson = data;
+                    var selectObj = document.getElementById("theme");//对应id="theme"
+                    selectObj.options.length = 0;
+                    for (var i = 0; i < data.length; i++) {
+                        selectObj.add(new Option(optionJson[i].huorname, optionJson[i].hourid));//对应数据库中名字，两个参数是(文本,value)
+                    }
+                    form.render();
+                }
+            })
+        });
+
+        form.on('select(selectThemes)', function (data) {//对应lay-filter="selectTheme"
+            var index1 = $('#boards option:selected').val();//对应id="board"  得到一级菜单选中值的value
+            var optionJson = [];
+            $.ajax({
+                url: "/stu/bymajorid",//对应controller层
+                type: "post",
+                data: {"deptid": index1},//将选中值的value传给controller
+                datatype: "json",
+                success: function (data) {
+                    optionJson = data;
+                    var selectObj = document.getElementById("themes");//对应id="theme"
+                    selectObj.options.length = 0;
+                    for (var i = 0; i < data.length; i++) {
+                        selectObj.add(new Option(optionJson[i].majorname, optionJson[i].majorid));//对应数据库中名字，两个参数是(文本,value)
+                    }
+                    form.render();
+                }
+            })
+        });
+
+
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){

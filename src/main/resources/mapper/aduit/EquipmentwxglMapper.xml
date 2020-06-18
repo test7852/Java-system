@@ -117,4 +117,31 @@
       `status` = #{status,jdbcType=INTEGER}
     where wxid = #{wxid,jdbcType=INTEGER}
   </update>
+
+  <!--查询总数据-->
+  <select id="selEqui" resultType="int">
+    select count(*) from equipmentwxgl;
+  </select>
+
+  <!--分页查询-->
+  <select id="selbypage" resultType="equipmentwxgl">
+    <![CDATA[
+          select * from equipmentwxgl ORDER by wxid desc limit #{startRow},#{pageSize};
+        ]]>
+  </select>
+
+  <!--查询学生-->
+  <select id="selstu" resultType="student">
+    select * from student;
+  </select>
+
+  <!--查询班级-->
+  <select id="selclass" resultType="studentclass">
+    select * from studentclass;
+  </select>
+
+  <!--查询系-->
+  <select id="seldept" resultType="dept">
+    select * from dept;
+  </select>
 </mapper>

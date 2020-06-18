@@ -84,7 +84,7 @@
         <th lay-data="{field:'schedulingname'}">排班名称</th>
         <th lay-data="{field:'emp_name'}">员工姓名</th>
         <th lay-data="{field:'beask'}">值班要求</th>
-        <th lay-data="{field:'besum'}">总值班</th>
+        <th lay-data="{field:'besum', templet: '#isTrueBesum' }" >总值班</th>
         <th lay-data="{field:'explain'}">说明</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
@@ -94,6 +94,13 @@
 </body>
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
+<script type="text/html" id="isTrueBesum">
+    {{#  if(d.besum ==1 ){ }}
+    <p>是</p>
+    {{#  } else { }}
+    <p>否</p>
+    {{#  } }}
+</script>
 <script type="text/javascript" th:inline="none">
 
     layui.use('table', function () {
