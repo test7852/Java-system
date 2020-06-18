@@ -30,15 +30,15 @@ public class StudentClassController {
     @Resource
     private JsonData jsonData;
     @Resource
-    private StudentclassService studentclassService;
+    private StudentclassService studentclassService;//班级管理接口
     @Resource
-    private EmpinfoService empinfoService;
+    private EmpinfoService empinfoService;//员工管理接口
     @Resource
-    private DeptService deptService;
+    private DeptService deptService;//系管理接口
     @Resource
-    private MajorService majorService;
+    private MajorService majorService;//专业管理接口
     @Resource
-    private StudentfallService studentfallService;
+    private StudentfallService studentfallService;//届别管理接口
 
     @RequestMapping("data")
     @ResponseBody
@@ -132,8 +132,10 @@ public class StudentClassController {
 
 
 
-
-
+    /**
+     * @return
+     * 删除班级
+     */
     @RequestMapping("del")
     public String del(@Param("id") Integer id){
         System.out.println("id = " + id);
@@ -155,7 +157,7 @@ public class StudentClassController {
 
     /**
      * @param studentclass
-     * @return 修改
+     * @return 修改班级
      */
     @RequestMapping("update")
     @ResponseBody

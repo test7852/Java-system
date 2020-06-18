@@ -23,10 +23,10 @@ public class StudentFloorController {
     @Resource
     private JsonData jsonData;
     @Resource
-    private StudentfloorService studentfloorService;
+    private StudentfloorService studentfloorService;//楼栋管理接口
 
 
-    //楼栋数据
+    //表格数据渲染所要的分页数据
     @RequestMapping("data")
     @ResponseBody
     public JsonData data(@Param("limit")int limit , @Param("page")int page){
@@ -44,6 +44,27 @@ public class StudentFloorController {
         return "student/studentFloorAdd.";
     }
 
+    //去修改页面
+    @RequestMapping("/toUpdate")
+    public String toUpdte(int id,Model model){
+        Studentfloor studentFloor = studentfloorService.selectByPrimaryKey(id);
+        model.addAttribute("studentFloor",studentFloor);
+        return "staffupd";
+    }
+
+    //去楼栋页面
+    @RequestMapping("list")
+    public String list(){
+        return "student/studentFloor";
+    }
+
+
+
+
+
+
+
+    //添加楼栋
     @RequestMapping("/add")
     @ResponseBody
     public Integer add(Studentfloor studentfloor) {
@@ -57,14 +78,9 @@ public class StudentFloorController {
         return i;
     }
 
-    @RequestMapping("/toUpdate")
-    public String toUpdte(int id,Model model){
-        Studentfloor studentFloor = studentfloorService.selectByPrimaryKey(id);
-        model.addAttribute("studentFloor",studentFloor);
-        return "staffupd";
-    }
 
-    //修改楼栋资料
+
+    //修改楼栋
     @RequestMapping("/update")
     @ResponseBody
     public Integer upd(Studentfloor studentfloor){
@@ -78,12 +94,9 @@ public class StudentFloorController {
         return i;
     }
 
-    @RequestMapping("list")
-    public String list(){
-        return "student/studentFloor";
-    }
 
 
+    //删除楼栋
     @RequestMapping("/del")
     public String del(Integer id) {
         studentfloorService.deleteByPrimaryKey(id);

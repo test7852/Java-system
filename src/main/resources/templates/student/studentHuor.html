@@ -36,9 +36,13 @@
 <body>
 <!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="toUpdate">
+    <a id="edit" class="layui-btn layui-btn-xs">
         <i class="layui-icon">&#xe642;</i><span class="falg">ON</span> 编辑
     </a>
+    <a class="layui-btn layui-btn-xs" lay-event="toUpdate">
+        <i class="layui-icon">&#xe640;</i>编辑
+    </a>
+
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
@@ -156,7 +160,7 @@
                 }
 
             }else if(obj.event= 'toUpdate'){
-                alert(data.classid);
+                alert(data.hourid);
                 layer.open({
                     type: 2,
                     title: '编辑宿舍',

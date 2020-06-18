@@ -35,13 +35,13 @@
             </li>
             <li>
                 <label class="layui-form-label"> 宿舍人数：</label>
-                <input name="count" type="number" required lay-verify="required" placeholder="宿舍人数" autocomplete="off" class="layui-input"
+                <input name="count" type="number" required lay-verify="required"  id="count" placeholder="宿舍人数" autocomplete="off" class="layui-input"
                        onkeyup="limitInput(this);">
             </li>
 
             <li>
                 <label class="layui-form-label"> 总床位数：</label>
-                <input name="numberbeds" type="number" id="count"   required lay-verify="required"  placeholder="床位数" autocomplete="off" class="layui-input">
+                    <input name="numberbeds" type="number" id="number" onkeyup="limitInput(this);" required lay-verify="required"  placeholder="床位数" autocomplete="off" class="layui-input">
             </li>
 <li><br> <br></li>
 
@@ -70,26 +70,30 @@
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
+    var i = document.getElementById("number").value;;
+    var j = document.getElementById("count").value;
     function limitInput(o){
-        var number = document.getElementById("number")
-        var count = document.getElementById("count")
-        var value=o.value;
+        var number = document.getElementById("number")//总床位
+        var count = document.getElementById("count")//宿舍人数
+        var countValue = count.value;
+        var numberValue = number.value;
         var min=0;
         var max=8;
-        if (count.value != ""){
-            max = count.value;
+        if (countValue != "" && numberValue != ""){
+            max = numberValue;
+            min = countValue;
         }
-        if(parseInt(value)<min||parseInt(value)>max){
-            alert('输入错误');
-            o.value='';
+        if(parseInt(countValue)<0||parseInt(countValue)>max || parseInt(numberValue)<min){
+            alert('床位不够了');
+            count.value=j;
+            number.value=i;
         }
     }
 
+
+
     layui.use('form', function(){
         var form = layui.form;
-
-
-
         form.on('select(selectTheme)', function (data) {//对应lay-filter="selectTheme"
             var index1 = $('#board option:selected').val();//对应id="board"  得到一级菜单选中值的value
             var optionJson = [];
