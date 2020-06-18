@@ -131,4 +131,9 @@
   <select id="selList" resultType="com.ht.bean.student.Studenthuor">
         select * from studenthuor
     </select>
+
+  <!--  查询所有-->
+  <select id="selByFid" resultType="com.ht.bean.student.Studenthuor">
+        select * from studenthuor where floorId=#{floorId}
+    </select>
 </mapper>
