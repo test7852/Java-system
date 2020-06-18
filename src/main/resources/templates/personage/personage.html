@@ -142,7 +142,7 @@
 					  </div>
 					  <div class="layui-form-item">
 					    <div class="layui-input-block">
-					      <button class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="accomplish" >立即提交</button>
+					      <button class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="accomplish" ><i class="layui-icon">&#xe609;</i> 立即提交</button>
 <!--					      <button type="reset" class="layui-btn layui-btn-radius layui-btn-primary">重置</button>-->
 					    </div>
 					  </div>
@@ -190,8 +190,8 @@
 				   <div class="layui-form-item">
 					    <div class="layui-input-block">
 					 
-					      <input  class="layui-btn layui-btn-normal layui-btn-radius" value="确认修改" id="ok"/>
-					      <button type="reset" class="layui-btn layui-btn-radius layui-btn-primary">重新填写</button>
+					      <button  class="layui-btn layui-btn-normal layui-btn-radius" id="ok"><i class="layui-icon">&#xe609;</i> 确认修改</button>
+					      <button id="reset" class="layui-btn layui-btn-radius layui-btn-primary"><i class="layui-icon">&#xe669;</i> 重新填写</button>
 					    </div>
 					  </div>
 		    </div>
@@ -271,7 +271,7 @@
 						</div>
 					</div>
 				</form>
-				<button class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="submit">立即提交</button>
+				<button class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="submit"><i class="layui-icon">&#xe609;</i> 立即提交</button>
 		    </div>
 
 		    <div class="layui-tab-item">
@@ -379,6 +379,7 @@
 								success(data){
 									if(data==1){
 										parent.layer.msg('保存成功', {icon: 1});
+										$("#password3").val("");$("#password1").val("");$("#password2").val("");
 									}
 								}
 							})
@@ -397,6 +398,9 @@
 									elem: '#birthday'
 								});
 
+							$("#reset").on('click',function(){
+								$("#password3").val("");$("#password1").val("");$("#password2").val("");
+							})
 								
 						  
 						  
