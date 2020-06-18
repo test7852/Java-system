@@ -9,7 +9,7 @@
 		<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 	</head>
 	<style>
-		.index{width: 600px;margin-left: 30px;}
+		.index{width: 800px;margin-left: 30px;height: 400px}
 		.layui-input{width: 120px;}
 		.menu li{float: left;}
 		.layui-form-label{margin-top: 15px}
@@ -19,38 +19,31 @@
 		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 	<body>
-	<form class="layui-form" th:action="@{/course/ceduadd}" method="post">
+	<form class="layui-form" th:action="@{/wxgl/sqadd}" method="post">
 		<div class="layui-form-item">
-			<label class="layui-form-label">课程名称</label>
+			<label class="layui-form-label">设备名称</label>
 			<div class="layui-input-block">
-				<input type="text" name="coursename" required  lay-verify="required" placeholder="课程名称" autocomplete="off" class="layui-input">
+				<input type="text" name="equipmenttype" required  lay-verify="required" placeholder="维修设备名称" autocomplete="off" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">课程类别：</label>
+			<label class="layui-form-label">损坏类别</label>
 			<div class="layui-input-block">
-				<select name="coursetypeid" lay-verify="required">
-					<option th:each="p:${list}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}"></option>
-				</select>
+				<input type="radio" name="wxcategory" value="自然损坏" title="自然损坏" checked>
+				<input type="radio" name="wxcategory" value="人为损坏" title="人为损坏">
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">是否必修</label>
+			<label class="layui-form-label">部门/班级</label>
 			<div class="layui-input-block">
-				<input type="radio" name="isobligatory" value="是" title="是" checked>
-				<input type="radio" name="isobligatory" value="否" title="否">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">说明</label>
-			<div class="layui-input-block">
-				<input type="text" name="remark" required  lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
+				<input type="radio" name="usertype" value="1" title="部门" checked>
+				<input type="radio" name="usertype" value="2" title="班级">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
 			</div>
 		</div>
 	</form>
@@ -58,23 +51,23 @@
 	<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script type="text/javascript" th:inline="none">
-		
-		function gbi() {
+
+        function gbi() {
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
             window.parent.location.reload();
 
         }
-		
-		layui.use('form', function(){
-		  var form = layui.form;
 
-		  //监听提交
-		  //你可以在这里做操作  也可以不使用这个方法
-		  // form.on('submit(formDemo)', function(data){
-		  //   layer.msg(JSON.stringify(data.field));
-		  //   return false;
-		  // });
-		});
+        layui.use('form', function(){
+			  var form = layui.form;
+
+			  //监听提交
+			  //你可以在这里做操作  也可以不使用这个方法
+			  // form.on('submit(formDemo)', function(data){
+			  //   layer.msg(JSON.stringify(data.field));
+			  //   return false;
+			  // });
+			});
 	</script>
 </html>

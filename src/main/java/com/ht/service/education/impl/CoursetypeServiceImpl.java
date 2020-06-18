@@ -60,4 +60,9 @@ public class CoursetypeServiceImpl implements CoursetypeService{
         return coursetypeMapper.selbypage((pager.currPage-1)*pager.pageSize,pager.pageSize);
     }
 
+    @Override
+    public Coursetype selName(String coursetypename) {
+        return coursetypeMapper.selName(coursetypename);
+    }
+
 }
