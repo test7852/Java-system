@@ -18,6 +18,7 @@
 			.more li{float: left;}
 			input[type=text]{border-radius:13px;border:1px solid #000;}
 			.layui-input{border-radius:13px;border:1px solid #000;text-indent:5px;}
+			::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 
 	<body>
@@ -28,11 +29,11 @@
  
 		<div class="layui-tab layui-tab-brief" style="margin-left: 10%;" lay-filter="docDemoTabBrief">
 		  <ul class="layui-tab-title">
-		    <li class="layui-this">我的资料</li>
-		    <li>头像 设置</li>
-		    <li>密码 设置</li>
-		    <li>其他 资料</li>
-		    <li>账号 绑定</li>
+		    <li class="layui-this"><i class="layui-icon">&#xe770;</i> 我的资料</li>
+		    <li><i class="layui-icon">&#xe60c;</i> 头像 设置</li>
+		    <li><i class="layui-icon">&#xe673;</i> 密码 设置</li>
+		    <li><i class="layui-icon">&#xe705;</i> 其他 资料</li>
+		    <li><i class="layui-icon">&#xe64c;</i> 账号 绑定</li>
 		  </ul>
 		  <div class="layui-tab-content" style="height: 500px;width: 1000px;" th:each="p:${person}">
 <!--			  我的资料-->
@@ -63,7 +64,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe677;</i> 微信</label>
 							    <div class="layui-input-inline">
-							      <input onBlur="" id="weixin" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
+							      <input id="weixin" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -71,7 +72,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe676;</i>   QQ</label>
 							    <div class="layui-input-inline">
-							      <input onBlur="" id="qqcode" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
+							      <input id="qqcode" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -79,7 +80,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 支付宝</label>
 							    <div class="layui-input-inline">
-							      <input onBlur="" id="alipay" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
+							      <input id="alipay" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -87,7 +88,7 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe637;</i> 入职</label>
 							    <div class="layui-input-inline">
-							      <input onblur="" id="hireday" name="hireday" th:value="${p.hireday}" required lay-verify="required" placeholder="选择入职时间" autocomplete="off" class="layui-input">
+							      <input disabled id="hireday" name="hireday" th:value="${p.hireday}" required lay-verify="required" placeholder="入职时间" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -95,7 +96,7 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe637;</i> 离职</label>
 							    <div class="layui-input-inline">
-							      <input  id="fireday" name="fireday" th:value="${p.fireday}" required lay-verify="required" placeholder="选择离职时间" autocomplete="off" class="layui-input">
+							      <input  disabled value="在职中" required lay-verify="required" placeholder="离职时间" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -241,19 +242,30 @@
 							</div>
 						</li>
 						<li>
+							<form class="layui-form">
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> 婚姻状况</label>
-								<div class="layui-input-inline">
-									<input id="married" th:value="${p.married}" required lay-verify="required" placeholder="婚姻状况" autocomplete="off" class="layui-input">
+								<div class="layui-input-block">
+									<select name="city"  lay-verify="required">
+										<option th:value="${p.married}" th:text="${p.married}">请选择</option>
+										<option value="已婚">已婚</option>
+										<option value="单身">单身</option>
+										<option value="离异">离异</option>
+										<option value="丧偶">丧偶</option>
+									</select>
 								</div>
+<!--								<div class="layui-input-inline">-->
+<!--									<input id="married" th:value="${p.married}" required lay-verify="required" placeholder="婚姻状况" autocomplete="off" class="layui-input">-->
+<!--								</div>-->
 							</div>
+							</form>
 						</li>
 					</ul>
 
 <!--				省市区 三级联动区-->
 				<form class="layui-form">
 					<div style="margin-left: 30px" class="layui-form-item" id="area-picker">
-						<div class="layui-form-label">城市</div>
+						<div class="layui-form-label"><i class="layui-icon">&#xe66c;</i> 城市</div>
 						<div name="area" class="layui-input-inline" style="width: 150px;">
 							<select id="province" class="province-selector" th:each="pr:${province}" th:data-value="${pr}"  lay-filter="province-1">
 								<option>请选择省</option>
@@ -271,7 +283,7 @@
 						</div>
 					</div>
 				</form>
-				<button class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="submit"><i class="layui-icon">&#xe609;</i> 立即提交</button>
+				<button style="margin-top: 30px" class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="submit"><i class="layui-icon">&#xe609;</i> 立即提交</button>
 		    </div>
 
 		    <div class="layui-tab-item">
@@ -311,7 +323,7 @@
 							 		  qqcode:$("#qqcode").val(),
 							 		  alipay:$("#alipay").val(),
 							 		  hireday:$("#hireday").val(),
-							 		  fireday:$("#fireday").val(),
+							 		  // fireday:$("#fireday").val(),
 							 		  emp_name:$("#emp_name").val(),
 							 		  education:$("#education").val(),
 							 		  emp_sex:$("input[name='emp_sex']:checked").val()
@@ -320,7 +332,9 @@
 							 	  success(data){
 							 		  if(data==1){
 							 			  parent.layer.msg('保存成功', {icon: 1});
-							 		  }
+							 		  }else {
+										  parent.layer.msg('出问题了', {icon: 4});
+									  }
 							 	  }
 
 							   })
@@ -352,6 +366,8 @@
 									success(data){
 										if(data==1){
 											parent.layer.msg('保存成功', {icon: 1});
+										}else {
+											parent.layer.msg('出问题了', {icon: 4});
 										}
 									}
 
@@ -380,19 +396,14 @@
 									if(data==1){
 										parent.layer.msg('保存成功', {icon: 1});
 										$("#password3").val("");$("#password1").val("");$("#password2").val("");
+									}else {
+										parent.layer.msg('出问题了', {icon: 4});
 									}
 								}
 							})
 						})
 
 						//执行一个laydate实例
-							 //常规用法 入职 离职
-								laydate.render({
-								  elem: '#hireday'
-								});
-								laydate.render({
-								  elem: '#fireday'
-								});
 								// 生日
 								laydate.render({
 									elem: '#birthday'
