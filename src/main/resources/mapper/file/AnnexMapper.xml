@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.file.AnnexMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.file.Annex">
+    <!--@mbg.generated-->
+    <!--@Table annex-->
+    <id column="annexId" jdbcType="INTEGER" property="annexid" />
+    <result column="seName" jdbcType="VARCHAR" property="sename" />
+    <result column="seId" jdbcType="INTEGER" property="seid" />
+    <result column="annexName" jdbcType="VARCHAR" property="annexname" />
+    <result column="annexNames" jdbcType="VARCHAR" property="annexnames" />
+    <result column="annexDate" jdbcType="VARCHAR" property="annexdate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sessionName" jdbcType="VARCHAR" property="sessionname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    annexId, seName, seId, annexName, annexNames, annexDate, remark, sessionName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from annex
+    where annexId = #{annexid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from annex
+    where annexId = #{annexid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="annexId" keyProperty="annexid" parameterType="com.ht.bean.file.Annex" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into annex (seName, seId, annexName, 
+      annexNames, annexDate, remark, 
+      sessionName)
+    values (#{sename,jdbcType=VARCHAR}, #{seid,jdbcType=INTEGER}, #{annexname,jdbcType=VARCHAR},
+      #{annexnames,jdbcType=VARCHAR}, #{annexdate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{sessionname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="annexId" keyProperty="annexid" parameterType="com.ht.bean.file.Annex" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into annex
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sename != null">
+        seName,
+      </if>
+      <if test="seid != null">
+        seId,
+      </if>
+      <if test="annexname != null">
+        annexName,
+      </if>
+      <if test="annexnames != null">
+        annexNames,
+      </if>
+      <if test="annexdate != null">
+        annexDate,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="sessionname != null">
+        sessionName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sename != null">
+        #{sename,jdbcType=VARCHAR},
+      </if>
+      <if test="seid != null">
+        #{seid,jdbcType=INTEGER},
+      </if>
+      <if test="annexname != null">
+        #{annexname,jdbcType=VARCHAR},
+      </if>
+      <if test="annexnames != null">
+        #{annexnames,jdbcType=VARCHAR},
+      </if>
+      <if test="annexdate != null">
+        #{annexdate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionname != null">
+        #{sessionname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.file.Annex">
+    <!--@mbg.generated-->
+    update annex
+    <set>
+      <if test="sename != null">
+        seName = #{sename,jdbcType=VARCHAR},
+      </if>
+      <if test="seid != null">
+        seId = #{seid,jdbcType=INTEGER},
+      </if>
+      <if test="annexname != null">
+        annexName = #{annexname,jdbcType=VARCHAR},
+      </if>
+      <if test="annexnames != null">
+        annexNames = #{annexnames,jdbcType=VARCHAR},
+      </if>
+      <if test="annexdate != null">
+        annexDate = #{annexdate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionname != null">
+        sessionName = #{sessionname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where annexId = #{annexid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.file.Annex">
+    <!--@mbg.generated-->
+    update annex
+    set seName = #{sename,jdbcType=VARCHAR},
+      seId = #{seid,jdbcType=INTEGER},
+      annexName = #{annexname,jdbcType=VARCHAR},
+      annexNames = #{annexnames,jdbcType=VARCHAR},
+      annexDate = #{annexdate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      sessionName = #{sessionname,jdbcType=VARCHAR}
+    where annexId = #{annexid,jdbcType=INTEGER}
+  </update>
+
+<!--  根据类型和id查找附件-->
+  <select id="sellist" resultType="com.ht.bean.file.Annex">
+    <bind name="kais" value="(page.currPage-1)*page.pageSize"></bind>
+    select * from annex where seName=#{seName} and seId=#{seId} limit #{kais},#{page.pageSize}
+  </select>
+  <!--  查询总数-->
+  <select id="selCount" resultType="int">
+        select count(*) from annex
+  </select>
+</mapper>
