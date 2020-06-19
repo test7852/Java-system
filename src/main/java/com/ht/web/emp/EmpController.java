@@ -86,7 +86,7 @@ public class EmpController {
      */
     @RequestMapping("toadd")
     public String toadd(Model model){
-        List<Dep> deps = depService.list();
+        List<Dep> deps = depService.getAllFdep();
         List<Post> posts = postService.selolist();
         model.addAttribute("deps",deps);
         model.addAttribute("posts",posts);
@@ -95,19 +95,17 @@ public class EmpController {
 
     /**
      * @param id
-     * @param empinfo
      * @return
      * 二级联动
      */
     @RequestMapping("selectpost")
     @ResponseBody
-    public List<Post> selectpost(Integer id,Empinfo empinfo){
-        if(id == 1){
-            List<Post> list = postService.elselist();
-            return list;
+    public List<Dep> selectpost(Integer id){
+        if (id == null){
+            return null;
         }
-        List<Post> list = postService.selolist();
-        return list;
+        List<Dep> deps2 = depService.getDepByid(id);
+        return deps2;
     }
 
     /**
@@ -118,8 +116,10 @@ public class EmpController {
     @RequestMapping("add")
     @ResponseBody
     public Boolean add(Empinfo empinfo) {
+        System.out.println(empinfo);
         Empinfo cf = empinfoService.getEmpByName(empinfo);
         if (cf == null){
+            empinfo.setPassword(Contants.PASSWORD_TA);//默认密码
             empinfo.setStatus(Contants.STATUS_SU);//默认开启
             empinfoService.insert(empinfo);
             return true;
