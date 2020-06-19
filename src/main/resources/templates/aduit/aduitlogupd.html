@@ -9,48 +9,41 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 600px;margin-left: 30px;}
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-left: 140px;margin-top: 20px;}
-
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form" enctype="multipart/form-data">
-    <div class="index">
-        <input name="aduitlogid" th:value="${aduitlog.aduitlogid}" type="hidden">
-        <ul class="menu">
-            <li class="layui-form-item">
-                <label class="layui-form-label">员工姓名：</label>
-                <input id="name"  name="empname" required lay-verify="required" placeholder="员工姓名" autocomplete="off" class="layui-input" th:value="${emp.emp_name}">
-            </li>
+    <input name="aduitlogid" th:value="${aduitlog.aduitlogid}" type="hidden">
 
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">员工姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" id="name" name="empname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" th:value="${emp.emp_name}">
+        </div>
+    </div>
 
-            <li class="layui-form-item">
-                <label class="layui-form-label">考核内容：</label>
-                <div class="layui-input-inline">
-                    <select name="aduitmodelid" lay-filter="selectTheme" id="board">
-                        <option value="-1" selected="">请选择考核内容</option>
-                        <option th:each="model:${models}"th:value="${model.aduitmodelid}" th:text="${model.aduitname}" th:selected="${model.aduitmodelid == aduitlog.aduitmodelid}">浙江省</option>
-                    </select>
-                </div>
-            </li>
+    <div class="layui-form-item">
+        <label class="layui-form-label">考核内容</label>
+        <div class="layui-input-block">
+            <select name="aduitmodelid" lay-filter="selectTheme" id="board">
+                <option value="-1">请选择考核内容</option>
+                <option th:each="model:${models}"th:value="${model.aduitmodelid}" th:text="${model.aduitname}" th:selected="${model.aduitmodelid == aduitlog.aduitmodelid}"></option>
+            </select>
+        </div>
+    </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-inline">
+            <input type="text" th:value="${aduitlog.remark}" name="remark" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
 
-            <li class="layui-form-item">
-                <label class="layui-form-label">说明：</label>
-                <input  name="remark" th:value="${aduitlog.remark}" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
-            </li>
-
-            <br>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </div>
     </div>
 
 </form>

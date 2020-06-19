@@ -2,17 +2,25 @@
 <!--suppress ThymeleafVariablesResolveInspection-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
+		<!--
+
+		@半口香甜吴一玄
+
+		-->
 		<meta charset="UTF-8">
 		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
 		<script th:src="@{/layui/layui.js}"></script>
-		<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+
 		<title></title>
 	</head>
 	<style>
 			.menu li{float: left;}
+			.more li{float: left;}
 			input[type=text]{border-radius:13px;border:1px solid #000;}
-			.layui-input{border-radius:13px;border:1px solid #000;;}
+			.layui-input{border-radius:13px;border:1px solid #000;text-indent:5px;}
+			::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
+
 	<body>
 		<div style="text-align: center;">
 			<fieldset class="layui-elem-field layui-field-title" >
@@ -21,22 +29,22 @@
  
 		<div class="layui-tab layui-tab-brief" style="margin-left: 10%;" lay-filter="docDemoTabBrief">
 		  <ul class="layui-tab-title">
-		    <li class="layui-this">我的资料</li>
-		    <li>头像 设置</li>
-		    <li>密码 设置</li>
-		    <li>账号绑定</li>
-		    <li>需要继续添加Tab</li>
+		    <li class="layui-this"><i class="layui-icon">&#xe770;</i> 我的资料</li>
+		    <li><i class="layui-icon">&#xe60c;</i> 头像 设置</li>
+		    <li><i class="layui-icon">&#xe673;</i> 密码 设置</li>
+		    <li><i class="layui-icon">&#xe705;</i> 其他 资料</li>
+		    <li><i class="layui-icon">&#xe64c;</i> 账号 绑定</li>
 		  </ul>
 		  <div class="layui-tab-content" style="height: 500px;width: 1000px;" th:each="p:${person}">
+<!--			  我的资料-->
 		    <div class="layui-tab-item layui-show">
-		    	<form class="layui-form" th:action="@{/personage/update}">
-						<input type="hidden" name="emp_id" th:value="${p.emp_id}" />
+						<input type="hidden" id="emp_id" th:value="${p.emp_id}" />
 						<input type="hidden" id="password" th:value="${p.password}" />
 		    			<li>
 					  		 <div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 手机号码</label>
 							    <div class="layui-input-inline">
-							      <input disabled th:value="${p.phone}"  name="phone" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+							      <input id="phone"  disabled th:value="${p.phone}"   required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
 							    <div class="layui-form-mid layui-word-aux">手机号码已注册，不可修改</div>
 							    </div>
 							  </div>
@@ -47,7 +55,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 邮箱地址</label>
 							    <div class="layui-input-inline">
-							      <input  name="email" th:value="${p.email}" required lay-verify="required" placeholder="请输入邮箱地址" autocomplete="off" class="layui-input">
+							      <input  id="email" th:value="${p.email}" required lay-verify="required" placeholder="请输入邮箱地址" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -56,7 +64,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe677;</i> 微信</label>
 							    <div class="layui-input-inline">
-							      <input  name="weixin" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
+							      <input id="weixin" onKeyUp="value=value.replace(/[\W]/g,'')" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -64,7 +72,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe676;</i>   QQ</label>
 							    <div class="layui-input-inline">
-							      <input  name="qqcode" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
+							      <input id="qqcode" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -72,7 +80,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 支付宝</label>
 							    <div class="layui-input-inline">
-							      <input  name="alipay" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
+							      <input id="alipay" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -80,7 +88,7 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe637;</i> 入职</label>
 							    <div class="layui-input-inline">
-							      <input id="hireday" name="hireday" th:value="${p.hireday}" required lay-verify="required" placeholder="选择入职时间" autocomplete="off" class="layui-input">
+							      <input disabled id="hireday" name="hireday" th:value="${p.hireday}" required lay-verify="required" placeholder="入职时间" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -88,7 +96,7 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe637;</i> 离职</label>
 							    <div class="layui-input-inline">
-							      <input  id="fireday" name="fireday" th:value="${p.fireday}" required lay-verify="required" placeholder="选择离职时间" autocomplete="off" class="layui-input">
+							      <input  disabled value="在职中" required lay-verify="required" placeholder="离职时间" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -96,7 +104,7 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 用户昵称</label>
 							    <div class="layui-input-inline">
-							      <input  name="emp_name" th:value="${p.emp_name}" required lay-verify="required" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">
+							      <input  id="emp_name" th:value="${p.emp_name}" required lay-verify="required" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -104,7 +112,7 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 学校</label>
 							    <div class="layui-input-inline">
-							      <input  name="education" th:value="${p.education}" required lay-verify="required" placeholder="在读或毕业学校" autocomplete="off" class="layui-input">
+							      <input  id="education" th:value="${p.education}" required lay-verify="required" placeholder="在读或毕业学校" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -113,12 +121,12 @@
 								<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 当前状态</label>
 							    <div class="layui-input-inline">
-							      <input  name="status" th:value="${p.status}" required lay-verify="required" placeholder="当前状态" autocomplete="off" class="layui-input">
+							      <input disabled value="启用中  不可编辑" required lay-verify="required" placeholder="当前状态" autocomplete="off" class="layui-input"/>
 							    </div>
 							  </div>
 							</li>
 					  </ul>
-					
+					<form class="layui-form" >
 					   <div class="layui-form-item">
 						    <label class="layui-form-label">性别 <i class="layui-icon">&#xe662;</i></label>
 						    <div class="layui-input-block">
@@ -126,38 +134,22 @@
 						      <input type="radio" th:checked="${p.emp_sex=='女'}" name="emp_sex" value="女" title="女" >
 						    </div>
 						  </div>
-				        <div class="layui-form-item" id="area-picker">
-				            <div class="layui-form-label">城市</div>
-				            <div name="city" class="layui-input-inline" style="width: 100px;">
-				                <select name="province" class="province-selector" data-value="广东省" lay-filter="province-1">
-				                    <option value="">请选择省</option>
-				                </select>
-				            </div>
-				            <div name="city" class="layui-input-inline" style="width: 100px;">
-				                <select name="city" class="city-selector" data-value="深圳市" lay-filter="city-1">
-				                    <option value="">请选择市</option>
-				                </select>
-				            </div>
-				            <div name="city" class="layui-input-inline" style="width: 100px;">
-				                <select name="county" class="county-selector" data-value="龙岗区" lay-filter="county-1">
-				                    <option value="">请选择区</option>
-				                </select>
-				            </div>
-				        </div>
+					</form>
 					  <div class="layui-form-item layui-form-text">
 					    <label class="layui-form-label">我的标签</label>
-					    <div style="width: 400px;" class="layui-input-block">
-					      <textarea  name="desc" placeholder="请输入内容" class="layui-textarea">只喜欢你，像风走了八千里QWQ</textarea>
+					    <div  class="layui-input-block">
+					      <textarea  id="desc" placeholder="请输入内容" class="layui-textarea">只喜欢你，像风走了八千里QWQ</textarea>
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
 					    <div class="layui-input-block">
-					      <button class="layui-btn layui-btn-normal layui-btn-radius" lay-submit >立即提交</button>
-					      <button type="reset" class="layui-btn layui-btn-radius layui-btn-primary">重置</button>
+					      <button class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="accomplish" ><i class="layui-icon">&#xe609;</i> 立即提交</button>
+<!--					      <button type="reset" class="layui-btn layui-btn-radius layui-btn-primary">重置</button>-->
 					    </div>
 					  </div>
-					</form>
+
 		    </div>
+<!--			  图片上传-->
 		    <div class="layui-tab-item">
 		    	<div class="layui-form-item">
                     <label class="layui-form-label"><i style="color: red">*</i>图片:</label>
@@ -174,8 +166,9 @@
 							</div> 
                 </div>
 		    </div>
+<!--			  密码更改-->
 		    <div class="layui-tab-item">
-		    	<div class="layui-form-item">
+		    	<div style="margin-top: 50px" class="layui-form-item">
 				    <label class="layui-form-label"><i style="color: red">*</i> 当前密码</label>
 				    <div class="layui-input-inline">
 				      <input type="password" id="password1" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
@@ -191,21 +184,108 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label"><i style="color: red">*</i> 确认密码</label>
 				    <div class="layui-input-inline">
-				      <input type="password" id="password3" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" id="password3" required lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 
 				   <div class="layui-form-item">
 					    <div class="layui-input-block">
 					 
-					      <button  class="layui-btn layui-btn-normal layui-btn-radius"  id="ok">确认修改</button>
-					      <button type="reset" class="layui-btn layui-btn-radius layui-btn-primary">重新填写</button>
+					      <button  class="layui-btn layui-btn-normal layui-btn-radius" id="ok"><i class="layui-icon">&#xe609;</i> 确认修改</button>
+					      <button id="reset" class="layui-btn layui-btn-radius layui-btn-primary"><i class="layui-icon">&#xe669;</i> 重新填写</button>
 					    </div>
 					  </div>
 		    </div>
-		    <div class="layui-tab-item">
-		    	内容4
+<!--			  其他资料-->
+		    <div style="margin-top: 50px" class="layui-tab-item" >
+<!--					<input type="hidden" name="emp_id" th:value="${p.emp_id}" />-->
+					<ul class="more">
+						<li>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe627;</i> 生日</label>
+								<div class="layui-input-inline">
+									<input id="birthday" name="birthday" th:value="${p.birthday}" required lay-verify="required" placeholder="你的生日" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe735;</i> 身份证</label>
+								<div class="layui-input-inline">
+									<input id="cardno" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.cardno}" required lay-verify="required" placeholder="你的身份证" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe62e;</i> 籍贯</label>
+								<div class="layui-input-inline">
+									<input id="nation" οnkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA5]/g,'')" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</li>
+
+						<li>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><i style="color: red">*</i> 毕业学校</label>
+								<div class="layui-input-inline">
+									<input id="university" th:value="${p.university}" required lay-verify="required" placeholder="毕业学校" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="layui-form-item">
+								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe656;</i> 专业</label>
+								<div class="layui-input-inline">
+									<input id="major" th:value="${p.major}" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</li>
+						<li>
+							<form class="layui-form">
+							<div class="layui-form-item">
+								<label class="layui-form-label"><i style="color: red">*</i> 婚姻状况</label>
+								<div style="width: 190px;" class="layui-input-block">
+									<select id="married"  lay-verify="required">
+										<option th:value="${p.married}" th:text="${p.married}">请选择</option>
+										<option value="已婚">已婚</option>
+										<option value="单身">单身</option>
+										<option value="离异">离异</option>
+										<option value="丧偶">丧偶</option>
+									</select>
+								</div>
+<!--								<div class="layui-input-inline">-->
+<!--									<input id="married" th:value="${p.married}" required lay-verify="required" placeholder="婚姻状况" autocomplete="off" class="layui-input">-->
+<!--								</div>-->
+							</div>
+							</form>
+						</li>
+					</ul>
+
+<!--				省市区 三级联动区-->
+				<form class="layui-form">
+					<div style="margin-left: 30px" class="layui-form-item" id="area-picker">
+						<div class="layui-form-label"><i class="layui-icon">&#xe66c;</i> 城市</div>
+						<div name="area" class="layui-input-inline" style="width: 150px;">
+							<select id="province" class="province-selector" th:each="pr:${province}" th:data-value="${pr}"  lay-filter="province-1">
+								<option>请选择省</option>
+							</select>
+						</div>
+						<div name="area" class="layui-input-inline" style="width: 150px;">
+							<select id="city" class="city-selector" th:each="ci:${city}" th:data-value="${ci}"  lay-filter="city-1">
+								<option >请选择市</option>
+							</select>
+						</div>
+						<div name="area" class="layui-input-inline" style="width: 150px;">
+							<select id="county" class="county-selector" th:each="co:${county}" th:data-value="${co}"  lay-filter="county-1">
+								<option >请选择区</option>
+							</select>
+						</div>
+					</div>
+				</form>
+				<button style="margin-top: 30px" class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-radius" id="submit"><i class="layui-icon">&#xe609;</i> 立即提交</button>
 		    </div>
+
 		    <div class="layui-tab-item">
 		    	内容5
 		    </div>
@@ -214,42 +294,138 @@
 		
 </div> 
 	</body>
+	<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 	<script>
+		// @半口香甜吴一玄
 		layui.use(['form','element','upload','laydate'], function(){
 						  var $ = layui.jquery
 						  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 						  var from=layui.from;
 						  var upload = layui.upload;
 						  var laydate=layui.laydate;
-						 
-						//执行一个laydate实例
-							 //常规用法
-								laydate.render({
-								  elem: '#hireday'
-								});
-								laydate.render({
-								  elem: '#fireday'
-								});
+
+
+
+							// 我的资料点击事件
+						 $("#accomplish").on('click',function(){
+						 	//判断邮箱格式  需要时放开
+							//  const emailrule = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+							//  if (!emailrule.test($("#email").val())) {
+							// 	 layer.msg("请输入有效邮箱",{icon:2});
+							// 	 return false;
+							//  }
+								 parent.layer.confirm('确认提交吗？', function(index){
+							   layer.close(index);
+							   $.ajax({
+							 	  url: '/personage/update',
+							 	  type: 'post',
+							 	  data: {
+							 		  //我的资料参数
+							 		  emp_id:$("#emp_id").val(),
+							 		  password:$("#password").val(),
+							 		  phone:$("#phone").val(),
+							 		  email:$("#email").val(),
+							 		  weixin:$("#weixin").val(),
+							 		  qqcode:$("#qqcode").val(),
+							 		  alipay:$("#alipay").val(),
+							 		  hireday:$("#hireday").val(),
+							 		  // fireday:$("#fireday").val(),
+							 		  emp_name:$("#emp_name").val(),
+							 		  education:$("#education").val(),
+							 		  emp_sex:$("input[name='emp_sex']:checked").val()
+							 	  },
+							 	  dataType: 'text',
+							 	  success(data){
+							 		  if(data==1){
+							 			  parent.layer.msg('保存成功', {icon: 1});
+							 		  }else {
+										  parent.layer.msg('出问题了', {icon: 4});
+									  }
+							 	  }
+
+							   })
+							 });
+						 })
+
+						// 其他资料点击事件
+						$("#submit").on('click',function(){
+							parent.layer.confirm('确认提交吗？', function(index){
+								layer.close(index);
+								$.ajax({
+									url: '/personage/update',
+									type: 'post',
+									data: {
+										//其他资料参数
+										emp_id:$("#emp_id").val(),
+										birthday:$("#birthday").val(),
+										cardno:$("#cardno").val(),
+										nation:$("#nation").val(),
+										university:$("#university").val(),
+										major:$("#major").val(),
+										married:$("#married option:selected").val(),
+										// married:$("#married").val(),
+										// 三级联动 参数
+										province:$("#province").val(),
+										city:$("#city").val(),
+										county:$("#county").val()
+									},
+									dataType: 'text',
+									success(data){
+										if(data==1){
+											parent.layer.msg('保存成功', {icon: 1});
+										}else {
+											parent.layer.msg('出问题了', {icon: 4});
+										}
+									}
+
+								})
+							});
+						})
 
 						//确认修改密码
 						$("#ok").on('click',function(){
 							if($("#password1").val()!=$("#password").val()){
-								layer.msg("当前密码填写有误")
+								layer.msg("当前密码填写有误", {icon: 2})
+								return;
+							}else if($("#password2").val().length<6){
+								layer.msg("密码至少六位", {icon: 6})
 								return;
 							}else if($("#password2").val()!=$("#password3").val()){
-								layer.msg("确认密码填写有误")
+								layer.msg("确认密码填写有误", {icon: 4})
 								return;
+							}else {
+								$.ajax({
+									url: '/personage/update	',
+									type: 'post',
+									data: {
+										emp_id:$("#emp_id").val(),
+										password:$("#password2").val()
+									},
+									dataType: 'text',
+									success(data){
+										if(data==1){
+											parent.layer.msg('保存成功', {icon: 1});
+											//异步保存后更新user里面的密码
+											$("#password").val($("#password2").val())
+											// $("#password3").val("");$("#password1").val("");$("#password2").val("");
+										}else {
+											parent.layer.msg('出问题了', {icon: 4});
+										}
+									}
+								})
 							}
-							$.ajax({
-								url: '/personage/update',
-								type: 'post',
-								data: {
-									password:$("#password2").val()
-								},
-								dataType: 'text',
-							})
 
 						})
+
+						//执行一个laydate实例
+								// 生日
+								laydate.render({
+									elem: '#birthday'
+								});
+
+							$("#reset").on('click',function(){
+								$("#password3").val("");$("#password1").val("");$("#password2").val("");
+							})
 								
 						  
 						  

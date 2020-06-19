@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.StuscoreMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Stuscore">
+    <!--@mbg.generated-->
+    <!--@Table stuscore-->
+    <id column="ssid" jdbcType="INTEGER" property="ssid" />
+    <result column="scoreid" jdbcType="INTEGER" property="scoreid" />
+    <result column="stuid" jdbcType="INTEGER" property="stuid" />
+    <result column="scure" jdbcType="VARCHAR" property="scure" />
+    <result column="rescore" jdbcType="VARCHAR" property="rescore" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ssid, scoreid, stuid, scure, rescore, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from stuscore
+    where ssid = #{ssid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from stuscore
+    where ssid = #{ssid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ssid" keyProperty="ssid" parameterType="com.ht.bean.education.Stuscore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into stuscore (scoreid, stuid, scure, 
+      rescore, remark)
+    values (#{scoreid,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{scure,jdbcType=VARCHAR}, 
+      #{rescore,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ssid" keyProperty="ssid" parameterType="com.ht.bean.education.Stuscore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into stuscore
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scoreid != null">
+        scoreid,
+      </if>
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="scure != null">
+        scure,
+      </if>
+      <if test="rescore != null">
+        rescore,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scoreid != null">
+        #{scoreid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="scure != null">
+        #{scure,jdbcType=VARCHAR},
+      </if>
+      <if test="rescore != null">
+        #{rescore,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Stuscore">
+    <!--@mbg.generated-->
+    update stuscore
+    <set>
+      <if test="scoreid != null">
+        scoreid = #{scoreid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        stuid = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="scure != null">
+        scure = #{scure,jdbcType=VARCHAR},
+      </if>
+      <if test="rescore != null">
+        rescore = #{rescore,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ssid = #{ssid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Stuscore">
+    <!--@mbg.generated-->
+    update stuscore
+    set scoreid = #{scoreid,jdbcType=INTEGER},
+      stuid = #{stuid,jdbcType=INTEGER},
+      scure = #{scure,jdbcType=VARCHAR},
+      rescore = #{rescore,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where ssid = #{ssid,jdbcType=INTEGER}
+  </update>
+</mapper>

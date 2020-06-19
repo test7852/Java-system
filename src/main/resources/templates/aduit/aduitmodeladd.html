@@ -9,75 +9,60 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 600px;margin-left: 30px;}
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-left: 140px;margin-top: 20px;}
-
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form">
-    <div class="index">
-        <ul class="menu">
-            <li>
-                <label class="layui-form-label">考核内容：</label>
-                <input  name="aduitname" required lay-verify="required" placeholder="考核内容" autocomplete="off" class="layui-input">
-            </li>
-
-
-            <li>
-                <div class="layui-input-inline">
-                    <select name="depid" lay-filter="selectTheme" id="board">
-                        <option value="-1" selected="">请选择上级部门</option>
-                        <option th:each="dep:${deps}"th:value="${dep.depid}" th:text="${dep.depname}">浙江省</option>
-                    </select>
-                </div>
-            </li>
-
-            <li>
-                <div class="layui-input-inline">
-                    <select name="depid2" id="theme">
-                        <option value="0" selected="">请选择下级部门</option>
-
-                    </select>
-                </div>
-            </li>
-
-            <li>
-
-            </li>
-
-            <li>
-                <div class="layui-input-inline">
-                    <select name="scores">
-                        <option value="0" selected="">请选择考核分数</option>
-                        <option value="-1" >-1</option>
-                        <option value="-2" >-2</option>
-                        <option value="-3" >-3</option>
-                        <option value="-4" >-4</option>
-                        <option value="-5" >-5</option>
-                        <option value="-10" >-10</option>
-                    </select>
-                </div>
-            </li>
-
-
-
-            <li>
-                <label class="layui-form-label">说明：</label>
-                <input  name="remark" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
-            </li>
-            <br>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">考核内容</label>
+        <div class="layui-input-block">
+            <input type="text" name="aduitname" placeholder="请输入考核内容" lay-verify="title" class="layui-input">
+        </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-inline">
+            <select name="depid" lay-verify="required" lay-filter="selectTheme" id="board">
+                <option value="-1">请选择上级部门</option>
+                <option th:each="dep:${deps}"th:value="${dep.depid}" th:text="${dep.depname}"></option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="depid2" id="theme">
+                <option value="0">请选择下级部门</option>
+              </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">考核分数</label>
+        <div class="layui-input-block">
+            <select name="scores">
+                <option value="0">请选择考核分数</option>
+                <option value="-1" >-1</option>
+                <option value="-2" >-2</option>
+                <option value="-3" >-3</option>
+                <option value="-4" >-4</option>
+                <option value="-5" >-5</option>
+                <option value="-10" >-10</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <input type="text" name="remark" lay-verify="title" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </div>
+    </div>
 </form>
 </body>
 <script type="text/javascript" th:inline="none">

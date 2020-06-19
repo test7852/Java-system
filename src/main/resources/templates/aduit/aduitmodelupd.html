@@ -9,76 +9,62 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 600px;margin-left: 30px;}
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-left: 140px;margin-top: 20px;}
-
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form">
-    <div class="index">
-        <ul class="menu">
-            <input name="aduitmodelid" type="hidden" th:value="${aduitmodel.aduitmodelid}">
-            <li>
-                <label class="layui-form-label">考核内容：</label>
-                <input  name="aduitname" th:value="${aduitmodel.aduitname}" required lay-verify="required" placeholder="考核内容" autocomplete="off" class="layui-input">
-            </li>
+    <input name="aduitmodelid" type="hidden" th:value="${aduitmodel.aduitmodelid}">
 
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">考核内容</label>
+        <div class="layui-input-block">
+            <input type="text" name="aduitname" th:value="${aduitmodel.aduitname}" lay-verify="title" class="layui-input">
+        </div>
+    </div>
 
-            <li>
-                <div class="layui-input-inline">
-                    <label class="layui-form-label">部门：</label>
-                    <select name="depid" lay-filter="selectTheme" id="board">
-                        <option value="-1" selected="">请选择上级部门</option>
-                        <option th:each="dep1:${fdeps}"th:value="${dep1.depid}" th:text="${dep1.depname}" th:selected="${aduitmodel.depid == dep1.depid || dep1.depid == fdep.depid}">浙江省</option>
-                    </select>
-                </div>
-            </li>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-inline">
+            <select name="depid" lay-verify="required" lay-filter="selectTheme" id="board">
+                <option value="-1">请选择上级部门</option>
+                <option th:each="dep1:${fdeps}"th:value="${dep1.depid}" th:text="${dep1.depname}" th:selected="${aduitmodel.depid == dep1.depid || dep1.depid == fdep.depid}"></option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="depid2" id="theme">
+                <option value="0">请选择下级部门</option>
+                <option th:each="dep2:${deps}"th:value="${dep2.depid}" th:text="${dep2.depname}" th:selected="${aduitmodel.depid == dep2.depid}"></option>
+            </select>
+        </div>
+    </div>
 
-            <li>
-                <div class="layui-input-inline">
-                    <select name="depid2" id="theme">
-                        <option value="0" selected="">请选择下级部门</option>
-                        <option th:each="dep2:${deps}"th:value="${dep2.depid}" th:text="${dep2.depname}" th:selected="${aduitmodel.depid == dep2.depid}">浙江省</option>
-                    </select>
-                </div>
-            </li>
+    <div class="layui-form-item">
+        <label class="layui-form-label">考核分数</label>
+        <div class="layui-input-block">
+            <select name="scores">
+                <option value="0">考核分数</option>
+                <option value="-1" th:selected="${aduitmodel.scores == -1}" >-1</option>
+                <option value="-2" th:selected="${aduitmodel.scores == -2}">-2</option>
+                <option value="-3" th:selected="${aduitmodel.scores == -3}">-3</option>
+                <option value="-4" th:selected="${aduitmodel.scores == -4}">-4</option>
+                <option value="-5" th:selected="${aduitmodel.scores == -5}">-5</option>
+                <option value="-10" th:selected="${aduitmodel.scores == -10}">-10</option>
+            </select>
+        </div>
+    </div>
 
-            <li>
+    <div class="layui-form-item">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <input type="text" name="remark" th:value="${aduitmodel.remark}" lay-verify="title" class="layui-input">
+        </div>
+    </div>
 
-            </li>
-
-            <li>
-                <div class="layui-input-inline">
-                    <label class="layui-form-label">考核分数：</label>
-                    <select name="scores">
-                        <option value="0" selected="">请选择考核分数</option>
-                        <option value="-1" th:selected="${aduitmodel.scores == -1}" >-1</option>
-                        <option value="-2" th:selected="${aduitmodel.scores == -2}">-2</option>
-                        <option value="-3" th:selected="${aduitmodel.scores == -3}">-3</option>
-                        <option value="-4" th:selected="${aduitmodel.scores == -4}">-4</option>
-                        <option value="-5" th:selected="${aduitmodel.scores == -5}">-5</option>
-                        <option value="-10" th:selected="${aduitmodel.scores == -10}">-10</option>
-                    </select>
-                </div>
-            </li>
-
-
-
-            <li>
-                <label class="layui-form-label">说明：</label>
-                <input  name="remark" th:value="${aduitmodel.remark}" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input">
-            </li>
-            <br>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </div>
     </div>
 
 </form>
@@ -87,8 +73,6 @@
 
     layui.use('form', function(){
         var form = layui.form;
-
-
 
         form.on('select(selectTheme)', function (data) {//对应lay-filter="selectTheme"
             var index1 = $('#board option:selected').val();//对应id="board"  得到一级菜单选中值的value

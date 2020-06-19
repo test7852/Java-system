@@ -32,9 +32,16 @@ public class personController {
      */
     @RequestMapping("topersonage")
     public String topersonage(Model model, HttpSession session){
-//        Empinfo user = (Empinfo)session.getAttribute("user");
+//        Empinfo user=(Empinfo) session.getAttribute("user");
 //        Empinfo empinfo= empinfoService.selectByPrimaryKey(user.getEmp_id());
-        Empinfo empinfo= empinfoService.selectByPrimaryKey(1);
+        Empinfo empinfo= empinfoService.selectByPrimaryKey(5);
+        String[] strings=empinfo.getAddress().split("/");//前台参数，截取省 市 区
+//        for(int i=0,len=strings.length;i<len;i++){
+//            System.out.println(strings[i].toString());
+//        }
+        model.addAttribute("province",strings[0]);//省
+        model.addAttribute("city",strings[1]);//市
+        model.addAttribute("county",strings[2]);//区
         model.addAttribute("person",empinfo);
         return "personage/personage";
     }
@@ -46,10 +53,16 @@ public class personController {
      */
     @RequestMapping("update")
     @ResponseBody
-    public String update(Empinfo empinfo){
-        System.out.println("empinfo.toString() = " + empinfo.toString());
-        empinfoService.updateByPrimaryKeySelective(empinfo);
-        return "personage/personage";
+    public Integer update(Empinfo empinfo,String province,String city,String county){
+        String area=null;
+        if(province!=null){
+             area=province+"/"+city+"/"+county;//前端参数拼接省 市 区
+        }
+        empinfo.setStatus(1);
+        empinfo.setAddress(area);
+        System.out.println("empinfo" + empinfo.toString());
+        Integer update= empinfoService.updateByPrimaryKeySelective(empinfo);
+        return update;
     }
 
 

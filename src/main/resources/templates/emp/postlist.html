@@ -66,12 +66,12 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/post/postdata', page:true, id:'tab'}"
+       lay-data="{width:1150,height:500, url:'/post/postdata', page:true, id:'tab'}"
        lay-filter="tab">
     <thead>
     <tr>
-        <th lay-data="{field:'pos_Id', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'pos_Name', width:120, sort: true,edit:true}">职位名称</th>
+        <th lay-data="{field:'pos_Id', width:80, sort: true}">编号</th>
+        <th lay-data="{field:'pos_Name', edit:true}">职位名称</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
     </tr>
     </thead>
@@ -121,7 +121,7 @@
                 type: 2,
                 title: '职位新增',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['550px', '600px'],
+                area: ['550px', '200px'],
                 content: ['/skip/postadd']//这是链接你的页面地址 url
             });
         })

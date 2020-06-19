@@ -83,12 +83,12 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
     <table class="layui-table"
-           lay-data="{width:1150,height:650, url:'/studentFloor/data', page:true, id:'tab',toolbar: '#toolbarDemo' }"
+           lay-data="{width:1150,height:500, url:'/studentFloor/data', page:true, id:'tab',toolbar: '#toolbarDemo' }"
            lay-filter="tab">
         <thead>
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'floorid', sort: true}">楼栋ID</th>
+            <th lay-data="{field:'floorid', sort: true}">编号</th>
             <th lay-data="{field:'floorname'}">楼栋名称</th>
             <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
         </tr>
@@ -132,7 +132,7 @@
                 type: 2,
                 title: '新增楼栋',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['450px', '300px'],
+                area: ['400px', '200px'],
                 content: ['/studentFloor/toAdd']//这是链接你的页面地址 url
             });
         })

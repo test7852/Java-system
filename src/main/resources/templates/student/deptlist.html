@@ -51,13 +51,13 @@
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:550, url:'/dept/deptdata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
+       lay-data="{width:1150,height:500, url:'/dept/deptdata', page:true, id:'tab',toolbar: '#toolbarDemo'}"
        lay-filter="tab">
     <thead>
     <tr>
-        <th lay-data="{field:'deptid', width:80, sort: true}">ID</th>
-        <th lay-data="{field:'deptname',sort: true,edit:true}">系名称</th>
-        <th lay-data="{field:'remark', sort: true,edit:true}">说明</th>
+        <th lay-data="{field:'deptid', width:80, sort: true}">编号</th>
+        <th lay-data="{field:'deptname',edit:true}">系名称</th>
+        <th lay-data="{field:'remark',edit:true}">说明</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:250}"></th>
     </tr>
     </thead>
@@ -105,9 +105,9 @@
             //iframe窗
             layer.open({
                 type: 2,
-                title: '职位新增',
+                title: '系别新增',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['600px', '400px'],
+                area: ['400px', '250px'],
                 content: ['/dept/deptadd']//这是链接你的页面地址 url
             });
         })

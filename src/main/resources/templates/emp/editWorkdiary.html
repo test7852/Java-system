@@ -16,7 +16,7 @@
 <div th:each="work:${list}">
     <input type="hidden" name="worklogid" th:value="${work.worklogid}">
 
-    <div class="layui-form-item layui-form-text">
+    <div class="layui-form-item layui-form-text" style="margin-top: 20px">
         <label class="layui-form-label">本周情況:</label>
         <div class="layui-input-block">
             <textarea class="layui-textarea" name="weekcur" th:text="${work.weekcur}"></textarea>
