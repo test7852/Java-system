@@ -64,7 +64,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe677;</i> 微信</label>
 							    <div class="layui-input-inline">
-							      <input id="weixin" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
+							      <input id="weixin" onKeyUp="value=value.replace(/[\W]/g,'')" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -72,7 +72,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe676;</i>   QQ</label>
 							    <div class="layui-input-inline">
-							      <input id="qqcode" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
+							      <input id="qqcode" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -80,7 +80,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 支付宝</label>
 							    <div class="layui-input-inline">
-							      <input id="alipay" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
+							      <input id="alipay" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -212,7 +212,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe735;</i> 身份证</label>
 								<div class="layui-input-inline">
-									<input id="cardno" th:value="${p.cardno}" required lay-verify="required" placeholder="你的身份证" autocomplete="off" class="layui-input">
+									<input id="cardno" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.cardno}" required lay-verify="required" placeholder="你的身份证" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 						</li>
@@ -220,7 +220,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe62e;</i> 籍贯</label>
 								<div class="layui-input-inline">
-									<input id="nation" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
+									<input id="nation" οnkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA5]/g,'')" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 						</li>
@@ -245,7 +245,7 @@
 							<form class="layui-form">
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> 婚姻状况</label>
-								<div class="layui-input-block">
+								<div style="width: 190px;" class="layui-input-block">
 									<select id="married"  lay-verify="required">
 										<option th:value="${p.married}" th:text="${p.married}">请选择</option>
 										<option value="已婚">已婚</option>
@@ -308,7 +308,13 @@
 
 							// 我的资料点击事件
 						 $("#accomplish").on('click',function(){
-							 parent.layer.confirm('确认提交吗？', function(index){
+						 	//判断邮箱格式  需要时放开
+							//  const emailrule = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+							//  if (!emailrule.test($("#email").val())) {
+							// 	 layer.msg("请输入有效邮箱",{icon:2});
+							// 	 return false;
+							//  }
+								 parent.layer.confirm('确认提交吗？', function(index){
 							   layer.close(index);
 							   $.ajax({
 							 	  url: '/personage/update',
@@ -378,7 +384,6 @@
 
 						//确认修改密码
 						$("#ok").on('click',function(){
-
 							if($("#password1").val()!=$("#password").val()){
 								layer.msg("当前密码填写有误", {icon: 2})
 								return;
