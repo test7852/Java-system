@@ -184,7 +184,7 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label"><i style="color: red">*</i> 确认密码</label>
 				    <div class="layui-input-inline">
-				      <input type="password" id="password3" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" id="password3" required lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 
@@ -377,30 +377,38 @@
 
 						//确认修改密码
 						$("#ok").on('click',function(){
+
 							if($("#password1").val()!=$("#password").val()){
 								layer.msg("当前密码填写有误", {icon: 2})
+								return;
+							}else if($("#password2").val().length<6){
+								layer.msg("密码至少六位", {icon: 6})
 								return;
 							}else if($("#password2").val()!=$("#password3").val()){
 								layer.msg("确认密码填写有误", {icon: 4})
 								return;
-							}
-							$.ajax({
-								url: '/personage/update	',
-								type: 'post',
-								data: {
-									emp_id:$("#emp_id").val(),
-									password:$("#password2").val()
-								},
-								dataType: 'text',
-								success(data){
-									if(data==1){
-										parent.layer.msg('保存成功', {icon: 1});
-										$("#password3").val("");$("#password1").val("");$("#password2").val("");
-									}else {
-										parent.layer.msg('出问题了', {icon: 4});
+							}else {
+								$.ajax({
+									url: '/personage/update	',
+									type: 'post',
+									data: {
+										emp_id:$("#emp_id").val(),
+										password:$("#password2").val()
+									},
+									dataType: 'text',
+									success(data){
+										if(data==1){
+											parent.layer.msg('保存成功', {icon: 1});
+											//异步保存后更新user里面的密码
+											$("#password").val($("#password2").val())
+											// $("#password3").val("");$("#password1").val("");$("#password2").val("");
+										}else {
+											parent.layer.msg('出问题了', {icon: 4});
+										}
 									}
-								}
-							})
+								})
+							}
+
 						})
 
 						//执行一个laydate实例
