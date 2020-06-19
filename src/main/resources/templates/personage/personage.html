@@ -246,7 +246,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> 婚姻状况</label>
 								<div class="layui-input-block">
-									<select name="city"  lay-verify="required">
+									<select id="married"  lay-verify="required">
 										<option th:value="${p.married}" th:text="${p.married}">请选择</option>
 										<option value="已婚">已婚</option>
 										<option value="单身">单身</option>
@@ -356,7 +356,8 @@
 										nation:$("#nation").val(),
 										university:$("#university").val(),
 										major:$("#major").val(),
-										married:$("#married").val(),
+										married:$("#married option:selected").val(),
+										// married:$("#married").val(),
 										// 三级联动 参数
 										province:$("#province").val(),
 										city:$("#city").val(),
