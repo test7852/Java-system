@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.aduit.HolidayMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.aduit.Holiday">
+    <!--@mbg.generated-->
+    <!--@Table holiday-->
+    <id column="holidayid" jdbcType="INTEGER" property="holidayid" />
+    <result column="Empid" jdbcType="INTEGER" property="empid" />
+    <result column="holidayDay" jdbcType="FLOAT" property="holidayday" />
+    <result column="startTime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endTime" jdbcType="VARCHAR" property="endtime" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    holidayid, Empid, holidayDay, startTime, endTime, Title, `status`, Remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from holiday
+    where holidayid = #{holidayid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from holiday
+    where holidayid = #{holidayid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="holidayid" keyProperty="holidayid" parameterType="com.ht.bean.aduit.Holiday" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into holiday (Empid, holidayDay, startTime, 
+      endTime, Title, `status`, 
+      Remark)
+    values (#{empid,jdbcType=INTEGER}, #{holidayday,jdbcType=FLOAT}, #{starttime,jdbcType=VARCHAR}, 
+      #{endtime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="holidayid" keyProperty="holidayid" parameterType="com.ht.bean.aduit.Holiday" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into holiday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        Empid,
+      </if>
+      <if test="holidayday != null">
+        holidayDay,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="title != null">
+        Title,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="holidayday != null">
+        #{holidayday,jdbcType=FLOAT},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.aduit.Holiday">
+    <!--@mbg.generated-->
+    update holiday
+    <set>
+      <if test="empid != null">
+        Empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="holidayday != null">
+        holidayDay = #{holidayday,jdbcType=FLOAT},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where holidayid = #{holidayid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.aduit.Holiday">
+    <!--@mbg.generated-->
+    update holiday
+    set Empid = #{empid,jdbcType=INTEGER},
+      holidayDay = #{holidayday,jdbcType=FLOAT},
+      startTime = #{starttime,jdbcType=VARCHAR},
+      endTime = #{endtime,jdbcType=VARCHAR},
+      Title = #{title,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where holidayid = #{holidayid,jdbcType=INTEGER}
+  </update>
+</mapper>

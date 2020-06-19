@@ -8,18 +8,16 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <body>
-
     <input id="hidden" type="hidden" th:value="${id}">
-    <div class="layui-upload">
-        <button type="button" class="layui-btn" id="test1">上传图片</button>
-        <div class="layui-upload-list">
-            <img style="width: 200px;height: 200px" class="layui-upload-img" id="demo1">
-            <p id="demoText"></p>
+    <center>
+        <button type="button" style="margin-top: 20px;" class="layui-btn" id="test1">图片上传</button>
+        <div class="layui-upload" >
+            <div class="layui-upload-list">
+                <img style="width: 200px;height: 200px" class="layui-upload-img" id="demo1">
+                <p id="demoText"></p>
+            </div>
         </div>
-    </div>
-
-
-    </div>
+    </center>
 </body>
 
 <script>

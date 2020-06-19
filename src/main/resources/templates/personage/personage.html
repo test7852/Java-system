@@ -64,7 +64,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe677;</i> 微信</label>
 							    <div class="layui-input-inline">
-							      <input id="weixin" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
+							      <input id="weixin" onKeyUp="value=value.replace(/[\W]/g,'')" th:value="${p.weixin}" required lay-verify="required" placeholder="请输入VX" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -72,7 +72,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe676;</i>   QQ</label>
 							    <div class="layui-input-inline">
-							      <input id="qqcode" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
+							      <input id="qqcode" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.qqcode}" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 					  	</li>
@@ -80,7 +80,7 @@
 					  		<div class="layui-form-item">
 							    <label class="layui-form-label"><i style="color: red">*</i> 支付宝</label>
 							    <div class="layui-input-inline">
-							      <input id="alipay" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
+							      <input id="alipay" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.alipay}" required lay-verify="required" placeholder="请输入支付宝" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -184,7 +184,7 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label"><i style="color: red">*</i> 确认密码</label>
 				    <div class="layui-input-inline">
-				      <input type="password" id="password3" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" id="password3" required lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 
@@ -212,7 +212,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe735;</i> 身份证</label>
 								<div class="layui-input-inline">
-									<input id="cardno" th:value="${p.cardno}" required lay-verify="required" placeholder="你的身份证" autocomplete="off" class="layui-input">
+									<input id="cardno" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${p.cardno}" required lay-verify="required" placeholder="你的身份证" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 						</li>
@@ -220,7 +220,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe62e;</i> 籍贯</label>
 								<div class="layui-input-inline">
-									<input id="nation" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
+									<input id="nation" οnkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA5]/g,'')" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 						</li>
@@ -245,8 +245,8 @@
 							<form class="layui-form">
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> 婚姻状况</label>
-								<div class="layui-input-block">
-									<select name="city"  lay-verify="required">
+								<div style="width: 190px;" class="layui-input-block">
+									<select id="married"  lay-verify="required">
 										<option th:value="${p.married}" th:text="${p.married}">请选择</option>
 										<option value="已婚">已婚</option>
 										<option value="单身">单身</option>
@@ -308,7 +308,13 @@
 
 							// 我的资料点击事件
 						 $("#accomplish").on('click',function(){
-							 parent.layer.confirm('确认提交吗？', function(index){
+						 	//判断邮箱格式  需要时放开
+							//  const emailrule = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+							//  if (!emailrule.test($("#email").val())) {
+							// 	 layer.msg("请输入有效邮箱",{icon:2});
+							// 	 return false;
+							//  }
+								 parent.layer.confirm('确认提交吗？', function(index){
 							   layer.close(index);
 							   $.ajax({
 							 	  url: '/personage/update',
@@ -356,7 +362,8 @@
 										nation:$("#nation").val(),
 										university:$("#university").val(),
 										major:$("#major").val(),
-										married:$("#married").val(),
+										married:$("#married option:selected").val(),
+										// married:$("#married").val(),
 										// 三级联动 参数
 										province:$("#province").val(),
 										city:$("#city").val(),
@@ -380,27 +387,34 @@
 							if($("#password1").val()!=$("#password").val()){
 								layer.msg("当前密码填写有误", {icon: 2})
 								return;
+							}else if($("#password2").val().length<6){
+								layer.msg("密码至少六位", {icon: 6})
+								return;
 							}else if($("#password2").val()!=$("#password3").val()){
 								layer.msg("确认密码填写有误", {icon: 4})
 								return;
-							}
-							$.ajax({
-								url: '/personage/update	',
-								type: 'post',
-								data: {
-									emp_id:$("#emp_id").val(),
-									password:$("#password2").val()
-								},
-								dataType: 'text',
-								success(data){
-									if(data==1){
-										parent.layer.msg('保存成功', {icon: 1});
-										$("#password3").val("");$("#password1").val("");$("#password2").val("");
-									}else {
-										parent.layer.msg('出问题了', {icon: 4});
+							}else {
+								$.ajax({
+									url: '/personage/update	',
+									type: 'post',
+									data: {
+										emp_id:$("#emp_id").val(),
+										password:$("#password2").val()
+									},
+									dataType: 'text',
+									success(data){
+										if(data==1){
+											parent.layer.msg('保存成功', {icon: 1});
+											//异步保存后更新user里面的密码
+											$("#password").val($("#password2").val())
+											// $("#password3").val("");$("#password1").val("");$("#password2").val("");
+										}else {
+											parent.layer.msg('出问题了', {icon: 4});
+										}
 									}
-								}
-							})
+								})
+							}
+
 						})
 
 						//执行一个laydate实例

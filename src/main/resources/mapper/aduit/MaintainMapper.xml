@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.aduit.MaintainMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.aduit.Maintain">
+    <!--@mbg.generated-->
+    <!--@Table maintain-->
+    <id column="wxid" jdbcType="INTEGER" property="wxid" />
+    <result column="equipmenttype" jdbcType="VARCHAR" property="equipmenttype" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="classno" jdbcType="INTEGER" property="classno" />
+    <result column="depid" jdbcType="INTEGER" property="depid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    wxid, equipmenttype, starttime, endtime, `status`, classno, depid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from maintain
+    where wxid = #{wxid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from maintain
+    where wxid = #{wxid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="wxid" keyProperty="wxid" parameterType="com.ht.bean.aduit.Maintain" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into maintain (equipmenttype, starttime, endtime, 
+      `status`, classno, depid
+      )
+    values (#{equipmenttype,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{classno,jdbcType=INTEGER}, #{depid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="wxid" keyProperty="wxid" parameterType="com.ht.bean.aduit.Maintain" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into maintain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="equipmenttype != null">
+        equipmenttype,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="classno != null">
+        classno,
+      </if>
+      <if test="depid != null">
+        depid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="equipmenttype != null">
+        #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="classno != null">
+        #{classno,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null">
+        #{depid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.aduit.Maintain">
+    <!--@mbg.generated-->
+    update maintain
+    <set>
+      <if test="equipmenttype != null">
+        equipmenttype = #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="classno != null">
+        classno = #{classno,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null">
+        depid = #{depid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wxid = #{wxid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.aduit.Maintain">
+    <!--@mbg.generated-->
+    update maintain
+    set equipmenttype = #{equipmenttype,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      classno = #{classno,jdbcType=INTEGER},
+      depid = #{depid,jdbcType=INTEGER}
+    where wxid = #{wxid,jdbcType=INTEGER}
+  </update>
+</mapper>

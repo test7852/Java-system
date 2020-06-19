@@ -9,84 +9,79 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 520px;margin-left: 50px;}
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-top: 70px;margin-left: 20px}
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form" th:action="@{/studentClass/add}">
-    <div class="index">
-        <ul class="menu">
-<!--            <li>-->
-<!--                <label class="layui-form-label">分班编号：</label>-->
-<!--                <input  name="classid" required lay-verify="required" placeholder="分班编号" autocomplete="off" class="layui-input">-->
-<!--            </li>-->
-            <li>
-                <label class="layui-form-label"> 班级编号：</label>
-                <input  name="classno" required lay-verify="required" placeholder="班级编号" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"> 班级名称：</label>
-                <input  name="classname" required lay-verify="required" placeholder="班级名称" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <label class="layui-form-label"> 班级人数：</label>
-                <input name="count" required lay-verify="required" placeholder="班级人数" autocomplete="off" class="layui-input">
-            </li>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">班级编号</label>
+        <div class="layui-input-inline">
+            <input  name="classno" required lay-verify="required" placeholder="班级编号" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">班级名称</label>
+        <div class="layui-input-inline">
+            <input  name="classname" required lay-verify="required" placeholder="班级名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级人数</label>
+        <div class="layui-input-inline">
+            <input name="count" required lay-verify="required" placeholder="班级人数" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">授课老师</label>
+        <div class="layui-input-inline">
+            <select   name="teacher">
+                <option value="0"></option>
+                <option th:each="l:${lecturers}"th:value="${l.emp_id}" th:text="${l.emp_name}">部门</option>
+            </select>
+        </div>
+    </div>
 
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe6b2;</i> 备注：</label>
-                <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input">
-            </li>
-            <br>
-            <li>
-                <label ><i class="layui-icon">&#xe705;</i> 授课老师：</label>
-                <select   name="teacher">
-                    <option value="0"></option>
-                    <option th:each="l:${lecturers}"th:value="${l.emp_id}" th:text="${l.emp_name}">部门</option>
-                </select>
-            </li>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班主任</label>
+        <div class="layui-input-block" style="width: 500px">
+            <select  name="classteacher">
+                <option value="0"></option>
+                <option th:each="c:${classTeachers}"th:value="${c.emp_id}" th:text="${c.emp_name}">部门</option>
+            </select>
+        </div>
+    </div>
 
-            <li>
-                <label><i class="layui-icon">&#xe705;</i> 班主任：</label>
-                <select  name="classteacher">
-                    <option value="0"></option>
-                    <option th:each="c:${classTeachers}"th:value="${c.emp_id}" th:text="${c.emp_name}">部门</option>
-                </select>
-            </li>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所在系</label>
+        <div class="layui-input-inline">
+            <select lay-filter="selectTheme" id="board" name="deptid">
+                <option value="0" >请选择所在系</option>
+                <option th:each="e:${depts}"th:value="${e.deptid}" th:text="${e.deptname}">所在系</option>
+            </select>
+        </div>
+        <label class="layui-form-label">专业</label>
+        <div class="layui-input-inline">
+            <select id="theme" name="majorid">
+                <option></option>
+            </select>
+        </div>
+    </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">届别</label>
+        <div class="layui-input-inline">
+            <select name="falled"  >
+                <option th:each="c:${studentFalls}"th:value="${c.fallid}" th:text="${c.level}">部门</option>
+            </select>
+        </div>
+        <label class="layui-form-label"><i class="layui-icon">&#xe6b2;</i>备注</label>
+        <div class="layui-input-inline">
+            <input  name="remark" required lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input">
+        </div>
+    </div>
 
-            <li>
-                <label><i class="layui-icon">&#xe705;</i> 所在系：</label>
-                <select lay-filter="selectTheme" id="board" name="deptid">
-                    <option value="0" >请选择所在系</option>
-                    <option th:each="e:${depts}"th:value="${e.deptid}" th:text="${e.deptname}">所在系</option>
-                </select>
-            </li>
-
-            <li>
-                <label ><i class="layui-icon">&#xe705;</i> 专业：</label>
-                <select id="theme" name="majorid">
-                    <option></option>
-                </select>
-            </li>
-
-            <li>
-                <label ><i class="layui-icon">&#xe663;</i> 届别</label>
-                <select name="falled"  >
-                    <option th:each="c:${studentFalls}"th:value="${c.fallid}" th:text="${c.level}">部门</option>
-                </select>
-
-                <!--                    <input  name="majorid" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">-->
-            </li>
-        </ul>
-        <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button><!--测试提交值的时候把 lay-filter="formDemo"注释掉可直接提交-->
-        <button type="reset" class="layui-btn layui-btn-radius layui-btn-warm">重新填写</button>
+    <div class="layui-form-item" style="margin-left: 130px">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button><!--测试提交值的时候把 lay-filter="formDemo"注释掉可直接提交-->
+            <button type="reset" class="layui-btn layui-btn-radius layui-btn-warm">重新填写</button>
+        </div>
     </div>
 </form>
 </body>
