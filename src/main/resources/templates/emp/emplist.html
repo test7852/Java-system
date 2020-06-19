@@ -14,6 +14,9 @@
         <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 	</head>
 	<style>
+    .utable .layui-laypage .layui-laypage-curr .layui-laypage-em {
+            background-color: #1E9FFF;
+    }
     .layui-table-page {
             text-align: center;
     }
@@ -27,16 +30,8 @@
     .layui-table-view tbody td {
         text-align: center;
     }
-    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 <body>
-<script type="text/html" id="sexTpl">
-    {{#  if(d.emp_sex === '女'){ }}
-    <span style="color: #F581B1;">{{ d.emp_sex }}</span>
-    {{#  } else { }}
-    {{ d.emp_sex }}
-    {{#  } }}
-</script>
 <!--数据表格样式及附件-->
     <script id="toolbarDemo" type="text/html">
         <div class="layui-btn-container">
@@ -73,8 +68,8 @@
     </a>
 	</script>
 <!--表格-->
-<div>
-    <table style="margin-top: 0px;margin-bottom: 0px" class="layui-table" id="demo" lay-filter="demo"></table>
+<div class="utable">
+    <table class="layui-table" id="demo" lay-filter="demo"></table>
 </div>
 
 </body>
@@ -88,7 +83,7 @@
         table.render({
             elem: '#demo'
             ,id: 'tab'
-            ,height: 580
+            ,height: 550
             ,width: 1200
             ,url: '/emp/empdata' //数据接口
             ,page: true //开启分页
@@ -97,13 +92,13 @@
                 {type: 'radio', title: '选择', fixed: 'left'}
                 ,{field: 'emp_id', title: '编号', width:80, sort: true}
                 ,{field: 'emp_name', title: '用户名', width:120}
-                ,{field: 'emp_sex', title: '性别',templet: '#sexTpl', sort: true, width:60}
+                ,{field: 'emp_sex', title: '性别', width:70}
                 ,{field: 'depname', title: '部门', width:100}
-                ,{field: 'postname', title: '职务', width: 80}
-                ,{field: 'phone', title: '电话', width: 80, sort: true}
-                ,{field: 'address', title: '家庭地址', width: 120}
-                ,{field: 'status', title: '状态', width: 80, templet: aaa}
-                ,{field: 'education', title: '学历', width:120}
+                ,{field: 'postname', title: '职务', width:100}
+                ,{field: 'phone', title: '电话', width: 120}
+                ,{field: 'address', title: '家庭地址', width: 180}
+                ,{field: 'status', title: '状态', width: 60, templet: aaa}
+                ,{field: 'education', title: '学历', width:60}
                 ,{fixed: 'right', title:'操作', toolbar: '#bar', width:310}
             ]]
         });
@@ -115,7 +110,7 @@
                 type: 2,
                 title: '员工新增',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['1000px', '500px'],
+                area: ['1000px', '480px'],
                 content: ['/emp/toadd']//这是链接你的页面地址 url
             });
         })
@@ -211,7 +206,6 @@
                         success: function (data) {
                             if (data) {
                                 layer.msg(JSON.stringify("重置密码成功!"))
-
                                 //执行重载
                                 $('.layui-laypage-btn').click();
                                 //table.reload('tab');
