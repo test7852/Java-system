@@ -82,7 +82,7 @@
         <thead>
         <tr>
             <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'hourid', width:80, sort: true}">ID</th>
+            <th lay-data="{field:'hourid', width:80, sort: true}">编号</th>
             <th lay-data="{field:'huorname'}">宿舍房号</th>
             <th lay-data="{field:'addr'}">宿舍地址</th>
             <th lay-data="{field:'count'}">宿舍人数</th>
@@ -105,7 +105,7 @@
                 type: 2,
                 title: '新增宿舍',
                 maxmin: true, //开启最大化最小化按钮
-                area: ['600px', '420px'],
+                area: ['700px', '310px'],
                 content: ['/studentHuor/toAdd']//这是链接你的页面地址 url
             });
         });
@@ -160,12 +160,11 @@
                 }
 
             }else if(obj.event= 'toUpdate'){
-                alert(data.hourid);
                 layer.open({
                     type: 2,
                     title: '编辑宿舍',
                     maxmin: true, //开启最大化最小化按钮
-                    area: ['600px', '420px'],
+                    area: ['700px', '310px'],
                     content: ['/studentHuor/toUpdate?id='+data.hourid]//这是链接你的页面地址 url
                 });
             }

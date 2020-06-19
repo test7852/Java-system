@@ -9,27 +9,23 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-left: 140px;margin-top: 20px;}
-
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form" th:action="@{/studentFloor/add}">
-    <div class="index">
-        <ul class="menu">
-            <li>
-                <label class="layui-form-label">楼栋名称：</label>
-                <input  name="floorname" required lay-verify="required" placeholder="楼栋名称" autocomplete="off" class="layui-input">
-            </li>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo" >立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼栋名称</label>
+        <div class="layui-input-inline" style="margin-top: 20px;">
+            <input  name="floorname" required lay-verify="required" placeholder="楼栋名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </div>
     </div>
 </form>
 </body>
