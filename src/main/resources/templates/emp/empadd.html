@@ -9,9 +9,10 @@
 	<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-	.index{width: 600px;margin-left: 30px;}
+	.layui-form-item .layui-input-inline{
+		width: 120px;
+	}
 	.layui-input{width: 120px;}
-	.menu li{float: left;}
 	.layui-form-label{margin-top: 15px}
 	.layui-input{margin-top: 15px}
 	button{margin-left: 140px;margin-top: 20px;}
@@ -19,113 +20,176 @@
 	::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form">
-	<div class="index">
-		<ul class="menu">
-			<li>
-				<label class="layui-form-label">员工姓名：</label>
+<form class="layui-form" action="">
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label">员工姓名：</label>
+			<div class="layui-input-inline">
 				<input  name="emp_name" required lay-verify="required" placeholder="员工姓名" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label">毕业学校：</label>
-				<input  name="university" required lay-verify="required" placeholder="毕业学校" autocomplete="off" class="layui-input">
-			</li>
-
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 部门：</label>
-				<select lay-filter="selectTheme" id="board" name="dep_id">
-					<option value="0">请输入一级部门</option>
-					<option th:each="e:${deps}"th:value="${e.depid}" th:text="${e.depname}">部门</option>
-				</select>
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 职位：</label>
-				<select id="theme" name="post_Id">
-					<option></option>
-				</select>
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 生日：</label>
-				<input  name="birthday" required lay-verify="required" placeholder="生日" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 籍贯：</label>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 50px">籍贯：</label>
+			<div class="layui-input-inline">
 				<input  name="nation" required lay-verify="required" placeholder="籍贯" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe66f;</i>身份证：</label>
-				<input style="width: 350px;" name="cardno" id="identity" required lay-verify="identity" placeholder="身份证" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe678;</i> 号码：</label>
-<!--				<input class="layui-input" style="width: 350px;" name="phone" placeholder="手机号码" lay-verify="phone"/>-->
-				<input style="width: 350px;" name="phone" required lay-verify="phone" placeholder="手机号码" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label">入职日期：</label>
-				<input  name="hireday" id="entry" required lay-verify="required" placeholder="入职日期" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe656;</i> 专业：</label>
-				<input style="width: 350px;"  name="major" required lay-verify="required" placeholder="专业" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe676;</i> QQ号码：</label>
-				<input style="width: 350px;"  name="qqcode" required lay-verify="required" placeholder="QQ号码" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe677;</i> 微信：</label>
-				<input style="width: 350px;"  name="weixin" required lay-verify="required" placeholder="微信号码" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label">邮箱地址：</label>
-				<input style="width: 350px;" name="email" required lay-verify="email" placeholder="邮箱地址" autocomplete="off" class="layui-input">
-			</li>
-
-			<li>
-				<label class="layui-form-label">家庭地址：</label>
-				<input style="width: 350px;"  name="address" required lay-verify="required" placeholder="家庭地址" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label"><i class="layui-icon">&#xe705;</i> 学历：</label>
-				<select name="education" lay-verify="required">
-					<option value="0">本科</option>
-					<option value="1">专科</option>
-				</select>
-<!--				<input  name="password" required lay-verify="required" placeholder="学历" autocomplete="off" class="layui-input">-->
-			</li>
-			<li>
-				<label class="layui-form-label">登录密码：</label>
-				<input  name="password" required lay-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input">
-			</li>
-			<li>
-				<label class="layui-form-label">支付宝：</label>
-				<input style="width: 350px;"  name="alipay" required lay-verify="required" placeholder="支付宝" autocomplete="off" class="layui-input">
-			</li>
-
-
-			<li>
-				<span class="layui-form-label">婚姻状况：</span>
-				<input type="radio" name="married" value="已婚" title="已婚">
-				<input type="radio" name="married" value="未婚" title="未婚" checked>
-			</li>
-			<li>
-				<label class="layui-form-label">
-					<i class="layui-icon">&#xe662;</i>
-					<i class="layui-icon">&#xe661;</i>姓别</label>
-				<input type="radio" name="emp_sex" value="男" title="男" checked>
-				<input type="radio" name="emp_sex" value="女" title="女">
-			</li>
-
-
-			<li>
-				<button id="bt" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-			</li>
-
-		</ul>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 80px">入职日期：</label>
+			<div class="layui-input-inline">
+				<input class="layui-input" lay-verify="required" id="hireday" name="hireday" type="text" placeholder="yyyy-MM-dd">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 50px">生日：</label>
+			<div class="layui-input-inline">
+				<input class="layui-input" lay-verify="required" id="birthday" name="birthday" type="text" placeholder="yyyy-MM-dd">
+			</div>
+		</div>
 	</div>
 
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 60px"><i class="layui-icon">&#xe676;</i> QQ：</label>
+			<div class="layui-input-inline">
+				<input name="qqcode" placeholder="QQ号码" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 60px"><i class="layui-icon">&#xe677;</i>微信：</label>
+			<div class="layui-input-inline">
+				<input name="weixin" placeholder="微信号码" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 70px">邮箱地址：</label>
+			<div class="layui-input-inline" style="width: 160px">
+				<input style="width: 160px" name="email" lay-verify="email" placeholder="邮箱地址" class="layui-input">
+			</div>
+		</div>
+
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 60px">支付宝：</label>
+			<div class="layui-input-inline" style="width: 130px">
+				<input style="width: 130px" name="alipay" placeholder="支付宝" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 80px">
+				<i class="layui-icon">&#xe662;</i>
+				<i class="layui-icon">&#xe661;</i>姓别：</label>
+			<div class="layui-input-inline" style="margin-top: 15px;width: 150px">
+				<input type="radio" name="emp_sex" checked="" value="男" title="男">
+				<input type="radio" name="emp_sex" value="女" title="女">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 60px"><i class="layui-icon">&#xe705;</i>学历：</label>
+			<div class="layui-input-inline" style="width: 120px">
+				<select name="education" lay-verify="required">
+					<option value="">请选择学历</option>
+					<option value="本科">本科</option>
+					<option value="专科">专科</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 80px">婚姻状况：</label>
+			<div class="layui-input-inline" style="width: 120px">
+				<select name="married" lay-verify="required">
+					<option value="">婚姻状况</option>
+					<option value="已婚">已婚</option>
+					<option value="未婚">未婚</option>
+					<option value="丧偶">丧偶</option>
+					<option value="离异">离异</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 50px">专业：</label>
+			<div class="layui-input-inline">
+				<input name="nation" placeholder="专业" lay-verify="required" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 100px">请选择部门：</label>
+			<div class="layui-input-inline" style="width: 120px;margin-right: 0px">
+				<select lay-filter="selectTheme" id="board" lay-verify="required">
+					<option value="">一级部门</option>
+					<option th:each="e:${deps}"th:value="${e.depid}" th:text="${e.depname}">部门</option>
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 120px">
+				<select id="theme" name="dep_id">
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label"><i class="layui-icon">&#xe705;</i>职位：</label>
+			<div class="layui-input-inline" style="width: 120px">
+				<select name="post_Id" lay-verify="required">
+					<option value="">请选择职业</option>
+					<option th:each="e:${posts}"th:value="${e.pos_Id}" th:text="${e.pos_Name}">部门</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label"><i class="layui-icon">&#xe678;</i>号码：</label>
+			<div class="layui-input-inline" style="width: 130px">
+				<input name="phone" style="width: 130px" lay-verify="phone" placeholder="手机号码" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-inline" id="area-picker">
+			<label class="layui-form-label">家庭住址：</label>
+			<div name="city" class="layui-input-inline" style="width: 100px;">
+				<select id="province" name="province" class="province-selector" data-value="江西省" lay-filter="province-1">
+					<option value="">请选择省</option>
+				</select>
+			</div>
+			<div name="city" class="layui-input-inline" style="width: 100px;">
+				<select id="city" name="city" class="city-selector" data-value="赣州市" lay-filter="city-1">
+					<option value="">请选择市</option>
+				</select>
+			</div>
+			<div name="city" class="layui-input-inline" style="width: 100px;">
+				<select id="county" name="county" class="county-selector" data-value="章贡区" lay-filter="county-1">
+					<option value="">请选择县区</option>
+				</select>
+			</div>
+			<div name="city" class="layui-input-inline" style="width: 200px;">
+				<input style="width: 200px" id="detail" name="detail" lay-verify="required" placeholder="详细地址" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 70px">毕业学校:</label>
+			<div class="layui-input-inline">
+				<input name="university" placeholder="毕业学校" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 70px">身份证：</label>
+			<div class="layui-input-inline" style="width: 200px;">
+				<input style="width: 200px;" name="cardno" id="identity" lay-verify="identity" placeholder="身份证" class="layui-input">
+			</div>
+		</div>
+		<input id="dz" type="hidden" name="address">
+		<div class="layui-inline" style="margin-left: 100px">
+			<button id="bt" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+			<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+		</div>
+	</div>
 </form>
 </body>
 <script type="text/javascript" th:inline="none">
@@ -146,7 +210,7 @@
 					var selectObj = document.getElementById("theme");//对应id="theme"
 					selectObj.options.length = 0;
 					for (var i = 0; i < data.length; i++) {
-						selectObj.add(new Option(optionJson[i].pos_Name, optionJson[i].pos_Id));//对应数据库中名字，两个参数是(文本,value)
+						selectObj.add(new Option(optionJson[i].depname, optionJson[i].depid));//对应数据库中名字，两个参数是(文本,value)
 					}
 					form.render();
 				}
@@ -171,14 +235,15 @@
             elem: '#entry'
         });
 
-        //常规用法
-        laydate.render({
-            elem: '#dimission'
-        });
-
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
+        	var province = $('#province').val();//省
+			var city = $('#city').val();//市
+			var county = $('#county').val();//县
+			var detail = $('#detail').val();//详细
+			var all = province+city+county+detail;
+			$('#dz').val(all)
 			$.ajax({
 				url: '/emp/add',
 				type: 'post',
@@ -199,6 +264,36 @@
 				},
 			})
 			return false;
+		});
+
+		laydate.render({
+			elem: '#birthday'
+			,calendar: true
+		});
+
+		laydate.render({
+			elem: '#hireday'
+			,calendar: true
+		});
+
+		//配置插件目录
+		layui.config({
+			base: '../layui/'
+			, version: '1.0'
+		});
+		//一般直接写在一个js文件中
+		layui.use(['layer', 'form', 'layarea'], function () {
+			var layer = layui.layer
+					, form = layui.form
+					, layarea = layui.layarea;
+
+			layarea.render({
+				elem: '#area-picker',
+				change: function (res) {
+					//选择结果
+					console.log(res);
+				}
+			});
 		});
     });
 </script>
