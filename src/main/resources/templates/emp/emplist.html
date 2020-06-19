@@ -22,6 +22,7 @@
     }
     .layui-table {
         text-align: center;
+        margin-top: -10px;
     }
     .layui-table-view thead th {
         text-align: center;
@@ -36,10 +37,7 @@
     <script id="toolbarDemo" type="text/html">
         <div class="layui-btn-container">
             <button id="add" class="layui-btn layui-btn-sm">新增</button>
-            <a th:href="@{/managerui/index.html#skip}" data-id="周报管理" data-title="周报管理" class="layui-btn layui-btn-sm" lay-event="word" data-type="tabAdd">
-                周报管理
-            </a>
-<!--            <button class="layui-btn layui-btn-sm" lay-event="word">工作经历</button>-->
+            <button class="layui-btn layui-btn-sm" lay-event="word">工作经历</button>
             <button class="layui-btn layui-btn-sm" lay-event="education">教育背景</button>
             <button class="layui-btn layui-btn-sm" lay-event="relation">家庭关系信息</button>
             <button class="layui-btn layui-btn-sm" lay-event="assess">员工考核</button>
@@ -83,8 +81,8 @@
         table.render({
             elem: '#demo'
             ,id: 'tab'
-            ,height: 543
-            ,width: 1200
+            ,height: 560
+            ,width: 1250
             ,url: '/emp/empdata' //数据接口
             ,page: true //开启分页
             ,toolbar: '#toolbarDemo'
@@ -92,13 +90,15 @@
                 {type: 'radio', title: '选择', fixed: 'left'}
                 ,{field: 'emp_id', title: '编号', width:80, sort: true}
                 ,{field: 'emp_name', title: '用户名', width:120}
-                ,{field: 'emp_sex', title: '性别', width:70}
+                ,{field: 'emp_sex', title: '性别', width:60}
                 ,{field: 'depname', title: '部门', width:100}
                 ,{field: 'postname', title: '职务', width:100}
                 ,{field: 'phone', title: '电话', width: 120}
+                ,{field: 'education', title: '学历', width:60}
                 ,{field: 'address', title: '家庭地址', width: 180}
                 ,{field: 'status', title: '状态', width: 60, templet: aaa}
-                ,{field: 'education', title: '学历', width:60}
+                ,{field: 'married', title: '婚姻状况', width:90}
+                ,{field: 'nation', title: '籍贯', width:60}
                 ,{fixed: 'right', title:'操作', toolbar: '#bar', width:310}
             ]]
         });
@@ -119,19 +119,19 @@
         table.on('toolbar(demo)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
             var data = checkStatus.data;
-            var ids = $.map(data,function(d){return d.emp_id;});//获取选中数据的id
+            var id = $.map(data,function(d){return d.emp_id;});//获取选中数据的id
             if (data.length === 0){
-                layer.msg('请选择数据', { icon: 5, time: 2000 });
+                layer.msg('请选择用户', { icon: 5, time: 2000 });
             }else if (obj.event === "word"){
-                alert(ids)
+                alert(id)
             }else if (obj.event === "education"){
-                alert(ids)
+                alert(id)
             } else if (obj.event === "relation"){
                 layer.alert(JSON.stringify(data));
             }else if (obj.event === "assess"){
                 layer.alert(JSON.stringify(data));
             }else if (obj.event === "voucher"){
-                layer.alert(JSON.stringify(data));
+                document.location.href="/skip/voucher?id="+id;
             }
         });
 
