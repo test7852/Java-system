@@ -111,7 +111,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label" style="width: 50px">专业：</label>
 			<div class="layui-input-inline">
-				<input name="nation" placeholder="专业" lay-verify="required" class="layui-input">
+				<input name="major" placeholder="专业" lay-verify="required" class="layui-input">
 			</div>
 		</div>
 	</div>
@@ -121,7 +121,7 @@
 			<label class="layui-form-label" style="width: 100px">请选择部门：</label>
 			<div class="layui-input-inline" style="width: 120px;margin-right: 0px">
 				<select lay-filter="selectTheme" id="board" lay-verify="required">
-					<option value="">一级部门</option>
+					<option value="">上级部门</option>
 					<option th:each="e:${deps}"th:value="${e.depid}" th:text="${e.depname}">部门</option>
 				</select>
 			</div>
@@ -184,7 +184,6 @@
 				<input style="width: 200px;" name="cardno" id="identity" lay-verify="identity" placeholder="身份证" class="layui-input">
 			</div>
 		</div>
-		<input id="dz" type="hidden" name="address">
 		<div class="layui-inline" style="margin-left: 100px">
 			<button id="bt" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
 			<button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
@@ -238,12 +237,6 @@
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-        	var province = $('#province').val();//省
-			var city = $('#city').val();//市
-			var county = $('#county').val();//县
-			var detail = $('#detail').val();//详细
-			var all = province+city+county+detail;
-			$('#dz').val(all)
 			$.ajax({
 				url: '/emp/add',
 				type: 'post',

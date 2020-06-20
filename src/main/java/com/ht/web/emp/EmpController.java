@@ -2,10 +2,12 @@ package com.ht.web.emp;
 import com.ht.bean.emp.Dep;
 import com.ht.bean.emp.Empinfo;
 import com.ht.bean.emp.Post;
+import com.ht.bean.file.Annex;
 import com.ht.bean.json.JsonData;
 import com.ht.service.emp.DepService;
 import com.ht.service.emp.EmpinfoService;
 import com.ht.service.emp.PostService;
+import com.ht.service.file.AnnexService;
 import com.ht.util.Contants;
 import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
@@ -32,6 +34,8 @@ public class EmpController {
     private DepService depService;
     @Resource
     private PostService postService;
+    @Resource
+    private AnnexService annexService;
     @Resource
     private JsonData jsonData;
 
@@ -115,8 +119,9 @@ public class EmpController {
      */
     @RequestMapping("add")
     @ResponseBody
-    public Boolean add(Empinfo empinfo) {
-        System.out.println(empinfo);
+    public Boolean add(Empinfo empinfo,String province,String city,String county,String detail) {
+        String dz = province+"/"+city+"/"+county+"/"+detail;
+        empinfo.setAddress(dz);
         Empinfo cf = empinfoService.getEmpByName(empinfo);
         if (cf == null){
             empinfo.setPassword(Contants.PASSWORD_TA);//默认密码
@@ -222,6 +227,20 @@ public class EmpController {
     public String word(Empinfo empinfo){
         System.out.println(empinfo.getEmp_id());
         return "emp/emppapers";
+    }
+
+    @RequestMapping("voucher")
+    @ResponseBody
+    public JsonData voucher(@Param("limit")int limit , @Param("page")int page,Integer id){
+        Pager pager = new Pager();
+        pager.setPageSize(limit);
+        pager.setCurrPage(page);
+        jsonData.setCount(annexService.selCount());
+        //找某个员工的附件
+        List<Annex> list = (annexService.sellist(pager,"员工",id));
+        //根据部门id和职务id去找
+        jsonData.setData(list);
+        return jsonData;
     }
 
 }
