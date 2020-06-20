@@ -123,11 +123,12 @@
             if (data.length === 0){
                 layer.msg('请选择用户', { icon: 5, time: 2000 });
             }else if (obj.event === "word"){
-                alert(id)
+                // alert(id)
+                document.location.href="/option/toworkadd?id="+id;
             }else if (obj.event === "education"){
-                alert(id)
+                document.location.href="/option/toeducationadd?id="+id;
             } else if (obj.event === "relation"){
-                layer.alert(JSON.stringify(data));
+                document.location.href="/option/tolink?id="+id;
             }else if (obj.event === "assess"){
                 layer.alert(JSON.stringify(data));
             }else if (obj.event === "voucher"){
