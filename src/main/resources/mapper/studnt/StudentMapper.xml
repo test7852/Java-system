@@ -542,8 +542,6 @@
     where Studid = #{studid,jdbcType=INTEGER}
   </update>
 
-
-
   <!--  分页-->
   <select id="allPageStu" resultType="Student">
     <bind name="kais" value="(currPage-1)*pageSize"></bind>
@@ -556,5 +554,9 @@
 
   <select id="allStu" resultType="Student">
     select * from student
+  </select>
+
+  <select id="allStuClazz" resultType="Student">
+    select * from student where clazz=#{clazz}
   </select>
 </mapper>
