@@ -104,4 +104,35 @@
       remark = #{remark,jdbcType=VARCHAR}
     where ssid = #{ssid,jdbcType=INTEGER}
   </update>
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from stuscore where scoreid = #{scoreid}
+    ]]>
+  </select>
+  <!--  分页-->
+  <select id="allPageClassScore" resultType="Map">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+    <![CDATA[
+        select a.*,c.stuname from stuscore a
+         left join student c on a.stuid = c.studid
+         where a.scoreid = #{scoreid}
+         limit #{kais},#{pager.pageSize}
+    ]]>
+  </select>
+
+  <!--  不分页-->
+  <select id="allClassScore" resultType="com.ht.bean.education.Stuscore">
+    <![CDATA[
+        select * from stuscore
+    ]]>
+  </select>
+  <!--根据班级成绩id删除-->
+  <delete id="delByScoreid" parameterType="int">
+    <![CDATA[
+        delete from stuscore where scoreid =#{scoreid}
+    ]]>
+  </delete>
+
 </mapper>

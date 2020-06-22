@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.ClassreplyMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Classreply">
+    <!--@mbg.generated-->
+    <!--@Table classreply-->
+    <id column="replyid" jdbcType="INTEGER" property="replyid" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="projectid" jdbcType="INTEGER" property="projectid" />
+    <result column="empid" jdbcType="INTEGER" property="empid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    replyid, classid, projectid, empid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from classreply
+    where replyid = #{replyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from classreply
+    where replyid = #{replyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="replyid" keyProperty="replyid" parameterType="com.ht.bean.education.Classreply" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into classreply (classid, projectid, empid
+      )
+    values (#{classid,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="replyid" keyProperty="replyid" parameterType="com.ht.bean.education.Classreply" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into classreply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="projectid != null">
+        projectid,
+      </if>
+      <if test="empid != null">
+        empid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Classreply">
+    <!--@mbg.generated-->
+    update classreply
+    <set>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        projectid = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        empid = #{empid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where replyid = #{replyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Classreply">
+    <!--@mbg.generated-->
+    update classreply
+    set classid = #{classid,jdbcType=INTEGER},
+      projectid = #{projectid,jdbcType=INTEGER},
+      empid = #{empid,jdbcType=INTEGER}
+    where replyid = #{replyid,jdbcType=INTEGER}
+  </update>
+</mapper>

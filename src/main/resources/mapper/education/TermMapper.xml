@@ -69,4 +69,13 @@
       remark = #{remark,jdbcType=VARCHAR}
     where termid = #{termid,jdbcType=INTEGER}
   </update>
+
+
+  <!--  获取所有学期-->
+  <select id="allTerm" resultType="com.ht.bean.education.Term">
+    <![CDATA[
+      select * from term
+    ]]>
+  </select>
+
 </mapper>

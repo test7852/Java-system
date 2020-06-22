@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.StureplyMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Stureply">
+    <!--@mbg.generated-->
+    <!--@Table stureply-->
+    <id column="srid" jdbcType="INTEGER" property="srid" />
+    <result column="replyid" jdbcType="INTEGER" property="replyid" />
+    <result column="stuid" jdbcType="INTEGER" property="stuid" />
+    <result column="score1" jdbcType="FLOAT" property="score1" />
+    <result column="score2" jdbcType="FLOAT" property="score2" />
+    <result column="score3" jdbcType="FLOAT" property="score3" />
+    <result column="score4" jdbcType="FLOAT" property="score4" />
+    <result column="score5" jdbcType="FLOAT" property="score5" />
+    <result column="score6" jdbcType="FLOAT" property="score6" />
+    <result column="score7" jdbcType="FLOAT" property="score7" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    srid, replyid, stuid, score1, score2, score3, score4, score5, score6, score7, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from stureply
+    where srid = #{srid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from stureply
+    where srid = #{srid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="srid" keyProperty="srid" parameterType="com.ht.bean.education.Stureply" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into stureply (replyid, stuid, score1, 
+      score2, score3, score4, score5, 
+      score6, score7, remark)
+    values (#{replyid,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{score1,jdbcType=FLOAT}, 
+      #{score2,jdbcType=FLOAT}, #{score3,jdbcType=FLOAT}, #{score4,jdbcType=FLOAT}, #{score5,jdbcType=FLOAT}, 
+      #{score6,jdbcType=FLOAT}, #{score7,jdbcType=FLOAT}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="srid" keyProperty="srid" parameterType="com.ht.bean.education.Stureply" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into stureply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="replyid != null">
+        replyid,
+      </if>
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="score1 != null">
+        score1,
+      </if>
+      <if test="score2 != null">
+        score2,
+      </if>
+      <if test="score3 != null">
+        score3,
+      </if>
+      <if test="score4 != null">
+        score4,
+      </if>
+      <if test="score5 != null">
+        score5,
+      </if>
+      <if test="score6 != null">
+        score6,
+      </if>
+      <if test="score7 != null">
+        score7,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="replyid != null">
+        #{replyid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="score1 != null">
+        #{score1,jdbcType=FLOAT},
+      </if>
+      <if test="score2 != null">
+        #{score2,jdbcType=FLOAT},
+      </if>
+      <if test="score3 != null">
+        #{score3,jdbcType=FLOAT},
+      </if>
+      <if test="score4 != null">
+        #{score4,jdbcType=FLOAT},
+      </if>
+      <if test="score5 != null">
+        #{score5,jdbcType=FLOAT},
+      </if>
+      <if test="score6 != null">
+        #{score6,jdbcType=FLOAT},
+      </if>
+      <if test="score7 != null">
+        #{score7,jdbcType=FLOAT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Stureply">
+    <!--@mbg.generated-->
+    update stureply
+    <set>
+      <if test="replyid != null">
+        replyid = #{replyid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        stuid = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="score1 != null">
+        score1 = #{score1,jdbcType=FLOAT},
+      </if>
+      <if test="score2 != null">
+        score2 = #{score2,jdbcType=FLOAT},
+      </if>
+      <if test="score3 != null">
+        score3 = #{score3,jdbcType=FLOAT},
+      </if>
+      <if test="score4 != null">
+        score4 = #{score4,jdbcType=FLOAT},
+      </if>
+      <if test="score5 != null">
+        score5 = #{score5,jdbcType=FLOAT},
+      </if>
+      <if test="score6 != null">
+        score6 = #{score6,jdbcType=FLOAT},
+      </if>
+      <if test="score7 != null">
+        score7 = #{score7,jdbcType=FLOAT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where srid = #{srid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Stureply">
+    <!--@mbg.generated-->
+    update stureply
+    set replyid = #{replyid,jdbcType=INTEGER},
+      stuid = #{stuid,jdbcType=INTEGER},
+      score1 = #{score1,jdbcType=FLOAT},
+      score2 = #{score2,jdbcType=FLOAT},
+      score3 = #{score3,jdbcType=FLOAT},
+      score4 = #{score4,jdbcType=FLOAT},
+      score5 = #{score5,jdbcType=FLOAT},
+      score6 = #{score6,jdbcType=FLOAT},
+      score7 = #{score7,jdbcType=FLOAT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where srid = #{srid,jdbcType=INTEGER}
+  </update>
+</mapper>

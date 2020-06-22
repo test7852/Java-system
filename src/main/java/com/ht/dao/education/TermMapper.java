@@ -1,6 +1,9 @@
 package com.ht.dao.education;
 
 import com.ht.bean.education.Term;
+import com.ht.bean.student.Dept;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -19,4 +22,11 @@ public interface TermMapper {
     int updateByPrimaryKeySelective(Term record);
 
     int updateByPrimaryKey(Term record);
+
+    /**
+     *
+     * @return
+     * 获取所有学期
+     */
+    List<Term> allTerm();
 }
