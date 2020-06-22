@@ -74,7 +74,7 @@
   <!--  获取所有答辩项目-->
   <select id="allProject" resultType="Map">
     <![CDATA[
-      select * from project limit
+      select * from project
     ]]>
   </select>
 
