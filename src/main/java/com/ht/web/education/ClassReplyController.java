@@ -183,24 +183,24 @@ public class ClassReplyController {
     @RequestMapping("stuupd")
     @ResponseBody
     public Boolean stuupd(Stureply stureply){
-        if(stureply.getScore1() == null){
-            stureply.setScore1((double)0);
-        }
-        if(stureply.getScore2() == null){
-            stureply.setScore2((double)0);
-        }
-        if(stureply.getScore3() == null){
-            stureply.setScore3((double)0);
-        }
-        if(stureply.getScore4() == null){
-            stureply.setScore4((double)0);
-        }
-        if(stureply.getScore5() == null){
-            stureply.setScore5((double)0);
-        }
-        if(stureply.getScore6() == null){
-            stureply.setScore6((double)0);
-        }
+//        if(stureply.getScore1() == null){
+//            stureply.setScore1((double)0);
+//        }
+//        if(stureply.getScore2() == null){
+//            stureply.setScore2((double)0);
+//        }
+//        if(stureply.getScore3() == null){
+//            stureply.setScore3((double)0);
+//        }
+//        if(stureply.getScore4() == null){
+//            stureply.setScore4((double)0);
+//        }
+//        if(stureply.getScore5() == null){
+//            stureply.setScore5((double)0);
+//        }
+//        if(stureply.getScore6() == null){
+//            stureply.setScore6((double)0);
+//        }
 
         double sum =stureply.getScore1()+stureply.getScore2()+
                     stureply.getScore3()+stureply.getScore4()+

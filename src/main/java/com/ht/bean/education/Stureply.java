@@ -27,37 +27,37 @@ public class Stureply {
     /**
     * 功能完善50
     */
-    private Double score1;
+    private Double score1=(double)0;
 
     /**
     * 技术难度10
     */
-    private Double score2;
+    private Double score2=(double)0;
 
     /**
     * 界面完美10
     */
-    private Double score3;
+    private Double score3=(double)0;
 
     /**
     * 回答问题10
     */
-    private Double score4;
+    private Double score4=(double)0;
 
     /**
     * 演示方法10
     */
-    private Double score5;
+    private Double score5=(double)0;
 
     /**
     * 语言表达10
     */
-    private Double score6;
+    private Double score6=(double)0;
 
     /**
     * 总分100
     */
-    private Double score7;
+    private Double score7=(double)0;
 
     /**
     * 说明

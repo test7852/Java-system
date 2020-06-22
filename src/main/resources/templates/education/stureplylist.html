@@ -95,44 +95,50 @@
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
 
-            if(data.score1 > 50 || data.score1 ==""){
-                layer.msg(JSON.stringify("修改失败,分数不能大于50且不能为空"));
+            if (isNaN(data.score1) || isNaN(data.score2) ||
+                isNaN(data.score3) || isNaN(data.score4) ||
+                isNaN(data.score5) || isNaN(data.score6) ){
+                layer.msg(JSON.stringify("请输入正确的数字"));
                 $('.layui-laypage-btn').click();
                 return;
+            }else {
+                if(data.score1 > 50 || data.score1 ==""){
+                    layer.msg(JSON.stringify("修改失败,分数不能大于50且不能为空"));
+                    $('.layui-laypage-btn').click();
+                    return;
+                }else if( (data.score2 > 10 || data.score2 ==="") ||
+                    (data.score3 > 10 || data.score3 ==="") ||
+                    (data.score4 > 10 || data.score4 ==="") ||
+                    (data.score5 > 10 || data.score5 ==="") ||
+                    (data.score6 > 10 || data.score6 ==="")
+                ){
+                    layer.msg(JSON.stringify("修改失败,分数不能大于10且不能为空"));
+                    $('.layui-laypage-btn').click();
+                    return;
+                }else {
+                    $.ajax({
+                        url: '/classreply/stuupd',
+                        type: 'post',
+                        data: {
+                            srid:data.srid,
+                            score1:data.score1,
+                            score2:data.score2,
+                            score3:data.score3,
+                            score4:data.score4,
+                            score5:data.score5,
+                            score6:data.score6,
+                            remark:data.remark
+                        },
+                        dataType: 'json',
+                        success:function(data){
+                            if(data){
+                                layer.msg(JSON.stringify("修改成功"));
+                                $('.layui-laypage-btn').click();
+                            }
+                        },
+                    })
+                }
             }
-
-            if( data.score2 > 10 || data.score2 =="" ||
-                data.score3 > 10 || data.score3 =="" ||
-                data.score4 > 10 || data.score4 =="" ||
-                data.score5 > 10 || data.score5 =="" ||
-                data.score6 > 10 || data.score6 ==""
-            ){
-                layer.msg(JSON.stringify("修改失败,分数不能大于10且不能为空"));
-                $('.layui-laypage-btn').click();
-                return;
-            }
-
-            $.ajax({
-                url: '/classreply/stuupd',
-                type: 'post',
-                data: {
-                    srid:data.srid,
-                    score1:data.score1,
-                    score2:data.score2,
-                    score3:data.score3,
-                    score4:data.score4,
-                    score5:data.score5,
-                    score6:data.score6,
-                    remark:data.remark
-                },
-                dataType: 'json',
-                success:function(data){
-                    if(data){
-                        layer.msg(JSON.stringify("修改成功"));
-                        $('.layui-laypage-btn').click();
-                    }
-                },
-            })
         });
 
 
