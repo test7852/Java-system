@@ -21,13 +21,19 @@ public class ProjectServiceImpl implements ProjectService{
     private ProjectMapper projectMapper;
 
     @Override
-    public List<Project> allProject(Pager pager) {
-        return projectMapper.allProject(pager);
+    public List<Project> allProject() {
+        return projectMapper.allProject();
     }
 
     @Override
     public int selprocount() {
         return projectMapper.selprocount();
+    }
+
+
+    @Override
+    public List<Project> allProjectPage(Pager pager) {
+        return projectMapper.allProjectPage(pager);
     }
 
     @Override

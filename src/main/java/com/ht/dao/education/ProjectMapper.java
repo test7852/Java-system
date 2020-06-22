@@ -33,5 +33,7 @@ public interface ProjectMapper {
      * @return
      * 获取所有答辩项目
      */
-    List<Project> allProject(Pager pager);
+    List<Project> allProject();
+
+    List<Project> allProjectPage(Pager pager);
 }

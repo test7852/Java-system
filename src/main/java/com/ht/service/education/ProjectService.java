@@ -17,9 +17,11 @@ public interface ProjectService{
      * @return
      * 获取所有答辩项目
      */
-    List<Project> allProject(Pager pager);
+    List<Project> allProject();
 
     int selprocount();
+
+    List<Project> allProjectPage(Pager pager);
 
     Project selByObjName(String name);
 

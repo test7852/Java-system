@@ -73,6 +73,13 @@
 
   <!--  获取所有答辩项目-->
   <select id="allProject" resultType="Map">
+    <![CDATA[
+      select * from project limit
+    ]]>
+  </select>
+
+  <!--  获取所有答辩项目-->
+  <select id="allProjectPage" resultType="Map">
     <bind name="kais" value="(currPage-1)*pageSize"></bind>
     <![CDATA[
       select * from project limit #{kais},#{pageSize}

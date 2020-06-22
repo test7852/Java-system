@@ -39,7 +39,7 @@ public class ProjectController {
         pager.setPageSize(limit);
         pager.setCurrPage(page);
         jsonData.setCount(ps.selprocount());
-        jsonData.setData(ps.allProject(pager));
+        jsonData.setData(ps.allProjectPage(pager));
         return jsonData;
     }
 
