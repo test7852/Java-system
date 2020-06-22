@@ -65,4 +65,10 @@ public class CenterController {
         return "emp/chatrecordlist";
     }
 
+    //去到首页页面
+    @RequestMapping("headerList")
+    public String headerList(){
+        return "managerui/headerList";
+    }
+
 }

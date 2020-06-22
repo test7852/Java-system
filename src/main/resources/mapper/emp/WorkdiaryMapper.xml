@@ -123,6 +123,10 @@
     select count(*) from workdiary
   </select>
 
+  <select id="selworkday" resultType="int">
+    SELECT count(*) FROM workdiary WHERE YEARWEEK(DATE_FORMAT(Workday,'%Y-%m-%d')) = YEARWEEK(NOW()) and Empid = #{empid}
+  </select>
+
   <!--分页-->
   <select id="allPageWorkdiary" resultType="Map">
     <bind name="kais" value="(currPage-1)*pageSize"></bind>

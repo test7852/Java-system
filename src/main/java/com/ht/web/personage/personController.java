@@ -31,7 +31,8 @@ public class personController {
      * @return
      */
     @RequestMapping("topersonage")
-    public String topersonage(Model model, HttpSession session){
+    public String
+    topersonage(Model model, HttpSession session){
 //        Empinfo user=(Empinfo) session.getAttribute("user");
 //        Empinfo empinfo= empinfoService.selectByPrimaryKey(user.getEmp_id());
         Empinfo empinfo= empinfoService.selectByPrimaryKey(5);

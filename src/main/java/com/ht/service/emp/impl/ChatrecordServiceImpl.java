@@ -27,6 +27,11 @@ public class ChatrecordServiceImpl implements ChatrecordService{
     }
 
     @Override
+    public int selchatcountmonth(Integer empid) {
+        return chatrecordMapper.selchatcountmonth(empid);
+    }
+
+    @Override
     public List<Chatrecord> allPageChatrecord(Pager pager) {
         return chatrecordMapper.allPageChatrecord(pager);
     }

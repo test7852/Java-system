@@ -109,10 +109,18 @@ public class WorkdiaryController {
     //添加周报
     @RequestMapping("addwork")
     @ResponseBody
-    public Integer addwork(Workdiary workdiary,int emp_id){
+    public Boolean addwork(Workdiary workdiary,int emp_id){
         workdiary.setEmpid(emp_id);
-        workdiary.setWorkday(new SimpleDateFormat("yyyy-MM-dd ").format(new Date()));
-        int i = workdiaryService.insert(workdiary);
-        return i;
+        Boolean bool=null;
+        if((workdiaryService.selworkday(emp_id))>0){
+            bool=false;
+        }else {
+            workdiary.setWorkday(new SimpleDateFormat("yyyy-MM-dd ").format(new Date()));
+            int i = workdiaryService.insert(workdiary);
+            bool=true;
+        }
+
+
+        return bool;
     }
 }
