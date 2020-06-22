@@ -72,7 +72,7 @@
 
 
   <!--  获取所有答辩项目-->
-  <select id="allProject" resultType="Map">
+  <select id="allProject" resultType="com.ht.bean.education.Project">
     <![CDATA[
       select * from project
     ]]>
