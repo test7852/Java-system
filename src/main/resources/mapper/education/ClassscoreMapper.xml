@@ -132,7 +132,7 @@
   <!-- 查询总行数-->
   <select id="getTotalRow" resultType="int">
     <![CDATA[
-        select count(*) from dep
+        select count(*) from classscore
     ]]>
   </select>
   <!--  分页-->

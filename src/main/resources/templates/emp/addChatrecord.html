@@ -16,8 +16,8 @@
     <div class="layui-form-item" style="margin-top: 20px">
         <label class="layui-form-label">学生姓名</label>
         <div class="layui-input-block">
-            <select name="sayface" lay-verify="required">
-                <option value="0" selected="">请选择学生</option>
+            <select name="sayface" lay-verify="required" id="sayface">
+                <option value="" selected="">请选择学生</option>
                 <option th:each="stu:${list}" th:value="${stu.studid}" th:text="${stu.stuname}"></option>
             </select>
         </div>
@@ -45,26 +45,36 @@
 <script type="text/javascript">
     layui.use('form', function(){
         var form = layui.form;
-
         //监听提交
         //你可以在这里做操作  也可以不使用这个方法
         form.on('submit(formDemo)', function(data){
-            $.ajax({
-                url: '/chatrecord/addchat',
-                type: 'post',
-                data:data.field,
-                dataType: 'json',
-                success:function(data){
-                    if(data){
-                        layer.msg(JSON.stringify("添加成功"));
-                        //先得到当前iframe层的索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        //再执行关闭
-                        parent.layer.close(index);
-                        window.parent.location.reload();
+            var sayface=$('#sayface').val();
+            if(sayface==0){
+                alert('请选择学生！');
+            }else {
+                $.ajax({
+                    url: '/chatrecord/addchat',
+                    type: 'post',
+                    data:data.field,
+                    dataType: 'json',
+                    success:function(data){
+                        if(data){
+                            layer.msg(JSON.stringify("添加成功"));
+                            //先得到当前iframe层的索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //再执行关闭
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        }else {
+                            alert('添加錯誤，已有5数据');
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //再执行关闭
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        }
                     }
-                }
-            });
+                });
+            }
             //$('.layui-laypage-btn').click();//刷新
             return false;
         });

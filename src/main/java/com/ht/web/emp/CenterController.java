@@ -1,7 +1,6 @@
 package com.ht.web.emp;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -64,6 +63,12 @@ public class CenterController {
     @RequestMapping("chatlist")
     public String chatlist(){
         return "emp/chatrecordlist";
+    }
+
+    //去到首页页面
+    @RequestMapping("headerList")
+    public String headerList(){
+        return "managerui/headerList";
     }
 
     //去证件上传
