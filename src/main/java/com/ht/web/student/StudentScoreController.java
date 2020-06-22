@@ -3,11 +3,9 @@ package com.ht.web.student;
 import com.ht.bean.education.Course;
 import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
-import com.ht.bean.student.Classscore;
 import com.ht.bean.student.Student;
 import com.ht.bean.student.StudentScore;
 import com.ht.service.education.CourseService;
-import com.ht.service.student.ClassscoreService;
 import com.ht.service.student.StudentScoreService;
 import com.ht.service.student.StudentService;
 import com.ht.util.Pager;
@@ -35,8 +33,7 @@ public class StudentScoreController {
     private CourseService courseService;//课程管理
     @Resource
     private StudentService studentService;//学生
-    @Resource
-    private ClassscoreService classscoreService;//学生班级成绩中间表
+
     //去到列表+
     @RequestMapping("scorelistUi")
     public String scorelistUi(){
@@ -82,17 +79,17 @@ public class StudentScoreController {
     @RequestMapping("add")
     @ResponseBody
     public String add(StudentScore studentScore,HttpSession session){
-        Empinfo empinfo= (Empinfo)session.getAttribute("user");
-        studentScore.setEmpid(empinfo.getEmp_id());
-        System.out.println("添加："+studentScore.toString());
-        Student stu=studentService.selectByPrimaryKey(studentScore.getStuid());
-        studentScoreService.insert(studentScore);
-        Classscore classscore=new Classscore();
-        classscore.setScoreid(studentScore.getScoreid());
-        classscore.setEmpid(studentScore.getEmpid());
-        classscore.setClazz(String.valueOf(stu.getClazz()));
-        classscoreService.insert(classscore);
-        return "true";
+//        Empinfo empinfo= (Empinfo)session.getAttribute("user");
+//        studentScore.setEmpid(empinfo.getEmp_id());
+//        System.out.println("添加："+studentScore.toString());
+//        Student stu=studentService.selectByPrimaryKey(studentScore.getStuid());
+//        studentScoreService.insert(studentScore);
+//        Classscore classscore=new Classscore();
+//        classscore.setScoreid(studentScore.getScoreid());
+//        classscore.setEmpid(studentScore.getEmpid());
+//        classscore.setClazz(String.valueOf(stu.getClazz()));
+//        classscoreService.insert(classscore);
+       return "true";
     }
 
     /**

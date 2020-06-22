@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.ClasstypeMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Classtype">
+    <!--@mbg.generated-->
+    <!--@Table classtype-->
+    <id column="classtypeid" jdbcType="INTEGER" property="classtypeid" />
+    <result column="classtypename" jdbcType="VARCHAR" property="classtypename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    classtypeid, classtypename
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from classtype
+    where classtypeid = #{classtypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from classtype
+    where classtypeid = #{classtypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="classtypeid" keyProperty="classtypeid" parameterType="com.ht.bean.education.Classtype" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into classtype (classtypename)
+    values (#{classtypename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="classtypeid" keyProperty="classtypeid" parameterType="com.ht.bean.education.Classtype" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into classtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="classtypename != null">
+        classtypename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="classtypename != null">
+        #{classtypename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Classtype">
+    <!--@mbg.generated-->
+    update classtype
+    <set>
+      <if test="classtypename != null">
+        classtypename = #{classtypename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where classtypeid = #{classtypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Classtype">
+    <!--@mbg.generated-->
+    update classtype
+    set classtypename = #{classtypename,jdbcType=VARCHAR}
+    where classtypeid = #{classtypeid,jdbcType=INTEGER}
+  </update>
+</mapper>

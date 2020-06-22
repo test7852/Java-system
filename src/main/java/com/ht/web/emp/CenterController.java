@@ -71,4 +71,10 @@ public class CenterController {
         return "managerui/headerList";
     }
 
+    //去证件上传
+    @RequestMapping("voucher")
+    public String voucher(Integer id, Model model){
+        model.addAttribute("id",id);
+        return "emp/voucher";
+    }
 }

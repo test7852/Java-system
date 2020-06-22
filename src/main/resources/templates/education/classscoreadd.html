@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<form class="layui-form">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级</label>
+        <div class="layui-input-inline">
+            <select name="classid" lay-verify="required" lay-filter="selectTheme">
+                <option>请选择班级</option>
+                <option th:each="class:${calsss}"th:value="${class.classid}" th:text="${class.classname}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程</label>
+        <div class="layui-input-inline">
+            <select name="courseid" lay-verify="required" lay-filter="selectTheme" id="board">
+                <option>请选择课程</option>
+                <option th:each="course:${courses}"th:value="${course.courseid}" th:text="${course.coursename}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">考试类别</label>
+        <div class="layui-input-block">
+            <select name="testtype">
+                <option value="0">请选择考试类别</option>
+                <option value="笔试" >笔试</option>
+                <option value="机试" >机试</option>
+                <option value="模拟面试" >模拟面试</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">学期</label>
+        <div class="layui-input-inline">
+            <select name="termid" lay-verify="required" lay-filter="selectTheme">
+                <option>请选择学期</option>
+                <option th:each="term:${terms}"th:value="${term.termid}" th:text="${term.termname}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <input type="text" name="remark" lay-verify="title" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+        </div>
+    </div>
+</form>
+</body>
+<script type="text/javascript" th:inline="none">
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        //你可以在这里做操作  也可以不使用这个方法
+        form.on('submit(formDemo)', function(data){
+            $.ajax({
+                url: '/classscore/add',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data){
+                        layer.msg(JSON.stringify("添加成功"));
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        window.parent.location.reload();
+                    }else {
+                        layer.msg('添加失败', { icon: 5, time: 2000 });
+                    }
+                },
+            })
+            //$('.layui-laypage-btn').click();//刷新
+            return false;
+        });
+    });
+</script>
+</html>

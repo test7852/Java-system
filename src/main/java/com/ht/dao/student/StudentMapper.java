@@ -27,5 +27,7 @@ public interface StudentMapper {
 
     int getTotalRow();
 
-    List<Student> allStu();
+    List<Student> allStu();//查找所有学生
+
+    List<Student> allStuClazz(Integer clazz);//根据班级查找学生
 }

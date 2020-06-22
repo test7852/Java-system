@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.dao.education.ClassscoreMapper">
+  <resultMap id="BaseResultMap" type="com.ht.bean.education.Classscore">
+    <!--@mbg.generated-->
+    <!--@Table classscore-->
+    <id column="cscoreid" jdbcType="INTEGER" property="cscoreid" />
+    <result column="courseid" jdbcType="INTEGER" property="courseid" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="testtype" jdbcType="VARCHAR" property="testtype" />
+    <result column="termid" jdbcType="INTEGER" property="termid" />
+    <result column="scoreTime" jdbcType="VARCHAR" property="scoretime" />
+    <result column="Empid" jdbcType="INTEGER" property="empid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    cscoreid, courseid, classid, testtype, termid, scoreTime, Empid, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from classscore
+    where cscoreid = #{cscoreid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from classscore
+    where cscoreid = #{cscoreid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="cscoreid" keyProperty="cscoreid" parameterType="com.ht.bean.education.Classscore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into classscore (courseid, classid, testtype, 
+      termid, scoreTime, Empid, 
+      remark)
+    values (#{courseid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{testtype,jdbcType=VARCHAR}, 
+      #{termid,jdbcType=INTEGER}, #{scoretime,jdbcType=VARCHAR}, #{empid,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="cscoreid" keyProperty="cscoreid" parameterType="com.ht.bean.education.Classscore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into classscore
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseid != null">
+        courseid,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="testtype != null">
+        testtype,
+      </if>
+      <if test="termid != null">
+        termid,
+      </if>
+      <if test="scoretime != null">
+        scoreTime,
+      </if>
+      <if test="empid != null">
+        Empid,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseid != null">
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="testtype != null">
+        #{testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="termid != null">
+        #{termid,jdbcType=INTEGER},
+      </if>
+      <if test="scoretime != null">
+        #{scoretime,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ht.bean.education.Classscore">
+    <!--@mbg.generated-->
+    update classscore
+    <set>
+      <if test="courseid != null">
+        courseid = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="testtype != null">
+        testtype = #{testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="termid != null">
+        termid = #{termid,jdbcType=INTEGER},
+      </if>
+      <if test="scoretime != null">
+        scoreTime = #{scoretime,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        Empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cscoreid = #{cscoreid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ht.bean.education.Classscore">
+    <!--@mbg.generated-->
+    update classscore
+    set courseid = #{courseid,jdbcType=INTEGER},
+      classid = #{classid,jdbcType=INTEGER},
+      testtype = #{testtype,jdbcType=VARCHAR},
+      termid = #{termid,jdbcType=INTEGER},
+      scoreTime = #{scoretime,jdbcType=VARCHAR},
+      Empid = #{empid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where cscoreid = #{cscoreid,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from classscore
+    ]]>
+  </select>
+  <!--  分页-->
+  <select id="allPageClassScore" resultType="Map">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+        select a.*,b.courseName,c.className,d.termname,e.emp_Name from classscore a
+        left join course b on a.courseid = b.courseid
+        left join studentclass c on a.classid = c.classid
+		left join term d on a.termid= d.termid
+		left join empinfo e on a.Empid = e.emp_Id
+		order by a.cscoreid
+		limit #{kais},#{pageSize}
+    ]]>
+  </select>
+  <select id="getId" resultType="int">
+    <![CDATA[
+        select cscoreid  from classscore order by cscoreid desc limit 1
+    ]]>
+  </select>
+
+
+</mapper>
