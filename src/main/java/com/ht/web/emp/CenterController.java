@@ -1,6 +1,7 @@
 package com.ht.web.emp;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -76,5 +77,11 @@ public class CenterController {
     public String voucher(Integer id, Model model){
         model.addAttribute("id",id);
         return "emp/voucher";
+    }
+
+    //去到系统设置
+    @RequestMapping("systemsetting")
+    public String systemsetting(){
+        return "managerui/systemsetting";
     }
 }

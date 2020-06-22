@@ -1,5 +1,6 @@
 package com.ht.service.education.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.education.ProjectMapper;
@@ -20,9 +21,20 @@ public class ProjectServiceImpl implements ProjectService{
     private ProjectMapper projectMapper;
 
     @Override
-    public List<Project> allProject() {
-        return projectMapper.allProject();
+    public List<Project> allProject(Pager pager) {
+        return projectMapper.allProject(pager);
     }
+
+    @Override
+    public int selprocount() {
+        return projectMapper.selprocount();
+    }
+
+    @Override
+    public Project selByObjName(String name) {
+        return projectMapper.selByObjName(name);
+    }
+
 
     @Override
     public int deleteByPrimaryKey(Integer projectid) {

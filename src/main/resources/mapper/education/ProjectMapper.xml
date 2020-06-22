@@ -72,10 +72,19 @@
 
 
   <!--  获取所有答辩项目-->
-  <select id="allProject" resultType="com.ht.bean.education.Project">
+  <select id="allProject" resultType="Map">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
     <![CDATA[
-      select * from project
+      select * from project limit #{kais},#{pageSize}
     ]]>
+  </select>
+
+  <select id="selprocount" resultType="int">
+    select count(*) from project
+  </select>
+
+  <select id="selByObjName" resultType="com.ht.bean.education.Project">
+    select * from project where projectName = #{name}
   </select>
 
 

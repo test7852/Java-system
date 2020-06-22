@@ -2,6 +2,7 @@ package com.ht.dao.education;
 
 import com.ht.bean.education.Project;
 import com.ht.bean.education.Term;
+import com.ht.util.Pager;
 
 import java.util.List;
 
@@ -11,6 +12,10 @@ import java.util.List;
  * 
  */
 public interface ProjectMapper {
+    Project selByObjName(String name);
+
+    int selprocount();
+
     int deleteByPrimaryKey(Integer projectid);
 
     int insert(Project record);
@@ -28,5 +33,5 @@ public interface ProjectMapper {
      * @return
      * 获取所有答辩项目
      */
-    List<Project> allProject();
+    List<Project> allProject(Pager pager);
 }
