@@ -127,4 +127,10 @@
   <select id="selectStudent" resultType="Student">
     select * from student
   </select>
+
+  <select id="selchatcountmonth" resultType="int">
+    select count(*) from chatrecord  where date_format(chatDate,'%Y-%m')=date_format(now(),'%Y-%m') and teacher = #{empid}
+  </select>
+
+
 </mapper>

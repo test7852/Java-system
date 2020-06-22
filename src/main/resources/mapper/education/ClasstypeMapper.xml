@@ -58,4 +58,22 @@
     set classtypename = #{classtypename,jdbcType=VARCHAR}
     where classtypeid = #{classtypeid,jdbcType=INTEGER}
   </update>
+  <select id="classtypedata" resultType="com.ht.bean.education.Classtype">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+    select * from classtype order by classtypeid desc limit #{kais},#{pageSize}
+     ]]>
+  </select>
+  <!-- 查询总行数-->
+  <select id="getclasstypeRow" resultType="int">
+    <![CDATA[
+        select count(*) from classtype
+    ]]>
+  </select>
+
+  <select id="alldata" resultType="com.ht.bean.education.Classtype">
+   <![CDATA[
+    select * from classtype
+     ]]>
+  </select>
 </mapper>

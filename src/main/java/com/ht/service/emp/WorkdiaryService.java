@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface WorkdiaryService{
 
+    int selworkday(Integer empid);//查询每个用户的周报
+
     int selworkcount();//查询总行数
 
     List<Workdiary> allPageWorkdiary(Pager pager);
