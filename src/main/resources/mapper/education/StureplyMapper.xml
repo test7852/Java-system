@@ -161,4 +161,39 @@
       remark = #{remark,jdbcType=VARCHAR}
     where srid = #{srid,jdbcType=INTEGER}
   </update>
+
+
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from stureply where replyid = #{scoreid}
+    ]]>
+  </select>
+  <!--  分页-->
+  <select id="allPageClassReply" resultType="Map">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+    <![CDATA[
+        select a.*,c.stuname from stureply a
+         left join student c on a.stuid = c.studid
+         where a.replyid = #{replyid}
+         limit #{kais},#{pager.pageSize}
+    ]]>
+  </select>
+
+  <!--  不分页-->
+  <select id="allClassReply" resultType="com.ht.bean.education.Stureply">
+    <![CDATA[
+        select * from stureply
+    ]]>
+  </select>
+  <!--根据班级成绩id删除-->
+  <delete id="delByStuReply" parameterType="int">
+    <![CDATA[
+        delete from stureply where replyid =#{replyid}
+    ]]>
+  </delete>
+
+
+
 </mapper>

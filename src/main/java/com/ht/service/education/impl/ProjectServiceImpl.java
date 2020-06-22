@@ -5,6 +5,9 @@ import javax.annotation.Resource;
 import com.ht.dao.education.ProjectMapper;
 import com.ht.bean.education.Project;
 import com.ht.service.education.ProjectService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/22 8:38
@@ -15,6 +18,11 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Resource
     private ProjectMapper projectMapper;
+
+    @Override
+    public List<Project> allProject() {
+        return projectMapper.allProject();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer projectid) {

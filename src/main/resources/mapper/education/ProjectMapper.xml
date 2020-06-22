@@ -69,4 +69,15 @@
       remark = #{remark,jdbcType=VARCHAR}
     where projectId = #{projectid,jdbcType=INTEGER}
   </update>
+
+
+  <!--  获取所有答辩项目-->
+  <select id="allProject" resultType="com.ht.bean.education.Project">
+    <![CDATA[
+      select * from project
+    ]]>
+  </select>
+
+
+
 </mapper>

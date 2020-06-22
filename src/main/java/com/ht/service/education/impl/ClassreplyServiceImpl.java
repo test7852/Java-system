@@ -1,10 +1,15 @@
 package com.ht.service.education.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.bean.education.Classreply;
 import com.ht.dao.education.ClassreplyMapper;
 import com.ht.service.education.ClassreplyService;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author 王金宝
  * @date 2020/6/22 8:37
@@ -15,6 +20,21 @@ public class ClassreplyServiceImpl implements ClassreplyService{
 
     @Resource
     private ClassreplyMapper classreplyMapper;
+
+    @Override
+    public List<Map> allPageClassReply(Pager pager) {
+        return classreplyMapper.allPageClassReply(pager);
+    }
+
+    @Override
+    public int getTotalRow() {
+        return classreplyMapper.getTotalRow();
+    }
+
+    @Override
+    public int getId() {
+        return classreplyMapper.getId();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer replyid) {
