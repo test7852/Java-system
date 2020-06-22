@@ -42,7 +42,7 @@
     </div>
 </script>
 
-<input id="scoreid" type="hidden" th:value="${scoreid}"/>
+<input id="replyid" type="hidden" th:value="${replyid}"/>
 
 <!--表格-->
 <div class="utable">
@@ -56,21 +56,26 @@
 
     layui.use('table', function () {
         var table = layui.table;
-        var scoreid = $("#scoreid").val();
+        var replyid = $("#replyid").val();
         //方法渲染
         table.render({
             elem: '#tab'
             ,id: 'tab'
             ,height: 560
             ,width: 1250
-            ,url: '/classscore/studata?scoreid='+scoreid//数据接口
+            ,url: '/classreply/studata?replyid='+replyid//数据接口
             ,page: true //开启分页
             ,toolbar: '#toolbarDemo'
             ,cols: [[ //表头
-                {field: 'ssid', title: '编号', sort: true}
+                {field: 'srid', title: '编号', sort: true}
                 ,{field: 'stuname', title: '学生名称'}
-                ,{field: 'scure', title: '学生成绩',edit:true}
-                ,{field: 'rescore', title: '补考成绩',edit:true}
+                ,{field: 'score1', title: '功能完善50',edit:true}
+                ,{field: 'score2', title: '技术难度10',edit:true}
+                ,{field: 'score3', title: '界面完美10',edit:true}
+                ,{field: 'score4', title: '回答问题10',edit:true}
+                ,{field: 'score5', title: '演示方法10',edit:true}
+                ,{field: 'score6', title: '语言表达10',edit:true}
+                ,{field: 'score7', title: '总分100'}
                 ,{field: 'remark', title: '备注',edit:true}
             ]]
         });
@@ -78,7 +83,7 @@
 
         //点击添加iframe窗方法
         $("#return").on('click',function(){
-            document.location.href="/skip/classscorelist"
+            document.location.href="/skip/classreplylist"
         })
 
         //监听单元格编辑（修改）
@@ -89,19 +94,42 @@
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
+
+            if(data.score1 > 50 || data.score1 ==""){
+                layer.msg(JSON.stringify("修改失败,分数不能大于50且不能为空"));
+                $('.layui-laypage-btn').click();
+                return;
+            }
+
+            if( data.score2 > 10 || data.score2 =="" ||
+                data.score3 > 10 || data.score3 =="" ||
+                data.score4 > 10 || data.score4 =="" ||
+                data.score5 > 10 || data.score5 =="" ||
+                data.score6 > 10 || data.score6 ==""
+            ){
+                layer.msg(JSON.stringify("修改失败,分数不能大于10且不能为空"));
+                $('.layui-laypage-btn').click();
+                return;
+            }
+
             $.ajax({
-                url: '/classscore/stuupd',
+                url: '/classreply/stuupd',
                 type: 'post',
                 data: {
-                    ssid:data.ssid,
-                    scure:data.scure,
-                    rescore:data.rescore,
+                    srid:data.srid,
+                    score1:data.score1,
+                    score2:data.score2,
+                    score3:data.score3,
+                    score4:data.score4,
+                    score5:data.score5,
+                    score6:data.score6,
                     remark:data.remark
                 },
                 dataType: 'json',
                 success:function(data){
                     if(data){
                         layer.msg(JSON.stringify("修改成功"));
+                        $('.layui-laypage-btn').click();
                     }
                 },
             })

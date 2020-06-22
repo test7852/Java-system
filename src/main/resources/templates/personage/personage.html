@@ -110,9 +110,9 @@
 							</li>
 							<li>
 								<div class="layui-form-item">
-							    <label class="layui-form-label"><i style="color: red">*</i> 学校</label>
+							    <label class="layui-form-label"><i style="color: red">*</i> 学历</label>
 							    <div class="layui-input-inline">
-							      <input  id="education" th:value="${p.education}" required lay-verify="required" placeholder="在读或毕业学校" autocomplete="off" class="layui-input">
+							      <input  id="education" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" th:value="${p.education}" required lay-verify="required" placeholder="在读或毕业学校" autocomplete="off" class="layui-input">
 							    </div>
 							  </div>
 							</li>
@@ -220,7 +220,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label"><i style="color: red">*</i> <i class="layui-icon">&#xe62e;</i> 籍贯</label>
 								<div class="layui-input-inline">
-									<input id="nation" οnkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA5]/g,'')" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
+									<input id="nation" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" th:value="${p.nation}" required lay-verify="required" placeholder="你的籍贯" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 						</li>
@@ -416,6 +416,8 @@
 							}
 
 						})
+
+						$("#weixin").on('click',function(){layer.tips('只能数字加字母', '#weixin');})
 
 						//执行一个laydate实例
 								// 生日

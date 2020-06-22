@@ -1,5 +1,6 @@
 package com.ht.service.education.impl;
 
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.education.TermMapper;
@@ -22,6 +23,16 @@ public class TermServiceImpl implements TermService{
     @Override
     public List<Term> allTerm() {
         return termMapper.allTerm();
+    }
+
+    @Override
+    public List<Term> Termpaging(Pager pager) {
+        return termMapper.Termpaging(pager);
+    }
+
+    @Override
+    public int gettermRow() {
+        return termMapper.gettermRow();
     }
 
     @Override

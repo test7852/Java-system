@@ -17,5 +17,10 @@ public class ECenterController {
     public String modellist(){
         return "education/classscorelist";
     }
+    //去到班级答辩管理页面
+    @RequestMapping("classreplylist")
+    public String replylist(){
+        return "education/classreplylist";
+    }
 
 }
