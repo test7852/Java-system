@@ -1,6 +1,11 @@
 package com.ht.dao.education;
 
 import com.ht.bean.education.Classscore;
+import com.ht.bean.student.StudentScore;
+import com.ht.util.Pager;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -19,4 +24,24 @@ public interface ClassscoreMapper {
     int updateByPrimaryKeySelective(Classscore record);
 
     int updateByPrimaryKey(Classscore record);
+
+
+    /**
+     * @param pager
+     * @return
+     * 分页查询
+     */
+    List<Map> allPageClassScore(Pager pager);
+
+    /**
+     * @return
+     * 获取总行数
+     */
+    int getTotalRow();
+
+    /**
+     * @return
+     * 获取最新的ID
+     */
+    int getId();
 }
