@@ -128,4 +128,19 @@
       Remark = #{remark,jdbcType=VARCHAR}
     where holidayid = #{holidayid,jdbcType=INTEGER}
   </update>
+
+  <!--分页byID倒序-->
+  <select id="sybase" resultType="Map">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+    <![CDATA[
+    select b.*,a.emp_Name from holiday b left join empinfo a on b.Empid = a.emp_Id WHERE a.emp_Id = #{id} order by holidayid desc
+ limit #{kais},#{pager.pageSize}
+    ]]>
+  </select>
+  <!--  查询总数-->
+  <select id="selCount" resultType="int">
+      select count(*) from holiday
+  </select>
+
+
 </mapper>

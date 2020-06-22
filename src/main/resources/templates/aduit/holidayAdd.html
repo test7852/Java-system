@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<form class="layui-form" action="">
+
+    <div class="layui-form-item"  >
+        <label class="layui-form-label">请假类型</label>
+        <div class="layui-input-block">
+            <select  name="title">
+                <option value="">请选择请假类型</option>
+                <option value="事假">事假</option>
+                <option value="病假">病假</option>
+                <option value="4小时带薪假">4小时带薪假</option>
+                <option value="婚假">婚假</option>
+                <option value="产假">产假</option>
+                <option value="陪产假">陪产假</option>
+                <option value="其他假">其他假</option>
+            </select>
+        </div>
+    </div>
+
+    <input type="hidden" name="starttime" id="startTime">
+    <input type="hidden" name="endtime" id="endTime">
+    <input type="hidden" name="holidayday" id="holidayDay">
+
+    <div class="layui-inline">
+        <label class="layui-form-label">日期:</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="test1">
+        </div>
+    </div>
+    <span></span>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请假事由</label>
+        <div class="layui-input-block" >
+            <li>
+                <textarea name="remark" class="layui-textarea"></textarea>
+            </li>
+        </div>
+    </div>
+
+    <div class="layui-form-item" >
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button><!--测试提交值的时候把 lay-filter="formDemo"注释掉可直接提交-->
+            <button type="reset" class="layui-btn layui-btn-radius layui-btn-warm">重新填写</button>
+        </div>
+    </div>
+
+</form>
+</body>
+<script>
+    layui.use('form',function () {
+        var form =layui.form;
+
+        //时间选择器
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //日期范围
+            laydate.render({
+                elem: '#test1'
+                ,type: 'datetime'
+                ,trigger: 'click' //采用click弹出
+                ,format: 'yyyy-M-d-H-m-s'
+                ,range: '到'
+                ,done: function (value,date,endDate) {
+                    var arr = value.split('到')
+                    getYMDHMS(arr[0],arr[1]);
+                }
+            });
+        });
+
+
+        function getYMDHMS(startTime, endTime) {
+            if(startTime.length < 14 || endTime.length < 14) {
+                alert('时间格式不正确');
+            }
+
+            var startArr = startTime.split('-');
+            alert(startArr)
+            var startDate = startArr[0]+'年'+startArr[1]+'月'+startArr[2]+'日 '+startArr[3]+'时'+startArr[4]+'分';
+            var endArr = endTime.split('-');
+            var endDate = endArr[0]+'年'+endArr[1]+'月'+endArr[2]+'日 '+endArr[3]+'时'+endArr[4]+'分';
+            var dateStart = new Date(startArr[0], startArr[1], startArr[2], startArr[3], startArr[4], startArr[5]);//采用new Date(yyyy,mth,dd,hh,mm,ss);创建方式分别传入年月日时分秒
+            var dateEnd = new Date(endArr[0], endArr[1], endArr[2], endArr[3], endArr[4], endArr[5]);
+            var dateInterval = dateEnd.getTime() - dateStart.getTime() //获取时间差毫秒
+            //计算出相差天数
+            var days = Math.floor(dateInterval / (24 * 60 * 60 * 1000));
+            //计算小时数
+            var hourLevel = dateInterval % (24 * 60 * 60 * 1000);
+            var hours = Math.floor(hourLevel / (60 * 60 * 1000))
+            //计算分钟数
+            var minutesLevel = hourLevel % (60 * 60 * 1000);
+            var minutes = Math.floor(minutesLevel / (60 * 1000));
+            //计算秒数
+            var seconds = Math.round((minutesLevel % (60 * 1000)) / 1000);
+            document.getElementById("startTime").value = startDate;
+            document.getElementById("endTime").value = endDate;
+            document.getElementById("holidayDay").value = (hours/24)+days;
+        }
+
+
+
+
+
+
+
+
+        //监听提交
+        //你可以在这里做操作  也可以不使用这个方法
+        form.on('submit(formDemo)', function(data){
+            $.ajax({
+                url: '/holiday/add',
+                type: 'post',
+                data:data.field,
+                dataType: 'json',
+                success:function(data){
+                    if(data != 0){
+                        //先得到当前iframe层的索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //再执行关闭
+                        parent.layer.close(index);
+                        layer.msg(JSON.stringify("添加成功"));
+                        window.parent.location.reload();
+                    }else {
+                        layer.msg('数据错误，添加失败！', { icon: 5, time: 2000 });
+                    }
+                },
+            })
+            return false;
+        });
+    })
+</script>
+</html>

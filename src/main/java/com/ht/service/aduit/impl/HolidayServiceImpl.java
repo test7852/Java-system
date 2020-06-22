@@ -1,10 +1,15 @@
 package com.ht.service.aduit.impl;
 
+import com.ht.bean.student.Studentclass;
+import com.ht.util.Pager;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.ht.dao.aduit.HolidayMapper;
 import com.ht.bean.aduit.Holiday;
 import com.ht.service.aduit.HolidayService;
+
+import java.util.List;
+
 /**
  * @author 王金宝
  * @date 2020/6/19 19:07
@@ -15,6 +20,16 @@ public class HolidayServiceImpl implements HolidayService{
 
     @Resource
     private HolidayMapper holidayMapper;
+
+    @Override
+    public List<Studentclass> sybase(Pager pager,int id) {
+        return holidayMapper.sybase(pager,id);
+    }
+
+    @Override
+    public int selCount() {
+        return holidayMapper.selCount();
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer holidayid) {

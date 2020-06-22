@@ -41,7 +41,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">所在楼栋</label>
         <div class="layui-input-block" style="width: 500px">
-            <select   name="teacher">
+            <select   name="floorid">
                 <option value="">请选择所在楼栋</option>
                 <option th:each="l:${studentFloorList}"th:value="${l.floorid}" th:text="${l.floorname}"></option>
             </select>
