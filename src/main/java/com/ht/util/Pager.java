@@ -26,6 +26,14 @@ public class Pager {
         }
     }
 
+    public Pager() {
+    }
+
+    public Pager(int currPage, int pageSize) {
+        this.currPage = currPage;
+        this.pageSize = pageSize;
+    }
+
     public int getPageSize() {
         return pageSize;
     }

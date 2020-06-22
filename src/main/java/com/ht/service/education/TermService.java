@@ -1,6 +1,7 @@
 package com.ht.service.education;
 
 import com.ht.bean.education.Term;
+import com.ht.util.Pager;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public interface TermService{
      * 获取所有学期
      */
     List<Term> allTerm();
+
+    List<Term> Termpaging(Pager pager);
+
+    int gettermRow();
 
     int deleteByPrimaryKey(Integer termid);
 

@@ -1,6 +1,9 @@
 package com.ht.dao.education;
 
 import com.ht.bean.education.Classtype;
+import com.ht.util.Pager;
+
+import java.util.List;
 
 /**
  * @author 王金宝
@@ -19,4 +22,10 @@ public interface ClasstypeMapper {
     int updateByPrimaryKeySelective(Classtype record);
 
     int updateByPrimaryKey(Classtype record);
+
+    List<Classtype> classtypedata(Pager pager);
+
+    List<Classtype> alldata();
+
+    int getclasstypeRow();
 }
