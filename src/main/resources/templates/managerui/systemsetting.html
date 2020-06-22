@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    ::-webkit-scrollbar {display:none}
+</style>
+<body>
+<div class="layui-row" style="margin-left: 190px;margin-top: 30px">
+    <div class="layui-col-xs3">
+        <a th:href="@{/studentFall/list}">
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            届别设置
+        </a>
+    </div>
+    <div class="layui-col-xs3">
+        <a>
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            班级类别
+        </a>
+    </div>
+    <div class="layui-col-xs3">
+        <a th:href="@{/skip/deplist}">
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            部门管理
+        </a>
+    </div>
+    <div class="layui-col-xs3">
+        <a th:href="@{/dept/deptlist}">
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            院系设置
+        </a>
+    </div>
+</div>
+
+<div class="layui-row" style="margin-left: 190px;margin-top: 100px">
+    <div class="layui-col-xs3">
+        <a th:href="@{/major/list}">
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            专业设置
+        </a>
+    </div>
+    <div class="layui-col-xs3">
+        <a>
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            学期设置
+        </a>
+    </div>
+    <div class="layui-col-xs3">
+        <a>
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            流程设置
+        </a>
+    </div>
+    <div class="layui-col-xs3">
+        <a th:href="@{/project/toproject}">
+            <i class="layui-icon"
+               style="font-size: 50px">&#xe614;</i><br>
+            答辩项目
+        </a>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

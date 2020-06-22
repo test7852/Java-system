@@ -81,11 +81,21 @@ public class ChatRecordController {
     @RequestMapping("addchat")
     @ResponseBody
     public Boolean addchat(Chatrecord chatrecord,HttpSession session){
+
+        Boolean bool=null;
         Empinfo empinfo=(Empinfo)session.getAttribute("user");
         Integer empid = empinfo.getEmp_id();
         chatrecord.setTeacher(empid);
         chatrecord.setChatdate(new SimpleDateFormat("yyyy-MM-dd ").format(new Date()));
-        chatrecordService.insert(chatrecord);
-        return true;
+        int i=5-chatrecordService.selchatcountmonth(empid);
+        System.out.println(i+"---"+empid+"****"+chatrecordService.selchatcountmonth(empid));
+        if (i<=0){
+            bool=false;
+        }else {
+            chatrecordService.insert(chatrecord);
+            bool=true;
+        }
+
+        return bool;
     }
 }

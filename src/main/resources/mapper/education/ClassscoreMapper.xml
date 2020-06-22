@@ -128,4 +128,31 @@
       remark = #{remark,jdbcType=VARCHAR}
     where cscoreid = #{cscoreid,jdbcType=INTEGER}
   </update>
+
+  <!-- 查询总行数-->
+  <select id="getTotalRow" resultType="int">
+    <![CDATA[
+        select count(*) from classscore
+    ]]>
+  </select>
+  <!--  分页-->
+  <select id="allPageClassScore" resultType="Map">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+        select a.*,b.courseName,c.className,d.termname,e.emp_Name from classscore a
+        left join course b on a.courseid = b.courseid
+        left join studentclass c on a.classid = c.classid
+		left join term d on a.termid= d.termid
+		left join empinfo e on a.Empid = e.emp_Id
+		order by a.cscoreid
+		limit #{kais},#{pageSize}
+    ]]>
+  </select>
+  <select id="getId" resultType="int">
+    <![CDATA[
+        select cscoreid  from classscore order by cscoreid desc limit 1
+    ]]>
+  </select>
+
+
 </mapper>

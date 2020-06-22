@@ -14,6 +14,8 @@ import java.util.List;
 public interface ChatrecordMapper {
     int selchatcount();
 
+    int selchatcountmonth(Integer empid);//查询每个用户每月的谈心记录总数
+
     List<Chatrecord> allPageChatrecord(Pager pager);
 
     int deleteByPrimaryKey(Integer chatid);

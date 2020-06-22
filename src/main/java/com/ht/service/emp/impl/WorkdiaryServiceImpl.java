@@ -23,6 +23,11 @@ public class WorkdiaryServiceImpl implements WorkdiaryService{
 
 
     @Override
+    public int selworkday(Integer empid) {
+        return workdiaryMapper.selworkday(empid);
+    }
+
+    @Override
     public int selworkcount() {
         return workdiaryMapper.selworkcount();
     }

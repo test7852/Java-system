@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface WorkdiaryMapper {
 
+    int selworkday(Integer empid);//查询每个用户每周的周报总数
+
     int selworkcount();//查询总数
 
     List<Workdiary> allPageWorkdiary(Pager pager);

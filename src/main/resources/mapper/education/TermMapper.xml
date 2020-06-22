@@ -69,4 +69,28 @@
       remark = #{remark,jdbcType=VARCHAR}
     where termid = #{termid,jdbcType=INTEGER}
   </update>
+
+
+  <!--  获取所有学期-->
+  <select id="allTerm" resultType="com.ht.bean.education.Term">
+    <![CDATA[
+      select * from term
+    ]]>
+  </select>
+
+  <!--  获取所有学期-->
+  <select id="Termpaging" resultType="com.ht.bean.education.Term">
+    <bind name="kais" value="(currPage-1)*pageSize"></bind>
+    <![CDATA[
+      select * from term order by termid desc limit #{kais},#{pageSize}
+    ]]>
+  </select>
+
+  <!-- 查询总行数-->
+  <select id="gettermRow" resultType="int">
+    <![CDATA[
+        select count(*) from term
+    ]]>
+  </select>
+
 </mapper>

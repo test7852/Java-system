@@ -18,9 +18,9 @@ public class Studentclass {
     private Integer classid;
 
     /**
-    * 班级编号
+    * 班级类别
     */
-    private String classno;
+    private Integer classno;
 
     /**
     * 班级名称

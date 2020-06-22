@@ -35,7 +35,10 @@
 
 <script id="toolbarDemo" type="text/html">
     <div class="layui-btn-container">
-        <button id="add" class="layui-btn layui-btn-sm">新增</button>
+        <a lay-event="fh" onclick="javascript:history.back(-1);" href="#" style="text-decoration:none">
+            <i class="layui-icon"style="font-size: 25px">&#xe65c;</i>
+        </a>
+        <button id="add" style="margin-left: 20px" class="layui-btn layui-btn-sm">新增</button>
     </div>
 </script>
 

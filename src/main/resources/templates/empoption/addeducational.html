@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+</head>
+<style>
+	input[type="text"]{width: 300px;}
+	.div{width: 500px;height: 450px;margin-left: 30px;}
+	::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<div class="div">
+	<form class="layui-form" action="">
+		<div class="layui-form-item">
+			<label class="layui-form-label">学校名称:</label>
+			<div class="layui-input-block">
+				<input type="text" name="title" required  lay-verify="required" placeholder="请输入学校名称" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">学    历 : </label>
+			<div class="layui-input-block">
+				<input type="text" name="title" required  lay-verify="required" placeholder="请输入学历 " autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">入校时间: </label>
+			<div class="layui-input-block">
+				<input style="width: 300px;" type="date" id="hireDay" name="title" required  lay-verify="required" placeholder="请输入入校时间" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">毕业时间:</label>
+			<div class="layui-input-block">
+				<input style="width: 300px;" type="date" id="fireDay" name="title" required  lay-verify="required" placeholder="请输入毕业时间" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text"  style="width: 400px;">
+			<label class="layui-form-label"><i class="layui-icon">&#xe702;</i> 说    明   : </label>
+			<div class="layui-input-block">
+				<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="formD	emo">保存</button>
+				<button type="reset" class="layui-btn layui-btn-radius layui-btn-primary ">重置</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+<script src="../js/jquery/jquery-3.1.0.min.js"></script>
+<script src="../layui/layui.js"></script>
+<script>
+	layui.use(['form','element','upload','laydate'], function(){
+		var $ = layui.jquery
+				,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+		var form=layui.form;
+		var laydate=layui.laydate;
+
+		//两个laydate实例  看想法需要
+//						  laydate.render({
+//							  elem: '#hireDay'
+//							});
+//							 laydate.render({
+//							  elem: '#fireDay'
+//							});
+//
+
+	});
+</script>
+</html>

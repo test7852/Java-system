@@ -65,4 +65,9 @@ public class StudentServiceImpl implements StudentService{
         return studentMapper.allStu();
     }
 
+    @Override
+    public List<Student> allStuClazz(Integer clazz) {
+        return studentMapper.allStuClazz(clazz);
+    }
+
 }

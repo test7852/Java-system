@@ -5,7 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table studentclass-->
     <id column="classid" jdbcType="INTEGER" property="classid" />
-    <result column="classno" jdbcType="VARCHAR" property="classno" />
+    <result column="classno" jdbcType="INTEGER" property="classno" />
     <result column="className" jdbcType="VARCHAR" property="classname" />
     <result column="count" jdbcType="INTEGER" property="count" />
     <result column="teacher" jdbcType="VARCHAR" property="teacher" />

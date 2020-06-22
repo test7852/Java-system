@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+	</head>
+	<style>
+		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+		input[type="text"]{width: 300px;}
+		.div{width: 500px;height: 450px;margin-left: 30px;}
+	</style>
+	<body>
+			<div class="div">
+				<form class="layui-form" action="">
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">公司名称:</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="title" required  lay-verify="required" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+				    </div>
+				  </div>
+
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">入职时间: </label>
+				    <div class="layui-input-block">
+				      <input type="text" id="hireDay" name="title" required  lay-verify="required" placeholder="请输入入职时间" autocomplete="off" class="layui-input">
+				    </div>
+				  </div>
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">离职时间:</label>
+				    <div class="layui-input-block">
+				      <input type="text" id="fireDay" name="title" required  lay-verify="required" placeholder="请输入离职时间" autocomplete="off" class="layui-input">
+				    </div>
+				  </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">岗    位   : </label>
+						<div class="layui-input-block">
+							<input type="text" name="title" required  lay-verify="required" placeholder="请输入岗位 " autocomplete="off" class="layui-input">
+						</div>
+					</div>
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">离职原因: </label>
+				    <div class="layui-input-block">
+				      <input type="text" name="title" required  lay-verify="required" placeholder="请输入离职原因" autocomplete="off" class="layui-input">
+				    </div>
+				  </div>
+				  <div class="layui-form-item layui-form-text"  style="width: 420px;">
+				    <label class="layui-form-label"><i class="layui-icon">&#xe702;</i> 说    明   : </label>
+				    <div class="layui-input-block">
+				      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+				    </div>
+				  </div>
+				  <div class="layui-form-item">
+				    <div class="layui-input-block">
+				      <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="formDemo"><i class="layui-icon">&#xe609;</i>保存</button>
+				      <button type="reset" class="layui-btn layui-btn-radius layui-btn-primary "><i class="layui-icon">&#xe669;</i> 重置</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+			
+	</body>
+		<script src="../js/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../layui/layui.js"></script>
+	<script>
+			layui.use(['form','element','upload','laydate'], function(){
+						  var $ = layui.jquery
+						  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+						  var form=layui.form;
+						  var laydate=layui.laydate;
+						  
+						  
+						  laydate.render({
+							  elem: '#hireDay'
+							});
+							 laydate.render({
+							  elem: '#fireDay'
+							});
+						  
+						  
+			 });
+	</script>
+</html>
