@@ -1,5 +1,6 @@
 package com.ht.service.aduit.impl;
 
+import com.ht.bean.emp.Dep;
 import com.ht.bean.student.Dept;
 import com.ht.bean.student.Student;
 import com.ht.bean.student.Studentclass;
@@ -64,18 +65,13 @@ public class EquipmentwxglServiceImpl implements EquipmentwxglService{
     }
 
     @Override
-    public List<Student> selstu() {
-        return equipmentwxglMapper.selstu();
-    }
-
-    @Override
     public List<Studentclass> selclass() {
         return equipmentwxglMapper.selclass();
     }
 
     @Override
-    public List<Dept> seldept() {
-        return equipmentwxglMapper.seldept();
+    public List<Dep> seldep() {
+        return equipmentwxglMapper.seldep();
     }
 
 }

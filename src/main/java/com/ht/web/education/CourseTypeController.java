@@ -37,12 +37,13 @@ public class CourseTypeController {
     //课程管理  分页查的数据
     @RequestMapping("/coursetypedata")
     @ResponseBody
-    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ,Coursetype coursetype){
         Pager pager=new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
         jsonData.setCount(coursetypeService.selCountEdu());
-        jsonData.setData(coursetypeService.selByPage(pager));
+        //jsonData.setData(coursetypeService.selByPage(pager));
+        jsonData.setData(coursetypeService.mhtype(pager,coursetype));
         return jsonData;
     }
 
@@ -58,9 +59,13 @@ public class CourseTypeController {
     //课程管理  修改
     @RequestMapping("/coursetypeupd")
     @ResponseBody
-    public Integer coursetypeupd(Coursetype coursetype){
-        int i = coursetypeService.updateByPrimaryKey(coursetype);
-        return i;
+    public Boolean coursetypeupd(Coursetype coursetype){
+        Coursetype coursetype1 = coursetypeService.selName(coursetype.getCoursetypename());
+        if(coursetype1 == null){
+            int i = coursetypeService.updateByPrimaryKey(coursetype);
+            return true;
+        }
+        return false;
     }
 
     //去新增

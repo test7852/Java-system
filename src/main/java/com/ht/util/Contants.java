@@ -47,4 +47,16 @@ public class Contants {
      * 教师
      */
     public static final Integer POST_TEACHER=5;
+    /**
+     * 员工请假-已完成
+     */
+    public static final Integer HOLIDAY_OK=2;
+    /**
+     * 员工请假-审批中
+     */
+    public static final Integer HOLIDAY_LOADING=1;
+    /**
+     * 员工请假-未批准
+     */
+    public static final Integer HOLIDAY_NOT=3;
 }

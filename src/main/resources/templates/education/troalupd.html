@@ -9,66 +9,74 @@
     <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 </head>
 <style>
-    .index{width: 600px;margin-left: 30px;}
-    .layui-input{width: 120px;}
-    .menu li{float: left;}
-    .layui-form-label{margin-top: 15px}
-    .layui-input{margin-top: 15px}
-    button{margin-left: 140px;margin-top: 20px;}
-
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
 <form class="layui-form" th:action="@{/trial/trialupd}" method="post">
-    <div class="index">
-        <ul class="menu">
-            <input type="hidden" name="trialid" th:value="${trial.trialid}">
-            <li>
-                <label class="layui-form-label">日期：</label>
-                <input name="date" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${trial.date}">
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 星期：</label>
-                <select name="time" lay-filter="mySelect">
-                    <option value="星期一" th:selected="${'星期一'==trial.time}">星期一</option>
-                    <option value="星期二" th:selected="${'星期二'==trial.time}">星期二</option>
-                    <option value="星期三" th:selected="${'星期三'==trial.time}">星期三</option>
-                    <option value="星期四" th:selected="${'星期四'==trial.time}">星期四</option>
-                    <option value="星期五" th:selected="${'星期五'==trial.time}">星期五</option>
-                    <option value="星期六" th:selected="${'星期六'==trial.time}">星期六</option>
-                    <option value="星期日" th:selected="${'星期日'==trial.time}">星期日</option>
-                </select>
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 课程/章节</label>
-                <select name="courseid" lay-filter="mySelect">
-                    <option th:each="c:${coulist}" th:value="${c.courseid}" th:text="${c.coursename}" th:selected="${trial.courseid==c.courseid}">张先生</option>
-                </select>
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 授课类型：</label>
-                <select name="type">
-                    <option value="试讲" th:selected="${'试讲'==trial.type}">试讲</option>
-                    <option value="培训" th:selected="${'培训'==trial.type}">培训</option>
-                </select>
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe627;</i> 授课老师</label>
-                <select name="empid" lay-filter="mySelect">
-                    <option th:each="e:${emplist}" th:value="${e.emp_id}" th:text="${e.emp_name}" th:selected="${trial.empid==e.emp_id}">张先生</option>
-                </select>
-            </li>
-            <li>
-                <label class="layui-form-label"><i class="layui-icon">&#xe715;</i> 备注：</label>
-                <input  name="remark" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${trial.remark}">
-            </li>
-            <li>
-                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
-            </li>
-        </ul>
+    <input type="hidden" name="trialid" th:value="${trial.trialid}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入框</label>
+        <div class="layui-input-block">
+            <input name="date" th:value="${trial.date}" type="text" class="layui-input" id="test1">
+        </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">星期</label>
+        <div class="layui-input-block">
+            <select name="time" lay-verify="required">
+                <option value="星期一" th:selected="${'星期一'==trial.time}">星期一</option>
+                <option value="星期二" th:selected="${'星期二'==trial.time}">星期二</option>
+                <option value="星期三" th:selected="${'星期三'==trial.time}">星期三</option>
+                <option value="星期四" th:selected="${'星期四'==trial.time}">星期四</option>
+                <option value="星期五" th:selected="${'星期五'==trial.time}">星期五</option>
+                <option value="星期六" th:selected="${'星期六'==trial.time}">星期六</option>
+                <option value="星期日" th:selected="${'星期日'==trial.time}">星期日</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名称</label>
+        <div class="layui-input-block">
+            <select name="courseid" lay-verify="required">
+                <option th:each="c:${coulist}" th:value="${c.courseid}" th:text="${c.coursename}" th:selected="${trial.courseid==c.courseid}">张先生</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">授课类型</label>
+        <div class="layui-input-block">
+            <select name="type" lay-verify="required">
+                <option value="试讲" th:selected="${'试讲'==trial.type}">试讲</option>
+                <option value="培训" th:selected="${'培训'==trial.type}">培训</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教师姓名</label>
+        <div class="layui-input-block">
+            <select name="empid" lay-verify="required">
+                <option th:each="e:${emplist}" th:value="${e.emp_id}" th:text="${e.emp_name}" th:selected="${trial.empid==e.emp_id}">张先生</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input  name="remark" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${trial.remark}">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
 </form>
 </body>
 <script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
@@ -92,6 +100,15 @@
         //     layer.close(index);
         //     return true;
         // });
+    });
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
     });
 </script>
 </html>

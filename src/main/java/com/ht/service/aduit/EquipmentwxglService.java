@@ -2,6 +2,7 @@ package com.ht.service.aduit;
 
 import com.ht.bean.aduit.Equipmentwxgl;
 import com.ht.bean.education.Coursetype;
+import com.ht.bean.emp.Dep;
 import com.ht.bean.student.Dept;
 import com.ht.bean.student.Student;
 import com.ht.bean.student.Studentclass;
@@ -33,10 +34,7 @@ public interface EquipmentwxglService{
 
     List<Equipmentwxgl> selByPage(Pager pager);//分页查询
 
-    List<Student> selstu();//查询学生
-
     List<Studentclass> selclass();//查询班级
 
-    List<Dept> seldept();//查询系
-
+    List<Dep> seldep();//查询部门
 }

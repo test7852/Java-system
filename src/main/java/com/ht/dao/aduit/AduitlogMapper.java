@@ -1,7 +1,6 @@
 package com.ht.dao.aduit;
 
 import com.ht.bean.aduit.Aduitlog;
-import com.ht.bean.aduit.Aduitmodel;
 import com.ht.util.Pager;
 
 import java.util.List;

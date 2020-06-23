@@ -4,6 +4,7 @@ import com.ht.bean.education.Course;
 import com.ht.bean.education.Trial;
 import com.ht.bean.emp.Empinfo;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -35,5 +36,7 @@ public interface TrialService{
     List<Course> Coulist();//查询课程管理
 
     List<Empinfo> Emplist();//查询emp
+
+    List<Map> mhtri(@Param("pager") Pager pager, @Param("trial") Trial trial);//模糊查询
 
 }

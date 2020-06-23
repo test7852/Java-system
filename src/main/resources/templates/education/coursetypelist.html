@@ -45,27 +45,16 @@
 </script>
  <!--搜索栏-->
   <div class="layui-form-item">
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+      <div class="layui-inline">
+          <label class="layui-form-label">课程类别</label>
+          <div class="layui-input-inline">
+              <input type="text" name="coursetypename" id="mh" autocomplete="off" class="layui-input">
+          </div>
       </div>
-     <label class="layui-form-label">验证</label>
-    </div>
+
     <div class="layui-inline">
-     
-      <div class="layui-input-inline">
-        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-      </div>
-        <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-      </div>
       <label class="layui-form-label">验证</label>
-       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+       <button id="ck" type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
         <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
   </div>
@@ -94,6 +83,19 @@
     layui.use('table', function () {
         var table = layui.table;
 
+        //模糊
+        $("#ck").on('click',function(){
+            var coursetypename=$("#mh").val();
+            table.reload('tab', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    coursetypename: coursetypename,
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        });
+
             //监听单元格编辑
         table.on('edit(tab)', function(obj){
             var value = obj.value //得到修改后的值
@@ -103,12 +105,20 @@
             $.ajax({
                 url: '/coursetype/coursetypeupd',
                 type: 'post',
-                data: {
-                    coursetypeid:data.coursetypeid,
-                    coursetypename:data.coursetypename,
-                    remark:data.remark
+                // data: {
+                //     coursetypeid:data.coursetypeid,
+                //     coursetypename:data.coursetypename,
+                //     remark:data.remark
+                // },
+                data: data.field,
+                dataType: 'text',
+                success:function(data){
+                    if(data){
+                         layer.msg(JSON.stringify("添加成功"));
+                    }else {
+                         layer.msg('重复 添加失败', { icon: 5, time: 2000 });
+                    }
                 },
-                dataType: 'text'
             })
         });
 

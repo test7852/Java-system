@@ -12,37 +12,41 @@
     ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 </style>
 <body>
-<form class="layui-form" th:action="@{/course/ceduupd}" method="post">
-    <input type="hidden" name="courseid" th:value="${list.courseid}">
+<form class="layui-form" th:action="@{/main/idupd}" method="post">
+    <input type="hidden" name="wxid" th:value="${list.wxid}">
+
     <div class="layui-form-item">
-        <label class="layui-form-label">课程名称</label>
+        <label class="layui-form-label">维修设备名称</label>
         <div class="layui-input-block">
-            <input  name="coursename" required lay-verify="required" placeholder="课程名称" autocomplete="off" class="layui-input" th:value="${list.coursename}">
+            <input  name="equipmenttype" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${list.equipmenttype}">
         </div>
     </div>
+
     <div class="layui-form-item">
-        <label class="layui-form-label">课程类别：</label>
+        <label class="layui-form-label">当前部门</label>
         <div class="layui-input-block">
-            <select name="coursetypeid">
-                <option th:each="p:${typelist}" th:value="${p.coursetypeid}" th:text="${p.coursetypename}" 	></option>
+            <select name="depid" lay-verify="required">
+                <option th:each="d:${dlist}" th:value="${d.depid}" th:text="${d.depname}" th:selected="${list.depid==d.depid}">张先生</option>
             </select>
         </div>
     </div>
+
     <div class="layui-form-item">
-        <label class="layui-form-label">是否必修</label>
+        <label class="layui-form-label">学生所在班级</label>
         <div class="layui-input-block">
-            <select name="isobligatory">
-                <option value="是" th:selected="${'是'==list.isobligatory}">是</option>
-                <option value="否" th:selected="${'否'==list.isobligatory}">否</option>
+            <select name="classno" lay-verify="required">
+                <option th:each="c:${clist}" th:value="${c.classno}" th:text="${c.classname}" th:selected="${list.classno==c.classno}">张先生</option>
             </select>
         </div>
     </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">说明</label>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
         <div class="layui-input-block">
-            <input name="remark" required lay-verify="required" placeholder="说明" autocomplete="off" class="layui-input" th:value="${list.remark}">
+            <textarea name="remark"  th:text="${list.remark}" class="layui-textarea"></textarea>
         </div>
     </div>
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>

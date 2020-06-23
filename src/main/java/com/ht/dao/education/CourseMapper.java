@@ -2,6 +2,7 @@ package com.ht.dao.education;
 
 import com.ht.bean.education.Course;
 import com.ht.bean.education.Coursetype;
+import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +35,7 @@ public interface CourseMapper {
     List<Coursetype> selCtype();//查询课程类别
 
     List<Course> selCourse();//查询课程类别
+
+    List<Map> mhcou(@Param("pager") Pager pager, @Param("course") Course course);//模糊查询
 
 }

@@ -37,13 +37,13 @@ public class TeacherBeController {
     //值班管理 分页查的数据
     @RequestMapping("/teacherdata")
     @ResponseBody
-    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ,Teacherbe teacherbe){
         Pager pager=new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
         jsonData.setCount(teacherbeService.selTea());
-        jsonData.setData(teacherbeService.selByPage(pager));
-//        System.out.println("jsonData = " + jsonData.getData().toString());
+        //jsonData.setData(teacherbeService.selByPage(pager));
+        jsonData.setData(teacherbeService.mhtea(pager,teacherbe));
         return jsonData;
     }
 
@@ -77,7 +77,7 @@ public class TeacherBeController {
 
     //值班管理  去新增界面
     @RequestMapping("/teachertoadd")
-    public String teachertoadd(Map map){
+    public String teachertoadd(Map map){//teacherBeadd
         List<Empinfo> empinfos = teacherbeService.listEmp();
         map.put("list",empinfos);
         return "education/teacherBeadd";
@@ -86,7 +86,7 @@ public class TeacherBeController {
     //值班管理  新增
     @RequestMapping("/teacheradd")
     @ResponseBody
-    public Integer teacheradd(Teacherbe teacherbe,String emp_name){
+    public Integer teacheradd(Teacherbe teacherbe){
         int insert = teacherbeService.insert(teacherbe);
         return insert;
     }

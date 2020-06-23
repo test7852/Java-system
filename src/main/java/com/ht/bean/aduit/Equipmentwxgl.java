@@ -22,7 +22,7 @@ public class Equipmentwxgl {
     /**
     * 部门/班级
     */
-    private Integer usertype;
+    private String usertype;
 
     /**
     * 类别
@@ -43,4 +43,14 @@ public class Equipmentwxgl {
     * 维修状态1未完成,2已完成
     */
     private Integer status;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 部门id
+     */
+    private Integer emp_id;
 }
