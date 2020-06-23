@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
+</head>
+<style>
+    ::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
+</style>
+<body>
+<form class="layui-form" th:action="@{/main/idupd}" method="post">
+    <input type="hidden" name="wxid" th:value="${list.wxid}">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">维修设备名称</label>
+        <div class="layui-input-block">
+            <input  name="equipmenttype" required lay-verify="required" autocomplete="off" class="layui-input" th:value="${list.equipmenttype}">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">当前部门</label>
+        <div class="layui-input-block">
+            <select name="depid" lay-verify="required">
+                <option th:each="d:${dlist}" th:value="${d.depid}" th:text="${d.depname}" th:selected="${list.depid==d.depid}">张先生</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">学生所在班级</label>
+        <div class="layui-input-block">
+            <select name="classno" lay-verify="required">
+                <option th:each="c:${clist}" th:value="${c.classno}" th:text="${c.classname}" th:selected="${list.classno==c.classno}">张先生</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea name="remark"  th:text="${list.remark}" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<script th:src="@{/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:inline="none">
+
+    function gbi() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+        window.parent.location.reload();
+
+    }
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        //你可以在这里做操作  也可以不使用这个方法
+        // form.on('submit(formDemo)', function(data){
+        //   layer.msg(JSON.stringify(data.field));
+        //   return false;
+        // });
+    });
+</script>
+</html>
