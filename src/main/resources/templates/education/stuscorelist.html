@@ -89,22 +89,28 @@
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
-            $.ajax({
-                url: '/classscore/stuupd',
-                type: 'post',
-                data: {
-                    ssid:data.ssid,
-                    scure:data.scure,
-                    rescore:data.rescore,
-                    remark:data.remark
-                },
-                dataType: 'json',
-                success:function(data){
-                    if(data){
-                        layer.msg(JSON.stringify("修改成功"));
-                    }
-                },
-            })
+            if(isNaN(data.scure) || isNaN(data.rescore)){
+                layer.msg(JSON.stringify("请输入正确的数字"));
+                $('.layui-laypage-btn').click();
+                return;
+            }else {
+                $.ajax({
+                    url: '/classscore/stuupd',
+                    type: 'post',
+                    data: {
+                        ssid:data.ssid,
+                        scure:data.scure,
+                        rescore:data.rescore,
+                        remark:data.remark
+                    },
+                    dataType: 'json',
+                    success:function(data){
+                        if(data){
+                            layer.msg(JSON.stringify("修改成功"));
+                        }
+                    },
+                })
+            }
         });
 
 
