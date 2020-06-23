@@ -72,5 +72,10 @@ public class CourseServiceImpl implements CourseService{
         return courseMapper.selCourse();
     }
 
+    @Override
+    public List<Map> mhcou(Pager pager, Course course) {
+        return courseMapper.mhcou(pager, course);
+    }
+
 
 }

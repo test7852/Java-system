@@ -95,4 +95,16 @@
     select * from coursetype where courseTypeName = #{coursetypename};
   </select>
 
+  <!--模糊查询 分页-->
+  <select id="mhtype" resultType="coursetype">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+    select * from coursetype
+    <where>
+      <if test="coursetype.coursetypename!=null and coursetype.coursetypename!=''">
+        coursetypename like concat("%",#{coursetype.coursetypename},"%")
+      </if>
+    </where>
+    ORDER by coursetypeid desc limit #{kais},#{pager.pageSize}
+  </select>
+
 </mapper>

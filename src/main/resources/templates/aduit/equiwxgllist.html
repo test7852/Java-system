@@ -61,7 +61,6 @@
         <th lay-data="{field:'wxid', width:80, sort: true}">ID</th>
         <th lay-data="{field:'equipmenttype'}">维修设备名称</th>
         <th lay-data="{field:'usertype', templet: '#bmbj'}">部门/班级</th>
-        <th lay-data="{field:'wxcategory'}">类别</th>
         <th lay-data="{field:'starttime'}">开始时间</th>
         <th lay-data="{field:'endtime'}" id="jssj">结束时间</th>
         <th lay-data="{field:'status', templet: '#zt'}">维修状态</th>
@@ -73,14 +72,20 @@
 </body>
 <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
-<script type="text/html" id="bmbj">
-    {{#  if(d.usertype ==1 ){ }}
-    <p>部门</p>
-    {{#  } else { }}
-    <p>班级</p>
-    {{#  } }}
-</script>
+<!--<script type="text/html" id="bmbj">-->
+    <!--{{#  if(d.usertype ==1 ){ }}-->
+    <!--{{d.starttime}}-->
+    <!--{{#  } else { }}-->
+    <!--{{d.endtime}}-->
+    <!--{{#  } }}-->
 
+
+    <!--{{#  if(d.usertype ==1 ){ }}-->
+    <!--<p>部门</p>-->
+    <!--{{#  } else { }}-->
+    <!--<p>班级</p>-->
+    <!--{{#  } }}-->
+<!--</script>-->
 <script type="text/html" id="zt">
     {{#  if(d.status ==1 ){ }}
     <p>未修好</p>

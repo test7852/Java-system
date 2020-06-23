@@ -124,8 +124,24 @@
     select * from coursetype;
   </select>
 
-  <!---->
+  <!--查询所有-->
   <select id="selCourse" resultType="course">
     select * from course;
   </select>
+
+  <!--模糊 分页查询-->
+  <select id="mhcou" resultType="map">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+          select a.courseTypeId,courseId,courseName,isobligatory,a.remark,b.courseTypeName,courseid
+          from course AS a
+          INNER JOIN coursetype AS b
+          where a.courseTypeId = b.courseTypeId
+
+    <if test="course.coursename!=null and course.coursename!=''">
+      AND a.coursename like concat("%",#{course.coursename},"%")
+    </if>
+
+    ORDER by a.courseid desc limit #{kais},#{pager.pageSize}
+  </select>
+
 </mapper>

@@ -1,9 +1,12 @@
 package com.ht.service.education;
 
+import com.ht.bean.aduit.Maintain;
 import com.ht.bean.education.Coursetype;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -30,4 +33,6 @@ public interface CoursetypeService{
     List<Coursetype> selByPage(Pager pager);//分页查询
 
     Coursetype selName(String coursetypename);
+
+    List<Coursetype> mhtype(Pager pager, Coursetype coursetype);//模糊查询
 }

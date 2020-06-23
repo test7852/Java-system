@@ -9,6 +9,7 @@ import com.ht.bean.education.Teacherbe;
 import com.ht.service.education.TeacherbeService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lrq
@@ -64,6 +65,11 @@ public class TeacherbeServiceImpl implements TeacherbeService{
     @Override
     public List<Empinfo> listEmp() {
         return teacherbeMapper.selEmplist();
+    }
+
+    @Override
+    public List<Map> mhtea(Pager pager, Teacherbe teacherbe) {
+        return teacherbeMapper.mhtea(pager,teacherbe);
     }
 
 }

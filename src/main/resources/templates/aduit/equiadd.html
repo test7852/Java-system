@@ -9,13 +9,6 @@
 		<script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 	</head>
 	<style>
-		.index{width: 800px;margin-left: 30px;height: 400px}
-		.layui-input{width: 120px;}
-		.menu li{float: left;}
-		.layui-form-label{margin-top: 15px}
-		.layui-input{margin-top: 15px}
-		button{margin-left: 140px;margin-top: 20px;}
-		
 		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 	<body>
@@ -23,7 +16,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">设备名称</label>
 			<div class="layui-input-block">
-				<input type="text" name="equipmenttype" required  lay-verify="required" placeholder="维修设备名称" autocomplete="off" class="layui-input">
+				<input style="width: 200px" type="text" name="equipmenttype" required  lay-verify="required" placeholder="维修设备名称" autocomplete="off" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -33,13 +26,28 @@
 				<input type="radio" name="wxcategory" value="人为损坏" title="人为损坏">
 			</div>
 		</div>
+		
+		<!--<div class="layui-form-item">-->
+			<!--<label class="layui-form-label">部门/班级</label>-->
+			<!--<div class="layui-input-block">-->
+				<!--<input type="radio" name="usertype" value="1" title="部门" checked>-->
+				<!--<input type="radio" name="usertype" value="2" title="班级">-->
+			<!--</div>-->
+		<!--</div>-->
+
 		<div class="layui-form-item">
-			<label class="layui-form-label">部门/班级</label>
+			<label class="layui-form-label">班级/班级</label>
 			<div class="layui-input-block">
-				<input type="radio" name="usertype" value="1" title="部门" checked>
-				<input type="radio" name="usertype" value="2" title="班级">
+				<select name="usertype" lay-verify="required">
+					<option th:each="p:${selclass}" th:value="${p.classname}" th:text="${p.classname}"></option>
+				</select>
+
+				<select name="usertype" lay-verify="required">
+					<option th:each="p:${seldep}" th:value="${p.depname}" th:text="${p.depname}"></option>
+				</select>
 			</div>
 		</div>
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="formDemo" onclick="gbi()">立即提交</button>

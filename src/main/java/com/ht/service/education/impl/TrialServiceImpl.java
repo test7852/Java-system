@@ -73,4 +73,9 @@ public class TrialServiceImpl implements TrialService{
         return trialMapper.selEmp();
     }
 
+    @Override
+    public List<Map> mhtri(Pager pager, Trial trial) {
+        return trialMapper.mhtri(pager,trial);
+    }
+
 }

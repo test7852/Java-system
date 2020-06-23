@@ -38,13 +38,13 @@ public class TroalController {
     //试讲培训数据
     @RequestMapping("/trialdata")
     @ResponseBody
-    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ){
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page ,Trial trial){
         Pager pager = new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
         jsonData.setCount(trialService.selTrial());
-        jsonData.setData(trialService.selByPage(pager));
-        System.out.println(trialService.selByPage(pager));
+        //jsonData.setData(trialService.selByPage(pager));
+        jsonData.setData(trialService.mhtri(pager,trial));
         return jsonData;
     }
 

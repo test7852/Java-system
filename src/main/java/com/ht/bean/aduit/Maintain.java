@@ -46,4 +46,14 @@ public class Maintain {
     * 部门 id
     */
     private Integer depid;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 部门id
+     */
+    private Integer emp_id;
 }

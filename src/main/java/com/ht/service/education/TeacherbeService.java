@@ -4,8 +4,10 @@ import com.ht.bean.education.Course;
 import com.ht.bean.education.Teacherbe;
 import com.ht.bean.emp.Empinfo;
 import com.ht.util.Pager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lrq
@@ -32,5 +34,7 @@ public interface TeacherbeService{
     List<Teacherbe> selByPage(Pager pager);//分页查询
 
     List<Empinfo> listEmp();//查询员工
+
+    List<Map> mhtea(@Param("pager")Pager pager, @Param("teacherbe") Teacherbe teacherbe);//模糊查询
 
 }

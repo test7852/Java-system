@@ -37,13 +37,13 @@ public class CourseController {
     //课程管理  分页查的数据
     @RequestMapping("/coursedata")
     @ResponseBody
-    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page,Map map ){
+    public JsonData jsonData(@Param("limit")int limit , @Param("page")int page,Course course ){
         Pager pager=new Pager();
         pager.setCurrPage(page);
         pager.setPageSize(limit);
         jsonData.setCount(courseService.selCountcEdu());
-        List<Map> maps = courseService.selByPage(pager);
-        jsonData.setData(courseService.selByPage(pager));
+        //jsonData.setData(courseService.selByPage(pager));
+        jsonData.setData(courseService.mhcou(pager,course));
         return jsonData;
     }
 
