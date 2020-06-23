@@ -8,6 +8,7 @@ import com.ht.dao.education.CoursetypeMapper;
 import com.ht.service.education.CoursetypeService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -64,5 +65,11 @@ public class CoursetypeServiceImpl implements CoursetypeService{
     public Coursetype selName(String coursetypename) {
         return coursetypeMapper.selName(coursetypename);
     }
+
+    @Override
+    public List<Coursetype> mhtype(Pager pager, Coursetype coursetype) {
+        return coursetypeMapper.mhtype(pager, coursetype);
+    }
+
 
 }

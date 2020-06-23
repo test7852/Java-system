@@ -44,32 +44,22 @@
     </a>
 	</script>
 
- <!--搜索栏-->
-  <div class="layui-form-item">
+<!--搜索栏-->
+<div class="layui-form-item">
     <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-      </div>
-     <label class="layui-form-label">验证</label>
+        <label class="layui-form-label">排班名称</label>
+        <div class="layui-input-block">
+            <input name="schedulingname" type="text" class="layui-input" id="test1">
+        </div>
+    </div>
+
+    <div class="layui-inline">
+        <button id="ck" type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
     </div>
     <div class="layui-inline">
-     
-      <div class="layui-input-inline">
-        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-      </div>
-        <label class="layui-form-label">验证</label>
-    </div>
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-      </div>
-      <label class="layui-form-label">验证</label>
-       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
         <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
     </div>
-  </div>
+</div>
 
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
@@ -106,6 +96,18 @@
     layui.use('table', function () {
         var table = layui.table;
 
+        //模糊
+        $("#ck").on('click',function(){
+            var schedulingname=$("#test1").val();
+            table.reload('tab', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    schedulingname: schedulingname,
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        });
 
         //点击添加iframe窗方法
         $("#add").on('click',function(){
@@ -114,7 +116,7 @@
                 type: 2,
                 title: '新增',
                 maxmin: true, //开启最大化最小化a按钮
-                area: ['550px', '600px'],
+                area: ['550px', '500px'],
                 content: ['/teacher/teachertoadd']//这是链接你的页面地址 url
             });
         })

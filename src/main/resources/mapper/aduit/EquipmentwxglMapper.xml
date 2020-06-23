@@ -6,7 +6,7 @@
     <!--@Table equipmentwxgl-->
     <id column="wxid" jdbcType="INTEGER" property="wxid" />
     <result column="equipmenttype" jdbcType="VARCHAR" property="equipmenttype" />
-    <result column="usertype" jdbcType="INTEGER" property="usertype" />
+    <result column="usertype" jdbcType="VARCHAR" property="usertype" />
     <result column="wxcategory" jdbcType="VARCHAR" property="wxcategory" />
     <result column="starttime" jdbcType="VARCHAR" property="starttime" />
     <result column="endtime" jdbcType="VARCHAR" property="endtime" />
@@ -33,7 +33,7 @@
     insert into equipmentwxgl (equipmenttype, usertype, wxcategory, 
       starttime, endtime, `status`
       )
-    values (#{equipmenttype,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, #{wxcategory,jdbcType=VARCHAR}, 
+    values (#{equipmenttype,jdbcType=VARCHAR}, #{usertype,jdbcType=VARCHAR}, #{wxcategory,jdbcType=VARCHAR},
       #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
       )
   </insert>
@@ -65,7 +65,7 @@
         #{equipmenttype,jdbcType=VARCHAR},
       </if>
       <if test="usertype != null">
-        #{usertype,jdbcType=INTEGER},
+        #{usertype,jdbcType=VARCHAR},
       </if>
       <if test="wxcategory != null">
         #{wxcategory,jdbcType=VARCHAR},
@@ -89,7 +89,7 @@
         equipmenttype = #{equipmenttype,jdbcType=VARCHAR},
       </if>
       <if test="usertype != null">
-        usertype = #{usertype,jdbcType=INTEGER},
+        usertype = #{usertype,jdbcType=VARCHAR},
       </if>
       <if test="wxcategory != null">
         wxcategory = #{wxcategory,jdbcType=VARCHAR},
@@ -110,7 +110,7 @@
     <!--@mbg.generated-->
     update equipmentwxgl
     set equipmenttype = #{equipmenttype,jdbcType=VARCHAR},
-      usertype = #{usertype,jdbcType=INTEGER},
+      usertype = #{usertype,jdbcType=VARCHAR},
       wxcategory = #{wxcategory,jdbcType=VARCHAR},
       starttime = #{starttime,jdbcType=VARCHAR},
       endtime = #{endtime,jdbcType=VARCHAR},
@@ -130,18 +130,13 @@
         ]]>
   </select>
 
-  <!--查询学生-->
-  <select id="selstu" resultType="student">
-    select * from student;
-  </select>
-
   <!--查询班级-->
   <select id="selclass" resultType="studentclass">
     select * from studentclass;
   </select>
 
-  <!--查询系-->
-  <select id="seldept" resultType="dept">
-    select * from dept;
+  <!--查询部门-->
+  <select id="seldep" resultType="dep">
+    select * from dep;
   </select>
 </mapper>

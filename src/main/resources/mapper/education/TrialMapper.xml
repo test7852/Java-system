@@ -126,7 +126,7 @@
 
   <!--查询总数据-->
   <select id="selTroal" resultType="int">
-    select count(*) from trial;
+    select count(*) from trial
   </select>
 
   <!--&lt;!&ndash;分页查询&ndash;&gt;-->
@@ -153,5 +153,18 @@
   <!--查询emp-->
   <select id="selEmp" resultType="empinfo">
     select * from empinfo;
+  </select>
+
+  <!--模糊分页查询  like concat(#{trial.date})-->
+  <select id="mhtri" resultType="map">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+          select * from trial, course, empinfo
+          WHERE trial.courseid = course.courseid AND trial.empid = empinfo.emp_Id
+
+           <if test="trial.date!=null and trial.date!=''">
+             AND trial.date like concat("%",#{trial.date},"%")
+           </if>
+
+          ORDER by trialid desc limit #{kais},#{pager.pageSize}
   </select>
 </mapper>

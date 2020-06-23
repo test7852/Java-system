@@ -1,8 +1,10 @@
 package com.ht.dao.education;
 
+import com.ht.bean.aduit.Maintain;
 import com.ht.bean.education.Course;
 import com.ht.bean.education.Trial;
 import com.ht.bean.emp.Empinfo;
+import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,4 +35,6 @@ public interface TrialMapper {
     List<Course> selCou();//查询课程管理
 
     List<Empinfo> selEmp();//查询员工
+
+    List<Map> mhtri(@Param("pager") Pager pager, @Param("trial") Trial trial);//模糊查询
 }

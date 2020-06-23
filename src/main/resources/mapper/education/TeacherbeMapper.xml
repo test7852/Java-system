@@ -135,4 +135,20 @@
   <select id="selEmplist" resultType="empinfo">
     select * from empinfo;
   </select>
+
+  <!--模糊分页查询-->
+  <select id="mhtea" resultType="teacherbe">
+    <bind name="kais" value="(pager.currPage-1)*pager.pageSize"></bind>
+          select * from teacherbe
+
+        <where>
+          <if test="teacherbe.schedulingname!=null and teacherbe.schedulingname!=''">
+            teacherbe.schedulingname like concat("%",#{teacherbe.schedulingname},"%")
+          </if>
+        </where>
+
+    ORDER by beid desc limit #{kais},#{pager.pageSize}
+  </select>
+
+
 </mapper>

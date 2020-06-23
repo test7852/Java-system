@@ -169,4 +169,9 @@
   <select id="selList" resultType="com.ht.bean.student.Studentclass">
       select * from studentclass
   </select>
+
+  <!--  查询所有-->
+  <select id="byFallId" resultType="com.ht.bean.student.Studentclass">
+      select * from studentclass where falled = #{id}
+  </select>
 </mapper>

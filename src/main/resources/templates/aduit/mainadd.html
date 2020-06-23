@@ -12,7 +12,7 @@
 		::-webkit-scrollbar {display:none}/*隐藏横向滚动条但可以滚动*/
 	</style>
 	<body>
-	<form class="layui-form" th:action="@{/wxgl/sqadd}" method="post">
+	<form class="layui-form" th:action="@{/main/idadd}" method="post">
 		<div class="layui-form-item">
 			<label class="layui-form-label">设备名称</label>
 			<div class="layui-input-block">
@@ -26,25 +26,29 @@
 				<input type="radio" name="wxcategory" value="人为损坏" title="人为损坏">
 			</div>
 		</div>
-		
-		<!--<div class="layui-form-item">-->
-			<!--<label class="layui-form-label">部门/班级</label>-->
-			<!--<div class="layui-input-block">-->
-				<!--<input type="radio" name="usertype" value="1" title="部门" checked>-->
-				<!--<input type="radio" name="usertype" value="2" title="班级">-->
-			<!--</div>-->
-		<!--</div>-->
 
 		<div class="layui-form-item">
-			<label class="layui-form-label">班级/班级</label>
+			<label class="layui-form-label">老师所在部门</label>
 			<div class="layui-input-block">
-				<select name="usertype" lay-verify="required">
-					<option th:each="p:${selclass}" th:value="${p.classname}" th:text="${p.classname}"></option>
+				<select name="depid" lay-verify="required">
+					<option th:each="d:${dlist}" th:value="${d.depid}" th:text="${d.depname}"></option>
 				</select>
+			</div>
+		</div>
 
-				<select name="usertype" lay-verify="required">
-					<option th:each="p:${seldep}" th:value="${p.depname}" th:text="${p.depname}"></option>
+		<div class="layui-form-item">
+			<label class="layui-form-label">学生所在班级</label>
+			<div class="layui-input-block">
+				<select name="classno" lay-verify="required">
+					<option th:each="c:${clist}" th:value="${c.classno}" th:text="${c.classname}"></option>
 				</select>
+			</div>
+		</div>
+
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">备注</label>
+			<div class="layui-input-block">
+				<textarea name="remark" class="layui-textarea"></textarea>
 			</div>
 		</div>
 

@@ -11,6 +11,7 @@ import java.util.List;
  * 
  */
 public interface StudentclassService{
+    List<Studentclass> byFallId(Integer id);//查找该届别下的所有班级
 
     List<Studentclass> selList();//查询所有
 

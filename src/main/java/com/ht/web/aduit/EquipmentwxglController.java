@@ -1,6 +1,7 @@
 package com.ht.web.aduit;
 
 import com.ht.bean.aduit.Equipmentwxgl;
+import com.ht.bean.emp.Dep;
 import com.ht.bean.emp.Empinfo;
 import com.ht.bean.json.JsonData;
 import com.ht.bean.student.Dept;
@@ -65,13 +66,14 @@ public class EquipmentwxglController {
     @RequestMapping("set")
     @ResponseBody
     public Boolean set(Equipmentwxgl equipmentwxgl){
-        if (equipmentwxgl.getStatus() == Contants.STATUS_SU){
-            equipmentwxgl.setStatus(Contants.STATUS_SW);
+        if (equipmentwxgl.getStatus() == Contants.STATUS_SU){//当前状态==未修好
+            equipmentwxgl.setStatus(Contants.STATUS_SW);//把状态成已修好
+            //设置结束时间
+            equipmentwxgl.setEndtime(new SimpleDateFormat("yyyy-MM-dd ").format(new Date()));
         }else {
-            equipmentwxgl.setStatus(Contants.STATUS_SU);
+            equipmentwxgl.setStatus(Contants.STATUS_SU);//把状态成未修好
+            equipmentwxgl.setEndtime(" ");//未修好时间为空
         }
-        //设置结束时间
-        equipmentwxgl.setEndtime(new SimpleDateFormat("yyyy-MM-dd ").format(new Date()));
         equipmentwxglService.updateByPrimaryKeySelective(equipmentwxgl);
         return true;
     }
@@ -79,12 +81,10 @@ public class EquipmentwxglController {
     //去申请界面
     @RequestMapping("/sqlist")
     public String sqlist(Map map){
-//        List<Student> selstu = equipmentwxglService.selstu();//查询学生
-//        List<Studentclass> selclass = equipmentwxglService.selclass();//查询班级
-//        List<Dept> seldept = equipmentwxglService.seldept();//查询系
-//        map.put("selstu",selstu);
-//        map.put("selclass",selclass);
-//        map.put("seldept",seldept);
+        List<Studentclass> selclass = equipmentwxglService.selclass();//查询班级
+        List<Dep> seldep = equipmentwxglService.seldep();
+        map.put("selclass",selclass);
+        map.put("seldep",seldep);
         return "aduit/equiadd";
     }
 

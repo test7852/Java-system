@@ -1,13 +1,17 @@
 package com.ht.dao.education;
 
+import com.ht.bean.aduit.Maintain;
 import com.ht.bean.education.Coursetype;
+import com.ht.bean.education.Teacherbe;
 import com.ht.bean.emp.Empinfo;
 import com.ht.bean.emp.Post;
+import com.ht.util.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 王金宝
@@ -33,4 +37,7 @@ public interface CoursetypeMapper {
     List<Coursetype> selbypage(@Param("startRow") int startRow, @Param("pageSize") int pageSize);//分页查询
 
     Coursetype selName(String coursetypename);//根据姓名查询是否重复
+
+    List<Coursetype> mhtype(@Param("pager") Pager pager,@Param("coursetype") Coursetype coursetype);//模糊查询
+
 }

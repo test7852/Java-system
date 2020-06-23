@@ -36,34 +36,48 @@
 <body>
 <!--数据表格样式及附件-->
 <script type="text/html" id="bar">
-    {{#  if(d.status == 1){ }}
-    <a id="ann" class="layui-btn layui-btn-warm layui-btn-xs" lay-event="no">
-        <i class="layui-icon">&#xe642;</i>禁用
+    <a id="upd" class="layui-btn layui-btn-xs" lay-event="upd">
+        <i class="layui-icon">&#xe642;</i>查看
     </a>
-    {{# }if(d.status == 2) { }}
-    <a class="layui-btn layui-btn-xs" lay-event="yes">
-        <i class="layui-icon">&#xe642;</i>启用
-    </a>
-    {{#  } }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 </script>
 
+<!--搜索栏-->
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">类型</label>
+        <select id="wxzt" style="height: 35px;width: 120px;" name="status" lay-filter="mySelect">
+            <option value="">选择</option>
+            <option value="1">已修好</option>
+            <option value="2">未修好</option>
+        </select>
+    </div>
+    <div class="layui-inline">
+        <button id="ck" type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
+    </div>
+
+    <div class="layui-inline">
+        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
+    </div>
+</div>
+
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:650, url:'/wxgl/equiwxgldata', page:true, id:'tab'}"
+       lay-data="{width:1150,height:650, url:'/main/iddata', page:true, id:'tab'}"
        lay-filter="tab">
     <thead>
     <tr>
         <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
         <th lay-data="{field:'wxid', width:80, sort: true}">ID</th>
+        <th lay-data="{field:'emp_Name'}">报修姓名</th>
         <th lay-data="{field:'equipmenttype'}">维修设备名称</th>
-        <th lay-data="{field:'usertype', templet: '#bmbj'}">部门/班级</th>
-        <th lay-data="{field:'starttime'}">开始时间</th>
-        <th lay-data="{field:'endtime'}" id="jssj">结束时间</th>
+        <th lay-data="{field:'depName'}">当前部门</th>
+        <th lay-data="{field:'className'}">学生所在班级</th>
         <th lay-data="{field:'status', templet: '#zt'}">维修状态</th>
+        <th lay-data="{field:'remark'}">备注</th>
         <th lay-data="{fixed: 'right', title:'操作', toolbar: '#bar', width:252}"></th>
     </tr>
     </thead>
@@ -72,20 +86,6 @@
 </body>
 <script th:src="@{/js/register/jquery-3.1.0.min.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
-<!--<script type="text/html" id="bmbj">-->
-    <!--{{#  if(d.usertype ==1 ){ }}-->
-    <!--{{d.starttime}}-->
-    <!--{{#  } else { }}-->
-    <!--{{d.endtime}}-->
-    <!--{{#  } }}-->
-
-
-    <!--{{#  if(d.usertype ==1 ){ }}-->
-    <!--<p>部门</p>-->
-    <!--{{#  } else { }}-->
-    <!--<p>班级</p>-->
-    <!--{{#  } }}-->
-<!--</script>-->
 <script type="text/html" id="zt">
     {{#  if(d.status ==1 ){ }}
     <p>未修好</p>
@@ -97,6 +97,43 @@
 
     layui.use('table', function () {
         var table = layui.table;
+
+        //模糊
+        $("#ck").on('click',function(){
+            var status=$("#wxzt").val();
+            table.reload('tab', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    status: status,
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        });
+
+        //点击添加iframe窗方法
+        $("#add").on('click',function(){
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '新增',
+                maxmin: true, //开启最大化最小化a按钮
+                area: ['400px', '400px'],
+                content: ['/main/idtoadd']//这是链接你的页面地址 url
+            });
+        })
+
+        //去到修改界面
+        function upd(wxid){
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '修改',
+                maxmin: true, //开启最大化最小化a按钮
+                area: ['550px', '600px'],
+                content: ['/main/maintoupdid?wxid='+wxid]//这是链接你的页面地址 url
+            });
+        }
 
         //监听行工具事件
         table.on('tool(tab)', function (obj) {
@@ -110,7 +147,7 @@
                     obj.del();
                     layer.close(index);
                     $.ajax({
-                        url: '/wxgl/wxgldel',
+                        url: '/main/del',
                         type: 'post',
                         data: {
                             wxid:data.wxid
@@ -118,56 +155,12 @@
                         dataType: 'text'
                     })
                 });
-            }else if (obj.event == "yes") {//禁用
-                $.ajax({
-                    url: '/wxgl/set',
-                    type: 'post',
-                    data: {
-                        wxid:data.wxid,
-                        status:data.status,
-                    },
-                    dataType: 'json',
-                    success : function(data) {
-                        if (data){
-                            //执行重载
-                            $('.layui-laypage-btn').click();
-                            //document.location.href="/skip/emplist";
-                        }
-                    }
-                })
-            } else if(obj.event === 'no'){//启用
-                $.ajax({
-                    url: '/wxgl/set',
-                    type: 'post',
-                    data: {
-                        wxid:data.wxid,
-                        status:data.status,
-                    },
-                    dataType: 'json',
-                    success : function(data) {
-                        if (data){
-                            //执行重载
-                            $('.layui-laypage-btn').click();
-                            //document.location.href="/skip/emplist";
-                        }
-                    }
-                })
+            }else if(obj.event == 'upd'){//修改
+                upd(data.wxid)
             }
+
+
         })
-
-
-        // //启用禁用
-        // function aaa(data){
-        //     var status = data.status;
-        //     var btns = "";
-        //     if (status == 1) {
-        //         return"启用";
-        //     }
-        //     if (status == 2) {
-        //         btns += '<span style="color:#ed2a4a">禁用</span>';
-        //     }
-        //     return btns;
-        // }
     });
 </script>
 </html>

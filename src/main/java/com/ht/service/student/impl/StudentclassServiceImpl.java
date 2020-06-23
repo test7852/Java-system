@@ -22,6 +22,11 @@ public class StudentclassServiceImpl implements StudentclassService{
     private StudentclassMapper studentclassMapper;
 
     @Override
+    public List<Studentclass> byFallId(Integer id) {
+        return studentclassMapper.byFallId(id);
+    }
+
+    @Override
     public List<Studentclass> selList() {
         return studentclassMapper.selList();
     }
