@@ -40,35 +40,20 @@
         <i class="layui-icon">&#xe640;</i>丢弃
     </a>
 	</script>
+<script type="text/html" id="toolbar">
+<div class="layui-btn-container">
+    <a lay-event="fh" onclick="javascript:history.back(-1);" href="#" style="text-decoration:none">
+        <i class="layui-icon"style="font-size: 20px">&#xe65c;</i>
+    </a>
+    <button id="add" style="margin-left: 25px" class="layui-btn layui-btn-radius layui-btn-sm">新增</button>
+</div>
+</script>
 
- <!--搜索栏-->
-  <div class="layui-form-item">
-      <a lay-event="fh" onclick="javascript:history.back(-1);" href="#" style="text-decoration:none">
-          <i class="layui-icon"style="font-size: 30px">&#xe65c;</i>
-      </a>
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
-      </div>
-     <label class="layui-form-label">验证</label>
-    </div>
-
-    <div class="layui-inline">
-      
-      <div class="layui-input-inline">
-        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
-      </div>
-      <label class="layui-form-label">验证</label>
-       <button type="button" class="btn btn-info btn-addon"><i class="fa fa-spin fa-refresh"></i> 查找</button>
-        <button id="add" type="button" class="btn btn-info btn-warning"><i class="fa fa-plus"></i> 添加</button>
-    </div>
-  </div>
 
 <!--数据表格  数据表格使用的是方法渲染-->
 <div class="utable">
 <table class="layui-table"
-       lay-data="{width:1150,height:500, url:'/studentFall/data', page:true, id:'tab'}"
+       lay-data="{width:1150,height:500, url:'/studentFall/data', page:true, id:'tab', toolbar:'#toolbar'}"
        lay-filter="tab">
     <thead>
     <tr>

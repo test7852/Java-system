@@ -31,11 +31,15 @@
          <div class="utable" style="width: 800px;" >
             <table class="layui-hide" id="table" lay-filter="table"></table>
          </div>
-        <script type="text/html" id="toolbar">
-          <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="add">新增</button>
-          </div>
-        </script>
+
+         <script id="toolbar" type="text/html">
+             <div class="layui-btn-container">
+                 <a lay-event="fh" onclick="javascript:history.back(-1);" href="#" style="text-decoration:none">
+                     <i class="layui-icon"style="font-size: 20px">&#xe65c;</i>
+                 </a>
+                 <button lay-event="add" style="margin-left: 25px" class="layui-btn layui-btn-radius layui-btn-sm">新增</button>
+             </div>
+         </script>
 
         <script type="text/html" id="bar">
             <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">
@@ -55,12 +59,12 @@
                 elem: '#table'
                 , id: 'table'
                 , height: 560
-                , width: 800
+                , width: 1150
                 , url: '/system/classtypedate' //数据接口
                 , page: true //开启分页
                 , toolbar: '#toolbar'
                 , cols: [[
-                    {type: 'checkbox', fixed: 'left'}
+                    {type: 'radio', fixed: 'left'}
                     , {field: 'classtypeid', title: 'ID', fixed: 'left', unresize: true, sort: true}
                     , {field: 'classtypename', title: '班级类别', edit: 'false', sort: true}
                     , {fixed: 'right', title: '操作', toolbar: '#bar'}

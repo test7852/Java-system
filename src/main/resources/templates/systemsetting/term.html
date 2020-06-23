@@ -28,12 +28,15 @@
     }
 </style>
 <body>
-<div class="utable" style="width: 800px;" >
+<div class="utable" style="width: 1150px;" >
     <table class="layui-hide" id="table" lay-filter="table"></table>
 </div>
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add">新增</button>
+        <a lay-event="fh" onclick="javascript:history.back(-1);" href="#" style="text-decoration:none">
+            <i class="layui-icon"style="font-size: 20px">&#xe65c;</i>
+        </a>
+        <button lay-event="add" style="margin-left: 25px" class="layui-btn layui-btn-radius layui-btn-sm">新增</button>
     </div>
 </script>
 
@@ -55,7 +58,7 @@
             elem: '#table'
             , id: 'table'
             , height: 560
-            , width: 800
+            , width: 1150
             , url: '/system/tremdata' //数据接口
             , page: true //开启分页
             , toolbar: '#toolbar'
